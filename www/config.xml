@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "ir.smgroup.atab"
+        id        = "ir.smgroup.imamali"
         version   = "1.10" >
 		
 		
-    <name>ودیعه</name>
-    <description>ودیعه</description>
+    <name>شبکه امام علی</name>
+    <description>شبکه امام علی</description>
     <author href="http://smgroup.ir" email="info@smgroup.ir">Sorush Mehr Rezvan</author>
     <!--
 		ir.smgroup.saveimage
