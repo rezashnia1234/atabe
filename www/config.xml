@@ -62,7 +62,7 @@
 	
 
     <!-- Third party plugins -->
-	<!--<gap:plugin name="de.appplant.cordova.plugin.local-notification" source="npm" />-->
+	<!--<gap:plugin name="de.appplant.cordova.plugin.local-notification" source="pgb" />-->
 	
 	
 	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
@@ -84,7 +84,7 @@
 	
 	<!--<gap:plugin name="com.dawsonloudon.videoplayer" 	platform="android"	version="1.0.0" />-->
 	<!--<gap:plugin name="com.hutchind.cordova.plugins.streamingmedia"  />-->
-	<plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="pgb" />
+	<!--<plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="pgb" />-->
 	<!--<plugin name="com.synconset.imagepicker" source="pgb" />-->
 	<!--<plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />-->
 	
