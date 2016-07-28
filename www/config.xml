@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "ir.smgroup.pano"
+        id        = "ir.smgroup.imamali"
         version   = "1.10" >
 		
 		
-    <name>تماشاخانه</name>
-    <description>تماشاخانه</description>
+    <name>شبکه امام علی</name>
+    <description>شبکه امام علی</description>
     <author href="http://smgroup.ir" email="info@smgroup.ir">Sorush Mehr Rezvan</author>
     <!--
         If you do not want any permissions to be added to your app, add the
@@ -51,7 +51,7 @@
     <gap:plugin name="org.apache.cordova.dialogs" source="npm" />
     <gap:plugin name="org.apache.cordova.file" source="npm" />
     <gap:plugin name="org.apache.cordova.file-transfer" source="npm" />
-    <!--<gap:plugin name="org.apache.cordova.geolocation" source="npm" />-->
+    <gap:plugin name="org.apache.cordova.geolocation" source="npm" />
     <!--<gap:plugin name="org.apache.cordova.globalization" source="npm" />-->
     <gap:plugin name="org.apache.cordova.inappbrowser" source="npm" />
 	<gap:plugin name="org.apache.cordova.media" source="npm" />
@@ -62,11 +62,8 @@
 	
 
     <!-- Third party plugins -->
-	<!--Prevent the screen of the mobile device from falling asleep:-->
-	<!--<plugin name="nl.x-services.plugins.insomnia" spec="4.0.1" source="pgb" />-->
-	<plugin spec="https://github.com/fiscal-cliff/phonegap-plugin-brightness.git" source="git" />
 	<plugin name="net.yoik.cordova.plugins.screenorientation"	source="pgb" />	
-	
+	<gap:plugin name="de.appplant.cordova.plugin.local-notification" />
 	
 	
 	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
@@ -90,7 +87,7 @@
 	<!--<gap:plugin name="com.hutchind.cordova.plugins.streamingmedia"  />-->
 	<plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="pgb" />
 	<!--<plugin name="com.synconset.imagepicker" source="pgb" />-->
-	<plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />
+	<!--<plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />-->
 	
     <!-- Define app icon      -->
     <icon src="images/splash/icon.png" />
