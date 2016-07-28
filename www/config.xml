@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "ir.smgroup.imamali"
+        id        = "ir.smgroup.atab"
         version   = "1.10" >
 		
 		
-    <name>شبکه امام علی</name>
-    <description>شبکه امام علی</description>
+    <name>ودیعه</name>
+    <description>ودیعه</description>
     <author href="http://smgroup.ir" email="info@smgroup.ir">Sorush Mehr Rezvan</author>
     <!--
+		ir.smgroup.saveimage
         If you do not want any permissions to be added to your app, add the
         following tag to your config.xml; you will still have the INTERNET
         permission on your app, which PhoneGap requires. 
@@ -16,7 +17,7 @@
     <preference name="permissions"                value="none"/>
 
     <!-- Customize your app and platform with the preference element. -->
-	<preference name='phonegap-version'			  value='cli-6.1.0' /> 
+	<preference name='phonegap-version'			  value='cli-6.1.0' />
     <preference name="orientation"                value="portrait" />        <!-- portrait all: default means both landscape and portrait are enabled -->
     <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
@@ -49,24 +50,24 @@
     <!--<gap:plugin name="org.apache.cordova.device-motion" source="npm" />-->
     <!--<gap:plugin name="org.apache.cordova.device-orientation" source="npm" />-->
     <gap:plugin name="org.apache.cordova.dialogs" source="npm" />
-    <gap:plugin name="org.apache.cordova.file" source="npm" />
-    <gap:plugin name="org.apache.cordova.file-transfer" source="npm" />
-    <gap:plugin name="org.apache.cordova.geolocation" source="npm" />
+    <!--<gap:plugin name="org.apache.cordova.file" source="npm" />-->
+    <!--<gap:plugin name="org.apache.cordova.file-transfer" source="npm" />-->
+    <!--<gap:plugin name="org.apache.cordova.geolocation" source="npm" />-->
     <!--<gap:plugin name="org.apache.cordova.globalization" source="npm" />-->
     <gap:plugin name="org.apache.cordova.inappbrowser" source="npm" />
-	<gap:plugin name="org.apache.cordova.media" source="npm" />
+	<!--<gap:plugin name="org.apache.cordova.media" source="npm" />-->
     <gap:plugin name="org.apache.cordova.network-information" source="npm" />
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
-    <gap:plugin name="org.apache.cordova.vibration" source="npm" />
-	
-	
+    <!--<gap:plugin name="org.apache.cordova.vibration" source="npm" />-->
 
     <!-- Third party plugins -->
-	<!--<gap:plugin name="de.appplant.cordova.plugin.local-notification" source="pgb" />-->
-	
-	
-	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
-    <gap:plugin name="com.phonegap.plugins.pushplugin" />
+    <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
+    <!-- 
+        <gap:plugin name="com.phonegap.plugins.barcodescanner" />
+		<gap:plugin name="com.kumbe.phonegap.zoom.zoomcontrol" version="0.1.5" />
+    -->	
+	<!-- <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />-->
+    <!-- <gap:plugin name="com.phonegap.plugins.pushplugin" />-->
 	<gap:plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" />
 	<gap:plugin name="com.phonegap.plugin.statusbar" />
 	<gap:config-file platform="ios" parent="UIStatusBarHidden">
@@ -76,32 +77,23 @@
 	<gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
 		<false/>
 	</gap:config-file>
+	<!-- 
 	<gap:config-file platform="ios" parent="UIBackgroundModes" overwrite="true">
 		<array>
 			<string>audio</string>
 		</array>
 	</gap:config-file>
-	
+	>-->
 	<!--<gap:plugin name="com.dawsonloudon.videoplayer" 	platform="android"	version="1.0.0" />-->
 	<!--<gap:plugin name="com.hutchind.cordova.plugins.streamingmedia"  />-->
-	<!--<plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="pgb" />-->
-	<!--<plugin name="com.synconset.imagepicker" source="pgb" />-->
-	<!--<plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />-->
+	<!--<plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="pgb" />>-->
+	<!--<plugin name="com.synconset.imagepicker" source="pgb" />>-->
+	<plugin name="net.roughshod.plugins.barcodescanner" source="pgb" />
 	
     <!-- Define app icon      -->
     <icon src="images/splash/icon.png" />
     <icon src="images/splash/ios.png" platform="ios" />
-	
-    <!-- Define app splash screen for each platform. -->
-	<!--<gap:splash src="images/splash/screen-hdpi-landscape.png" />-->
-	<!--
-	<gap:splash src="img/splash/splash_bkg.png" gap:platform="android" gap:qualifier="port-xxhdpi" />
-	<gap:splash src="img/splash/splash_bkg_landscape.png" gap:platform="android" gap:qualifier="land-xxhdpi" />
-	<gap:splash src="img/splash/splash_bkg.png" gap:platform="ios" width="1536" height="2048" />
-	<gap:splash src="img/splash/splash_bkg_landscape.png" gap:platform="ios" width="2048" height="1536" />
-	-->
-    <!-- Define app splash screen for each platform. -->
-	
+
     <gap:splash src="images/splash/screen-ldpi-landscape.png"		gap:platform="android" gap:density="ldpi" />
     <gap:splash src="images/splash/screen-mdpi-landscape.png"		gap:platform="android" gap:density="mdpi" />
     <gap:splash src="images/splash/screen-hdpi-landscape.png"		gap:platform="android" gap:density="hdpi" />
@@ -117,7 +109,6 @@
 
 	
 	<access origin="*"/> <!-- allow local pages -->
-	
 	
 	
 
