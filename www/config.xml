@@ -62,7 +62,6 @@
 	
 
     <!-- Third party plugins -->
-	<plugin name="net.yoik.cordova.plugins.screenorientation"	source="pgb" />	
 	<gap:plugin name="de.appplant.cordova.plugin.local-notification" />
 	
 	
