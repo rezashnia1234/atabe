@@ -107,7 +107,9 @@
 				
 			}
 		}
+		function Set_notif() {
 
+		}
 		function Set_notif_delay() {
 			var now             = new Date().getTime(),
 				_5_sec_from_now = new Date(now + 5*1000);
@@ -123,7 +125,7 @@
 
 			cordova.plugins.notification.local.schedule({
 				id: 1,
-				title: "شبکه امام علی علیه السلام",
+				title: 'Scheduled with delay',
 				text: 'Test Message 1',
 				at: _5_sec_from_now,
 				sound: sound,
@@ -184,16 +186,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 ////sabte notifications///////////////////////////////////////////////////////////////////
 $(document).ready(function() {
-
-});
-function Set_azan() {
 	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
 	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
 	var html = '';
 	prayTimes.setMethod('Tehran');
 	var times;
 	var notif_counter = 0;
-	var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
+	//var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
 
 	
 	var now		= new Date().getTime();
@@ -202,9 +201,12 @@ function Set_azan() {
 	today.setSeconds(0);
 	today.setMinutes(0);
 	today.setHours(0);
+	//alert(today);
 	
-	for (ii = 1; ii < 5; ii++) {
+	for (ii = 1; ii < 2; ii++) {
+		//alert();
 		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+		//alert(times['fajr']);
 		for(var i in list)	{
 			notif_counter++;
 			html += list[i] + ' : ';
@@ -216,15 +218,17 @@ function Set_azan() {
 			today.setHours(date_hour);
 			console.log(today);
 			console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
-			/**/
+			/*
+			var now             = new Date().getTime(),
+				_5_sec_from_now = new Date(now + 5*1000);
 			cordova.plugins.notification.local.schedule({
 				id: notif_counter,
 				title: "شبکه امام علی علیه السلام",
 				text: list_name[i],
-				at: today,
+				at: _5_sec_from_now,
 				sound: sound,
 			});
-			
+			*/
 		}
 		html += "<br/>====================<br/>";
 		today.setDate(today.getDate()+ 1);
@@ -232,45 +236,7 @@ function Set_azan() {
 	}
 	//$("#timezoon").html(html);
 	//$("#timezoon").html(timezoon);
-}
-function Get_azan() {
-	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
-	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
-	var html = '';
-	prayTimes.setMethod('Tehran');
-	var times;
-	var notif_counter = 0;
-	
-	var now		= new Date().getTime();
-	var today	= new Date(now);
-	today.setMilliseconds(0);
-	today.setSeconds(0);
-	today.setMinutes(0);
-	today.setHours(0);
-	
-	for (ii = 1; ii < 5; ii++) {
-		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
-		for(var i in list)	{
-			notif_counter++;
-			html += list[i] + ' : ';
-			html += times[list[i].toLowerCase()]+ '</br>';
-			date_temp = times[list[i].toLowerCase()].split(":");
-			date_min = parseInt(date_temp[1]);
-			date_hour = parseInt(date_temp[0]);
-			today.setMinutes(date_min);
-			today.setHours(date_hour);
-			console.log(today);
-			console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
-
-			
-		}
-		html += "<br/>====================<br/>";
-		today.setDate(today.getDate()+ 1);
-		$("#timezoon").html(html);
-	}
-	//$("#timezoon").html(html);
-	//$("#timezoon").html(timezoon);
-}
+});
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -297,8 +263,6 @@ function Get_azan() {
 			<br/>
 			<br/>
 			<div onclick="Set_notif_delay();">Set_notif_delay</div><br/><br/><br/>
-			<div onclick="Set_azan();">Set_azan</div><br/><br/><br/>
-			<div onclick="Get_azan();">Get_azan</div><br/><br/><br/>
 			<div id="timezoon">timezoon</div><br/><br/><br/>
 			
 	</div>
