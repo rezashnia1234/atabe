@@ -29,6 +29,46 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
 			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+                cordova.plugins.notification.local.on('schedule', function (notification) {
+                    alert('onschedule');
+                });
+
+                cordova.plugins.notification.local.on('update', function (notification) {
+                    alert('onupdate');
+                });
+
+                cordova.plugins.notification.local.on('trigger', function (notification) {
+                    alert('ontrigger');
+                });
+
+                cordova.plugins.notification.local.on('click', function (notification) {
+                    alert('onclick');
+                });
+
+                cordova.plugins.notification.local.on('cancel', function (notification) {
+                    alert('oncancel');
+                });
+
+                cordova.plugins.notification.local.on('clear', function (notification) {
+                    alert('onclear');
+                });
+
+                cordova.plugins.notification.local.on('cancelall', function () {
+                    alert('oncancelall');
+                });
+
+                cordova.plugins.notification.local.on('clearall', function () {
+                    alert('onclearall');
+                });
 		}
 
 		$(window).load(function() {		
@@ -91,23 +131,9 @@
 				badge: 12
 			});
 		}
-		showToast = function (text) {
-			setTimeout(function () {
-				if (device.platform != 'windows') {
-					window.plugins.toast.showShortBottom(text);
-				} else {
-					showDialog(text);
-				}
-			}, 100);
-		};
-		
-		cordova.plugins.notification.local.on('trigger', function (notification) {
-			showToast('triggered: ' + notification.id);
-		}, this);
 
-		cordova.plugins.notification.local.on('click', function (notification) {
-			showToast('clicked: ' + notification.id);
-		}, this);
+		
+
 	</script>	
 
 		
