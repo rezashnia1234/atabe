@@ -17,7 +17,7 @@
     <preference name="permissions"                value="none"/>
 
     <!-- Customize your app and platform with the preference element. -->
-	<preference name='phonegap-version'			  value='cli-6.1.0' />
+	<preference name='phonegap-version'			  value='cli-5.2.0' />
     <preference name="orientation"                value="portrait" />        <!-- portrait all: default means both landscape and portrait are enabled -->
     <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
@@ -62,13 +62,13 @@
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
-	<plugin name="de.appplant.cordova.plugin.local-notification" spec="0.8.1" source="pgb" />
+	<!--<plugin name="de.appplant.cordova.plugin.local-notification" spec="0.8.1" source="pgb" />-->
     <!-- 
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 		<gap:plugin name="com.kumbe.phonegap.zoom.zoomcontrol" version="0.1.5" />
     -->	
 	<!-- <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />-->
-    <!-- <gap:plugin name="com.phonegap.plugins.pushplugin" source="pgb" />-->
+    <gap:plugin name="com.phonegap.plugins.pushplugin" />
 	<gap:plugin name="hu.dpal.phonegap.plugins.uniquedeviceid" />
 	<gap:plugin name="com.phonegap.plugin.statusbar" />
 	<gap:config-file platform="ios" parent="UIStatusBarHidden">
