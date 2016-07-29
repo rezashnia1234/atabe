@@ -80,23 +80,26 @@
 				sound: null
 			});
 */
-			window.plugins.localNotification.add({
-				fireDate        : Math.round(new Date().getTime()/1000 + 5),
-				alertBody       : "This is a local notification.",
-				action          : "View",
-				repeatInterval  : "daily",
-				soundName       : "beep.caf",
-				badge           : 0,
-				notificationId  : 123,
-				foreground      : function(notificationId){ 
-					alert("Hello1 World! This alert was triggered by notification " + notificationId); 
-				},
-				background  : function(notificationId){
-					alert("Hello2 World! This alert was triggered by notification " + notificationId);
-				}           
+			var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
+
+			cordova.plugins.notification.local.schedule({
+				id: 1,
+				title: 'Scheduled with delay',
+				text: 'Test Message 1',
+				at: _5_sec_from_now,
+				sound: sound,
+				badge: 12
 			});
 		}
-		
+		showToast = function (text) {
+			setTimeout(function () {
+				if (device.platform != 'windows') {
+					window.plugins.toast.showShortBottom(text);
+				} else {
+					showDialog(text);
+				}
+			}, 100);
+		};
 		
 		cordova.plugins.notification.local.on('trigger', function (notification) {
 			showToast('triggered: ' + notification.id);
@@ -125,8 +128,9 @@
 
 			<p>بسم الله الرحمن الرحيم</p>
 			<br/>
-			<div onclick="Set_notif();">Seeeeeeeeeeeeeeeet</div><br/>
-			<div onclick="Set_notif_delay();">Set_notif_delay</div><br/>
+			<br/>
+			<div onclick="Set_notif_delay();">Set_notif_delay</div><br/><br/><br/>
+			<div onclick="showToast('dddddddddd');">showToast</div><br/><br/><br/>
 			
 	</div>
 </body>
