@@ -131,6 +131,7 @@
 			});
 		}
 		
+
 		function Set_notif_delay2() {
 			/**/
 			cordova.plugins.notification.local.cancelAll(function() {
@@ -283,6 +284,67 @@ function Set_azan() {
 	//$("#timezoon").html(html);
 	//$("#timezoon").html(timezoon);
 }
+function Set_azan2() {
+	cordova.plugins.notification.local.cancelAll(function() {
+		alert("done");
+	}, this);
+	var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
+
+	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
+	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
+	var html = '';
+	prayTimes.setMethod('Tehran');
+	var times;
+	var notif_counter = 0;
+	
+	var now		= new Date().getTime();
+	var today	= new Date(now);
+	today.setMilliseconds(0);
+	today.setSeconds(0);
+	today.setMinutes(0);
+	today.setHours(0);
+	
+	var time=0;
+	var time2=0;
+	
+	for (ii = 1; ii < 5; ii++) {
+		setTimeout(function(){
+			times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+			for(var i in list)	{
+					setTimeout(function(){
+					notif_counter++;
+					html += list[i] + ' : ';
+					html += times[list[i].toLowerCase()]+ '</br>';
+					date_temp = times[list[i].toLowerCase()].split(":");
+					date_min = parseInt(date_temp[1]);
+					date_hour = parseInt(date_temp[0]);
+					today.setMinutes(date_min);
+					today.setHours(date_hour);
+					html += today + '</br>';
+					if(now < today.getTime())
+					{
+						html += '***********************</br>';
+						cordova.plugins.notification.local.schedule({
+							id: notif_counter,
+							title: "شبکه امام علی علیه السلام",
+							text: list[i],
+							at: today,
+							sound: sound,
+							badge: notif_counter
+						});
+					}
+					console.log(today);
+					console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
+				}, time2);
+			}
+			time2 += 10;
+			html += "<br/>====================<br/>";
+			today.setDate(today.getDate()+ 1);
+			$("#timezoon").html(html);
+		}, time);
+		time += 60;
+	}
+}
 function Get_azan() {
 	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
 	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
@@ -323,6 +385,51 @@ function Get_azan() {
 	//$("#timezoon").html(html);
 	//$("#timezoon").html(timezoon);
 }
+
+function Get_azan2() {
+	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
+	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
+	var html = '';
+	prayTimes.setMethod('Tehran');
+	var times;
+	var notif_counter = 0;
+	
+	var now		= new Date().getTime();
+	var today	= new Date(now);
+	today.setMilliseconds(0);
+	today.setSeconds(0);
+	today.setMinutes(0);
+	today.setHours(0);
+	
+	var time=0;
+	var time2=0;
+	
+	for (ii = 1; ii < 5; ii++) {
+		setTimeout(function(){
+			times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+			for(var i in list)	{
+					setTimeout(function(){
+					notif_counter++;
+					html += list[i] + ' : ';
+					html += times[list[i].toLowerCase()]+ '</br>';
+					date_temp = times[list[i].toLowerCase()].split(":");
+					date_min = parseInt(date_temp[1]);
+					date_hour = parseInt(date_temp[0]);
+					today.setMinutes(date_min);
+					today.setHours(date_hour);
+					html += today + '</br>';
+					console.log(today);
+					console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
+				}, time2);
+			}
+			time2 += 10;
+			html += "<br/>====================<br/>";
+			today.setDate(today.getDate()+ 1);
+			$("#timezoon").html(html);
+		}, time);
+		time += 60;
+	}
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -352,6 +459,7 @@ function Get_azan() {
 			<div onclick="Set_notif_delay2();">Set_notif_delay2</div><br/><br/><br/>
 			<div onclick="Set_azan();">Set_azan</div><br/><br/><br/>
 			<div onclick="Get_azan();">Get_azan</div><br/><br/><br/>
+			<div onclick="Get_azan2();">Get_azan2</div><br/><br/><br/>
 			<div id="timezoon">timezoon</div><br/><br/><br/>
 			
 	</div>
