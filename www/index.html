@@ -132,26 +132,36 @@
 		}
 		
 		function Set_notif_delay2() {
-			var now             = new Date().getTime(),
-				_5_sec_from_now = new Date(now + 5*1000);
-/*
-			cordova.plugins.notification.local.schedule({
-				text: "Delayed Notification",
-				at: _5_sec_from_now,
-				led: "FF0000",
-				sound: null
-			});
-*/
+			var now			= new Date().getTime();
+			var today		= new Date(now);
+			today.setMilliseconds(0);
+			today.setSeconds(0);
+			today.setMinutes(0);
+			today.setHours(0);
+			
 			var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
 
+			today.setMinutes(59);
+			today.setHours(11);
+			
 			cordova.plugins.notification.local.schedule({
-				id: 100,
+				id: 101,
 				title: "شبکه امام علی علیه السلام",
 				text: 'Test Message 1',
-				at: _5_sec_from_now,
+				at: today,
 				sound: sound,
 				badge: 12
 			});
+			/*
+			cordova.plugins.notification.local.schedule({
+				id: notif_counter,
+				title: "شبکه امام علی علیه السلام",
+				text: list[i],
+				at: today,
+				sound: sound,
+				badge: notif_counter
+			});
+			*/
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -246,6 +256,7 @@ function Set_azan() {
 			/**/
 			if(now < today.getTime())
 			{
+				html += '***********************</br>';
 				cordova.plugins.notification.local.schedule({
 					id: notif_counter,
 					title: "شبکه امام علی علیه السلام",
