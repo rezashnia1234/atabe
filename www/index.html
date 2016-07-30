@@ -497,7 +497,7 @@ function Set_notif_delay3() {
 	setTimeout(function(){
 		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
 		notif_counter++;
-		date_temp = times["fajr"].split(":");
+		date_temp = times["sunrise"].split(":");
 		date_min = parseInt(date_temp[1]);
 		date_hour = parseInt(date_temp[0]);
 		today.setMinutes(date_min);
@@ -506,7 +506,7 @@ function Set_notif_delay3() {
 		cordova.plugins.notification.local.schedule({
 			id: 222,
 			title: "شبکه امام علی علیه السلام",
-			text: 'اذان صبح',
+			text: 'طلوع آفتاب',
 			at: today,
 			sound: sound,
 			badge: 2
