@@ -143,10 +143,7 @@
 			today.setMilliseconds(0);
 			today.setSeconds(0);
 			today.setMinutes(10);
-			today.setHours(10);
-
-			alert("today : " + today);
-			
+			today.setHours(10);		
 			
 			cordova.plugins.notification.local.schedule({
 				id: 111,
@@ -156,7 +153,7 @@
 				sound: sound,
 				badge: 1
 			});
-			/**/
+
 			setTimeout(function(){
 				today.setMinutes(30);
 				today.setHours(10);
@@ -170,11 +167,10 @@
 					sound: sound,
 					badge: 2
 				});
-			}, 100);
+			}, 5);
 
 
 			
-			alert("done");
 		}
 
 ////////////////////////////////////////////////////////////////////////////////////////
