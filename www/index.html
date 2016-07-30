@@ -140,16 +140,16 @@
 			today.setHours(0);
 			var today2 = today;
 			
+
+			today.setMinutes(10);
+			today.setHours(10);
+			today2.setMinutes(20);
+			today2.setHours(10);
+			
 			var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
 
-			today.setMinutes(59);
-			today.setHours(10);
-			today2.setMinutes(00);
-			today2.setHours(11);
-			
 			cordova.plugins.notification.local.schedule(
 				{
-					id: 101,
 					title: "شبکه امام علی علیه السلام",
 					text: 'Test Message 1',
 					at: today,
@@ -157,7 +157,6 @@
 					badge: 1
 				},
 				{
-					id: 102,
 					title: "شبکه امام علی علیه السلام",
 					text: 'Test Message 2',
 					at: today2,
@@ -165,6 +164,7 @@
 					badge: 2
 				}
 			);
+			alert("done");
 			/*
 			cordova.plugins.notification.local.schedule({
 				id: notif_counter,
