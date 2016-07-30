@@ -132,38 +132,33 @@
 		}
 		
 		function Set_notif_delay2() {
-			/*
+			/**/
 			cordova.plugins.notification.local.cancelAll(function() {
 				alert("done");
 			}, this);
-			*/
+			var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
+
 			var now			= new Date().getTime();
 			var today		= new Date(now);
 			today.setMilliseconds(0);
 			today.setSeconds(0);
-			today.setMinutes(0);
-			today.setHours(0);
-			var today2 = today;
-
 			today.setMinutes(10);
 			today.setHours(10);
+
 			alert("today : " + today);
-
-
-
 			
-			var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
-
 			
 			cordova.plugins.notification.local.schedule({
-				id: 333,
+				id: 111,
 				title: "شبکه امام علی علیه السلام",
 				text: 'Test Message 111',
 				at: today,
 				sound: sound,
 				badge: 1
 			});
-			
+			/*
+			setTimeout(function(){ alert("Hello"); }, 3000);
+
 			today2.setMinutes(30);
 			today2.setHours(10);
 			alert("today2 : " + today2);
@@ -176,7 +171,7 @@
 				sound: sound,
 				badge: 2
 			});
-			/**/
+			*/
 			alert("done");
 		}
 
