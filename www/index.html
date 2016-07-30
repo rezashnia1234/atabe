@@ -156,22 +156,24 @@
 				sound: sound,
 				badge: 1
 			});
-			/*
-			setTimeout(function(){ alert("Hello"); }, 3000);
+			/**/
+			setTimeout(function(){
+				today.setMinutes(30);
+				today.setHours(10);
+				alert("today2 : " + today);
 
-			today2.setMinutes(30);
-			today2.setHours(10);
-			alert("today2 : " + today2);
+				cordova.plugins.notification.local.schedule({
+					id: 222,
+					title: "شبکه امام علی علیه السلام",
+					text: 'Test Message 222',
+					at: today,
+					sound: sound,
+					badge: 2
+				});
+			}, 100);
 
-			cordova.plugins.notification.local.schedule({
-				id: 444,
-				title: "شبکه امام علی علیه السلام",
-				text: 'Test Message 222',
-				at: today2,
-				sound: sound,
-				badge: 2
-			});
-			*/
+
+			
 			alert("done");
 		}
 
