@@ -309,7 +309,7 @@ function Set_azan2() {
 	var time2=0;
 	today.setDate(today.getDate()- 1);
 
-	for (ii = 1; ii < 5; ii++) {
+	for (ii = 1; ii < 3; ii++) {
 		time2=0;
 		setTimeout(function(){
 			times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
@@ -344,12 +344,12 @@ function Set_azan2() {
 						iii++;
 					}, time2);
 			}
-			time2 += 100;
+			time2 += 1000;
 			html += "<br/>====================<br/>";
 			today.setDate(today.getDate()+ 1);
 			$("#timezoon").html(html);
 		}, time);
-		time += 600;
+		time += 6000;
 	}
 }
 function Get_azan() {
