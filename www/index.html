@@ -446,6 +446,76 @@ function Get_azan2() {
 		time += 600;
 	}
 }
+
+function Set_notif_delay3() {
+	/**/
+	cordova.plugins.notification.local.cancelAll(function() {
+		alert("done");
+	}, this);
+	var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
+	
+	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
+	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
+	var html = '';
+	prayTimes.setMethod('Tehran');
+	var times;
+	var notif_counter = 0;
+	
+	var now		= new Date().getTime();
+	var today	= new Date(now);
+	today.setMilliseconds(0);
+	today.setSeconds(0);
+	today.setMinutes(0);
+	today.setHours(0);
+	
+	var time=0;
+	var time2=0;
+	var iii=0;
+	//today.setDate(today.getDate()- 1);
+	
+	
+
+
+	
+	times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+	notif_counter++;
+	date_temp = times["fajr"].split(":");
+	date_min = parseInt(date_temp[1]);
+	date_hour = parseInt(date_temp[0]);
+	today.setMinutes(date_min);
+	today.setHours(date_hour);
+	
+	cordova.plugins.notification.local.schedule({
+		id: 111,
+		title: "شبکه امام علی علیه السلام",
+		text: 'اذان صبح',
+		at: today,
+		sound: sound,
+		badge: 1
+	});
+
+	setTimeout(function(){
+		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+		notif_counter++;
+		date_temp = times["fajr"].split(":");
+		date_min = parseInt(date_temp[1]);
+		date_hour = parseInt(date_temp[0]);
+		today.setMinutes(date_min);
+		today.setHours(date_hour);
+		
+		cordova.plugins.notification.local.schedule({
+			id: 222,
+			title: "شبکه امام علی علیه السلام",
+			text: 'اذان صبح',
+			at: today,
+			sound: sound,
+			badge: 2
+		});
+	}, 100);
+
+
+	
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -473,6 +543,7 @@ function Get_azan2() {
 			<br/>
 			<div onclick="Set_notif_delay();">Set_notif_delay</div><br/><br/><br/>
 			<div onclick="Set_notif_delay2();">Set_notif_delay2</div><br/><br/><br/>
+			<div onclick="Set_notif_delay3();">Set_notif_delay3</div><br/><br/><br/>
 			<div onclick="Set_azan();">Set_azan</div><br/><br/><br/>
 			<div onclick="Set_azan2();">Set_azan2</div><br/><br/><br/>
 			<div onclick="Get_azan();">Get_azan</div><br/><br/><br/>
