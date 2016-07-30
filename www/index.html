@@ -122,7 +122,7 @@
 			var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
 
 			cordova.plugins.notification.local.schedule({
-				id: 1,
+				id: 100,
 				title: "شبکه امام علی علیه السلام",
 				text: 'Test Message 1',
 				at: _5_sec_from_now,
@@ -207,7 +207,7 @@ function Set_azan() {
 	today.setMinutes(0);
 	today.setHours(0);
 	
-	for (ii = 1; ii < 5; ii++) {
+	for (ii = 1; ii < 2; ii++) {
 		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
 		for(var i in list)	{
 			notif_counter++;
@@ -218,15 +218,16 @@ function Set_azan() {
 			date_hour = parseInt(date_temp[0]);
 			today.setMinutes(date_min);
 			today.setHours(date_hour);
-			console.log(today);
-			console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
+			html += today + '</br>';
+			html += list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min + '</br>';
 			/**/
 			cordova.plugins.notification.local.schedule({
 				id: notif_counter,
 				title: "شبکه امام علی علیه السلام",
-				text: list_name[i],
+				text: list[i],
 				at: today,
 				sound: sound,
+				badge: notif_counter
 			});
 			
 		}
@@ -265,7 +266,7 @@ function Get_azan() {
 			today.setHours(date_hour);
 			console.log(today);
 			console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
-
+	
 			
 		}
 		html += "<br/>====================<br/>";
