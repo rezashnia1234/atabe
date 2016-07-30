@@ -512,6 +512,78 @@ function Set_notif_delay3() {
 			badge: 2
 		});
 	}, 100);
+	setTimeout(function(){
+		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+		notif_counter++;
+		date_temp = times["dhuhr"].split(":");
+		date_min = parseInt(date_temp[1]);
+		date_hour = parseInt(date_temp[0]);
+		today.setMinutes(date_min);
+		today.setHours(date_hour);
+		
+		cordova.plugins.notification.local.schedule({
+			id: 333,
+			title: "شبکه امام علی علیه السلام",
+			text: 'اذان ظهر',
+			at: today,
+			sound: sound,
+			badge: 2
+		});
+	}, 200);
+	setTimeout(function(){
+		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+		notif_counter++;
+		date_temp = times["dhuhr"].split(":");
+		date_min = parseInt(date_temp[1]);
+		date_hour = parseInt(date_temp[0]);
+		today.setMinutes(date_min);
+		today.setHours(date_hour);
+		
+		cordova.plugins.notification.local.schedule({
+			id: 444,
+			title: "شبکه امام علی علیه السلام",
+			text: 'اذان ظهر',
+			at: today,
+			sound: sound,
+			badge: 2
+		});
+	}, 300);
+	setTimeout(function(){
+		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+		notif_counter++;
+		date_temp = times["maghrib"].split(":");
+		date_min = parseInt(date_temp[1]);
+		date_hour = parseInt(date_temp[0]);
+		today.setMinutes(date_min);
+		today.setHours(date_hour);
+		
+		cordova.plugins.notification.local.schedule({
+			id: 555,
+			title: "شبکه امام علی علیه السلام",
+			text: 'اذان مغرب',
+			at: today,
+			sound: sound,
+			badge: 2
+		});
+	}, 400);
+	setTimeout(function(){
+		times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
+		notif_counter++;
+		date_temp = times["midnight"].split(":");
+		date_min = parseInt(date_temp[1]);
+		date_hour = parseInt(date_temp[0]);
+		today.setMinutes(date_min);
+		today.setHours(date_hour);
+		
+		cordova.plugins.notification.local.schedule({
+			id: 666,
+			title: "شبکه امام علی علیه السلام",
+			text: 'نمیه شب شرعی',
+			at: today,
+			sound: sound,
+			badge: 2
+		});
+	}, 500);
 
 
 	
