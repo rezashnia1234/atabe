@@ -310,6 +310,7 @@ function Set_azan2() {
 	today.setDate(today.getDate()- 1);
 
 	for (ii = 1; ii < 5; ii++) {
+		time2=0;
 		setTimeout(function(){
 			times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
 			iii=0;
@@ -343,12 +344,12 @@ function Set_azan2() {
 						iii++;
 					}, time2);
 			}
-			time2 += 10;
+			time2 += 100;
 			html += "<br/>====================<br/>";
 			today.setDate(today.getDate()+ 1);
 			$("#timezoon").html(html);
 		}, time);
-		time += 60;
+		time += 600;
 	}
 }
 function Get_azan() {
@@ -413,6 +414,7 @@ function Get_azan2() {
 	today.setDate(today.getDate()- 1);
 	
 	for (ii = 1; ii < 5; ii++) {
+		time2=0;
 		setTimeout(function(){
 			times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
 			iii=0;
@@ -436,12 +438,12 @@ function Get_azan2() {
 					iii++;
 				}, time2);
 			}
-			time2 += 10;
+			time2 += 100;
 			html += "<br/>====================<br/>";
 			today.setDate(today.getDate()+ 1);
 			$("#timezoon").html(html);
 		}, time);
-		time += 60;
+		time += 600;
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////
