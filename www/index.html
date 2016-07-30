@@ -132,6 +132,9 @@
 		}
 		
 		function Set_notif_delay2() {
+			cordova.plugins.notification.local.cancelAll(function() {
+				alert("done");
+			}, this);
 			var now			= new Date().getTime();
 			var today		= new Date(now);
 			today.setMilliseconds(0);
