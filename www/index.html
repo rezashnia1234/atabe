@@ -187,6 +187,10 @@ $(document).ready(function() {
 
 });
 function Set_azan() {
+	cordova.plugins.notification.local.cancelAll(function() {
+		alert("done");
+	}, this);
+	
 	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
 	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
 	var html = '';
