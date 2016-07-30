@@ -312,30 +312,30 @@ function Set_azan2() {
 			times = prayTimes.getTimes(today, [31.995, 44.314], timezoon);
 			for(var i in list)	{
 					setTimeout(function(){
-					notif_counter++;
-					html += list[i] + ' : ';
-					html += times[list[i].toLowerCase()]+ '</br>';
-					date_temp = times[list[i].toLowerCase()].split(":");
-					date_min = parseInt(date_temp[1]);
-					date_hour = parseInt(date_temp[0]);
-					today.setMinutes(date_min);
-					today.setHours(date_hour);
-					html += today + '</br>';
-					if(now < today.getTime())
-					{
-						html += '***********************</br>';
-						cordova.plugins.notification.local.schedule({
-							id: notif_counter,
-							title: "شبکه امام علی علیه السلام",
-							text: list[i],
-							at: today,
-							sound: sound,
-							badge: notif_counter
-						});
-					}
-					console.log(today);
-					console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
-				}, time2);
+						notif_counter++;
+						html += list[i] + ' : ';
+						html += times[list[i].toLowerCase()]+ '</br>';
+						date_temp = times[list[i].toLowerCase()].split(":");
+						date_min = parseInt(date_temp[1]);
+						date_hour = parseInt(date_temp[0]);
+						today.setMinutes(date_min);
+						today.setHours(date_hour);
+						html += today + '</br>';
+						if(now < today.getTime())
+						{
+							html += '***********************</br>';
+							cordova.plugins.notification.local.schedule({
+								id: notif_counter,
+								title: "شبکه امام علی علیه السلام",
+								text: list[i],
+								at: today,
+								sound: sound,
+								badge: notif_counter
+							});
+						}
+						console.log(today);
+						console.log(list[i] + " : " + times[list[i].toLowerCase()] + " /// hour : " + date_hour + " /// min : " + date_min);
+					}, time2);
 			}
 			time2 += 10;
 			html += "<br/>====================<br/>";
@@ -458,6 +458,7 @@ function Get_azan2() {
 			<div onclick="Set_notif_delay();">Set_notif_delay</div><br/><br/><br/>
 			<div onclick="Set_notif_delay2();">Set_notif_delay2</div><br/><br/><br/>
 			<div onclick="Set_azan();">Set_azan</div><br/><br/><br/>
+			<div onclick="Set_azan2();">Set_azan2</div><br/><br/><br/>
 			<div onclick="Get_azan();">Get_azan</div><br/><br/><br/>
 			<div onclick="Get_azan2();">Get_azan2</div><br/><br/><br/>
 			<div id="timezoon">timezoon</div><br/><br/><br/>
