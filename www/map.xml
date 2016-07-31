@@ -1,0 +1,20 @@
+<krpano version="1.0.8">
+<include url="%SWFPATH%/map-plan.xml"/>
+<action name="hidemap-all">
+Move-Map();
+</action>
+<plugin name="map-body" url="skin/blank.png" align="lefttop" x="5" y="65" keep="true" maskchildren="true" scalechildren="false" handcursor="false" capture="false" zorder="10001" width="323" height="480"/>
+<plugin name="map-background-black" url="skin/imamali/map-back.png" parent="map-body" align="lefttop" x="0" y="0" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10001" width="325" height="345" blendmode="DARKEN"/>
+<plugin name="map-background-front" url="skin/parvaz-skin/map-back2.png" parent="map-body" align="lefttop" x="0" y="0" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10002" width="323" height="480" blendmode="normal"/>
+<plugin name="BTN-close" url="skin/blank.png" parent="map-background-front" align="lefttop" x="300" y="29" keep="true" maskchildren="false" scalechildren="false" handcursor="true" zorder="10005" width="14" height="14" blendmode="normal" onclick="hidemap();"/>
+<plugin name="map-view" url="skin/parvaz-skin/all-map.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10004" width="323" height="449" crop="0|0|323|449" blendmode="normal" alpha="1"/>
+<plugin name="map-view-shab" url="skin/parvaz-skin/all-map.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10004" width="323" height="449" crop="0|0|323|449" blendmode="normal" alpha="0" enabled="false"/>
+<plugin name="map-view-radar" url="skin/blank.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10003" width="323" height="449" crop="0|0|323|449" blendmode="normal" alpha="1" enabled="false"/>
+<plugin name="BTN-open-map" url="skin/parvaz-skin/open.png" align="lefttop" x="-132" y="-900" keep="true" maskchildren="false" scalechildren="false" handcursor="true" zorder="10005" width="132" height="70" blendmode="normal" onhover="" onout="" onclick="showmap();"/>
+<action name="showmap">
+Move-Map();
+</action>
+<action name="hidemap">
+Move-Map();
+</action>
+</krpano>
