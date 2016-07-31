@@ -40,7 +40,7 @@
 // 			  		animDuration: "0.3s",
 // 			  		animEasing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
 // 			    });
-var myScroll = new iScroll('smm_wrapper', { hideScrollbar: true, bounce : "enable", vScrollbar: false });
+			var myScroll = new iScroll('smm_wrapper', { hideScrollbar: true, bounce : "enable", vScrollbar: false });
 			/*****************************/
 		}
 
@@ -66,7 +66,12 @@ var myScroll = new iScroll('smm_wrapper', { hideScrollbar: true, bounce : "enabl
 			setTimeout(function(){
 				$(".mypreload").html("");
 			}, 300);
-		
+			
+			var ulwidth = $('.smm_menu ul').height();
+			var divwidth = $('.smm_menu > div').height();
+			$('.smm_menu ul').css('top',(divwidth-ulwidth)).delay(800).animate({
+			    top: "0",
+			}, 2500 );
 		});
 
 		function go_back_index() {
@@ -104,11 +109,7 @@ var myScroll = new iScroll('smm_wrapper', { hideScrollbar: true, bounce : "enabl
 			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 		}
 		$(document).ready(function(){
-			var ulwidth = $('.smm_menu ul').height();
-			var divwidth = $('.smm_menu > div').height();
-			$('.smm_menu ul').css('top',(divwidth-ulwidth)).delay(500).animate({
-			    top: "0",
-			  }, 2500 );;
+
 		});
 	</script>	
 
@@ -123,7 +124,7 @@ var myScroll = new iScroll('smm_wrapper', { hideScrollbar: true, bounce : "enabl
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body" class="smm_body retina">
 	<div class="container " id="container" >
 			<div id="ajax" class="mypreload">
-				<div style="z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: #322958; opacity: 1; cursor: default; position: fixed;overflow:visible;" class="blockUI blockOverlay"></div>
+				<div style="z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: #1e92c4; opacity: 1; cursor: default; position: fixed;overflow:visible;" class="blockUI blockOverlay"></div>
 				<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
 				<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
 			</div>
