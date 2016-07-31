@@ -1,0 +1,22 @@
+<krpano onstart="startup();" showerrors="true" logkey="true">
+
+	<action name="startup">
+		loadscene("eyvan", null, MERGE);
+	</action>
+	
+    <plugin
+		name="gyro"
+		devices="html5"
+		url="%SWFPATH%/plugins/gyro2.js"
+		keep="true"
+		camroll="true" friction="0" velastic="0"
+     />
+	 
+	<scene name="eyvan" title="object" thumburl="panos/eyvan-day/thumb.jpg" onstart="action(startscene);">
+		<preview url="panos/eyvan-day/preview.jpg" />
+		<image >
+			<cube url="panos/eyvan-day/mobile_%s.jpg" />
+		</image>
+	</scene>
+
+</krpano>

@@ -12,10 +12,10 @@
 		camroll="true" friction="0" velastic="0"
      />
 	 
-	<scene name="eyvan" title="object" thumburl="panos/eyvan/thumb.jpg" onstart="action(startscene);">
-		<preview url="panos/eyvan/preview.jpg" />
+	<scene name="eyvan" title="object" thumburl="panos/eyvan-night/thumb.jpg" onstart="action(startscene);">
+		<preview url="panos/eyvan-night/preview.jpg" />
 		<image >
-			<cube url="panos/eyvan/mobile_%s.jpg" />
+			<cube url="panos/eyvan-night/mobile_%s.jpg" />
 		</image>
 	</scene>
 
