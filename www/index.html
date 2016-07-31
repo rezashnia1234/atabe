@@ -14,10 +14,12 @@
     <script src="phonegap.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
+	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script>
 	<script>
 		function init() {		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 			document.addEventListener("deviceready", onDeviceReady, false);
+			/**** added by mahdi *********/
 			if(isRetina())
 			{
 				$('.retina').each( function(i) {
@@ -25,8 +27,20 @@
 					back = back.replace("/low", "/high");
 					$(this).css('background-image',back);
 				});
-				
+				$('.retina:before').each( function(i) {
+					var back = $(this).css('background-image');
+					back = back.replace("/low", "/high");
+					$(this).css('background-image',back);
+				});
 			}
+			$('.smm_menu > div').fancy_scroll({
+			      innerWrapper: ".smm_menu ul",
+			      animation: "bounce",
+			  		bounceDistance: 100,
+			  		animDuration: "0.3s",
+			  		animEasing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+			    });
+			/*****************************/
 		}
 
 
@@ -114,7 +128,7 @@
 			</div>
 		<div class="smm_content">
 			<div class="smm_title retina"></div>
-			<div class="smm_menu retina">
+			<div class="smm_menu">
 				<div>
 				<ul class="retina">
 					<li></li>
