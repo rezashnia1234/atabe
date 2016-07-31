@@ -67,11 +67,14 @@
     position: absolute;
     left: 0;
     right: 0;
+	
+	transition:top 1s ease-in-out 0s !important;
 }
 
 .smm_menu ul li{
 	height: 13.5vw;
     list-style-type: none;
+	transition:all 0.55s ease-in-out 0s;
 }
 .smm_menu ul li:hover{
 	background-color: rgba(40,101,143,.35);

@@ -67,11 +67,13 @@
 				$(".mypreload").html("");
 			}, 300);
 			
-			var ulwidth = $('.smm_menu ul').height();
+			var ulwidth = $('.smm_menu ul').height()*10/11;
 			var divwidth = $('.smm_menu > div').height();
-			$('.smm_menu ul').css('top',(divwidth-ulwidth)).delay(800).animate({
-			    top: "0",
-			}, 2500 );
+
+			$('.smm_menu ul').css('top',(divwidth-ulwidth));
+			setTimeout(function(){
+				$('.smm_menu ul').css("top","0");
+			}, 1500);
 		});
 
 		function go_back_index() {
