@@ -1,7 +1,8 @@
 ﻿/*********** added by Seyed Mahdi Mirzaei ******************/
 
 .smm_body{
-	background: url('../images/low/menu_back.jpg') no-repeat;
+	background-image: url('../images/low/menu_back.jpg');
+	background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
@@ -16,7 +17,9 @@
 .smm_title {
     width: 90%;
     height: 15vw;
-    background: url('../images/low/title.png') center center no-repeat;
+    background-image: url('../images/low/title.png');
+    background-position: center center;
+    background-repeat: no-repeat;
     background-size: 100%;
     margin: auto;
 }
@@ -61,14 +64,13 @@
 	background-image: url("../images/low/menu.png");
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position-y: 3vw;
     position: absolute;
     left: 0;
     right: 0;
 }
 
 .smm_menu ul li{
-	height: 15.7vw;
+	height: 13.5vw;
     list-style-type: none;
 }
 .smm_menu ul li:hover{
@@ -81,5 +83,7 @@
     right: 0;
     bottom: 0;
     overflow: auto;
+    -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+    border-radius: 10vw;
 }
 /**********************************************************/
