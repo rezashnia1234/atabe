@@ -610,10 +610,6 @@ function Set_notif_delay4() {
 	var today_dhuhr		= new Date(now);
 	var today_maghrib	= new Date(now);
 	var today_midnight	= new Date(now);
-	today.setMilliseconds(0);
-	today.setSeconds(0);
-	today.setMinutes(0);
-	today.setHours(0);
 	
 	var time=0;
 	var time2=0;
@@ -657,13 +653,13 @@ function Set_notif_delay4() {
 	today_midnight.setHours(date_hour);
 			
 	setTimeout(function(){
-	/*
+	/**/
 		alert("today_fajr : " + today_fajr);
 		alert("today_sunrise : " + today_sunrise);
 		alert("today_dhuhr : " + today_dhuhr);
 		alert("today_maghrib : " + today_maghrib);
 		alert("today_midnight : " + today_midnight);
-	*/
+	
 		cordova.plugins.notification.local.schedule({
 			id: 111,
 			title: "شبکه امام علی علیه السلام",
