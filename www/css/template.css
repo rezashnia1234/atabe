@@ -1,0 +1,85 @@
+﻿/*********** added by Seyed Mahdi Mirzaei ******************/
+
+.smm_body{
+	background: url('../images/low/menu_back.jpg') no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+.smm_content{
+	width: 80%;
+	height: 80%;
+	position: fixed;
+	text-align: center;
+	padding: 10%;
+}
+.smm_title {
+    width: 90%;
+    height: 15vw;
+    background: url('../images/low/title.png') center center no-repeat;
+    background-size: 100%;
+    margin: auto;
+}
+.smm_menu {
+    background-color: rgba(0,106,155,.44);
+    border-radius: 10vw;
+    top: 32vw;
+    bottom: 5%;
+    position: inherit;
+    left: 10%;
+    right: 10%;
+}
+.smm_menu:before{
+	content: "";
+    background-image: url("../images/low/menu-background-top.png");
+    width: 28vw;
+    height: 5vw;
+    background-position: center center;
+    background-repeat: no-repeat;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-size: contain;
+    top: -5vw;
+    position: absolute;
+}
+.smm_menu:after{
+	    content: "";
+    background-image: url("../images/low/menu-background-saye.png");
+    /* width: 28vw; */
+    height: 18vw;
+    background-position: center center;
+    background-repeat: no-repeat;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-size: contain;
+    bottom: -5vw;
+    position: absolute;
+}
+.smm_menu ul{
+	background-image: url("../images/low/menu.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: 3vw;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.smm_menu ul li{
+	height: 15.7vw;
+    list-style-type: none;
+}
+.smm_menu ul li:hover{
+	background-color: rgba(40,101,143,.35);
+}
+.smm_menu > div{
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+/**********************************************************/
