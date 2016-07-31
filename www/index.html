@@ -14,7 +14,8 @@
     <script src="phonegap.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
-	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script>
+<!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
+	<script type="text/javascript" src="js/iscroll.js"></script>
 	<script>
 		function init() {		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
@@ -33,13 +34,14 @@
 					$(this).css('background-image',back);
 				});
 			}
-			$('.smm_menu > div').fancy_scroll({
-			      innerWrapper: ".smm_menu ul",
-			      animation: "bounce",
-			  		bounceDistance: 100,
-			  		animDuration: "0.3s",
-			  		animEasing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
-			    });
+// 			$('.smm_menu > div').fancy_scroll({
+// 			      innerWrapper: ".smm_menu ul",
+// 			      animation: "bounce",
+// 			  		bounceDistance: 40,
+// 			  		animDuration: "0.3s",
+// 			  		animEasing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+// 			    });
+var myScroll = new iScroll('smm_wrapper', { hideScrollbar: true, bounce : "enable" });
 			/*****************************/
 		}
 
@@ -129,7 +131,7 @@
 		<div class="smm_content">
 			<div class="smm_title retina"></div>
 			<div class="smm_menu">
-				<div>
+				<div id="smm_wrapper">
 				<ul class="retina">
 					<li></li>
 					<li></li>

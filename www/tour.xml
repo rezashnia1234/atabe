@@ -1,8 +1,6 @@
 <krpano onstart="startup();" showerrors="true" logkey="true">
 
 	<action name="startup">
-		
-		
 		loadscene("eyvan", null, MERGE);
 	</action>
 	
