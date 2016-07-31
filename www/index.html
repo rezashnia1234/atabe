@@ -590,12 +590,12 @@ function Set_notif_delay3() {
 	
 }
 function Set_notif_delay4() {
-	/*
+	/**/
 	cordova.plugins.notification.local.cancelAll(function() {
 		alert("done");
 	}, this);
 	var sound = device.platform == 'Android' ? 'file://sound.mp3' : 'file://beep.caf';
-	*/
+	
 	var list = ['Fajr', 'Sunrise', 'Dhuhr', 'Maghrib', 'Midnight'];
 	var list_name = ['اذان صبح', 'طلوع آفتاب', 'اذان ظهر', 'اذان مغرب', 'نمیه شب شرعی'];
 	var html = '';
@@ -653,13 +653,13 @@ function Set_notif_delay4() {
 	today_midnight.setHours(date_hour);
 			
 	setTimeout(function(){
-	/**/
+	/*
 		alert("today_fajr : " + today_fajr);
 		alert("today_sunrise : " + today_sunrise);
 		alert("today_dhuhr : " + today_dhuhr);
 		alert("today_maghrib : " + today_maghrib);
 		alert("today_midnight : " + today_midnight);
-	
+	*/
 		cordova.plugins.notification.local.schedule({
 			id: 111,
 			title: "شبکه امام علی علیه السلام",
