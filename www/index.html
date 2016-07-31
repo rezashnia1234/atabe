@@ -667,32 +667,36 @@ function Set_notif_delay4() {
 			at: today_fajr,
 			sound: sound,
 			badge: 1
-		},
-		{
+		});
+
+		cordova.plugins.notification.local.schedule({
 			id: 222,
 			title: "شبکه امام علی علیه السلام",
 			text: 'طلوع آفتاب',
 			at: today_sunrise,
 			sound: sound,
 			badge: 2
-		},
-		{
+		});
+
+		cordova.plugins.notification.local.schedule({
 			id: 333,
 			title: "شبکه امام علی علیه السلام",
 			text: 'اذان ظهر',
 			at: today_dhuhr,
 			sound: sound,
 			badge: 2
-		},
-		{
+		});
+
+		cordova.plugins.notification.local.schedule({
 			id: 444,
 			title: "شبکه امام علی علیه السلام",
 			text: 'اذان مغرب',
 			at: today_maghrib,
 			sound: sound,
 			badge: 2
-		},
-		{
+		});
+
+		cordova.plugins.notification.local.schedule({
 			id: 555,
 			title: "شبکه امام علی علیه السلام",
 			text: 'نمیه شب شرعی',
