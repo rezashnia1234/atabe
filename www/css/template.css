@@ -1,5 +1,5 @@
 ﻿/*********** added by Seyed Mahdi Mirzaei ******************/
-
+/***** Menu Page *************/
 .smm_body{
 	background-image: url('../images/low/menu_back.jpg');
 	background-repeat: no-repeat;
@@ -7,7 +7,7 @@
     background-position: center center;
     background-attachment: fixed;
 }
-.bg{
+.smm_body .bg{
 	background-image: url('../images/low/menu_back.jpg');
 	background-repeat: no-repeat;
     background-size: cover;
@@ -99,5 +99,101 @@
     overflow: auto;
     -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
     border-radius: 10vw;
+}
+/***** Ziarat Page *************/
+.smm_ziarat_body{
+	background-image: url('../images/low/ziarat_back.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+.smm_ziarat_body .bg{
+	background-image: url('../images/low/ziarat_back.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+	
+	height:100%;
+	width:100%;
+	position:absolute;	
+	z-index:0;
+}
+.smm_ziarat_title {
+    width: 90%;
+    height: 14vw;
+    background-image: url('../images/low/ziarat_title.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+    vertical-align: middle;
+}
+.smm_ziarat_back{
+	background-image: url('../images/low/back.png');
+    width: 6vw;
+    height: 100%;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center 40%;
+    background-size: contain;
+    float: left;
+    vertical-align: -webkit-baseline-middle;
+    margin-left: -5vw;
+}
+#smm_ziarat_wrapper{
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 1vw;
+    overflow: auto;
+    text-align: right;
+/*     -webkit-mask-image: -webkit-radial-gradient(circle, white, black); */
+/*     border-radius: 10vw; */
+}
+.smm_ziarat_content{
+	top: 32vw;
+    bottom: 5%;
+    position: inherit;
+    left: 10%;
+    right: 10%;
+}
+.smm_ziarat_title2{
+    width: 30vw;
+}
+#smm_ziarat_wrapper input,#smm_ziarat_wrapper select{
+	display: block;
+    height: 12vw;
+    width: 99%;
+    border: 1px solid #69cee3;
+    border-radius: 2vw;
+    background-color: #e5f4fa;
+    margin-top: 4vw;
+    font-family: 'Droid Arabic Kufi' !important;
+    padding-right: 5vw;
+    box-sizing: border-box;
+    color: #2581c4;
+}
+#smm_ziarat_wrapper input[type="submit"]{
+	background-color: #e39124;
+	color: white;
+	border: none;
+	margin-top: 6vw;
+}
+.smm_ziarat_body ::-webkit-input-placeholder {
+   color: #2581c4;
+}
+
+.smm_ziarat_body :-moz-placeholder { /* Firefox 18- */
+   color: #2581c4;  
+}
+
+.smm_ziarat_body ::-moz-placeholder {  /* Firefox 19+ */
+   color: #2581c4;  
+}
+
+.smm_ziarat_body :-ms-input-placeholder {  
+   color: #2581c4;  
 }
 /**********************************************************/
