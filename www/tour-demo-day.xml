@@ -4,15 +4,21 @@
 		loadscene("eyvan", null, MERGE);
 	</action>
 	
-    <plugin
-		name="gyro"
-		devices="html5"
-		url="%SWFPATH%/plugins/gyro2.js"
-		keep="true"
-		camroll="true" friction="0" velastic="0"
-     />
+	<plugin name="gyro" devices="html5" keep="true"
+			url="%SWFPATH%/plugins/gyro2.js" 
+			enabled="false"
+			camroll="true"
+			friction="0.0"
+			touch_mode="full"
+			sensor_mode="1"
+			autocalibration="true"
+			onavailable=""
+			onunavailable=""
+			onenable=""
+			ondisable=""
+			/>
 	 
-	<scene name="eyvan" title="object" thumburl="panos/eyvan-day/thumb.jpg" onstart="action(startscene);">
+	<scene name="eyvan" title="object" thumburl="panos/eyvan-day/thumb.jpg" >
 		<preview url="panos/eyvan-day/preview.jpg" />
 		<image >
 			<cube url="panos/eyvan-day/mobile_%s.jpg" />
