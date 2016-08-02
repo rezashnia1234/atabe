@@ -82,8 +82,8 @@
 
 	}
 /**/
-	function download_zip(URL,Folder) {
-		var sync = ContentSync.sync({ src: URL, id: Folder });
+	function download_zip(URL,Folder) {//, type:'merge'
+		var sync = ContentSync.sync({ src: URL, id: Folder, type:'merge', timeout:'14400' });
 		sync.on('progress', function(data) {
 			// data.progress
 			var perc = data.progress;
