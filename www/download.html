@@ -16,6 +16,7 @@
     <script src="js/jquery.md5.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
+    <script src="js/back_btn.js"></script>
 
 	<script>
 		function init() {		
@@ -88,7 +89,7 @@
 		if (device.platform == 'iOS')
 		{
 			downloadPath = "cdvfile://localhost/persistent/";
-			window.localStorage.setItem('download_address',downloadPath);
+			window.localStorage.setItem('download_address',window.localStorage.getItem('download_address'));
 		}
 		
 		downloadPath = window.localStorage.getItem('download_address') + $.md5(URL) + "." + Extension;
@@ -99,7 +100,25 @@
 			
 			//$("#play").css("display","none");
 			//playAudio_new(downloadPath,true);
-			alert("it is already downloaded!");
+			//alert("it is already downloaded!");
+			//zip.unzip(<source zip>, <destination dir>, <callback>, [<progressCallback>]);
+			//zip.unzip(<source zip>, <destination dir>, <callback>, [<progressCallback>]);
+			console.log("check_download file: " + downloadPath);
+			console.log("check_download path: " + window.localStorage.getItem('download_address'));
+			
+			var progressCallback = function(progressEvent) {
+				var perc = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+				$('#status').html(perc + "%");
+				$('.progress-bar-percent').css('width',perc + "%");
+			};
+			var extractfinished = function(event) {
+				alert("finished");
+				alert(event);
+			};
+			zip.unzip(downloadPath, "/", extractfinished, progressCallback]);
+			
+			$(".progress-bar #descripion").html("<div class='first'>استخراج...</div>");
+			
 			//var media = new Media(downloadPath, null, function(e) { alert(JSON.stringify(e));});
 			//media.play();
 		}
@@ -159,7 +178,7 @@
 			FileTransfer_OBJ.download(uri, downloadPath, 
 				function(entry) {	
 					$('#status').html("");
-					$('.progress-bar-parent').find('span').css('width','2%');
+					$('.progress-bar-parent').find('span').css('width','1%');
 					console.log("start_download : done");
 					temp_array = JSON.parse(window.localStorage.getItem('downloaded_files'));
 					temp_array.push($.md5(URL));
@@ -167,7 +186,7 @@
 					
 					//temp_element.removeClass("need_download");
 					//$("#play").css("display","none");
-					$('.progress-bar-parent').css("display","none");				
+					//$('.progress-bar-parent').css("display","none");				
 				}, 
 				function(error) {
 					//alert('Crap something went wrong...');	
@@ -179,18 +198,18 @@
 						'اخطار',            // title
 						'تائید'                  // buttonName
 					);
-					$('.progress-bar-parent').find('span').css('width','2%');
-					$('.progress-bar-percent').css('width',"");
-					$('.progress-bar-parent').css("display","none");
+					//$('.progress-bar-parent').find('span').css('width','2%');
+					//$('.progress-bar-percent').css('width',"");
+					//$('.progress-bar-parent').css("display","none");
 				},
 				true
 			);
 			
 			$("#abort").click( function(i) {
 				FileTransfer_OBJ.abort();
-				$('.progress-bar-parent').find('span').css('width','2%');
-				$('.progress-bar-percent').css('width',"");
-				$('.progress-bar-parent').css("display","none");
+				//$('.progress-bar-parent').find('span').css('width','2%');
+				//$('.progress-bar-percent').css('width',"");
+				//$('.progress-bar-parent').css("display","none");
 				brightness.setKeepScreenOn(false);
 				navigator.notification.alert(
 					'دانلود کنسل شد',  // message
