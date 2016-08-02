@@ -63,8 +63,9 @@
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
 	<plugin spec="https://github.com/fiscal-cliff/phonegap-plugin-brightness.git" source="git" />
-	<!-- 	<plugin spec="https://github.com/MobileChromeApps/cordova-plugin-zip.git" source="git" />-->
-	<plugin name="com.downloadwink.phonegap.contentsync"	source="pgb" />
+	<!-- <plugin spec="https://github.com/MobileChromeApps/cordova-plugin-zip.git" source="git" /> -->
+	<!-- <plugin name="com.downloadwink.phonegap.contentsync"	source="pgb" />-->	
+	<plugin name="https://github.com/phonegap/phonegap-plugin-contentsync"	source="git" />	
 	
     <!-- 
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
