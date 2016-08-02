@@ -83,7 +83,7 @@
 	}
 /**/
 	function download_zip(URL,Folder) {//, type:'merge'
-		var sync = ContentSync.sync({ src: URL, id: Folder, type:'merge', timeout:'14400' });
+		var sync = ContentSync.sync({ src: URL, id: Folder, type:'merge', timeout:'14400000' });
 		sync.on('progress', function(data) {
 			// data.progress
 			var perc = data.progress;
@@ -105,6 +105,19 @@
 		sync.on('cancel', function() {
 			// triggered if event is cancelled
 			alert("cancel");
+		});
+		$("#abort").click( function(i) {
+			//sync.abort();
+			//$('.progress-bar-parent').find('span').css('width','2%');
+			//$('.progress-bar-percent').css('width',"");
+			//$('.progress-bar-parent').css("display","none");
+			brightness.setKeepScreenOn(false);
+			navigator.notification.alert(
+				'دانلود کنسل شد',  // message
+				go_back,         // callback
+				'اخطار',            // title
+				'تائید'                  // buttonName
+			);
 		});
 
 	}
