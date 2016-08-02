@@ -34,6 +34,8 @@
 			setTimeout(function(){
 				var src = window.localStorage.getItem('pano_localPath') + "/panos/15_roze.tiles/preview.jpg";
 				$(".smm_content img").attr("src",src);
+				src = "file://" + src;
+				$(".smm_content img.ddd").attr("src",src);
 				$(".mypreload").html("");
 			//}, 300);
 			}, 2000);
@@ -68,7 +70,7 @@
 			<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
 		</div>
 		<div class="smm_content">
-			<img src="panos/panos/15_roze.tiles/preview.jpg" style="width:50px;">
+			<img src="panos/panos/15_roze.tiles/preview.jpg" style="width:50px;" class="ddd">
 			<img src="panos/15_roze.tiles/preview.jpg" style="width:50px;">
 		</div>
 			
