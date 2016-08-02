@@ -1,0 +1,2462 @@
+<krpano version="1.16" title="Virtual Tour" onstart="startup();" showerrors="true" logkey="true">
+<include url="%SWFPATH%/contro-normal.xml"/>
+<include url="%SWFPATH%/map.xml"/>
+<control movetocursor="vector"/>
+<control mousetype="moveto"/>
+<control keybaccelerate="0.5"/>
+<lensflareset name="default" url="%SWFPATH%/skin/krpano_default_flares.jpg">
+<flare name="n0" pixsize="128" pixupos="  0" pixvpos="  0" color="0xffffef" pos="0.000" scale="0.100"/>
+<flare name="n1" pixsize=" 64" pixupos="128" pixvpos="128" color="0x060606" pos="-0.100" scale="0.110"/>
+<flare name="n2" pixsize=" 64" pixupos="192" pixvpos="128" color="0x555f64" pos="0.200" scale="0.020"/>
+<flare name="n3" pixsize="128" pixupos="  0" pixvpos="128" color="0x240a00" pos="0.300" scale="0.050"/>
+<flare name="n4" pixsize=" 64" pixupos="192" pixvpos="128" color="0x144422" pos="0.400" scale="0.020"/>
+<flare name="n5" pixsize=" 64" pixupos="128" pixvpos="192" color="0x143c40" pos="0.600" scale="0.050"/>
+<flare name="n6" pixsize=" 64" pixupos="128" pixvpos="128" color="0x354500" pos="0.800" scale="0.012"/>
+<flare name="n7" pixsize="128" pixupos="  0" pixvpos="128" color="0x483925" pos="1.100" scale="0.050"/>
+<flare name="n8" pixsize=" 64" pixupos="192" pixvpos="128" color="0x10303f" pos="1.500" scale="0.060"/>
+<flare name="n9" pixsize="128" pixupos="  0" pixvpos="128" color="0x665544" pos="1.700" scale="0.050"/>
+</lensflareset>
+	<plugin name="gyro" devices="html5" keep="true"
+			url="%SWFPATH%/plugins/gyro2.js" 
+			enabled="false"
+			camroll="true"
+			friction="0.0"
+			touch_mode="full"
+			sensor_mode="1"
+			autocalibration="true"
+			onavailable=""
+			onunavailable=""
+			onenable=""
+			ondisable=""
+			/> 
+<autorotate enabled="false" waittime="38.0" speed="-3.0" horizon="0.0" tofov="120.0"/>
+<action name="startup">
+set(IsMapOpen,true);
+set(autorotate.enabled,'true');
+set(autorotate.waittime,8);
+set(IsAutoRotate,true);
+//if(startscene === null, copy(startscene,scene[0].name));
+loadscene(scene_07_roze, null, MERGE);
+ 
+//if(scene.count GT 1, buildthumbs(); );
+</action>
+ 
+<scene name="scene_002zarih_00" title="حرم امام علي عليه السلام ruz" onstart="action(startsceneACT);" thumburl="%$mypath%panos/002zarih_00.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+//action(activatespotRadar,scene_002zarih_00, 0);
+//set(plugin[radar].heading, 0);
+//set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/002zarih_00.tiles/preview.jpg"/>
+<image>
+<cube url="%$mypath%panos/002zarih_00.tiles/pano_%s.jpg"/>
+</image>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_002zarih_220, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_002zarih_220" title="حرم امام علي عليه السلام shab" onstart="action(startsceneACT);" thumburl="%$mypath%panos/002zarih_00.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+//action(activatespotRadar,scene_002zarih_00, 0);
+//set(plugin[radar].heading, 0);
+//set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/002zarih_00.tiles/preview.jpg"/>
+<image>
+<cube url="%$mypath%panos/002zarih_00.tiles/pano_%s.jpg"/>
+</image>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_002zarih_00, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_01zarih_sphere" title="الضريح المقدس مدخل إيوان الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/01zarih_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_01zarih_sphere, 0);
+set(plugin[radar].heading, -88.79);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/01zarih_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+
+<cube url="%$mypath%panos/01zarih_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="38.572" atv="12.822" linkedscene="scene_02zarih_sphere"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-61.201" atv="1.972" linkedscene="scene_36_sphere"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="179.055" atv="5.346" linkedscene="scene_05_shab"/>
+</scene>
+<scene name="scene_02zarih_sphere" title="الضريح المقدس جهة باب الزنجاني" onstart="action(startsceneACT);" thumburl="%$mypath%panos/02zarih_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_02zarih_sphere, 0);
+set(plugin[radar].heading, -173.21);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-5.305" vlookat="0.887" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/02zarih_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/02zarih_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-61.490" atv="11.816" linkedscene="scene_01zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="41.063" atv="11.291" linkedscene="scene_03zarih_sphere"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="162.676" atv="2.825" linkedscene="scene_04_shab"/>
+</scene>
+<scene name="scene_03zarih_sphere" title="الضريح المقدس جهة الرأس الشريف" onstart="action(startsceneACT);" thumburl="%$mypath%panos/03zarih_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_03zarih_sphere, 0);
+set(plugin[radar].heading, 97.87);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-3.728" vlookat="0.412" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/03zarih_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/03zarih_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-52.676" atv="11.411" linkedscene="scene_02zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="66.155" atv="19.509" linkedscene="scene_04zarih_sphere"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="173.679" atv="12.087" linkedscene="scene_39_roze"/>
+</scene>
+<scene name="scene_04zarih_sphere" title="الضريح المقدس جهة الراس الشريف" onstart="action(startsceneACT);" thumburl="%$mypath%panos/04zarih_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_04zarih_sphere, 0);
+set(plugin[radar].heading, 54.27);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="2.249" vlookat="-7.613" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/04zarih_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+
+<cube url="%$mypath%panos/04zarih_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-68.724" atv="16.054" linkedscene="scene_03zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="70.737" atv="1.847" linkedscene="scene_36_sphere"/>
+</scene>
+<scene name="scene_34_sphere" title="الرواق الشريف جهة النساء" onstart="action(startsceneACT);" thumburl="%$mypath%panos/34_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_34_sphere, 0);
+set(plugin[radar].heading, 45.85);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-98.469" vlookat="-6.149" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/34_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/34_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-154.025" atv="6.452" linkedscene="scene_35_sphere"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-64.612" atv="-1.463" linkedscene="scene_05_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="116.481" atv="4.029" linkedscene="scene_32_shab"/>
+</scene>
+<scene name="scene_35_sphere" title="الرواق الشريف جهة النساء" onstart="action(startsceneACT);" thumburl="%$mypath%panos/35_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_35_sphere, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="4.870" vlookat="0.247" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/35_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/35_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="6.032" atv="5.750" linkedscene="scene_36_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="93.298" atv="3.816" linkedscene="scene_34_sphere"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-89.217" atv="5.663" linkedscene="scene_37_sphere"/>
+</scene>
+<scene name="scene_36_sphere" title="الضريح المقدس جهة النساء" onstart="action(startsceneACT);" thumburl="%$mypath%panos/36_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_36_sphere, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="4.619" vlookat="-0.384" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/36_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+
+<cube url="%$mypath%panos/36_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-70.321" atv="-1.517" linkedscene="scene_04zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="44.632" atv="-0.727" linkedscene="scene_01zarih_sphere"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-175.534" atv="4.740" linkedscene="scene_35_sphere"/>
+</scene>
+<scene name="scene_37_sphere" title="الرواق الشريف جهة النساء" onstart="action(startsceneACT);" thumburl="%$mypath%panos/37_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_37_sphere, 0);
+set(plugin[radar].heading, 84.03);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-13.259" vlookat="-5.295" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/37_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/37_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="1.055" atv="5.577" linkedscene="scene_35_sphere"/>
+</scene>
+
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<scene name="scene_04_shab" title="الرواق الشريف جهة باب الزنجاني" onstart="action(startsceneACT);" thumburl="%$mypath%panos/04_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_04_shab, 0);
+set(plugin[radar].heading, 186.06);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-5.433" vlookat="1.403" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/04_shab.tiles/preview.jpg"/>
+	<image type="CUBE">
+		<cube url="%$mypath%panos/04_shab.tiles/mobile_%s.jpg"/>
+	</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="0.828" atv="14.590" linkedscene="scene_02zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="83.296" atv="1.207" linkedscene="scene_10_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="65.806" atv="2.282" linkedscene="scene_39_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-88.098" atv="4.888" linkedscene="scene_20_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="176.503" atv="6.221" linkedscene="scene_42_shab"/>
+</scene>
+<scene name="scene_05-roz_roze" title="الرواق الشريف مدخل إيوان الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/05-roz_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_05-roz_roze, 0);
+set(plugin[radar].heading, -89.31);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/05-roz_roze.tiles/preview.jpg"/>
+	<image type="CUBE">
+	 	<cube url="%$mypath%panos/05-roz_roze.tiles/mobile_%s.jpg"/>
+	</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="3.338" atv="-0.435" linkedscene="scene_01zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="81.714" atv="-0.510" linkedscene="scene_20_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="175.856" atv="7.500" linkedscene="scene_06_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_05_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_05_shab" title="مدخل الضريح الرئيسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/05_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_05_shab, 0);
+set(plugin[radar].heading, -89.31);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/05_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/05_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-1.239" atv="6.585" linkedscene="scene_01zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="73.794" atv="3.796" linkedscene="scene_20_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-108.603" atv="-3.043" linkedscene="scene_34_sphere"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="164.748" atv="7.814" linkedscene="scene_06_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_05-roz_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_06_roze" title="إيوان الذهب المدخل الرئيسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/06_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_06_roze, 0);
+set(plugin[radar].heading, -93.24);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/06_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/06_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="2.759" atv="4.057" linkedscene="scene_05-roz_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="179.371" atv="4.546" linkedscene="scene_07_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_06_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_06_shab" title="إيوان الذهب المدخل الرئيسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/06_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_06_shab, 0);
+set(plugin[radar].heading, -93.24);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/06_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/06_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_06_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_07_roze" title="باحة الصحن المقابله لإيوان الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/07_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_07_roze, 0);
+set(plugin[radar].heading, -112.45);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="20.302" vlookat="-25.323" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/07_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/07_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="14.686" atv="4.054" linkedscene="scene_06_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-10.127" atv="-0.889" linkedscene="scene_alame_ardabili_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="40.789" atv="-0.550" linkedscene="scene_alame_heli_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="112.318" atv="0.547" linkedscene="scene_21_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="71.777" atv="-9.040" linkedscene="scene_ivane_rast_roze"/>
+<hotspot name="spot6" style="skin_hotspotstyle" ath="-47.067" atv="-9.268" linkedscene="scene_ivan_chap_roze_roze"/>
+<hotspot name="spot7" style="skin_hotspotstyle" ath="-80.164" atv="1.686" linkedscene="scene_29_roze"/>
+<hotspot name="spot8" style="skin_hotspotstyle" ath="52.662" atv="-46.779" linkedscene="scene_menare_rast" />
+<hotspot name="spot9" style="skin_hotspotstyle" ath="-19.303" atv="-46.368" linkedscene="scene_menare_chap" />
+ 
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_07_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_07_shab" title="باحة الصحن المقابله لإيوان الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/07_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_07_shab, 0);
+set(plugin[radar].heading, -405.57);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-43.164" vlookat="-17.048" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/07_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/07_shab.tiles/mobile_%s.jpg"/>
+
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-47.887" atv="4.896" linkedscene="scene_06_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-107.919" atv="-9.284" linkedscene="scene_ivane_chap_shab_sphere"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-145.777" atv="-0.680" linkedscene="scene_29_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="48.874" atv="2.590" linkedscene="scene_21_shab"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="-81.908" atv="-46.989" linkedscene="scene_menare_chap_shab"/>
+<hotspot name="spot6" style="skin_hotspotstyle" ath="-10.150" atv="-46.309" linkedscene="scene_menare_rast_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_07_shab, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_08_roze" title="رواق ابو طالب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/08_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_08_roze, 0);
+set(plugin[radar].heading, 89.26);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="360.803" vlookat="3.958" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/08_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/08_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-14.556" atv="4.237" linkedscene="scene_39_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-106.263" atv="11.087" linkedscene="scene_10_roze"/>
+</scene>
+<scene name="scene_10_roze" title="رواق ابو طالب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/10_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_10_roze, 0);
+set(plugin[radar].heading, 13.12);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="80.867" vlookat="5.724" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/10_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/10_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="170.904" atv="7.459" linkedscene="scene_08_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="41.216" atv="6.920" linkedscene="scene_12_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="79.609" atv="1.148" linkedscene="scene_04_shab"/>
+</scene>
+<scene name="scene_12_roze" title="باحة الصحن الشريف جهة رواق ابو طالب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/12_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_12_roze, 0);
+set(plugin[radar].heading, -172.38);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/12_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/12_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-92.527" atv="7.482" linkedscene="scene_41_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-133.859" atv="2.604" linkedscene="scene_14_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-44.685" atv="3.258" linkedscene="scene_42_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="0.315" atv="-0.633" linkedscene="scene_39_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="43.636" atv="0.551" linkedscene="scene_10_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_12_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_12_shab" title="باحة الصحن الشريف جهة باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/12_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_12_shab, 0);
+set(plugin[radar].heading, -264.39);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-94.691" vlookat="-13.181" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/12_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/12_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-77.082" atv="-12.305" linkedscene="scene_ivane_chap_shab_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-179.750" atv="-1.719" linkedscene="scene_40_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-15.304" atv="3.299" linkedscene="scene_29_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_12_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_14_roze" title="إيوان مسجد عمران بن شاهين" onstart="action(startsceneACT);" thumburl="%$mypath%panos/14_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_14_roze, 0);
+set(plugin[radar].heading, -5.25);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-168.439" vlookat="-9.746" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/14_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/14_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-174.973" atv="7.938" linkedscene="scene_41_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-128.040" atv="8.952" linkedscene="scene_12_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="131.504" atv="-0.902" linkedscene="scene_16_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="2.634" atv="6.244" linkedscene="scene_15_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_14_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_15_roze" title="مسجد عمران بن شاهين" onstart="action(startsceneACT);" thumburl="%$mypath%panos/15_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_15_roze, 0);
+set(plugin[radar].heading, -6.29);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="8.189" vlookat="-58.240" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/15_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/15_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-173.330" atv="7.264" linkedscene="scene_14_roze"/>
+</scene>
+<scene name="scene_16_roze" title="باحة الصحن الشريف مقابل باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/16_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_16_roze, 0);
+set(plugin[radar].heading, -157.59);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-16.272" vlookat="-5.589" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/16_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/16_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-20.022" atv="0.633" linkedscene="scene_20_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="73.902" atv="5.311" linkedscene="scene_41_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-75.503" atv="-10.118" linkedscene="scene_ivane_rast_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-109.808" atv="3.001" linkedscene="scene_21_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="163.710" atv="-0.526" linkedscene="scene_17_roze"/>
+<hotspot name="spot6" style="skin_hotspotstyle" ath="-50.612" atv="-46.123" linkedscene="scene_menare_rast" />
+
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_16_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_16_shab" title="باحة الصحن الشريف مقابل باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/16_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_16_shab, 0);
+set(plugin[radar].heading, -157.59);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-27.764" vlookat="-4.759" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/16_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/16_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-29.353" atv="1.464" linkedscene="scene_20_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="14.847" atv="2.460" linkedscene="scene_42_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-118.641" atv="0.776" linkedscene="scene_21_shab"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="153.021" atv="1.644" linkedscene="scene_17_shab"/>
+<hotspot name="spot6" style="skin_hotspotstyle" ath="57.593" atv="5.520" linkedscene="scene_41_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_16_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_17_roze" title="مدخل باب الشيخ الطوسي(قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/17_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_17_roze, 0);
+set(plugin[radar].heading, 48.35);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="132.373" vlookat="1.198" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/17_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/17_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="129.758" atv="2.068" linkedscene="scene_16_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-50.707" atv="0.894" linkedscene="scene_18_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_17_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_18_roze" title="باب الشيخ الطوسي(قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/18_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_18_roze, 0);
+set(plugin[radar].heading, 234.41);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-52.980" vlookat="-1.409" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/18_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/18_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-53.173" atv="-1.471" linkedscene="scene_17_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_18_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_18_shab" title="باب الشيخ الطوسي(قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/18_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_18_shab, 0);
+set(plugin[radar].heading, 234.41);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-51.085" vlookat="-8.072" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/18_shab.tiles/preview.jpg"/>
+<image type="CUBE" multires="true" tilesize="512" progressive="false">
+<cube url="%$mypath%panos/18_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-51.655" atv="4.092" linkedscene="scene_17_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_18_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_20_roze" title="مدخل الرواق مقابل باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/20_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_20_roze, 0);
+set(plugin[radar].heading, -51.93);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-75.729" vlookat="2.623" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/20_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/20_roze.tiles/mobile_%s.jpg"/>
+
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-37.291" atv="7.177" linkedscene="scene_04_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-155.948" atv="4.742" linkedscene="scene_alame_heli_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="50.582" atv="6.299" linkedscene="scene_16_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="-129.440" atv="10.223" linkedscene="scene_05_shab"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_20_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_21_roze" title="باحة الصحن الشريف جهة باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/21_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_21_roze, 0);
+set(plugin[radar].heading, -149.61);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="17.698" vlookat="-9.048" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/21_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/21_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="16.810" atv="-11.516" linkedscene="scene_ivane_rast_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-28.173" atv="0.088" linkedscene="uuu"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="54.339" atv="0.890" linkedscene="scene_16_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-108.337" atv="0.600" linkedscene="scene_khoei_sphere"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="12.389" atv="-35.261" linkedscene="scene_menare_rast" />
+<hotspot name="spot6" style="skin_hotspotstyle" ath="-9.105" atv="-22.534" linkedscene="scene_menare_chap" />
+ 
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_21_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_21_shab" title="باحة الصحن الشريف جهة باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/21_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_21_shab, 0);
+set(plugin[radar].heading, -457.60);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-29.057" vlookat="-9.962" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/21_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/21_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="7.657" atv="2.099" linkedscene="scene_16_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-81.178" atv="0.843" linkedscene="scene_07_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-158.442" atv="0.482" linkedscene="scene_khoei_sphere"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="88.241" atv="-1.768" linkedscene="scene_50_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="-38.920" atv="-39.782" linkedscene="scene_menare_rast_shab"/>
+<hotspot name="spot6" style="skin_hotspotstyle" ath="-58.513" atv="-25.379" linkedscene="scene_menare_chap_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_21_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_29_roze" title="باحة الصحن الشريف جهة باب القبلة " onstart="action(startsceneACT);" thumburl="%$mypath%panos/29_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_29_roze, 0);
+set(plugin[radar].heading, 18.75);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-81.177" vlookat="-6.432" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/29_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/29_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-88.360" atv="-10.269" linkedscene="scene_ivan_chap_roze_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-131.851" atv="1.920" linkedscene="scene_32_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-47.424" atv="2.780" linkedscene="scene_07_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-87.470" atv="-37.207" linkedscene="scene_menare_chap" />
+<hotspot name="spot5" style="skin_hotspotstyle" ath="-68.260" atv="-23.111" linkedscene="scene_menare_rast" />
+
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_29_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_29_shab" title="باحة الصحن الشريف جهة باب القبلة " onstart="action(startsceneACT);" thumburl="%$mypath%panos/29_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_29_shab, 0);
+set(plugin[radar].heading, 18.75);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-18.378" vlookat="-14.687" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/29_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/29_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-41.380" atv="-12.215" linkedscene="scene_ivane_chap_shab_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-0.663" atv="1.241" linkedscene="scene_07_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-86.525" atv="3.255" linkedscene="scene_12_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-40.080" atv="-39.140" linkedscene="scene_menare_chap_shab"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="-19.576" atv="-25.320" linkedscene="scene_menare_rast_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_29_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_30_roze" title="باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/30_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_30_roze, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/30_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/30_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-2.324" atv="7.363" linkedscene="scene_31_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_30_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_30_shab" title="باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/30_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_30_shab, 0);
+set(plugin[radar].heading, 25.89);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-28.174" vlookat="0.309" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/30_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/30_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-24.832" atv="10.498" linkedscene="scene_31_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="147.357" atv="-0.159" linkedscene="scene_47_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_30_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_31_roze" title="مدخل باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/31_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_31_roze, 0);
+set(plugin[radar].heading, -12.31);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="135.825" vlookat="0.806" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/31_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/31_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="125.182" atv="5.778" linkedscene="scene_32_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-59.336" atv="3.796" linkedscene="scene_30_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_31_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_32_roze" title="باحة الصحن الشريف مقابل باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/32_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_32_roze, 0);
+set(plugin[radar].heading, 42.98);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-44.777" vlookat="-11.502" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/32_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/32_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="11.308" atv="-8.341" linkedscene="scene_ivan_chap_roze_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="53.185" atv="3.409" linkedscene="scene_29_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="138.958" atv="3.692" linkedscene="scene_31_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-134.444" atv="-3.113" linkedscene="scene_40-roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="-84.443" atv="-3.683" linkedscene="scene_43_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_32_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_39_roze" title="مدخل رواق ابو طالب المقابل للضريح الشريف" onstart="action(startsceneACT);" thumburl="%$mypath%panos/39_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_39_roze, 0);
+set(plugin[radar].heading, 178.56);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-88.138" vlookat="3.725" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/39_roze.tiles/preview.jpg"/>
+<image type="CUBE" multires="true" tilesize="512" progressive="false">
+
+<cube url="%$mypath%panos/39_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-91.822" atv="15.303" linkedscene="scene_03zarih_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="88.974" atv="6.913" linkedscene="scene_08_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="178.382" atv="-2.701" linkedscene="scene_12_roze"/>
+</scene>
+<scene name="scene_40-roze" title="باحة الصحن الشريف المقابله لإيوان ميزاب الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/40-roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_40-roze, 0);
+set(plugin[radar].heading, 58.38);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-58.448" vlookat="-5.574" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/40-roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/40-roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-77.447" atv="2.372" linkedscene="scene_43_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-168.606" atv="5.254" linkedscene="scene_44_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="9.086" atv="-0.801" linkedscene="scene_32_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="50.361" atv="-0.894" linkedscene="scene_31_roze"/>
+</scene>
+<scene name="scene_40_shab" title="باحة الصحن الشريف المقابلة لأيوان ميزاب الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/40_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_40_shab, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/40_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/40_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="5.648" atv="-0.145" linkedscene="scene_43_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-91.303" atv="1.095" linkedscene="scene_45_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="91.114" atv="-1.542" linkedscene="scene_12_shab"/>
+</scene>
+<scene name="scene_41_roze" title="باحة الصحن الشريف مقابل إيوان العلماء" onstart="action(startsceneACT);" thumburl="%$mypath%panos/41_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_41_roze, 0);
+set(plugin[radar].heading, -132.62);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-46.256" vlookat="-10.748" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/41_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/41_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-52.946" atv="3.526" linkedscene="scene_42_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="36.976" atv="7.911" linkedscene="scene_12_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="129.519" atv="5.380" linkedscene="scene_14_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-148.772" atv="-0.973" linkedscene="scene_16_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_41_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_41_shab" title="باحة الصحن الشريف مقابل إيوان العلماء" onstart="action(startsceneACT);" thumburl="%$mypath%panos/41_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_41_shab, 0);
+set(plugin[radar].heading, -100.23);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-76.925" vlookat="-4.411" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/41_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/41_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-81.244" atv="3.235" linkedscene="scene_42_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_41_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_42_roze" title="إيوان العلماء جهة باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/42_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_42_roze, 0);
+set(plugin[radar].heading, -151.59);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-26.254" vlookat="-1.668" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/42_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/42_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_42_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_42_shab" title="إيوان العلماء جهة باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/42_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_42_shab, 0);
+set(plugin[radar].heading, -151.59);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-22.721" vlookat="-2.595" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/42_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/42_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-24.886" atv="6.335" linkedscene="scene_04_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="154.430" atv="9.004" linkedscene="scene_41_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="109.177" atv="7.231" linkedscene="scene_122_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_42_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_43_roze" title="إيوان ميزاب الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/43_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_43_roze, 0);
+set(plugin[radar].heading, 9.38);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-8.900" vlookat="-2.269" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/43_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/43_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="169.782" atv="5.628" linkedscene="scene_40-roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-150.223" atv="3.982" linkedscene="scene_44_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="125.464" atv="3.003" linkedscene="scene_32_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_43_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_44_roze" title="باحة الصحن الشريف المقابلة لباب الفرج" onstart="action(startsceneACT);" thumburl="%$mypath%panos/44_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_44_roze, 0);
+set(plugin[radar].heading, 69.21);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-48.333" vlookat="-14.506" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/44_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/44_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-27.066" atv="3.306" linkedscene="scene_43_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="20.655" atv="6.559" linkedscene="scene_40-roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-162.276" atv="-1.100" linkedscene="scene_45_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_44_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_45_roze" title="مدخل باب الفرج" onstart="action(startsceneACT);" thumburl="%$mypath%panos/45_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_45_roze, 0);
+set(plugin[radar].heading, -26.40);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="119.062" vlookat="-1.245" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/45_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/45_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="108.168" atv="3.049" linkedscene="scene_44_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-66.800" atv="1.593" linkedscene="scene_46_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_45_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_45_shab" title="مدخل باب الفرج" onstart="action(startsceneACT);" thumburl="%$mypath%panos/45_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_45_shab, 0);
+set(plugin[radar].heading, 187.84);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-100.274" vlookat="-4.929" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/45_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/45_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-101.274" atv="1.870" linkedscene="scene_40_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="85.191" atv="4.229" linkedscene="scene_46_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_45_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_46_roze" title="باب الفرج" onstart="action(startsceneACT);" thumburl="%$mypath%panos/46_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_46_roze, 0);
+set(plugin[radar].heading, 170.97);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-79.874" vlookat="3.041" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/46_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/46_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-79.872" atv="2.462" linkedscene="scene_45_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_46_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_46_shab" title="باب الفرج" onstart="action(startsceneACT);" thumburl="%$mypath%panos/46_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_46_shab, 0);
+set(plugin[radar].heading, 140.05);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-50.885" vlookat="-5.958" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/46_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/46_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-46.367" atv="11.331" linkedscene="scene_45_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_46_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_alame_ardabili_roze" title="مرقد العلامة الشيخ احمد الأردبيلي(قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/alame_ardabili_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_alame_ardabili_roze, 0);
+set(plugin[radar].heading, -140.55);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-37.607" vlookat="2.304" fovtype="MFOV" fov="127.033" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/alame_ardabili_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/alame_ardabili_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-133.423" atv="5.206" linkedscene="scene_07_roze"/>
+</scene>
+<scene name="scene_alame_heli_roze" title="مرقد الشيخ جمال الدين الحلي (قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/alame_heli_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_alame_heli_roze, 0);
+set(plugin[radar].heading, 22.86);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-37.013" vlookat="4.697" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/alame_heli_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/alame_heli_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-7.103" atv="15.967" linkedscene="scene_07_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-81.312" atv="3.194" linkedscene="scene_20_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="36.822" atv="8.449" linkedscene="scene_40_shab"/>
+</scene>
+<scene name="scene_ivan_chap_roze_roze" title="كيشوانية باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/ivan_chap_roze_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_ivan_chap_roze_roze, 0);
+set(plugin[radar].heading, 136.15);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-136.041" vlookat="-17.632" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/ivan_chap_roze_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/ivan_chap_roze_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-131.937" atv="-1.554" linkedscene="scene_ivane_rast_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-99.241" atv="12.806" linkedscene="scene_07_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="5.871" atv="20.093" linkedscene="scene_29_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="96.322" atv="14.626" linkedscene="scene_32_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="178.865" atv="-64.328" linkedscene="scene_menare_chap" />
+<hotspot name="spot6" style="skin_hotspotstyle" ath="-142.640" atv="-31.805" linkedscene="scene_menare_rast" />
+</scene>
+<scene name="scene_ivane_rast_roze" title="كيشوانية باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/ivane_rast_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_ivane_rast_roze, 0);
+set(plugin[radar].heading, -140.95);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="17.707" vlookat="-13.199" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/ivane_rast_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/ivane_rast_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-59.623" atv="12.999" linkedscene="scene_07_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-159.315" atv="16.263" linkedscene="scene_21_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="105.583" atv="13.730" linkedscene="scene_16_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-26.816" atv="0.800" linkedscene="scene_ivan_chap_roze_roze"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="85.185" atv="9.473" linkedscene="scene_41_roze"/>
+<hotspot name="spot6" style="skin_hotspotstyle" ath="16.113" atv="-64.771" linkedscene="scene_menare_rast" />
+<hotspot name="spot7" style="skin_hotspotstyle" ath="-18.053" atv="-29.869" linkedscene="scene_menare_chap" />
+
+</scene>
+
+<scene name="scene_parcham_roze" title="parcham_roze" onstart="action(startsceneACT);" thumburl="%$mypath%panos/parcham_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_parcham_roze, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/parcham_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/parcham_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+</scene>
+<scene name="scene_seyed_mostafa_roze" title="مرقد الشيخ محمد الاصفهاني والسيد مصطفى الخميني(قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/seyed_mostafa_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_seyed_mostafa_roze, 0);
+set(plugin[radar].heading, -161.13);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="23.991" vlookat="17.094" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/seyed_mostafa_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/seyed_mostafa_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+</scene>
+<scene name="scene_24_roze" title="مدخل باب مسلم ابن عقيل (ع)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/24_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_24_roze, 0);
+set(plugin[radar].heading, -50.70);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-38.608" vlookat="-1.369" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/24_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/24_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-16.547" atv="8.267" linkedscene="scene_21_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-39.323" atv="-6.637" linkedscene="scene_ivane_rast_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="134.497" atv="4.308" linkedscene="scene_49_roze"/>
+</scene>
+<scene name="scene_25_roze" title="جهة السوق الكبير" onstart="action(startsceneACT);" thumburl="%$mypath%panos/25_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_25_roze, 0);
+set(plugin[radar].heading, -59.72);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-31.043" vlookat="-3.886" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/25_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/25_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-34.940" atv="2.188" linkedscene="scene_26_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="8.970" atv="0.251" linkedscene="scene_49_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_25_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_26_roze" title="باب الساعة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/26_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_26_roze, 0);
+set(plugin[radar].heading, -44.16);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-45.089" vlookat="-0.719" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/26_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/26_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="40.602" atv="3.965" linkedscene="scene_49_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-51.217" atv="1.483" linkedscene="scene_27_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="132.510" atv="5.504" linkedscene="scene_25_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-165.080" atv="-1.228" linkedscene="scene_48_roze"/>
+</scene>
+<scene name="scene_27_roze" title="مدخل باب الساعة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/27_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_27_roze, 0);
+set(plugin[radar].heading, -39.64);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-49.146" vlookat="-9.871" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/27_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/27_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-51.817" atv="5.709" linkedscene="scene_07_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="128.791" atv="8.773" linkedscene="scene_26_roze"/>
+</scene>
+<scene name="scene_47_roze" title="جهة شارع الرسول" onstart="action(startsceneACT);" thumburl="%$mypath%panos/47_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_47_roze, 0);
+set(plugin[radar].heading, -80.24);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="82.771" vlookat="-0.541" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/47_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/47_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot2" style="skin_hotspotstyle" ath="167.778" atv="-2.241" linkedscene="scene_48_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="79.748" atv="-0.047" linkedscene="scene_30_roze"/>
+ 
+<plugin name="shab-icon" parent="footer-2th" url="skin/imamali/shab.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة ليلاً, ToolTips);" onclick="loadscene(scene_47_shab, null, MERGE);tween(plugin[map-view].alpha, 0);tween(plugin[map-view-shab].alpha, 1.0);set(plugin[map-view].enabled,false);set(plugin[map-view-shab].enabled,true);"/>
+</scene>
+<scene name="scene_48_roze" title="جهة شارع الصادق(ع)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/48_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_48_roze, 0);
+set(plugin[radar].heading, -124.39);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="85.487" vlookat="-7.333" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/48_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/48_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="112.898" atv="-0.349" linkedscene="scene_26_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="41.809" atv="-2.572" linkedscene="scene_47_roze"/>
+</scene>
+<scene name="scene_49_roze" title="باب مسلم ابن عقيل (ع)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/49_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_49_roze, 0);
+set(plugin[radar].heading, -90.90);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/49_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/49_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="2.178" atv="8.077" linkedscene="scene_24_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-81.312" atv="3.194" linkedscene="scene_26_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-123.435" atv="1.415" linkedscene="scene_25_roze"/>
+</scene>
+<scene name="scene_50_roze" title="جامع الغرويه" onstart="action(startsceneACT);" thumburl="%$mypath%panos/50_roze.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_50_roze, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/50_roze.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/50_roze.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="2.178" atv="8.077" linkedscene="scene_24_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-81.312" atv="3.194" linkedscene="scene_26_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-123.435" atv="1.415" linkedscene="scene_25_roze"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="36.822" atv="8.449" linkedscene="scene_40_shab"/>
+</scene>
+<scene name="scene_17_shab" title="مدخل باب الشيخ الطوسي(قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/17_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_17_shab, 0);
+set(plugin[radar].heading, 301.69);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-118.819" vlookat="-5.614" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/17_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/17_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-118.674" atv="0.609" linkedscene="scene_16_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="61.217" atv="3.994" linkedscene="scene_18_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_17_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_25_shab" title="جهة السوق الكبير" onstart="action(startsceneACT);" thumburl="%$mypath%panos/25_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_25_shab, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/25_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/25_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_25_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_43_shab" title="إيوان ميزاب الذهب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/43_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_43_shab, 0);
+set(plugin[radar].heading, -108.38);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="104.458" vlookat="9.753" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/43_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/43_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-77.791" atv="3.142" linkedscene="scene_40_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-21.290" atv="-1.494" linkedscene="scene_45_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_43_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_47_shab" title="جهة شارع الرسول" onstart="action(startsceneACT);" thumburl="%$mypath%panos/47_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_47_shab, 0);
+set(plugin[radar].heading, 25.58);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-30.089" vlookat="-6.137" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/47_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/47_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-35.693" atv="1.227" linkedscene="scene_30_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_47_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_ardabili_shab_sphere" title="مرقد العلامة الشيخ احمد الأردبيلي (قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/ardabili_shab_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_ardabili_shab_sphere, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/ardabili_shab_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/ardabili_shab_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+</scene>
+<scene name="scene_ivane_chap_shab_sphere" title="كيشوانية باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/ivane_chap_shab_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_ivane_chap_shab_sphere, 0);
+set(plugin[radar].heading, -81.71);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="46.061" vlookat="-18.385" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/ivane_chap_shab_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/ivane_chap_shab_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="115.562" atv="14.980" linkedscene="scene_07_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-138.052" atv="19.246" linkedscene="scene_29_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-75.233" atv="20.046" linkedscene="scene_12_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-29.420" atv="5.968" linkedscene="scene_40_shab"/>
+</scene>
+<scene name="scene_khoei_sphere" title="مقبرة السيد الخوئي(قدس)" onstart="action(startsceneACT);" thumburl="%$mypath%panos/khoei_sphere.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_khoei_sphere, 0);
+set(plugin[radar].heading, -118.81);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-89.940" vlookat="3.296" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/khoei_sphere.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/khoei_sphere.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="20.632" atv="17.135" linkedscene="scene_21_roze"/>
+</scene>
+<scene name="scene_menare_chap" title="المنارة الجنوبية" onstart="action(startsceneACT);" thumburl="%$mypath%panos/menare_chap.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_menare_chap, 0);
+set(plugin[radar].heading, -104.75);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="167.391" vlookat="2.197" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/menare_chap.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/menare_chap.tiles/mobile_%s.jpg"/>
+</image>
+ 
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="179.566" atv="47.277" linkedscene="scene_07_roze" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="-92.366" atv="40.804" linkedscene="scene_29_roze" />
+		<hotspot name="spot3" style="skin_hotspotstyle" ath="146.911" atv="26.198" linkedscene="scene_21_roze" />
+		<hotspot name="spot4" style="skin_hotspotstyle" ath="119.467" atv="-0.964" linkedscene="scene_menare_rast" />
+		<hotspot name="spot5" style="skin_hotspotstyle" ath="-75.927" atv="63.541" linkedscene="scene_ivan_chap_roze_roze" />
+		<hotspot name="spot6" style="skin_hotspotstyle" ath="132.332" atv="30.722" linkedscene="scene_ivane_rast_roze" />
+</scene>
+<scene name="scene_menare_rast" title="المنارة الشمالية" onstart="action(startsceneACT);" thumburl="%$mypath%panos/menare_rast.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_menare_rast, 0);
+set(plugin[radar].heading, 284.28);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="206.508" vlookat="12.476" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/menare_rast.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/menare_rast.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-134.659" atv="45.884" linkedscene="scene_07_roze" />
+<hotspot name="spot2" style="skin_hotspotstyle" ath="140.187" atv="38.799" linkedscene="scene_21_roze" />
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-104.815" atv="25.375" linkedscene="scene_29_roze" />
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-76.087" atv="-0.625" linkedscene="scene_menare_chap" />
+<hotspot name="spot5" style="skin_hotspotstyle" ath="62.288" atv="44.726" linkedscene="scene_16_roze" />
+		
+<hotspot name="spot6" style="skin_hotspotstyle" ath="125.248" atv="66.424" linkedscene="scene_ivane_rast_roze" />
+<hotspot name="spot7" style="skin_hotspotstyle" ath="-87.970" atv="29.600" linkedscene="scene_ivan_chap_roze_roze" />
+
+</scene>
+<scene name="scene_menare_chap_shab" title="المنارة الجنوبية" onstart="action(startsceneACT);" thumburl="%$mypath%panos/menare_chap_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_menare_chap_shab, 0);
+set(plugin[radar].heading, -59.21);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="473.112" vlookat="3.879" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/menare_chap_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/menare_chap_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="94.980" atv="25.315" linkedscene="scene_21_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="125.122" atv="47.558" linkedscene="scene_07_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-140.028" atv="43.809" linkedscene="scene_29_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="72.146" atv="0.133" linkedscene="scene_menare_rast_shab"/>
+</scene>
+<scene name="scene_menare_rast_shab" title="المنارة الشمالية" onstart="action(startsceneACT);" thumburl="%$mypath%panos/menare_rast_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_menare_rast_shab, 0);
+set(plugin[radar].heading, -124.31);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-81.624" vlookat="6.160" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/menare_rast_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/menare_rast_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-179.221" atv="41.211" linkedscene="scene_21_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-89.424" atv="49.613" linkedscene="scene_07_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-59.185" atv="26.563" linkedscene="scene_29_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="110.905" atv="39.267" linkedscene="scene_16_shab"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="-33.284" atv="-1.068" linkedscene="scene_menare_chap_shab"/>
+</scene>
+<scene name="scene_14_shab" title="إيوان مسجد عمران بن شاهين" onstart="action(startsceneACT);" thumburl="%$mypath%panos/14_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_14_shab, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="171.369" vlookat="-6.042" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/14_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/14_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="170.371" atv="7.227" linkedscene="scene_41_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-144.453" atv="7.289" linkedscene="scene_122_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="118.327" atv="6.000" linkedscene="scene_16_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_14_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_20_shab" title="مدخل الرواق مقابل باب الشيخ الطوسي" onstart="action(startsceneACT);" thumburl="%$mypath%panos/20_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_20_shab, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="126.274" vlookat="2.467" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/20_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/20_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="85.197" atv="2.683" linkedscene="scene_05_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="176.857" atv="6.962" linkedscene="scene_04_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-91.875" atv="3.979" linkedscene="scene_16_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_20_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_31_shab" title="مدخل باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/31_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_31_shab, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="10.504" vlookat="0.626" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/31_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/31_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="12.394" atv="6.414" linkedscene="scene_32_shab"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-171.795" atv="1.587" linkedscene="scene_30_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_31_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_32_shab" title="باحة الصحن الشريف مقابل باب القبلة" onstart="action(startsceneACT);" thumburl="%$mypath%panos/32_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_32_shab, 0);
+set(plugin[radar].heading, 0);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/32_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/32_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="1.743" atv="-0.436" linkedscene="scene_34_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="179.226" atv="3.087" linkedscene="scene_31_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="89.264" atv="7.715" linkedscene="scene_12_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-90.800" atv="-8.186" linkedscene="scene_40_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_32_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_44_shab" title="باحة الصحن الشريف المقابلة لباب الفرج" onstart="action(startsceneACT);" thumburl="%$mypath%panos/44_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_44_shab, 0);
+set(plugin[radar].heading, 50.03);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-45.509" vlookat="-7.719" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/44_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/44_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-47.679" atv="-2.213" linkedscene="scene_37_sphere"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-136.101" atv="0.534" linkedscene="scene_45_shab"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="-10.024" atv="0.946" linkedscene="scene_43_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="36.444" atv="5.464" linkedscene="scene_40_shab"/>
+ 
+<plugin name="ruz-icon" parent="footer-2th" url="skin/imamali/ruz.png" align="center" width="20" height="20" x="115" y="15" zorder="110" enabled="true" alpha="1" onhover="showtext(عرض النقطة في النهار, ToolTips);" onclick="loadscene(scene_44_roze, null, MERGE);tween(plugin[map-view].alpha, 1);tween(plugin[map-view-shab].alpha, 0);set(plugin[map-view].enabled,true);set(plugin[map-view-shab].enabled,false);"/>
+</scene>
+<scene name="scene_122_shab" title="باحة الصحن الشريف جهة رواق ابو طالب" onstart="action(startsceneACT);" thumburl="%$mypath%panos/122_shab.tiles/thumb.jpg" lat="" lng="" heading="">
+<action name="startsceneACT">
+action(activatespotRadar,scene_122_shab, 0);
+set(plugin[radar].heading, 279.49);
+set(plugin[panoControl].heading,0);
+set(plugin[play].alpha,0);
+set(plugin[tolaTime].alpha,0);
+set(plugin[volume].alpha,0);
+//hotspot[videospot].stop();
+//action(pausevideo);
+set(plugin[MapIcon].alpha,1);
+set(plugin[MapIcon].enabled,true);
+set(plugin[Littelplant-icon].alpha,1);
+set(plugin[Littelplant-icon].enabled,true);
+set(plugin[rotate-icon].alpha,1);
+set(plugin[rotate-icon].enabled,true);
+</action>
+<view hlookat="-101.641" vlookat="-6.441" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto"/>
+<preview url="%$mypath%panos/122_shab.tiles/preview.jpg"/>
+<image type="CUBE">
+<cube url="%$mypath%panos/122_shab.tiles/mobile_%s.jpg"/>
+</image>
+ 
+<hotspot name="spot1" style="skin_hotspotstyle" ath="-63.319" atv="-1.016" linkedscene="scene_10_roze"/>
+<hotspot name="spot2" style="skin_hotspotstyle" ath="-102.900" atv="-2.209" linkedscene="scene_39_roze"/>
+<hotspot name="spot3" style="skin_hotspotstyle" ath="170.498" atv="6.397" linkedscene="scene_41_shab"/>
+<hotspot name="spot4" style="skin_hotspotstyle" ath="-144.480" atv="2.735" linkedscene="scene_42_shab"/>
+<hotspot name="spot5" style="skin_hotspotstyle" ath="127.675" atv="4.345" linkedscene="scene_14_shab"/>
+</scene>
+ 
+<action name="calc_pos_from_hfov_yaw_pitch_roll">
+div(hfov,%1,57.295779);
+div(yaw,%2,-57.295779);
+div(pitch,%3,57.295779);
+div(roll,%4,-57.295779);
+mul(hfov,0.5);Math.tan(hfov);mul(width,hfov,1000);set(height,'prop');
+Math.cos(ch,yaw);Math.sin(sh,yaw);
+Math.cos(ca,pitch);Math.sin(sa,pitch);
+Math.cos(cb,roll);Math.sin(sb,roll);
+mul(m0,ca,ch);
+mul(tmp,cb,sa);mul(tmp,ch);mul(tmp2,sb,sh);add(m3,tmp,tmp2);
+mul(m4,cb,ca);
+mul(tmp,cb,sa);mul(tmp,sh);mul(tmp2,sb,ch);sub(m5n,tmp,tmp2);mul(m5n,-1);
+mul(tmp,sb,sa);mul(tmp,ch);mul(tmp2,cb,sh);sub(m6n,tmp,tmp2);mul(m6n,-1);
+Math.atan2(yaw,m6n,m0);
+Math.atan2(roll,m5n,m4);
+Math.asin(pitch,m3);
+mul(ath,yaw,57.295779);
+mul(atv,pitch,57.295779);
+mul(rotate,roll,57.295779);
+</action>
+ 
+<action name="buildthumbs">
+if(%1 != NEXT, set(i,0));
+if(i LT scene.count,
+copy(thumb, scene[get(i)].thumburl);
+txtadd(thumbname,'thumb_',get(i));
+addplugin(get(thumbname));
+set(plugin[get(thumbname)].url, get(thumb));
+set(plugin[get(thumbname)].keep, true);
+set(plugin[get(thumbname)].align, rightbottom);
+set(plugin[get(thumbname)].width, 40);
+set(plugin[get(thumbname)].height, 40);
+mul(plugin[get(thumbname)].x, i,3);
+mul(plugin[get(thumbname)].y, i,3);
+add(plugin[get(thumbname)].x, 6);
+add(plugin[get(thumbname)].y, 104);
+copy(plugin[get(thumbname)].xsmall, plugin[get(thumbname)].x);
+copy(plugin[get(thumbname)].ysmall, plugin[get(thumbname)].y);
+add(plugin[get(thumbname)].zorder, 100, i);
+set(plugin[get(thumbname)].effect, glow(0xFFFFFF,1.0,2,10000));
+set(plugin[get(thumbname)].jsborder, '1px solid #FFFFFF');
+copy(plugin[get(thumbname)].thumbpos, i);
+set(plugin[get(thumbname)].linkedscene, get(scene[get(i)].name) );
+set(plugin[get(thumbname)].onclick, openthumbs() );
+inc(i);
+buildthumbs(NEXT);
+);
+</action>
+<action name="openthumb">
+if(%2 != NEXT,
+set(pos,0);
+copy(curpos, plugin[%1].thumbpos);
+set(xdst, 0);
+set(ydst, 0);
+);
+if(pos LT curpos,
+inc(pos);
+inc(ydst,90);
+sub(ymax, stageheight, 100);
+if(ydst GT ymax, inc(xdst,90);set(ydst,0); );
+openthumb(%1,NEXT);
+,
+add(xdst,10);
+add(ydst,10);
+tween(plugin[%1].x, get(xdst) );
+tween(plugin[%1].y, get(ydst) );
+tween(plugin[%1].width, 80);
+tween(plugin[%1].height, 80);
+);
+</action>
+<action name="closethumb">
+tween(plugin[%1].x, get(plugin[%1].xsmall));
+tween(plugin[%1].y, get(plugin[%1].ysmall));
+tween(plugin[%1].width, 40);
+tween(plugin[%1].height, 40);
+</action>
+<action name="openthumbs">
+if(%1 != NEXT,
+set(i,0);
+set(events.onclick, set(events.onclick,null); delayedcall(0.1, closethumbs() ); );
+);
+if(i LT scene.count,
+txtadd(thumbname,'thumb_',get(i));
+openthumb(get(thumbname));
+set(plugin[get(thumbname)].onclick, set(events.onclick,null); closethumbs(); loadscene(get(linkedscene),null,MERGE,BLEND(1)); );
+inc(i);
+openthumbs(NEXT);
+);
+</action>
+<action name="closethumbs">
+if(%1 != NEXT, set(i,0));
+if(i LT scene.count,
+txtadd(thumbname,'thumb_',get(i));
+closethumb(get(thumbname));
+set(plugin[get(thumbname)].onclick, openthumbs() );
+inc(i);
+closethumbs(NEXT);
+);
+</action>
+ 
+</krpano>
