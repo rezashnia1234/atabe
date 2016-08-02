@@ -62,9 +62,9 @@
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
-	<plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" spec="0.8.2" source="pgb" />
-	<!--<plugin name="org.chromium.zip" spec="2.1.0" source="pgb" />-->
-	<plugin name="org.chromium.zip2" spec="2.1.0" source="pgb" />
+	<plugin spec="https://github.com/MobileChromeApps/cordova-plugin-zip.git" source="git" />
+
+
 	
     <!-- 
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
