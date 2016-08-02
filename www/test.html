@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/template.css">
 
 	<script src="js/jquery-2.2.2.min.js"></script>
+	<script src="js/console.log.js"></script>
     <script src="cordova.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
@@ -24,6 +25,27 @@
 
 			FastClick.attach(document.body);
 
+			
+			
+			
+			
+function success(entries) {
+    var i;
+    for (i=0; i<entries.length; i++) {
+        console.log('En - ', entries[i]);
+    }
+}
+function fail(error) {
+    console.log("Failed to list directory contents: ", error);
+}
+
+window.resolveLocalFileSystemURL(DIR_FULL_PATH, function(dirEntry) {
+    var directoryReader = dirEntry.createReader();
+    console.log(dirEntry);
+
+    // Get a list of all the entries in the directory
+    directoryReader.readEntries(success,fail);
+});
 			
 		}
 
