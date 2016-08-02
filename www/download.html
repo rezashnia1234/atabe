@@ -40,7 +40,10 @@
 
 
 		function onDeviceReady() {
-			alert();
+			setTimeout(function(){
+				window.brightness = cordova.require("cordova.plugin.Brightness.Brightness");
+				brightness.setKeepScreenOn(true);
+			}, 1000);
 			
 			var networkState = navigator.connection.type;
 
@@ -112,9 +115,10 @@
 		networkState = navigator.connection.type;
 		if (networkState == Connection.NONE) {
 			console.log("start_download : NO internet");
+			brightness.setKeepScreenOn(false);
 			navigator.notification.alert(
 				'شما برای اینکار به اینترنت نیاز دارید',  // message
-				temp_function,         // callback
+				go_back,         // callback
 				'اخطار',            // title
 				'تائید'                  // buttonName
 			);
@@ -168,9 +172,10 @@
 				function(error) {
 					//alert('Crap something went wrong...');	
 					//alert(JSON.stringify(error));
+					brightness.setKeepScreenOn(false);
 					navigator.notification.alert(
 						'خطا در دانلود فایل',  // message
-						temp_function,         // callback
+						go_back,         // callback
 						'اخطار',            // title
 						'تائید'                  // buttonName
 					);
@@ -186,7 +191,13 @@
 				$('.progress-bar-parent').find('span').css('width','2%');
 				$('.progress-bar-percent').css('width',"");
 				$('.progress-bar-parent').css("display","none");
-				alert("download canceld");
+				brightness.setKeepScreenOn(false);
+				navigator.notification.alert(
+					'دانلود کنسل شد',  // message
+					go_back,         // callback
+					'اخطار',            // title
+					'تائید'                  // buttonName
+				);
 			});
 			
 			
