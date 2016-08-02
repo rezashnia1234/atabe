@@ -39,7 +39,8 @@
 
 
 		function onDeviceReady() {
-		
+			alert();
+			
 			var networkState = navigator.connection.type;
 
 			FastClick.attach(document.body);
@@ -50,50 +51,32 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 /////START DOWNLOAD//////////////////////////////////////////////////////////////////////
-/*
-		$('.play_it').each( function(i) {
-			//$(this).css("display","none");
-			var temp_array = JSON.parse(window.localStorage.getItem('downloaded_files'));
-			if($.inArray($.md5($(this).attr('online')),temp_array) != -1)
-			{
-				$(this).removeClass("need_download").addClass("downloaded");
+	
+		
+			if(window.localStorage.getItem('downloaded_files') == null){
+				window.localStorage.setItem('downloaded_files',JSON.stringify(["786","110"]));	
 			}
-		});
-		$('.play_it').click( function(i) {
-			temp_element = $(this);
-			//alert($(this).attr('online'));
 			
-			//play_or_download('http://khamenei.mobi/app/jh/ios/audio/roze/02.mp3','mp3');
-			play_or_download($(this).attr('online'),"mp3");
-		});
-*/		
-		
-		
-		
-		if(window.localStorage.getItem('downloaded_files') == null){
-			window.localStorage.setItem('downloaded_files',JSON.stringify(["786","110"]));	
-		}
-		
-		
-		if(window.localStorage.getItem('download_address') == null){
 			
-			window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, 
-				function(fs) {
-					window.localStorage.setItem('download_address',fs.root.toURL());
-				}, function(e) {
-					alert('failed to get fs');
-					alert(JSON.stringify(e));
-				}
-			);
-		}
+			if(window.localStorage.getItem('download_address') == null){
+				
+				window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, 
+					function(fs) {
+						window.localStorage.setItem('download_address',fs.root.toURL());
+					}, function(e) {
+						alert('failed to get fs');
+						alert(JSON.stringify(e));
+					}
+				);
+			}
 
-		console.log("window.localStorage.getItem('download_address'):" + window.localStorage.getItem('download_address'));
-		console.log("window.localStorage.getItem('downloaded_files'):" + window.localStorage.getItem('downloaded_files'));
-		
-		play_or_download('http://smcms.ir/tmp/panos.zip','zip');
+			console.log("window.localStorage.getItem('download_address'):" + window.localStorage.getItem('download_address'));
+			console.log("window.localStorage.getItem('downloaded_files'):" + window.localStorage.getItem('downloaded_files'));
+			
+			//play_or_download('http://smcms.ir/tmp/panos.zip','zip');
 
 	}
-	
+/*
 	function play_or_download(URL,Extension) {
 		console.log("play_or_download URL: " + URL);
 		console.log("play_or_download Extension: " + Extension);
@@ -225,7 +208,7 @@
 			return false;
 		}
 	}
-
+*/
 /////END DOWNLOAD////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
