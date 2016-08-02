@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/template.css">
 
 	<script src="js/jquery-2.2.2.min.js"></script>
-	<script src="js/console.log.js"></script>
+	<!--<script src="js/console.log.js"></script>-->
     <script src="cordova.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
@@ -28,31 +28,15 @@
 			
 			
 			
-			
-function success(entries) {
-    var i;
-    for (i=0; i<entries.length; i++) {
-        console.log('En - ', entries[i]);
-    }
-}
-function fail(error) {
-    console.log("Failed to list directory contents: ", error);
-}
-
-window.resolveLocalFileSystemURL(DIR_FULL_PATH, function(dirEntry) {
-    var directoryReader = dirEntry.createReader();
-    console.log(dirEntry);
-
-    // Get a list of all the entries in the directory
-    directoryReader.readEntries(success,fail);
-});
-			
 		}
 
 		$(window).load(function() {		
 			setTimeout(function(){
+				var src = window.localStorage.getItem('pano_localPath') + "/panos/15_roze.tiles/preview.jpg";
+				$(".smm_content img").attr("src",src);
 				$(".mypreload").html("");
-			}, 300);
+			//}, 300);
+			}, 2000);
 			
 		});
 
@@ -63,7 +47,7 @@ window.resolveLocalFileSystemURL(DIR_FULL_PATH, function(dirEntry) {
 			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 		}
 		$(document).ready(function(){
-
+			
 		});
 	</script>	
 

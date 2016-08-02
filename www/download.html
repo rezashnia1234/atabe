@@ -93,8 +93,10 @@
 
 		sync.on('complete', function(data) {
 			// data.localPath
+			window.localStorage.setItem('pano_localPath',data.localPath);
 			alert("complete : " + data.localPath);
 			alert("complete cached : " + data.cached);
+			
 		});
 
 		sync.on('error', function(e) {
