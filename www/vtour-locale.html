@@ -19,10 +19,11 @@
     <!--<script src="phonegap.js"></script>-->
 	<script>
 		var src;
+		src = "file://" + window.localStorage.getItem('pano_localPath')  + "/panos/panos/";
+		alert(src);
 		function init() {		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 			document.addEventListener("deviceready", onDeviceReady, false);
-			src = "file://" + window.localStorage.getItem('pano_localPath')  + "/panos/panos/";
 			//"./panos1/"
 		}
 		function onDeviceReady() {
