@@ -3,7 +3,7 @@
 <plugin name="activespot" url="skin/mappointactive.png" keep="true" align="center" edge="center" visible="false" zorder="1011"/>
 <plugin name="activespot_shab" url="skin/mappointactive.png" keep="true" align="center" edge="center" visible="false" zorder="1011"/>
  
-<plugin name="radar" url="%SWFPATH%/plugins/radar.swf" alturl="%SWFPATH%/plugins/radar.js" zorder="1006" keep="true" heading="0" parent="map-view-radar" align="lefttop" edge="center" x="0" y="0" linecolor="0" fillcolor="0xFF0000" scale="0.6" visible="false" editmode="true"/>
+<plugin name="radar" url="%SWFPATH%/plugins/radar.swf" alturl="%SWFPATH%/plugins/radar.js" zorder="1006" keep="true" heading="0" parent="map-view-radar" align="lefttop" edge="center" x="0" y="0" linecolor="0" fillcolor="0xFFFFFF" alpha="0.9" scale="0.6" visible="false" editmode="true"/>
 <action name="activatespot">
 set(plugin[activespot].parent, plugin[%1]);
 set(plugin[activespot].visible, true);

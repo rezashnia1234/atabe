@@ -7,6 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<meta http-equiv="x-ua-compatible" content="IE=edge" />
     <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
 
 	<style>
 		@-ms-viewport { width: device-width; }
@@ -20,7 +21,7 @@
 	<script>
 		var src;
 		src = "file://" + window.localStorage.getItem('pano_localPath')  + "/";
-		alert(src);
+		//alert(src);
 		function init() {		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 			document.addEventListener("deviceready", onDeviceReady, false);
@@ -35,21 +36,30 @@
 			setTimeout(function(){
 				$(".mypreload").html("");
 			}, 300);
+			setTimeout(function(){
+				function krpano() 
+				{
+					return document.getElementById("krpanoSWFObject");
+				}
+				$("#shkb_btn2").click(function() {
+					krpano().call( "Move-Map()" );
+				});
+			}, 300);
 		});
 	</script>
 </head>
 <style>
 #shkb_header {
-  background-image: url("images/vtour-demo/back.png");
+  background-image: url("images/vtour-demo/map-back.png");
   background-position: left center;
   background-repeat: no-repeat;
   background-size: contain;
-  top: 13vw;
-  height: 60px;
+  top: 0;
+  height: 32vw;
   left: 0;
   position: absolute;
-  width: 75px;
-  z-index:9999999999;
+  width: 19vw;
+  z-index:999999999;
 }
 #shkb_footer {
   background-image: url("images/vtour-demo/demo-footer.png");
@@ -94,7 +104,8 @@
 
 <script src="tour.js?0"></script>
 <div id="shkb_header" style="" >
-	<div id="shkb_btn1" onclick="parent.history.back();" ></div>
+	<a id="shkb_btn1" href="vtour-demo-day.html" ></a>
+	<div id="shkb_btn2" ></div>
 </div>
 
 <div id="pano" style="width:100%;height:100%;">

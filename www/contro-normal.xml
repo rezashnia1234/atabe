@@ -16,22 +16,30 @@
 			   showtime="0.1" fadetime="0.20" fadeintime="0.05"
 			   effect="glow(0x000000,1,12,100);"
 			   />
+	<style	name="shab_icon" 
+			css="background-image:url(skin/imamali/shab.png);background-repeat:no-repeat;background-color: transparent;color: transparent;height: 100%;width: 100%;background-size: 50%;background-position: left center;margin-left: 0vw;font-size: 3vw;"
+			html="00000"
+			parent="TitleName"
+			url="%SWFPATH%/plugins/textfield.swf"
+			align="right"
+			height="100%" zorder="110" enabled="true" alpha="1"
+			background="false"
+			onhover="showtext(عرض النقطة ليلاً, ToolTips);"
+			/>
+	<style	name="ruz_icon" 
+			css="background-image:url(skin/imamali/ruz.png);background-repeat:no-repeat;background-color: transparent;color: transparent;height: 100%;width: 100%;background-size: 50%;background-position: left center;margin-left: 0vw;font-size: 3vw;"
+			html="00000"
+			parent="TitleName"
+			url="%SWFPATH%/plugins/textfield.swf"
+			align="right"
+			height="100%" zorder="110" enabled="true" alpha="1"
+			background="false"
+			onhover="showtext(عرض النقطة في النهار, ToolTips);" 
+			/>
 
 			   
 			   
-	<plugin name="header-1th"
-	        url="skin/imamali/header.png"
-	        align="centertop"
-	        width="2000"
-	        height="100"
-	        keep="true"
-	        x=""
-	        y="0"
-	        scalechildren="false"
-			capture="false"
-	        handcursor="false"
-	        zorder="10"
-	        />
+
 	<plugin name="header-2th"
 	        url="skin/blank.png"
 	        align="centertop"
@@ -45,20 +53,7 @@
 	        handcursor="false"
 	        zorder="11"
 	        />
-	<plugin name="footer-1th"
-	        url="skin/imamali/footer.png"
-	        align="centerbottom"
-	        width="2000"
-	        height="69"
-	        keep="true"
-	        x="0"
-	        y="-5"
-	        scalechildren="false"
-			capture="false"
-	        handcursor="false"
-	        zorder="10"
-			alpha="0.9"
-	        />
+
 	<plugin name="footer-2th"
 	        url="skin/blank.png"
 	        align="centerbottom"
@@ -76,91 +71,25 @@
 	<plugin name="TitleName"
 	        url="%SWFPATH%/plugins/textfield.swf"
 			background="false"
-			css="text-align:center;color:#ffffff; font-family:tahoma;font-size:14px;direction:rtl;"
+			css="text-align:center;color:#ffffff; font-size:4vw;direction:rtl;background-color:rgba(30,146,196,0.9);width:100%;padding:2vw 0;"
 			parent="footer-2th"
 	        align="center"
 			x="0"
-			y="17"
-	        width="300"
-	        height="27"
+			y="0"
+	        width="100%"
+
 	        keep="true"
 			selectable="false"
 	        scalechildren="true"
-			html=""
+			html="حرم امام علي عليه السلام"
 			handcursor="false"
 	        />
 			
 
-	<plugin name="MapIcon"
-			parent="header-2th"
-	        url="skin/imamali/map-icon.png"
-	        align="lefttop"
-	        width="30"
-	        height="30"
-	        keep="true"
-	        x="40"
-	        y="26"
-	        zorder="110"
-			enabled="true"
-			alpha="1"
-			onclick="action(Move-Map);"
-			crop="0|0|40|40"
-			onhover="showtext(اغلاق المخطط, ToolTips);set(crop,0|40|40|40);"
-			onout="set(crop,0|0|40|40);"
-	        />
-	<plugin name="fullscreen"
-			parent="header-2th"
-	        url="skin/imamali/fullscreen.png"
-	        align="lefttop"
-	        width="30"
-	        height="30"
-	        keep="true"
-	        x="80"
-	        y="25"
-	        zorder="110"
-			enabled="true"
-			alpha="1"
-			crop="0|0|40|40"
-			onclick="switch(fullscreen);"
-			onhover="showtext( ملئ الشاشة , ToolTips);set(crop,0|40|40|40);"
-			onout="set(crop,0|0|40|40);"	
-	        />
-	<plugin name="rotate-icon"
-			parent="header-2th"
-	        url="skin/imamali/rotate-icon.png"
-	        align="lefttop"
-	        width="30"
-	        height="30"
-	        keep="true"
-	        x="120"
-	        y="24"
-	        zorder="110"
-			enabled="true"
-			alpha="1"
-			crop="0|0|40|40"
-			onclick="action(auto-rotate);"
-			onhover="showtext(  إيقاف الدوران التلقائي  , ToolTips);set(crop,0|40|40|40);"
-			onout="set(crop,0|0|40|40);"
-	        />
-	<plugin name="Littelplant-icon"
-			parent="header-2th"
-	        url="skin/imamali/littelplanet-icon.png"
-	        align="lefttop"
-	        width="30"
-	        height="30"
-	        keep="true"
-	        x="160"
-	        y="25"
-	        zorder="110"
-			enabled="true"
-			alpha="1"
-			crop="0|0|40|40"
-			onclick="action(Goto-Littleplanet-View);"
-			onhover="showtext(لقطة 360 درجة, ToolTips);set(crop,0|40|40|40);"
-			onout="set(crop,0|0|40|40);"
-	        />
 
 
+
+	<events	name="zoom_events" keep="true" onnewpano="set(plugin[TitleName].html, get(scene[get(xml.scene)].title) );"		/>
 
 
 <!-- Toolbar Icons -->
@@ -191,28 +120,7 @@
 			tween(view.fovmax, get(Fits_fovmax), 1.0);
 			tween(view.fov, get(Fits_fov), 1.0);
 	</action>
-	<action name="Move-Map">
-	if(IsMapOpen != true,
-		set(IsMapOpen,true);
-		set(plugin[MapIcon].onhover,showtext(اغلاق المخطط, ToolTips);set(crop,0|40|40|40););
-		tween(plugin[map-body].alpha, 1);
-		tween(plugin[map-body].x,5);
-		
-		set(plugin[BTN-open-map].enabled,false);
-		tween(plugin[BTN-open-map].alpha, 0.0);
-		tween(plugin[BTN-open-map].x, -132);
-	,
-		set(IsMapOpen,false);
-		set(plugin[MapIcon].onhover,showtext(اضهار المخطط, ToolTips);set(crop,0|40|40|40););
-		tween(plugin[map-body].alpha, 0.0);
-		tween(plugin[map-body].x,-323);
-		
-		set(plugin[BTN-open-map].enabled,true);
-		tween(plugin[BTN-open-map].alpha, 1.0);
-		tween(plugin[BTN-open-map].x, 0);
-	);	
 
-	</action>
 	<action name="auto-rotate">
 	if(IsAutoRotate != true,
 		set(IsAutoRotate,true);
@@ -246,114 +154,4 @@
 	</action>
 	
 
-<!--
-/////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-=============================================================zoom controler.xml=========================================================================
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////////////////////////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////////////////////////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////////////////////////////////////////////
--->
-	<plugin name="zoom-out"
-			parent="footer-2th"
-	        url="skin/video/zoom.png"
-	        align="leftcenter"
-	        width="15"
-	        height="15"
-	        keep="true"
-			crop="0|27|27|27"
-	        x="5"
-	        y="23"
-	        ondown="set(fov_moveforce,0.3);set(onhover,set(crop,'54|27|27|27'););" onup="set(fov_moveforce,0);set(onhover,set(crop,'0|27|27|27'););"
-	        scalechildren="true"
-			onhover="set(crop,'27|27|27|27');"
-			onout="set(crop,'0|27|27|27');"
-	        zorder="10"
-	        />
-	<plugin name="zoom-in"
-			parent="footer-2th"
-	        url="skin/video/zoom.png"
-	        align="leftcenter"
-	        width="15"
-	        height="15"
-	        keep="true"
-			crop="0|0|27|27"
-	        x="200"
-	        y="23"
-	        ondown="set(fov_moveforce,-0.3);set(onhover,set(crop,'54|0|27|27'););" onup="set(fov_moveforce,0);set(onhover,set(crop,'0|0|27|27'););"
-	        scalechildren="true"
-			onhover="set(crop,'27|0|27|27');"
-			onout="set(crop,'0|0|27|27');"
-	        zorder="10"
-	        />
-	<plugin name="zoom_bar"
-			parent="footer-2th"
-	        url="skin/video/zoom-bar.png"
-	        align="leftcenter"
-			edge="leftcenter"
-	        keep="true"
-	        width="155"
-	        height="9"
-	        x="35"
-	        y="24"
-			onhover=""
-			accuracy="1"
-	        zorder="10"
-			handcursor="false"
-	        />
-	<plugin name="zoom_bar_past"
-			parent="zoom_bar"
-	        url="%SWFPATH%/plugins/textfield.swf"
-			background="true"
-			backgroundcolor="0xffffff"
-	        align="leftbottom"
-			capture="false"
-			children="false"
-			x="0"
-			y="3"
-			selectable="false"
-			width="70"
-			height="2"
-	        keep="true"
-	        scalechildren="true"
-			zorder="11"
-			handcursor="false"
-	        />
-	<action name="refresh_zoom_bar">
-			sub(totalFOV,view.fovmax,view.fovmin);
-			sub(currentFOV,view.fov,view.fovmin);
-			div(temp,plugin[zoom_bar].pixelwidth,totalFOV);
-			mul(temp,temp,currentFOV);
-			if(temp GE plugin[zoom_bar].pixelwidth,copy(temp,plugin[zoom_bar].pixelwidth));
-			if(temp LT 1,set(temp,1));
-			sub(temp,plugin[zoom_bar].pixelwidth,temp);
-			set(plugin[zoom_bar_past].width,get(temp));
-			//set(plugin[tolaTime].html,get(temp));
-	</action>
-	<action name="gototime">
-		<!--
-		trace("shab");
-		trace("shab0000000000");
-		
-		set(plugin[shab-icon].onhover,showtext(get(scene[get(xml.scene)].shab), ToolTips));
-		set(plugin[ruz-icon].onhover,showtext("%1", ToolTips));
-		
-		set(plugin[shab-icon].onclick,loadscene(%1, null, MERGE));
-		set(plugin[ruz-icon].onclick,%1);
-		trace("%1");
-		
-		set(plugin[shab-icon].alpha,0);set(plugin[shab-icon].alpha,0);	txtadd(shab,get(scene[get(xml.scene)].shab));txtadd(ruz,get(scene[get(xml.scene)].ruz));txtadd(khali,'');		if(shab != khali, set(plugin[shab-icon].alpha,1);gototime(shab););		if(ruz != khali, set(plugin[ruz-icon].alpha,1);gototime(ruz););
-		-->
-    </action>
-	<events	name="zoom_events" keep="true"	onviewchanged="refresh_zoom_bar();" onnewpano="set(plugin[TitleName].html, get(scene[get(xml.scene)].title) ); gototime();	"		/>
-<!--
-/////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-=============================================================videoplayer_timebar.xml=========================================================================
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////////////////////////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////////////////////////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\///////////////////////////////////////////////////////////////////////////////
--->
 </krpano>
