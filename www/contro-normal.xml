@@ -1,4 +1,6 @@
 ﻿<krpano version="1.0.8">
+	<!-- ensure stagescale 2x for mobile devices (regardless if mobilescale is 0.5 or 1.0) -->
+	<krpano stagescale="calc:stagescale * 2" if="stagescale LT 1.0" devices="mobile" />
 
 	<!-- Skin Hotspot Style (the hotspots need a 'linkedscene' attribute to be clickable)-->
 	<style name="skin_hotspotstyle" url="skin/vtourskin_hotspot.png" zorder="1000" scale="0.5" edge="top" oy="0" onclick="pausevideo();if(linkedscene, tween(scale,0.25,0.5); tween(oy,-20,0.5); tween(alpha,0,0.5); looktohotspot(); loadscene(get(linkedscene),null,MERGE,BLEND(1));  );" />
