@@ -3,20 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
-
     <title>بسم الله الرحمن الرحيم</title>
-
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" type="text/css" href="css/font.css">
 
 	<script src="js/jquery-2.2.2.min.js"></script>
-    <!-- <script src="phonegap.js"></script> -->
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
     <script src="js/PrayTimes.js"></script>
 	<!--<script src="js/console.log.js"></script>-->
-	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script src="js/iscroll.js"  type="text/javascript"></script>
 	<script>
 		function init() {		
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
@@ -41,18 +38,12 @@
 		}
 
 
+
 		function onDeviceReady() {
-			console.log('222222222');
+			var networkState = navigator.connection.type;
 
 			FastClick.attach(document.body);
 
-			
-			console.log('333333333');
-			
-			
-			
-			
-			
 		}
 
 		$(window).load(function() {	
