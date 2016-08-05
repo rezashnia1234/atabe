@@ -29,6 +29,15 @@
 		
 		}
 		$(document).ready(function() {
+			if(window.sessionStorage.getItem('pano_localPath') == null)
+			{
+
+			}
+			else
+			{
+				$("#shkb_footer.need_download").css("display","none");
+				$("#shkb_footer.downloaded").css("display","block");
+			}
 			setTimeout(function(){
 				$(".mypreload").html("");
 			}, 300);
@@ -64,6 +73,9 @@
   width: 100%;
   z-index:999;
 }
+#shkb_footer.downloaded {
+  background-image: url("images/vtour-demo/demo-footer2.png");
+}
 #shkb_btn1{
 	position:absolute;
 	left:0;
@@ -92,9 +104,13 @@
 
 <script src="tour.js?0"></script>
 <!--<div id="gyro" style="">00000000000000000</div>-->
-<div id="shkb_footer" style="" >
+<div id="shkb_footer" class="need_download" >
 	<a id="shkb_btn1" href="vtour-online.html" ></a>
 	<a id="shkb_btn2" href="download.html" ></a>
+</div>
+<div id="shkb_footer" class="downloaded" style="display: none;" >
+	<a id="shkb_btn1" href="vtour-online.html" ></a>
+	<a id="shkb_btn2" href="vtour-locale.html" ></a>
 </div>
 <div id="shkb_header" style="" >
 	<a id="shkb_btn1" href="index.html" ></a>
