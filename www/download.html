@@ -86,16 +86,22 @@
 		sync.on('progress', function(data) {
 			// data.progress
 			var perc = data.progress;
-			$('#status').html(perc + "% --" + data.status);
+			//$('#status').html(perc + "% --" + data.status);
+			$('#status').html(perc + "%");
 			$('.progress-bar-percent').css('width',perc + "%");
 		});
 
 		sync.on('complete', function(data) {
 			// data.localPath
 			window.localStorage.setItem('pano_localPath',data.localPath);
-			alert("complete : " + data.localPath);
-			alert("complete cached : " + data.cached);
-			
+			//alert("complete : " + data.localPath);
+			//alert("complete cached : " + data.cached);
+			navigator.notification.alert(
+				'دانلود با موفقیت به پایان رسید',  // message
+				go_back,         // callback
+				'اطلاعیه',            // title
+				'تائید'                  // buttonName
+			);
 		});
 
 		sync.on('error', function(e) {
@@ -105,7 +111,7 @@
 
 		sync.on('cancel', function() {
 			// triggered if event is cancelled
-			alert("cancel");
+			//alert("cancel");
 		});
 		$("#abort").click( function(i) {
 			//sync.abort();
