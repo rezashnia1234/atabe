@@ -25,7 +25,38 @@ if(IsMapOpen != true,
 <action name="hidemap-all">
 Move-Map();
 </action>
-<plugin name="map-body" url="skin/blank.png" align="lefttop" x="5" y="69" keep="true" maskchildren="true" scalechildren="false" handcursor="false" capture="false" zorder="10001" width="323" height="345"/>
+<layer	name="back_btn_home"
+		url="images/vtour-demo/back.png"
+		align="lefttop"
+		x="0"
+		y="0"
+		keep="true" 
+		maskchildren="false"
+		scalechildren="false"
+		handcursor="true"
+		capture="true"
+		zorder="10002"
+		width="70" height="63"
+		onclick="openurl('vtour-demo-day.html',_self);"
+		/>
+<layer	name="map_btn_home"
+		url="images/vtour-demo/map.png"
+		align="lefttop"
+		x="0"
+		y="63"
+		keep="true" 
+		maskchildren="false"
+		scalechildren="false"
+		handcursor="true"
+		capture="true"
+		zorder="10002"
+		width="70" height="63"
+		onclick="showmap"
+		/>
+
+
+
+<plugin name="map-body" url="skin/blank.png" align="lefttop" x="5" y="95" keep="true" maskchildren="true" scalechildren="false" handcursor="false" capture="false" zorder="10001" width="323" height="345"/>
 <plugin name="map-background-front" url="skin/imamali/map-back.png" parent="map-body" align="lefttop" x="0" y="0" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10001" width="325" height="345" blendmode="normal"/>
 <plugin name="map-view" url="skin/imamali/all-map.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10004" width="323" height="323" blendmode="normal" alpha="1"/>
 <plugin name="map-view-shab" url="skin/imamali/all-map.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10004" width="323" height="323" blendmode="normal" alpha="0" enabled="false"/>
