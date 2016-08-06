@@ -101,8 +101,8 @@
 				}
 			
 				var timezoon = new Date().getTimezone();
-/*	
-				function set_salat_time(x=31.995,y=44.314){
+/*	*/
+				function set_salat_time(x,y){
 						console.log('77777777');
 						var list = ['Fajr', 'Sunrise', 'Dhuhr', 'sunset', 'Maghrib', 'Midnight'];
 						var listName = ['الصلاة الفجر', 'الشروق', 'الصلاة الظهر', 'الفروب', 'الصلاة المغرب', 'وقت منتصف اللیل'];
@@ -133,10 +133,10 @@
 								$('.smm_salat_content ul li').eq(i).find('span:last-child').html(times[list[i].toLowerCase()]);
 							}
 				}
-*/
+
 				//set salat time for najaf
 				console.log('5555555');
-/*				set_salat_time();*/
+/**/				set_salat_time(31.995,44.314);
 				console.log('6666666666');
 				$('#najaf').click(function(){
 					$('.smm_select_city > div').removeClass('active');
