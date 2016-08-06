@@ -17,6 +17,7 @@
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
     <script src="js/back_btn.js"></script>
+	<script src="js/iscroll.js"  type="text/javascript"></script>
 
 	<script>
 		function init() {		
@@ -54,9 +55,28 @@
 			
 
 		}
-
-			
-			
+		
+		$(document).ready(function(){
+			//set salat time for najaf
+			console.log('5555555');
+			set_salat_time();
+			console.log('6666666666');
+			$('#najaf').click(function(){
+				$('.smm_select_city > div').removeClass('active');
+				$(this).addClass('active');
+				set_salat_time(31.995,44.314);
+			});
+			$('#karbala').click(function(){
+				$('.smm_select_city > div').removeClass('active');
+				$(this).addClass('active');
+				set_salat_time(32.6068,44.0104);
+			});
+			$('#kazemain').click(function(){
+				$('.smm_select_city > div').removeClass('active');
+				$(this).addClass('active');
+				set_salat_time(33.3611,44.3142);
+			});
+		});
 			
 			
 
