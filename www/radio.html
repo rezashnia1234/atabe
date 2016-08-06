@@ -77,7 +77,7 @@
 		$(window).load(function() {		
 			setTimeout(function(){
 				$(".mypreload").html("");
-			}, 300);
+			}, 3000);
 		});
 
 
@@ -98,19 +98,7 @@
 				$(this).toggleClass("playing");
 				if($(this).hasClass("playing"))
 				{
-					stop_my_radio();
-					if(isRetina())
-					{
-						$(this).css('background-image','url("images/high/radio_bg.png")');
-					}
-					else
-					{
-						$(this).css('background-image','url("images/low/radio_bg.png")');
-					}
-				}
-				else
-				{
-					play_my_radio();
+					//stop_my_radio();
 					if(isRetina())
 					{
 						$(this).css('background-image','url("images/high/radio_bg_stop.png")');
@@ -118,6 +106,18 @@
 					else
 					{
 						$(this).css('background-image','url("images/low/radio_bg_stop.png")');
+					}
+				}
+				else
+				{
+					//play_my_radio();
+					if(isRetina())
+					{
+						$(this).css('background-image','url("images/high/radio_bg.png")');
+					}
+					else
+					{
+						$(this).css('background-image','url("images/low/radio_bg.png")');
 					}
 				}
 			});
@@ -139,7 +139,7 @@
     vertical-align: middle;
 }
 .hm_radio_bg{
-    background-image: url('images/low/radio_bg.png');
+    background-image: url('images/low/radio_bg_stop.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
