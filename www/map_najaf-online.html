@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>بسم الله الرحمن الرحیم</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<script src="js/jquery-2.2.2.min.js"></script>
+<script src="phonegap.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="js/back_btn.js"></script>
+<script src="maps/js/leaflet.1.0.js"></script>
+<script src="maps/js/leaflet-search.min.js"></script> 
+<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+<script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script>
+	
+	
+<link rel="stylesheet" href="maps/js/leaflet.css" />
+<link rel="stylesheet" href="maps/js/leaflet-search.css" />
+<link rel="stylesheet" href="maps/js/style.css" />
+<style type="text/css">
+
+</style>
+
+<script>
+	var my_location_gps;
+	function init() {		
+		//console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+		document.addEventListener("deviceready", onDeviceReady, false);
+		add_to_favorites_popup = false;
+		
+		radius = 0;
+		my_location_marker = L.marker([36.2879,59.6157], {icon: user_location_icon,zIndexOffset: 999}).addTo(map);
+		my_location_circle = L.circle([36.2879,59.6157], radius).addTo(map);
+		my_location_marker_friend = L.marker([36.2879,59.6157], {icon: user_location_icon_friend,zIndexOffset: 998}).addTo(map);
+		my_location_marker_friend.bindPopup("موقعیت دوست شما");
+		
+		///////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////
+		////Share Location Auto////////////////////////////////////////////////
+				//window.localStorage.setItem('location_thistime',JSON.stringify(['09151163416:latlng(32.1212,44.3250)']));
+
+				if(window.localStorage.getItem('location_thistime') == null){
+					window.localStorage.setItem('location_thistime',JSON.stringify([]));
+				}
+				temp_array_location = JSON.parse(window.localStorage.getItem('location_thistime'));
+				if (temp_array_location.length === 0) {
+
+				}
+				else
+				{
+					results = temp_array_location[0];
+					temp_array_location2 = results.split(':');
+					latlong = temp_array_location2[1].replace("LatLng(","").replace("latlng(","").replace(")","").split(",");
+					//latlong = results.input1.trim().replace(" ","").replace("LatLng(","").replace("latlng(","").replace(")","").split(",");
+					my_location_marker_friend.setLatLng([latlong[0],latlong[1]]);
+					my_location_marker_friend.bindPopup("موقعیت دوست شما<br/>" + temp_array_location2[0]);
+					my_location_marker_friend.openPopup();
+					
+					if(my_location_marker.getLatLng().lat != 36.2879)
+					{
+						navigator.notification.alert(
+							'موقعیت دوست شما در نقشه ثبت شد.\nفاصله تقریبی شما با دوستتان ' +  Math.round(distance(my_location_marker.getLatLng().lat, my_location_marker.getLatLng().lng, my_location_marker_friend.getLatLng().lat, my_location_marker_friend.getLatLng().lng, "M")) + " متر می باشد.",  // message
+							alertDismissed,         // callback
+							'اطلاعیه',            // title
+							'تائید'                  // buttonName
+						);
+					}
+					window.localStorage.setItem('location_thistime',JSON.stringify([]));
+				}
+		///////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////
+	}
+
+	function onDeviceReady() {
+			check_auto_location();
+		//FastClick.attach(document.body);
+		FastClick.attach(document.getElementById('button'));
+		
+		(function(){
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			setTimeout(arguments.callee, 5000);
+		})();
+	}
+	function add_to_favorites_open() {
+		if(add_to_favorites_popup==false)
+		{
+			$("#add_to_favorites").addClass("disabled");
+			$(".cd-popup").addClass("is-visible");
+			add_to_favorites_popup = true;
+			new_favorite_marker_icon	= new icon_style_favorites_new({iconUrl: 'maps/map-icon/marker-icon.png',iconRetinaUrl: 'maps/map-icon/marker-icon@2x.png',shadowUrl: 'maps/map-icon/marker-shadow.png',});
+			new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup();
+		}
+		else
+		{
+			$("#add_to_favorites").removeClass("disabled");
+			$(".cd-popup").removeClass("is-visible");
+			add_to_favorites_popup = false;
+			new_favorite_marker.remove();
+		}
+	}
+	function add_to_favorites() {
+		temp_array_lat	 = JSON.parse(window.localStorage.getItem('favorites_lat'));
+		temp_array_long	 = JSON.parse(window.localStorage.getItem('favorites_long'));
+		temp_array_title = JSON.parse(window.localStorage.getItem('favorites_title'));
+		temp_new_title	 = $("#favorite_title");
+		
+		temp_array_lat.push(new_favorite_marker.getLatLng().lat);
+		temp_array_long.push(new_favorite_marker.getLatLng().lng);
+		temp_array_title.push(temp_new_title.val());
+		
+		window.localStorage.setItem('favorites_lat',JSON.stringify(temp_array_lat));
+		window.localStorage.setItem('favorites_long',JSON.stringify(temp_array_long));
+		window.localStorage.setItem('favorites_title',JSON.stringify(temp_array_title));
+		
+		new_favorite_marker.remove();
+		L.marker([new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng], {icon: favorites_icon}).bindPopup(temp_new_title.val()).addTo(favorites);
+		L.marker([new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng], {icon: favorites_icon}).bindPopup(temp_new_title.val()).addTo(map);
+		
+		temp_new_title.val("");
+		add_to_favorites_popup = false;
+		$(".cd-popup").removeClass("is-visible");
+		$("#add_to_favorites").removeClass("disabled");
+	}
+//////////////////////////////////////////////////
+//////share location//////////////////////////////
+	function share_location() {
+		navigator.notification.confirm(
+			//'لطفا گزینه مورد نظر را انتخاب نمایید', // message
+			'لطفا گزینه مورد نظر را انتخاب نمایید:\n مرحله 1: میخواهم موقعیت خود را ارسال کنم \n مرحله 2: دوستم موقعیت خود را برای من ارسال کرده است', // message
+			 onConfirm,            // callback to invoke with index of button pressed
+			'اشتراک گذاری موقعیت',           // title
+			['مرحله یک','مرحله دو','لغو درخواست']         // buttonLabels
+		);
+	}
+	function onConfirm(buttonIndex) {
+		if(buttonIndex==1)
+		{//send
+			//alert("sms:?body=" + my_location_marker.getLatLng());
+			//sms:+19725551212?body=hello	android
+			if(my_location_marker.getLatLng().lat != 36.2879)
+			{
+				if ( device.platform == 'iOS' ){//Android,iOS,win7=WinCE,win8=Win32NT
+					window.location.href = "sms:&body=" + my_location_marker.getLatLng();
+				}
+				else
+				{
+					window.location.href = "sms:?body=" + my_location_marker.getLatLng();
+				}
+			}
+			else
+			{
+				if ( device.platform == 'iOS' ){//Android,iOS,win7=WinCE,win8=Win32NT
+					navigator.notification.alert(
+						'متاسفانه دستگاه موقعیت جغرافیایی شما پیدا نکرده است.\nلطفا در فضای بدون سقف قرار گیرید و از روشن بودن GPS اطمینان حاصل کنید و دقایقی دیگر ، مجددا تلاش نمایید.', // message
+						alertDismissed,         // callback
+						'اخطار',            // title
+						'تائید'                  // buttonName
+					);
+				}
+				else
+				{
+					navigator.notification.confirm(
+						'متاسفانه دستگاه موقعیت جغرافیایی شما پیدا نکرده است.\nلطفا در فضای بدون سقف قرار گیرید و از روشن بودن GPS اطمینان حاصل کنید و دقایقی دیگر ، مجددا تلاش نمایید.', // message
+						 onConfirm,            // callback to invoke with index of button pressed
+						'',           // title
+						['بررسی روشن بودن GPS','لغو درخواست']         // buttonLabels
+					);
+					function onConfirm(buttonIndex) {
+						if(buttonIndex==1)
+						{
+							navigator.share("openGpsSettings","",function(result)
+							{
+								//alert(result);
+							});
+						}
+						else
+						{
+							
+						}
+					}
+				}
+			}
+		}
+		else if(buttonIndex==2)
+		{//recive
+			navigator.notification.prompt(
+				'لطفا متن پیامکی که سامانه برای شما ارسال کرده است را وارد نمایید',  // message
+				onPrompt,                  // callback to invoke
+				'موقعیت مخاطب',            // title
+				['ثبت','لغو درخواست'],             // buttonLabels
+				'LatLng(...,...)'                 // defaultText
+			);
+		}
+	}
+	function onPrompt(results) {
+		//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+		//var count = (results.input1.trim().match(/\,/g) || []).length;
+		//if(results.buttonIndex==2 && results.input1.trim().substring(0,7)=="LatLng("  && results.input1.trim().substring(results.input1.trim().length-1,results.input1.trim().length)==")" &&  count==1 && $.isNumeric(results.input1.trim().replace("LatLng(","").replace(")","").replace(",",""))	)
+		function CheckLatLong(teststring)
+		{
+			var teststring = teststring.toLowerCase(); 
+			var re= new RegExp('^(latlng)[\(][0-9]+(\.)[0-9]+(\,)[0-9]+(\.)[0-9]+[\)]$');
+		   // Test string for existence of regular expression.
+		   var found = re.test(teststring)
+
+		   if (found)
+			  return(true);
+		   else
+			  return(false);
+		}
+		if(CheckLatLong(results.input1.trim().replace(" ","")	))
+		{
+			latlong = results.input1.trim().replace(" ","").replace("LatLng(","").replace("latlng(","").replace(")","").split(",");
+			my_location_marker_friend.setLatLng([latlong[0],latlong[1]]);
+			my_location_marker_friend.openPopup();
+			//////////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////
+			////Add To History//////////////////////////////////////////////////////////////////////////
+			if(window.localStorage.getItem('location_history') == null){
+				window.localStorage.setItem('location_history',JSON.stringify([]));   
+			}
+			temp_array_location_history = JSON.parse(window.localStorage.getItem('location_history'));
+			temp_typed_location = "00000000000:" + results.input1.trim().replace(" ","");
+			temp_array3 = temp_typed_location.split('\n');
+			temp_array_location_history = $.merge(temp_array3, temp_array_location_history);
+			window.localStorage.setItem('location_history',JSON.stringify(temp_array_location_history));
+			////Add To History//////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////
+			if(my_location_marker.getLatLng().lat != 36.2879)
+			{
+				navigator.notification.alert(
+					'موقعیت دوست شما در نقشه ثبت شد.\nفاصله تقریبی شما با دوستتان ' +  Math.round(distance(my_location_marker.getLatLng().lat, my_location_marker.getLatLng().lng, my_location_marker_friend.getLatLng().lat, my_location_marker_friend.getLatLng().lng, "M")) + " متر می باشد.",  // message
+					alertDismissed,         // callback
+					'اطلاعیه',            // title
+					'تائید'                  // buttonName
+				);
+			}
+		}
+		else
+		{
+			navigator.notification.alert(
+				'اطلاعات ورودی شما ، با الگوی مورد نظر نرم افزار همخوانی ندارد.',  // message
+				alertDismissed,         // callback
+				'اخطار',            // title
+				'لغو درخواست'                  // buttonName
+			);
+		}
+	}
+	function alertDismissed() {
+		// do something
+	}
+	function distance(lat1, lon1, lat2, lon2, unit) {
+		var radlat1 = Math.PI * lat1/180
+		var radlat2 = Math.PI * lat2/180
+		var radlon1 = Math.PI * lon1/180
+		var radlon2 = Math.PI * lon2/180
+		var theta = lon1-lon2
+		var radtheta = Math.PI * theta/180
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		dist = Math.acos(dist)
+		dist = dist * 180/Math.PI
+		dist = dist * 60 * 1.1515
+		if (unit=="K") { dist = dist * 1.609344 }
+		if (unit=="M") { dist = dist * 1.609344 * 1000 }
+		if (unit=="N") { dist = dist * 0.8684 }
+		return dist;
+	}
+//////share location//////////////////////////////
+//////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	function onSuccess(position) {
+		//alert("longitude : " + position.coords.longitude);
+		//alert("latitude  : " + position.coords.latitude );
+		
+		//user_location_icon	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
+		radius = (position.coords.accuracy / 2) * 1;
+		//my_location_marker = L.marker([position.coords.latitude,position.coords.longitude], {icon: user_location_icon}).addTo(map).bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");//.openPopup();
+		//my_location_circle = L.circle([position.coords.latitude,position.coords.longitude], radius).addTo(map);
+		my_location_marker.setLatLng([position.coords.latitude,position.coords.longitude]);
+		my_location_marker.bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");
+		my_location_circle.setLatLng([position.coords.latitude,position.coords.longitude]);
+		my_location_circle.setRadius(radius);
+		
+		
+		//test = L.marker([32.6072,44.0264], {icon: transport_icon}).bindPopup('test').addTo(map);
+		//test.setLatLng([32.5986,44.0156]);
+	}
+	
+	function onError(error) { 
+		// your callback here
+		//alert(JSON.stringify(error));
+	}
+/**/
+</script>
+
+</head>
+<body onload="init();">
+	<div id="findbox" style="display:none;"></div>
+	<div id="button">
+		<div id="back" onclick="parent.history.back();"><!--back--></div>
+		<div id="add_to_favorites"	onclick="add_to_favorites_open();"><!--favorites--></div>
+		<div id="share_location"	onclick="share_location();"><!--location--></div>
+	</div>
+	
+	
+<div class="cd-popup is-visible0" role="alert">
+	<div class="cd-popup-container">
+		<p><input id="favorite_title" id="favorite_title" placeholder="عنوان نقطه جدید" /></p>
+		<ul class="cd-buttons">
+			<li><a href="#" onclick="add_to_favorites();">تاید</a></li>
+			<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
+		</ul>
+		<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
+	</div> <!-- cd-popup-container -->
+</div> <!-- cd-popup -->
+
+
+	<div id="map"></div>
+<script>
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// START Map :////////////////////////////////////////////////////////////////
+	var icon_style = L.Icon.extend({
+		options: {
+			iconSize:     [33, 44], // size of the icon
+			iconAnchor:   [16,44], // point of the icon which will correspond to marker's location
+			popupAnchor:  [0, -44] // point from which the popup should open relative to the iconAnchor
+		}
+	});
+	var icon_style_favorites_new = L.Icon.extend({
+		options: {
+			iconSize:     [25, 41], // size of the icon
+			iconAnchor:   [12,41], // point of the icon which will correspond to marker's location
+			popupAnchor:  [0, -41], // point from which the popup should open relative to the iconAnchor
+			shadowSize:   [41, 41],
+			shadowAnchor: [11, 39]
+		}
+	});
+	var icon_style_user_location = L.Icon.extend({
+		options: {
+			iconSize:     [44, 59], // size of the icon
+			iconAnchor:   [22,59], // point of the icon which will correspond to marker's location
+			popupAnchor:  [0, -59] // point from which the popup should open relative to the iconAnchor
+		}
+	});
+	    
+	var ziyarati_icon		= new icon_style({iconUrl: 'maps/map-icon/zearati.png',iconRetinaUrl: 'maps/map-icon/zearati@2x.png',});
+	var bimarestan_icon		= new icon_style({iconUrl: 'maps/map-icon/hospetal.png',iconRetinaUrl: 'maps/map-icon/hospetal@2x.png',});
+	var darmani_icon		= new icon_style({iconUrl: 'maps/map-icon/darmangah.png',iconRetinaUrl: 'maps/map-icon/darmangah@2x.png',});
+	var mukeb_icon			= new icon_style({iconUrl: 'maps/map-icon/mukeb.png',iconRetinaUrl: 'maps/map-icon/mukeb@2x.png',});
+	var mukeb_irani_icon	= new icon_style({iconUrl: 'maps/map-icon/mukeb-iran.png',iconRetinaUrl: 'maps/map-icon/mukeb-iran@2x.png',});
+	var bazresi_icon		= new icon_style({iconUrl: 'maps/map-icon/stop.png',iconRetinaUrl: 'maps/map-icon/stop@2x.png',});
+	var amud_icon			= new icon_style({iconUrl: 'maps/map-icon/mil.png',iconRetinaUrl: 'maps/map-icon/mil@2x.png',});
+	var transport_icon		= new icon_style({iconUrl: 'maps/map-icon/hamlonaghl.png',iconRetinaUrl: 'maps/map-icon/hamlonaghl@2x.png',});
+	var airport_icon		= new icon_style({iconUrl: 'maps/map-icon/airport.png',iconRetinaUrl: 'maps/map-icon/airport@2x.png',});
+	var favorites_icon		= new icon_style({iconUrl: 'maps/map-icon/fav.png',iconRetinaUrl: 'maps/map-icon/fav@2x.png',});
+	var lost_icon			= new icon_style({iconUrl: 'maps/map-icon/gomshodeghan.png',iconRetinaUrl: 'maps/map-icon/gomshodeghan@2x.png',});
+	var hotel_icon			= new icon_style({iconUrl: 'maps/map-icon/hotel.png',iconRetinaUrl: 'maps/map-icon/hotel@2x.png',});
+	var wifi_icon			= new icon_style({iconUrl: 'maps/map-icon/wifi.png',iconRetinaUrl: 'maps/map-icon/wifi@2x.png',});
+	var console_icon		= new icon_style({iconUrl: 'maps/map-icon/konsulgari.png',iconRetinaUrl: 'maps/map-icon/konsulgari@2x.png',});
+	var edari_icon			= new icon_style({iconUrl: 'maps/map-icon/edari.png',iconRetinaUrl: 'maps/map-icon/edari@2x.png',});
+	var	user_location_icon	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
+	var	user_location_icon_friend	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location_friend.png',iconRetinaUrl: 'maps/map-icon/user_location_friend@2x.png',});
+
+	var ziyarati	= new L.LayerGroup();
+	var bimarestan	= new L.LayerGroup();
+	var darmani		= new L.LayerGroup();
+	var mukeb		= new L.LayerGroup();
+	var mukeb_irani	= new L.LayerGroup();
+	var bazresi		= new L.LayerGroup();
+	var amud		= new L.LayerGroup();
+	var transport	= new L.LayerGroup();
+	var favorites	= new L.LayerGroup();
+	var lost		= new L.LayerGroup();
+	var consoles	= new L.LayerGroup();
+	var edari		= new L.LayerGroup();
+	var hotel		= new L.LayerGroup();
+	var wifi		= new L.LayerGroup();
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//زیارتگاه ها///////////////////////////////////////////////////////////////////////////////////
+L.marker([32.6171,44.0362], {icon: ziyarati_icon}).bindPopup('حرم مطهر امام حسین علیه السلام').addTo(ziyarati),
+L.marker([32.6163,44.0322], {icon: ziyarati_icon}).bindPopup('حرم مطهر حضرت اباالفضل علیه السلام').addTo(ziyarati),
+L.marker([32.6510,43.9850], {icon: ziyarati_icon}).bindPopup('مرقد حر بن یزید ریاحی').addTo(ziyarati),
+L.marker([31.9958,44.3146], {icon: ziyarati_icon}).bindPopup('حرم مطهر امیرالمونین علیه السلام').addTo(ziyarati);
+L.marker([32.0288724,44.4008203], {icon: ziyarati_icon}).bindPopup('مسجد کوفه').addTo(ziyarati);
+L.marker([32.02645113,44.3948918], {icon: ziyarati_icon}).bindPopup('مرقد میثم تمار').addTo(ziyarati);
+L.marker([32.03892129,44.37993155], {icon: ziyarati_icon}).bindPopup('مسجد سهله').addTo(ziyarati);
+L.marker([32.00680564,44.33875302], {icon: ziyarati_icon}).bindPopup('مرقد کمیل').addTo(ziyarati);
+L.marker([32.0048148,44.33475735], {icon: ziyarati_icon}).bindPopup('مسجد حنانه').addTo(ziyarati);
+L.marker([32.00001671,44.3323294], {icon: ziyarati_icon}).bindPopup('مرقد آیت الله حکیم').addTo(ziyarati);
+L.marker([31.99565193,44.30934614], {icon: ziyarati_icon}).bindPopup('صافی صفا').addTo(ziyarati);
+L.marker([31.99997219,44.31655901], {icon: ziyarati_icon}).bindPopup('مرقد هود و صالح').addTo(ziyarati);
+L.marker([32.00029956,44.31497449], {icon: ziyarati_icon}).bindPopup('مرقد آیت الله قاضی').addTo(ziyarati);
+L.marker([32.001879,44.31273779], {icon: ziyarati_icon}).bindPopup('مقام امام زمان').addTo(ziyarati);
+L.marker([32.61596931,44.03122651], {icon: ziyarati_icon}).bindPopup('تل زینبیه').addTo(ziyarati);
+L.marker([32.61445311,44.03079782], {icon: ziyarati_icon}).bindPopup('خیمه گاه').addTo(ziyarati);
+L.marker([32.62218719,44.03511867], {icon: ziyarati_icon}).bindPopup('مقام امام زمان').addTo(ziyarati);
+L.marker([33.38026985,44.33819831], {icon: ziyarati_icon}).bindPopup('حرم مطهر امام موسی کاظم و امام جواد علیهما السلام').addTo(ziyarati);
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//کنسولگری ها///////////////////////////////////////////////////////////////////////////////////
+L.marker([31.99969789780743,44.33634475707925], {icon: console_icon}).bindPopup('کنسولگری جمهوری اسلامی ایران').addTo(consoles);//najaf
+L.marker([32.60835727605914,44.02948021388499], {icon: console_icon}).bindPopup('کنسولگری جمهوری اسلامی ایران').addTo(consoles);//karbala
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//ستادی ها///////////////////////////////////////////////////////////////////////////////////
+L.marker([31.99969789780743,44.33634475707925], {icon: console_icon}).bindPopup('کنسولگری جمهوری اسلامی ایران').addTo(edari);//najaf
+L.marker([32.60835727605914,44.02948021388499], {icon: console_icon}).bindPopup('کنسولگری جمهوری اسلامی ایران').addTo(edari);//karbala
+
+L.marker([32.6149711258429,44.0360628581014], {icon: edari_icon}).bindPopup('مقابل سوق الصفارين').addTo(edari);//karbala
+L.marker([32.994789274621,44.31209804663716], {icon: edari_icon}).bindPopup('هتل رسل').addTo(edari);//karbala
+L.marker([32.61476034906538,44.0283875149519], {icon: edari_icon}).bindPopup('هتل جواهر').addTo(edari);//karbala
+L.marker([32.99742710314293,44.30891206701998], {icon: edari_icon}).bindPopup('ستاد بازسازی عتبات - خباطه').addTo(edari);//karbala
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//WIFI//////////////////////////////////////////////////////////////////////////////////////////
+L.marker([32.15117209,44.32204485], {icon: wifi_icon}).bindPopup('موکب فاطمه الزهرا').addTo(wifi);//najaf
+L.marker([32.18816688,44.30900232], {icon: wifi_icon}).bindPopup('موکب موکب امام رضا ').addTo(wifi); //285
+L.marker([32.23855779,44.29175952], {icon: wifi_icon}).bindPopup('موکب احباب الرضا').addTo(wifi); //403
+L.marker([32.34500242,44.24412089], {icon: wifi_icon}).bindPopup('موکب بسیج شهرداری تهران').addTo(wifi); //657
+L.marker([32.52648538,44.11361659], {icon: wifi_icon}).bindPopup('موکب خدام الحسین').addTo(wifi); //1120////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//مراکز درمانی///////////////////////////////////////////////////////////////////////////////////
+//L.marker([32.60985803,44.03081814], {icon: darmani_icon}).bindPopup('هتل ضیوف الرحمن').addTo(darmani);
+//L.marker([32.62536997,44.03313105], {icon: darmani_icon}).bindPopup('هتل هدی الوالی').addTo(darmani);
+//L.marker([32.61670818,44.03129439], {icon: darmani_icon}).bindPopup('درمانگاه سفیر').addTo(darmani);
+L.marker([31.99671432,44.32239353], {icon: darmani_icon}).bindPopup('هتل نبا').addTo(darmani);
+
+L.marker([32.00773352197744,44.34559013039667], {icon: bimarestan_icon}).bindPopup('بیمارستان حکیم').addTo(darmani);
+L.marker([32.01783084105517,44.37258733139262], {icon: bimarestan_icon}).bindPopup('بیمارستان صدر').addTo(darmani);
+L.marker([31.98750536580526,44.34119211845884], {icon: bimarestan_icon}).bindPopup('بیمارستان امام علی').addTo(darmani);
+L.marker([31.99675811750426,44.32279523471789], {icon: darmani_icon}).bindPopup('درمانگاه هلال احمر').addTo(darmani);
+L.marker([32.31709559338142,44.27156113381829], {icon: bimarestan_icon}).bindPopup('بیمارستان حیدریه').addTo(darmani);
+L.marker([32.58628026668129,44.02645245620648], {icon: bimarestan_icon}).bindPopup('بیمارستان الحسین').addTo(darmani);
+L.marker([32.59113209723427,44.04201816149397], {icon: bimarestan_icon}).bindPopup('بیمارستان الکفیل').addTo(darmani);
+L.marker([32.60951606209149,44.03086738895918], {icon: darmani_icon}).bindPopup('درمانگاه هلال احمر- هتل ضیوف الرحمن').addTo(darmani);
+L.marker([32.61673588651463,44.03127805094174], {icon: darmani_icon}).bindPopup('هتل سفیر').addTo(darmani);
+L.marker([32.6252571776183,44.03370455791725], {icon: darmani_icon}).bindPopup('درمانگاه هلال احمر- هتل هدی الوالی').addTo(darmani);
+L.marker([32.62959543633673,44.03861156301936], {icon: bimarestan_icon}).bindPopup('بیمارستان امام سجاد').addTo(darmani);
+
+
+L.marker([32.52192911314614,44.1177773439915], {icon: darmani_icon}).bindPopup('').addTo(darmani); //1293
+L.marker([32.51454791985185,44.12426249361236], {icon: darmani_icon}).bindPopup('').addTo(darmani); //1293
+L.marker([32.5976628637717,44.02866280538157], {icon: darmani_icon}).bindPopup('').addTo(darmani); //1293
+
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//سید جواد///////////////////////////////////////////////////////////////////////////////////
+//درمانی
+L.marker([32.095100755,44.32180651], {icon: darmani_icon}).bindPopup('موکب مختار ثقفی').addTo(darmani);
+L.marker([32.15117209,44.32204485], {icon: darmani_icon}).bindPopup('موکب فاطمه الزهرا').addTo(darmani); //202
+L.marker([32.1642528,44.31721268], {icon: darmani_icon}).bindPopup('حج و زیارت').addTo(darmani); //228
+L.marker([32.18816688,44.30900232], {icon: darmani_icon}).bindPopup('موکب موکب امام رضا ').addTo(darmani); //285
+L.marker([32.25171654,44.28727554], {icon: darmani_icon}).bindPopup('').addTo(darmani); //431
+L.marker([32.34500242,44.24412089], {icon: darmani_icon}).bindPopup('موکب بسیج شهرداری تهران').addTo(darmani); //657
+L.marker([32.35640047,44.23550036], {icon: darmani_icon}).bindPopup('حج و زیارت').addTo(darmani); //692
+L.marker([32.36425214,44.22984769], {icon: darmani_icon}).bindPopup('حج و زیارت').addTo(darmani); //712
+L.marker([32.39742109,44.20613394], {icon: darmani_icon}).bindPopup('').addTo(darmani); //795
+L.marker([32.43400466,44.17997067], {icon: darmani_icon}).bindPopup('حج و زیارت').addTo(darmani); //890
+L.marker([32.489819,44.14609605], {icon: darmani_icon}).bindPopup('موکب شباب المنتظر').addTo(darmani); //1027
+L.marker([32.52648538,44.11361659], {icon: darmani_icon}).bindPopup('موکب خدام الحسین').addTo(darmani); //1120
+L.marker([32.56815115,44.0544717], {icon: darmani_icon}).bindPopup('').addTo(darmani); //1293
+
+
+
+/*
+//موکب ایرانی
+L.marker([32.095100755,44.32180651], {icon: mukeb_icon}).bindPopup('موکب مختار ثقفی').addTo(mukeb_irani);
+L.marker([32.15117209,44.32204485], {icon: mukeb_icon}).bindPopup('موکب فاطمه الزهرا').addTo(mukeb_irani); //202
+L.marker([32.1642528,44.31721268], {icon: mukeb_icon}).bindPopup('حج و زیارت').addTo(mukeb_irani); //228
+L.marker([32.18816688,44.30900232], {icon: mukeb_icon}).bindPopup('موکب موکب امام رضا ').addTo(mukeb_irani); //285
+L.marker([32.18816688,44.30900232], {icon: mukeb_icon}).bindPopup('موکب جابر بن عبدالله').addTo(mukeb_irani); //286
+L.marker([32.1950076,44.30660983], {icon: mukeb_icon}).bindPopup('موکب دارالصدیقه الشهیده').addTo(mukeb_irani); //298
+L.marker([32.23855779,44.29175952], {icon: mukeb_icon}).bindPopup('موکب ستاد بازسازی عتبات').addTo(mukeb_irani); //402
+L.marker([32.23855779,44.29175952], {icon: mukeb_icon}).bindPopup('موکب احباب الرضا').addTo(mukeb_irani); //403
+L.marker([32.25171654,44.28727554], {icon: mukeb_icon}).bindPopup('').addTo(mukeb_irani); //431
+L.marker([32.2561198,44.28575976], {icon: mukeb_icon}).bindPopup('موکب شباب النجف الاشرف').addTo(mukeb_irani); //439
+L.marker([32.34330874,44.24587171], {icon: mukeb_icon}).bindPopup('موکب هانی بن عروه').addTo(mukeb_irani); //655
+L.marker([32.34500242,44.24412089], {icon: mukeb_icon}).bindPopup('موکب بسیج شهرداری تهران').addTo(mukeb_irani); //657
+L.marker([32.35640047,44.23550036], {icon: mukeb_icon}).bindPopup('موکب حج و زیارت').addTo(mukeb_irani); //692
+L.marker([32.36425214,44.22984769], {icon: mukeb_icon}).bindPopup('موکب حج و زیارت').addTo(mukeb_irani); //712
+L.marker([32.37389933,44.22304766], {icon: mukeb_icon}).bindPopup('موکب بسیج شهرداری تهران').addTo(mukeb_irani); //728
+L.marker([32.37677686,44.22090975], {icon: mukeb_icon}).bindPopup('موکب رایه الثقافی').addTo(mukeb_irani); //741
+L.marker([32.37965439,44.21877184], {icon: mukeb_icon}).bindPopup('موکب هیئت رزمندگان').addTo(mukeb_irani); //753
+L.marker([32.38196561,44.21790943], {icon: mukeb_icon}).bindPopup('موکب شباب الرضوی').addTo(mukeb_irani); //757
+L.marker([32.39120205,44.21050259], {icon: mukeb_icon}).bindPopup('موکب بیعت حسینی مازندران').addTo(mukeb_irani); //777
+L.marker([32.39742109,44.20613394], {icon: mukeb_icon}).bindPopup('').addTo(mukeb_irani); //795
+L.marker([32.410349,44.19667496], {icon: mukeb_icon}).bindPopup('موکب بسیج شهرداری تهران').addTo(mukeb_irani); //828
+L.marker([32.41424868,44.19388002], {icon: mukeb_icon}).bindPopup('موکب رزمندگان').addTo(mukeb_irani); //840
+L.marker([32.43400466,44.17997067], {icon: mukeb_icon}).bindPopup('موکب حج و زیارت').addTo(mukeb_irani); //890
+L.marker([32.43400466,44.17997067], {icon: mukeb_icon}).bindPopup('موکب شباب قاسم').addTo(mukeb_irani); //890
+L.marker([32.43750745,44.17765374], {icon: mukeb_icon}).bindPopup('موکب شباب المقاومه').addTo(mukeb_irani); //903
+L.marker([32.489819,44.14609605], {icon: mukeb_icon}).bindPopup('موکب شباب المنتظر').addTo(mukeb_irani); //1027
+L.marker([32.51249313,44.12637326], {icon: mukeb_icon}).bindPopup('').addTo(mukeb_irani); //1092
+L.marker([32.52648538,44.11361659], {icon: mukeb_icon}).bindPopup('موکب خدام الحسین').addTo(mukeb_irani); //1120
+L.marker([32.53638261,44.10289987], {icon: mukeb_icon}).bindPopup('موکب رضوان').addTo(mukeb_irani); //1162
+L.marker([32.56815115,44.0544717], {icon: mukeb_icon}).bindPopup('').addTo(mukeb_irani); //1293
+*/
+
+
+L.marker([32.09553636,44.32264229], {icon: mukeb_icon}).bindPopup('مختار ثقفی ').addTo(mukeb_irani);
+L.marker([32.15205588,44.3220367], {icon: mukeb_icon}).bindPopup('ستاد بازسازی عتبات ').addTo(mukeb_irani);
+L.marker([32.18764503,44.30900859], {icon: mukeb_icon}).bindPopup('امام رضا ').addTo(mukeb_irani);
+L.marker([32.18793055,44.30898279], {icon: mukeb_icon}).bindPopup('جابر بن عبدالله ').addTo(mukeb_irani);
+L.marker([32.23928522,44.2918741], {icon: mukeb_icon}).bindPopup('هیئت رزمندگان قزوین ').addTo(mukeb_irani);
+L.marker([32.34393754,44.24559581], {icon: mukeb_icon}).bindPopup('علی بن موسی الرضا ').addTo(mukeb_irani);
+L.marker([32.37143616,44.22525655], {icon: mukeb_icon}).bindPopup('صاحب الزمان ').addTo(mukeb_irani);
+L.marker([32.38091489,44.2187713], {icon: mukeb_icon}).bindPopup('رزمندگان اسلام ').addTo(mukeb_irani);
+L.marker([32.38223656,44.21763088], {icon: mukeb_icon}).bindPopup('شباب رضوی ').addTo(mukeb_irani);
+L.marker([32.39062094,44.21135736], {icon: mukeb_icon}).bindPopup('دانشجویی مازندران ').addTo(mukeb_irani);
+L.marker([32.40978929,44.19762056], {icon: mukeb_icon}).bindPopup('خیرین تهران ').addTo(mukeb_irani);
+L.marker([32.41437167,44.19430872], {icon: mukeb_icon}).bindPopup('هیئت رزمندگان ورامین ').addTo(mukeb_irani);
+L.marker([32.42931588,44.18365317], {icon: mukeb_icon}).bindPopup('خیرین شیراز ').addTo(mukeb_irani);
+L.marker([32.43387941,44.18028427], {icon: mukeb_icon}).bindPopup('شباب قاسم-اهالی هرمزگان ').addTo(mukeb_irani);
+L.marker([32.49408667,44.14293766], {icon: mukeb_icon}).bindPopup('شباب امیرالمومنین ').addTo(mukeb_irani);
+L.marker([32.50905503,44.12976284], {icon: mukeb_icon}).bindPopup('مسجد جمکران ').addTo(mukeb_irani);
+L.marker([32.52195446,44.11770874], {icon: mukeb_icon}).bindPopup('خدام الحسین ').addTo(mukeb_irani);
+
+// ایست و بازرسی
+L.marker([32.095100755,44.32180651], {icon: bazresi_icon}).bindPopup('پست ایست و بازرسی').addTo(bazresi); //75
+L.marker([32.21640131,44.29940089], {icon: bazresi_icon}).bindPopup('پست ایست و بازرسی').addTo(bazresi); //350
+L.marker([32.35059010,44.23965372], {icon: bazresi_icon}).bindPopup('پست ایست و بازرسی').addTo(bazresi); //675
+L.marker([32.46153787,44.16302833], {icon: bazresi_icon}).bindPopup('پست ایست و بازرسی').addTo(bazresi); //960
+L.marker([32.54348019,44.09236097], {icon: bazresi_icon}).bindPopup('پست ایست و بازرسی').addTo(bazresi); //1185
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//عمود ها///////////////////////////////////////////////////////////////////////////////////
+L.marker([32.06145077,44.31901018], {icon: amud_icon}).bindPopup('عمود 1').addTo(amud);
+L.marker([32.08367882,44.32090625], {icon: amud_icon}).bindPopup('عمود 50').addTo(amud);
+L.marker([32.10639998,44.3232189], {icon: amud_icon}).bindPopup('عمود 100').addTo(amud);
+L.marker([32.12939951,44.32526032], {icon: amud_icon}).bindPopup('عمود 150').addTo(amud);
+L.marker([32.15117209,44.32204485], {icon: amud_icon}).bindPopup('عمود 200').addTo(amud);
+L.marker([32.17316084,44.31384165], {icon: amud_icon}).bindPopup('عمود 250').addTo(amud);
+L.marker([32.1950076,44.30660983], {icon: amud_icon}).bindPopup('عمود 300').addTo(amud);
+L.marker([32.21640131,44.29940089], {icon: amud_icon}).bindPopup('عمود 350').addTo(amud);
+L.marker([32.23855779,44.29175952], {icon: amud_icon}).bindPopup('عمود 400').addTo(amud);
+L.marker([32.25947617,44.28469073], {icon: amud_icon}).bindPopup('عمود 450').addTo(amud);
+L.marker([32.28275171,44.27999661], {icon: amud_icon}).bindPopup('عمود 500').addTo(amud);
+L.marker([32.30518268,44.2744001], {icon: amud_icon}).bindPopup('عمود 550').addTo(amud);
+L.marker([32.32410114,44.26459453], {icon: amud_icon}).bindPopup('عمود 600').addTo(amud);
+L.marker([32.34161505,44.24762252], {icon: amud_icon}).bindPopup('عمود 650').addTo(amud);
+L.marker([32.36021692,44.23273777], {icon: amud_icon}).bindPopup('عمود 700').addTo(amud);
+L.marker([32.37965439,44.21877184], {icon: amud_icon}).bindPopup('عمود 750').addTo(amud);
+L.marker([32.39897241,44.20488018], {icon: amud_icon}).bindPopup('عمود 800').addTo(amud);
+L.marker([32.41915226,44.19098449], {icon: amud_icon}).bindPopup('عمود 850').addTo(amud);
+L.marker([32.43750745,44.17765374], {icon: amud_icon}).bindPopup('عمود 900').addTo(amud);
+L.marker([32.45751053,44.16551532], {icon: amud_icon}).bindPopup('عمود 950').addTo(amud);
+L.marker([32.47790948,44.15314967], {icon: amud_icon}).bindPopup('عمود 1000').addTo(amud);
+L.marker([32.49824901,44.13906916], {icon: amud_icon}).bindPopup('عمود 1050').addTo(amud);
+L.marker([32.51525581,44.12360547], {icon: amud_icon}).bindPopup('عمود 1100').addTo(amud);
+L.marker([32.53346943,44.10718541], {icon: amud_icon}).bindPopup('عمود 1150').addTo(amud);
+L.marker([32.54784607,44.08603837], {icon: amud_icon}).bindPopup('عمود 1200').addTo(amud);
+L.marker([32.55963849,44.06856344], {icon: amud_icon}).bindPopup('عمود 1250').addTo(amud);
+L.marker([32.56815115,44.0544717], {icon: amud_icon}).bindPopup('عمود 1290').addTo(amud);
+L.marker([32.570875,44.05040459], {icon: amud_icon}).bindPopup('عمود 1300').addTo(amud);
+L.marker([32.57864068,44.03668983], {icon: amud_icon}).bindPopup('عمود 1340').addTo(amud);
+L.marker([32.58109046,44.03231423], {icon: amud_icon}).bindPopup('عمود 1350').addTo(amud);
+L.marker([32.58567667,44.02494779], {icon: amud_icon}).bindPopup('عمود 1375').addTo(amud);
+L.marker([32.59531398,44.03057773], {icon: amud_icon}).bindPopup('عمود 1400').addTo(amud);
+L.marker([32.59800815,44.03128786], {icon: amud_icon}).bindPopup('عمود 1406').addTo(amud);
+L.marker([32.61535202,44.03570274], {icon: amud_icon}).bindPopup('عمود 1450').addTo(amud);
+L.marker([32.61614266,44.03589881], {icon: amud_icon}).bindPopup('عمود 1452').addTo(amud);
+L.marker([32.02714431,44.32390337], {icon: amud_icon}).bindPopup('عمود 100N').addTo(amud);
+L.marker([32.03864202,44.32212557], {icon: amud_icon}).bindPopup('عمود 130N').addTo(amud);
+L.marker([32.04792271,44.32073493], {icon: amud_icon}).bindPopup('عمود 150n').addTo(amud);
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//حمل و نقل///////////////////////////////////////////////////////////////////////////////////
+L.marker([31.9899,44.4043], {icon: airport_icon}).bindPopup('فرودگاه نجف').addTo(transport);
+L.marker([33.2690,44.2379], {icon: airport_icon}).bindPopup('فرودگاه بغداد').addTo(transport);
+
+L.marker([32.60615,44.05965], {icon: transport_icon}).bindPopup('میدان قنطره السلام- توقفگاه ماشین ها به سمت مرزها').addTo(transport);
+L.marker([32.61815457,44.00870404], {icon: transport_icon}).bindPopup('گاراژ تعلیب- توقفگاه ماشین های ساماندهی شده به سمت مرزها').addTo(transport);
+L.marker([32.56946061,44.05269308], {icon: transport_icon}).bindPopup('تقاطع حولی- توقفگاه ماشین های عتبه در برگشت به سمت نجف').addTo(transport);
+L.marker([32.53665248,44.10336384], {icon: transport_icon}).bindPopup('توقفگاه ماشین های حج و زیارت در برگشت به سمت نجف').addTo(transport);
+L.marker([32.60253141,44.01927841], {icon: transport_icon}).bindPopup('توقفگاه ماشین ها به سمت مرزها و نجف 3 روز بعد از اربعین').addTo(transport);
+L.marker([32.6331846,44.04461349], {icon: transport_icon}).bindPopup('توقفگاه ماشین ها به سمت کاظمین و بغداد').addTo(transport);
+L.marker([31.98127135,44.35126618], {icon: transport_icon}).bindPopup('گاراژ جنوبی - توقفگاه ماشین های شخصی به سمت مرزها و شهرهای جنوبی در کلیه ایام').addTo(transport);
+L.marker([31.98461229,44.34451175], {icon: transport_icon}).bindPopup('پارکینگ ورودی به نجف- ماشین های عمومی- احتمالی').addTo(transport);
+L.marker([32.00229249,44.32879968], {icon: transport_icon}).bindPopup('گاراژ داخلی').addTo(transport);
+L.marker([31.99933934,44.31475745], {icon: transport_icon}).bindPopup('پارکینگ داخلی به کربلا در ایام عادی').addTo(transport);
+L.marker([31.99049689,44.30878474], {icon: transport_icon}).bindPopup('توقفگاه ماشین ها از کربلا و به کربلا در ایام عادی').addTo(transport);
+L.marker([31.9918562,44.31593556], {icon: transport_icon}).bindPopup('توقفگاه ماشین ها به نجف و از نجف در ایام عادی').addTo(transport);
+L.marker([32.01513264,44.32919727], {icon: transport_icon}).bindPopup('گاراژ شمالی - گاراژ اصلی ماشین ها به کربلا و کاظمین و شمال نجف در کلیه ایام').addTo(transport);
+L.marker([32.61750811,44.02746806], {icon: transport_icon}).bindPopup('گاراژ احیا - پارکینگ ماشین ها به سمت نجف در ایام عادی').addTo(transport);
+L.marker([32.60787689,44.03887005], {icon: transport_icon}).bindPopup('پارکینگ اصلی کربلا به تمام مسیرها در ایام عادی').addTo(transport);
+L.marker([32.62200191,44.04236083], {icon: transport_icon}).bindPopup('پارکینگ ماشین ها به مهران و کاظمین در ایام عادی').addTo(transport);
+L.marker([33.37743285,44.33355629], {icon: transport_icon}).bindPopup('گاراژ سید محمد - پارکینگ ماشین ها به نقاط مختلف در ایام عادی').addTo(transport);
+L.marker([33.38255072,44.34629977], {icon: transport_icon}).bindPopup('پارکینگ ماشین های حج و زیارت در ایام عادی').addTo(transport);
+L.marker([32.32579018,44.26424418], {icon: transport_icon}).bindPopup('توقفگاه ماشین های بین مسیر').addTo(transport);
+L.marker([32.31287901,44.27285793], {icon: transport_icon}).bindPopup('توقفگاه ماشین های بین مسیر').addTo(transport);
+L.marker([33.37326762,44.33939277], {icon: transport_icon}).bindPopup('محل توقف ماشین ها به سمت کربلا و نجف و .. در ایام غیرعادی').addTo(transport);
+L.marker([30.50586472,48.02234353], {icon: transport_icon}).bindPopup('توقفگاه ماشین ها به سمت شهرهای زیارتی عراق').addTo(transport);
+L.marker([32.52932512,45.78987925], {icon: transport_icon}).bindPopup('توقفگاه کوت').addTo(transport);
+L.marker([31.85360039,47.80292111], {icon: transport_icon}).bindPopup('توقفگاه ماشین ها به سمت شهرهای عراق در ایام عادی').addTo(transport);
+L.marker([33.12433418,46.02756392], {icon: transport_icon}).bindPopup('توقفگاه عادی').addTo(transport);
+L.marker([33.1158972,45.94179662], {icon: transport_icon}).bindPopup('ایستگاه احتمالی').addTo(transport);
+L.marker([31.83483973,47.4282702], {icon: transport_icon}).bindPopup('توقفگاه احتمالی').addTo(transport);
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//گم شدگان///////////////////////////////////////////////////////////////////////////////////
+L.marker([31.99959919,44.33743639], {icon: lost_icon}).bindPopup('کنسولگری').addTo(lost);
+L.marker([32.52395296,44.11668331], {icon: lost_icon}).bindPopup('1120').addTo(lost);
+L.marker([32.61719262,44.03231438], {icon: lost_icon}).bindPopup('خیابان سدره').addTo(lost);
+L.marker([31.99564047,44.31262563], {icon: lost_icon}).bindPopup('حرم امام علی').addTo(lost);
+L.marker([32.00081604,44.33115201], {icon: lost_icon}).bindPopup('پل ثوره العشرین').addTo(lost);
+L.marker([31.99600278,44.31926111], {icon: lost_icon}).bindPopup('ساحه النفق').addTo(lost);
+L.marker([32.06167778,44.31883889], {icon: lost_icon}).bindPopup('ستون 1').addTo(lost);
+L.marker([32.18803611,44.30839722], {icon: lost_icon}).bindPopup('ستون285').addTo(lost);
+L.marker([32.15181111,44.32153333], {icon: lost_icon}).bindPopup('ستون202').addTo(lost);
+L.marker([32.23968056,44.29133611], {icon: lost_icon}).bindPopup('ستون 406').addTo(lost);
+L.marker([32.34383889,44.24491389], {icon: lost_icon}).bindPopup('ستون 657').addTo(lost);
+L.marker([32.40956389,44.19713056], {icon: lost_icon}).bindPopup('ستون 828').addTo(lost);
+L.marker([32.5367,44.10327778], {icon: lost_icon}).bindPopup('ستون 1160').addTo(lost);
+L.marker([32.56900556,44.05331944], {icon: lost_icon}).bindPopup('ستون 1295').addTo(lost);
+L.marker([32.58557778,44.02486667], {icon: lost_icon}).bindPopup('تقاطع پل حی الحسین').addTo(lost);
+L.marker([32.59753333,44.03133056], {icon: lost_icon}).bindPopup('سیده جوده').addTo(lost);
+L.marker([32.603175,44.03216667], {icon: lost_icon}).bindPopup('گاراژ سبعین').addTo(lost);
+L.marker([32.60819167,44.02953889], {icon: lost_icon}).bindPopup('کنسولگری ایران در کربلا').addTo(lost);
+L.marker([32.60443889,44.03033611], {icon: lost_icon}).bindPopup('زمین مدرسی').addTo(lost);
+L.marker([32.61973889,44.02514722], {icon: lost_icon}).bindPopup('گاراژ دیوان').addTo(lost);
+L.marker([32.60851111,44.03930556], {icon: lost_icon}).bindPopup('گاراژ موحد=گاراژ کربلا').addTo(lost);
+L.marker([32.61625278,44.0309], {icon: lost_icon}).bindPopup('صحن عقیله').addTo(lost);
+L.marker([32.61489722,44.02842778], {icon: lost_icon}).bindPopup('هتل جواهر').addTo(lost);
+L.marker([32.61691389,44.04291111], {icon: lost_icon}).bindPopup('گاراژ طف').addTo(lost);
+L.marker([32.60930507,44.03091291], {icon: lost_icon}).bindPopup('ستاد مرکزی').addTo(lost);
+L.marker([32.61224722,44.04283333], {icon: lost_icon}).bindPopup('گاراژ هندیه').addTo(lost);
+L.marker([32.61590278,44.03393611], {icon: lost_icon}).bindPopup('بین الحرمین 2').addTo(lost);
+L.marker([32.615875,44.03595833], {icon: lost_icon}).bindPopup('باب القبله حضرت عباس ع').addTo(lost);
+L.marker([32.61819722,44.03585556], {icon: lost_icon}).bindPopup('باب بغداد').addTo(lost);
+L.marker([32.61656389,44.03979444], {icon: lost_icon}).bindPopup('هتل اطلس').addTo(lost);
+L.marker([32.60526111,44.03011944], {icon: lost_icon}).bindPopup('میدان میزان').addTo(lost);
+L.marker([32.61706145,44.0370201], {icon: lost_icon}).bindPopup('خیابان علقمه').addTo(lost);
+L.marker([32.617075,44.03395833], {icon: lost_icon}).bindPopup('بین الحرمین 1').addTo(lost);
+L.marker([32.61653333,44.03144722], {icon: lost_icon}).bindPopup('خیابان شهدا').addTo(lost);
+L.marker([32.61539167,44.03206389], {icon: lost_icon}).bindPopup('باب قبله امام حسین ع').addTo(lost);
+L.marker([32.62149285,44.04199506], {icon: lost_icon}).bindPopup('تقاطع امام مهدی (عج) و میثم تمار').addTo(lost);
+L.marker([32.60985803,44.03081814], {icon: lost_icon}).bindPopup('هتل ضیوف الرحمن').addTo(lost);	
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//NAJAF HOTEL///////////////////////////////////////////////////////////////////////////////////
+L.marker([31.99494079,44.31933967], {icon: hotel_icon}).bindPopup('67').addTo(hotel);
+L.marker([31.9944538,44.31971041], {icon: hotel_icon}).bindPopup('68').addTo(hotel);
+L.marker([31.99336859,44.31583109], {icon: hotel_icon}).bindPopup('Abitaleb').addTo(hotel);
+L.marker([31.99330933,44.31536062], {icon: hotel_icon}).bindPopup('Abizar').addTo(hotel);
+L.marker([31.99525863,44.31839411], {icon: hotel_icon}).bindPopup('Abrar').addTo(hotel);
+L.marker([31.99370856,44.31573185], {icon: hotel_icon}).bindPopup('Adam').addTo(hotel);
+L.marker([32.02536944,44.39129152], {icon: hotel_icon}).bindPopup('Akramin').addTo(hotel);
+L.marker([32.00569075,44.37050323], {icon: hotel_icon}).bindPopup('Al Aragh').addTo(hotel);
+L.marker([31.99690651,44.3275236], {icon: hotel_icon}).bindPopup('Al Mohamad').addTo(hotel);
+L.marker([32.00897436,44.32742301], {icon: hotel_icon}).bindPopup('Al Mona').addTo(hotel);
+L.marker([31.99820294,44.31263365], {icon: hotel_icon}).bindPopup('Alamdar').addTo(hotel);
+L.marker([31.99768108,44.31512794], {icon: hotel_icon}).bindPopup('AlghadiR').addTo(hotel);
+L.marker([31.99769374,44.31856611], {icon: hotel_icon}).bindPopup('Alghari').addTo(hotel);
+L.marker([31.99183647,44.31524989], {icon: hotel_icon}).bindPopup('Alhadi').addTo(hotel);
+L.marker([31.99406421,44.3290921], {icon: hotel_icon}).bindPopup('Alharam').addTo(hotel);
+L.marker([31.99245748,44.3235484], {icon: hotel_icon}).bindPopup('Almasshargh').addTo(hotel);
+L.marker([32.02463963,44.39473481], {icon: hotel_icon}).bindPopup('Almatar').addTo(hotel);
+L.marker([31.9966543,44.31612136], {icon: hotel_icon}).bindPopup('Amin').addTo(hotel);
+L.marker([31.99224374,44.32164595], {icon: hotel_icon}).bindPopup('Anvar Baghie').addTo(hotel);
+L.marker([31.99678539,44.30985463], {icon: hotel_icon}).bindPopup('Anvar Mashhad').addTo(hotel);
+L.marker([31.99336004,44.31937538], {icon: hotel_icon}).bindPopup('AnvAr Sadegh').addTo(hotel);
+L.marker([32.00434755,44.33163249], {icon: hotel_icon}).bindPopup('Arz Moghadas').addTo(hotel);
+L.marker([31.9955276,44.31885126], {icon: hotel_icon}).bindPopup('Asadollah').addTo(hotel);
+L.marker([31.99028607,44.32202213], {icon: hotel_icon}).bindPopup('Aseme Seghafe').addTo(hotel);
+L.marker([32.00376433,44.36686138], {icon: hotel_icon}).bindPopup('Atlas').addTo(hotel);
+L.marker([31.99420025,44.32271607], {icon: hotel_icon}).bindPopup('Baghr').addTo(hotel);
+L.marker([32.00581807,44.34448002], {icon: hotel_icon}).bindPopup('Bahr Najaf').addTo(hotel);
+L.marker([31.99462898,44.31080178], {icon: hotel_icon}).bindPopup('Barekat Abas').addTo(hotel);
+L.marker([32.01155833,44.36125372], {icon: hotel_icon}).bindPopup('Barekat Karim').addTo(hotel);
+L.marker([31.99545166,44.31884028], {icon: hotel_icon}).bindPopup('Barekat Mortez').addTo(hotel);
+L.marker([31.99392473,44.31472778], {icon: hotel_icon}).bindPopup('Barekat Ombann').addTo(hotel);
+L.marker([31.99708957,44.31116531], {icon: hotel_icon}).bindPopup('Beitolbareka').addTo(hotel);
+L.marker([31.99662672,44.30990023], {icon: hotel_icon}).bindPopup('Boludan').addTo(hotel);
+L.marker([31.99825918,44.31262543], {icon: hotel_icon}).bindPopup('Borasa').addTo(hotel);
+L.marker([31.98932206,44.32122669], {icon: hotel_icon}).bindPopup('Borhan').addTo(hotel);
+L.marker([31.99153706,44.32295118], {icon: hotel_icon}).bindPopup('Borjmenar').addTo(hotel);
+L.marker([31.99767396,44.31812698], {icon: hotel_icon}).bindPopup('Borjnajaf').addTo(hotel);
+L.marker([31.99625356,44.31895746], {icon: hotel_icon}).bindPopup('Borjomara').addTo(hotel);
+L.marker([31.99252546,44.31795415], {icon: hotel_icon}).bindPopup('Dar Rahme').addTo(hotel);
+L.marker([31.99669177,44.31107344], {icon: hotel_icon}).bindPopup('Darbelal').addTo(hotel);
+L.marker([31.99989969,44.3313931], {icon: hotel_icon}).bindPopup('Darolhoda').addTo(hotel);
+L.marker([31.99629916,44.31211766], {icon: hotel_icon}).bindPopup('Darolhoreh').addTo(hotel);
+L.marker([31.99741965,44.31942475], {icon: hotel_icon}).bindPopup('Darosalam').addTo(hotel);
+L.marker([31.99658683,44.32269554], {icon: hotel_icon}).bindPopup('Doheh').addTo(hotel);
+L.marker([32.00176835,44.33377809], {icon: hotel_icon}).bindPopup('Dor Najaf').addTo(hotel);
+L.marker([31.99703601,44.32253511], {icon: hotel_icon}).bindPopup('Dor Neda').addTo(hotel);
+L.marker([31.99284447,44.31826369], {icon: hotel_icon}).bindPopup('Dorar').addTo(hotel);
+L.marker([32.02115536,44.38364287], {icon: hotel_icon}).bindPopup('Doratosalam').addTo(hotel);
+L.marker([32.00388394,44.32954506], {icon: hotel_icon}).bindPopup('Ebn Ghazi').addTo(hotel);
+L.marker([31.995208,44.33369603], {icon: hotel_icon}).bindPopup('Ein Hayat').addTo(hotel);
+L.marker([32.00418636,44.32964028], {icon: hotel_icon}).bindPopup('Ein Salsabil').addTo(hotel);
+L.marker([31.99039972,44.32090893], {icon: hotel_icon}).bindPopup('Eshtar').addTo(hotel);
+L.marker([32.00347206,44.33775036], {icon: hotel_icon}).bindPopup('Farghadein 2').addTo(hotel);
+L.marker([31.99548352,44.31883274], {icon: hotel_icon}).bindPopup('Fatemiyon').addTo(hotel);
+L.marker([32.01300136,44.36526001], {icon: hotel_icon}).bindPopup('Forghadein').addTo(hotel);
+L.marker([31.99364671,44.32069377], {icon: hotel_icon}).bindPopup('Fosofl').addTo(hotel);
+L.marker([31.99364855,44.32082771], {icon: hotel_icon}).bindPopup('Fosul').addTo(hotel);
+L.marker([31.99368367,44.32089468], {icon: hotel_icon}).bindPopup('G Habib').addTo(hotel);
+L.marker([31.99657576,44.31265544], {icon: hotel_icon}).bindPopup('Gahsr Tohid').addTo(hotel);
+L.marker([31.9938348,44.31924353], {icon: hotel_icon}).bindPopup('Gasr Ghasan').addTo(hotel);
+L.marker([31.99282578,44.32684382], {icon: hotel_icon}).bindPopup('Ghamar Bani Ha').addTo(hotel);
+L.marker([31.99816363,44.31452997], {icon: hotel_icon}).bindPopup('Ghamr').addTo(hotel);
+L.marker([31.99770363,44.31120546], {icon: hotel_icon}).bindPopup('Ghased').addTo(hotel);
+L.marker([31.99413948,44.31520128], {icon: hotel_icon}).bindPopup('Ghasem').addTo(hotel);
+L.marker([31.99599498,44.32386498], {icon: hotel_icon}).bindPopup('Ghasim').addTo(hotel);
+L.marker([31.99406547,44.31927874], {icon: hotel_icon}).bindPopup('Ghasn').addTo(hotel);
+L.marker([31.99493861,44.31089197], {icon: hotel_icon}).bindPopup('Ghasr Abbas').addTo(hotel);
+L.marker([31.99549726,44.32568159], {icon: hotel_icon}).bindPopup('Ghasr Aye').addTo(hotel);
+L.marker([31.9966714,44.32166683], {icon: hotel_icon}).bindPopup('Ghasr Badr').addTo(hotel);
+L.marker([32.02104396,44.38328873], {icon: hotel_icon}).bindPopup('Ghasr Karar').addTo(hotel);
+L.marker([31.99495395,44.31082475], {icon: hotel_icon}).bindPopup('Ghasr Mola').addTo(hotel);
+L.marker([31.99531311,44.31663785], {icon: hotel_icon}).bindPopup('Ghasr Mostafa').addTo(hotel);
+L.marker([32.00731013,44.34920641], {icon: hotel_icon}).bindPopup('Ghasr Oliya').addTo(hotel);
+L.marker([31.99155576,44.31255293], {icon: hotel_icon}).bindPopup('Ghasr Seyedzei').addTo(hotel);
+L.marker([31.98406678,44.34704077], {icon: hotel_icon}).bindPopup('Ghasr Soltan').addTo(hotel);
+L.marker([31.99888481,44.31572196], {icon: hotel_icon}).bindPopup('Ghasr Vali').addTo(hotel);
+L.marker([32.0144215,44.36925164], {icon: hotel_icon}).bindPopup('Ghasr Zaman').addTo(hotel);
+L.marker([32.00449549,44.3409685], {icon: hotel_icon}).bindPopup('Ghasrolvard').addTo(hotel);
+L.marker([31.99793011,44.32699981], {icon: hotel_icon}).bindPopup('Ghasronajm').addTo(hotel);
+L.marker([31.99505981,44.31241664], {icon: hotel_icon}).bindPopup('Ghasrozjyafe').addTo(hotel);
+L.marker([32.00212584,44.33228955], {icon: hotel_icon}).bindPopup('Ghasrreza').addTo(hotel);
+L.marker([32.00274451,44.36201706], {icon: hotel_icon}).bindPopup('Ghasrsaeed').addTo(hotel);
+L.marker([31.99762534,44.31414147], {icon: hotel_icon}).bindPopup('Ghasrtoosi').addTo(hotel);
+L.marker([31.99521136,44.32213412], {icon: hotel_icon}).bindPopup('Ghasrzaerin').addTo(hotel);
+L.marker([31.99060944,44.32237275], {icon: hotel_icon}).bindPopup('Ghebtan').addTo(hotel);
+L.marker([31.9973821,44.31858773], {icon: hotel_icon}).bindPopup('Ghobab Zahbieh').addTo(hotel);
+L.marker([31.99536734,44.32639531], {icon: hotel_icon}).bindPopup('Ghobe Baiza').addTo(hotel);
+L.marker([32.00304835,44.3370166], {icon: hotel_icon}).bindPopup('Ghofran').addTo(hotel);
+L.marker([31.99519937,44.32435649], {icon: hotel_icon}).bindPopup('Ghsr Omara').addTo(hotel);
+L.marker([31.99544714,44.32646681], {icon: hotel_icon}).bindPopup('Gobe Beiza').addTo(hotel);
+L.marker([32.00918273,44.32714155], {icon: hotel_icon}).bindPopup('Hamd').addTo(hotel);
+L.marker([31.9929495,44.31553756], {icon: hotel_icon}).bindPopup('Hava').addTo(hotel);
+L.marker([31.99997144,44.32929243], {icon: hotel_icon}).bindPopup('Heisam').addTo(hotel);
+L.marker([31.99994805,44.32943702], {icon: hotel_icon}).bindPopup('Homam').addTo(hotel);
+L.marker([31.99648239,44.31718829], {icon: hotel_icon}).bindPopup('Hoveishi').addTo(hotel);
+L.marker([31.99301857,44.32550322], {icon: hotel_icon}).bindPopup('Jainat Fatemeh').addTo(hotel);
+L.marker([31.99394024,44.31510983], {icon: hotel_icon}).bindPopup('Janat Ghari').addTo(hotel);
+L.marker([31.99710868,44.32828358], {icon: hotel_icon}).bindPopup('Janat Khold').addTo(hotel);
+L.marker([31.99274339,44.31820401], {icon: hotel_icon}).bindPopup('Janat Mostafa').addTo(hotel);
+L.marker([32.00334163,44.33761692], {icon: hotel_icon}).bindPopup('Janat Reza').addTo(hotel);
+L.marker([31.99335099,44.32010771], {icon: hotel_icon}).bindPopup('Janat Vahid').addTo(hotel);
+L.marker([31.99140279,44.31407433], {icon: hotel_icon}).bindPopup('Janatozahra').addTo(hotel);
+L.marker([32.03793827,44.38069596], {icon: hotel_icon}).bindPopup('Jar Montazar').addTo(hotel);
+L.marker([31.99630821,44.31281713], {icon: hotel_icon}).bindPopup('Jar Shafi').addTo(hotel);
+L.marker([31.99370236,44.32014652], {icon: hotel_icon}).bindPopup('Javad').addTo(hotel);
+L.marker([31.99381418,44.32056377], {icon: hotel_icon}).bindPopup('Johare Najaf').addTo(hotel);
+L.marker([32.00306227,44.33019273], {icon: hotel_icon}).bindPopup('Johareh Beirut').addTo(hotel);
+L.marker([31.99872857,44.31616805], {icon: hotel_icon}).bindPopup('Karbalamoghads').addTo(hotel);
+L.marker([31.99433494,44.33096336], {icon: hotel_icon}).bindPopup('Khadije Kobra').addTo(hotel);
+L.marker([32.03129084,44.32028214], {icon: hotel_icon}).bindPopup('Kheime').addTo(hotel);
+L.marker([31.99208298,44.31618439], {icon: hotel_icon}).bindPopup('KHeir').addTo(hotel);
+L.marker([32.0212686,44.34761468], {icon: hotel_icon}).bindPopup('Kheirat').addTo(hotel);
+L.marker([31.99416546,44.31974444], {icon: hotel_icon}).bindPopup('Lolonajaf').addTo(hotel);
+L.marker([31.99883494,44.3319049], {icon: hotel_icon}).bindPopup('Lotf Zahra').addTo(hotel);
+L.marker([31.99615063,44.32928581], {icon: hotel_icon}).bindPopup('M Ashpaz').addTo(hotel);
+L.marker([31.99817947,44.31244883], {icon: hotel_icon}).bindPopup('Madine Elm').addTo(hotel);
+L.marker([31.99607117,44.32356876], {icon: hotel_icon}).bindPopup('Madine Heidari').addTo(hotel);
+L.marker([32.00429868,44.35697224], {icon: hotel_icon}).bindPopup('Madine Nojum').addTo(hotel);
+L.marker([31.99448213,44.32879991], {icon: hotel_icon}).bindPopup('Madine Noor').addTo(hotel);
+L.marker([31.99131897,44.31290405], {icon: hotel_icon}).bindPopup('Majm Bahr Naja').addTo(hotel);
+L.marker([31.99443544,44.30966905], {icon: hotel_icon}).bindPopup('Majma Zamzam').addTo(hotel);
+L.marker([32.00351464,44.3379703], {icon: hotel_icon}).bindPopup('Malaz').addTo(hotel);
+L.marker([31.99332501,44.3110483], {icon: hotel_icon}).bindPopup('Malk').addTo(hotel);
+L.marker([31.99508035,44.31289516], {icon: hotel_icon}).bindPopup('Mesbah Hoda').addTo(hotel);
+L.marker([32.00382468,44.33893564], {icon: hotel_icon}).bindPopup('Meshkat').addTo(hotel);
+L.marker([31.99677324,44.32212221], {icon: hotel_icon}).bindPopup('Mobaheleh').addTo(hotel);
+L.marker([31.99750347,44.31173762], {icon: hotel_icon}).bindPopup('Mohand').addTo(hotel);
+L.marker([31.99948554,44.3287093], {icon: hotel_icon}).bindPopup('Mostafa').addTo(hotel);
+L.marker([31.99475504,44.31876736], {icon: hotel_icon}).bindPopup('Mozif Hosein').addTo(hotel);
+L.marker([31.9947843,44.31897699], {icon: hotel_icon}).bindPopup('Mozif Hossein').addTo(hotel);
+L.marker([31.99767178,44.31830811], {icon: hotel_icon}).bindPopup('Mozifol Hasan').addTo(hotel);
+L.marker([31.99690986,44.32240896], {icon: hotel_icon}).bindPopup('Naba').addTo(hotel);
+L.marker([31.99668967,44.31761149], {icon: hotel_icon}).bindPopup('Najmo Zahbi').addTo(hotel);
+L.marker([32.00187279,44.33296421], {icon: hotel_icon}).bindPopup('Narjes').addTo(hotel);
+L.marker([31.99447576,44.33111424], {icon: hotel_icon}).bindPopup('Naser').addTo(hotel);
+L.marker([31.99015019,44.32039177], {icon: hotel_icon}).bindPopup('Nasim').addTo(hotel);
+L.marker([31.9946356,44.31087127], {icon: hotel_icon}).bindPopup('Noor Abas').addTo(hotel);
+L.marker([31.99339625,44.31894598], {icon: hotel_icon}).bindPopup('Noor Hasanein').addTo(hotel);
+L.marker([31.99484666,44.3339562], {icon: hotel_icon}).bindPopup('Noor Hosein').addTo(hotel);
+L.marker([31.993884,44.3151944], {icon: hotel_icon}).bindPopup('Noor Velaye').addTo(hotel);
+L.marker([31.99571611,44.33380608], {icon: hotel_icon}).bindPopup('Noor Zahra').addTo(hotel);
+L.marker([31.99180109,44.32524338], {icon: hotel_icon}).bindPopup('Noorshams').addTo(hotel);
+L.marker([31.99342266,44.31887649], {icon: hotel_icon}).bindPopup('Nor Hasnn').addTo(hotel);
+L.marker([32.01437071,44.36688543], {icon: hotel_icon}).bindPopup('Omana Rahman').addTo(hotel);
+L.marker([31.99793883,44.31433501], {icon: hotel_icon}).bindPopup('Omre').addTo(hotel);
+L.marker([31.99426236,44.31984921], {icon: hotel_icon}).bindPopup('Oyon Malaek').addTo(hotel);
+L.marker([31.99320741,44.31130688], {icon: hotel_icon}).bindPopup('Raghim').addTo(hotel);
+L.marker([31.99671976,44.31827207], {icon: hotel_icon}).bindPopup('Raoof').addTo(hotel);
+L.marker([31.98978307,44.31956372], {icon: hotel_icon}).bindPopup('Rayatheidar').addTo(hotel);
+L.marker([31.99739635,44.32788326], {icon: hotel_icon}).bindPopup('Raye').addTo(hotel);
+L.marker([31.99191199,44.31767394], {icon: hotel_icon}).bindPopup('Reihane Mostaf').addTo(hotel);
+L.marker([31.99374435,44.32892899], {icon: hotel_icon}).bindPopup('Rettaj').addTo(hotel);
+L.marker([31.99575073,44.32303358], {icon: hotel_icon}).bindPopup('Riyahi').addTo(hotel);
+L.marker([31.99489921,44.31279668], {icon: hotel_icon}).bindPopup('Rosol').addTo(hotel);
+L.marker([31.99155802,44.31607266], {icon: hotel_icon}).bindPopup('Roze').addTo(hotel);
+L.marker([32.00360374,44.33851345], {icon: hotel_icon}).bindPopup('Safa').addTo(hotel);
+L.marker([31.99368727,44.32030225], {icon: hotel_icon}).bindPopup('Safine Hosein').addTo(hotel);
+L.marker([31.99192573,44.32494449], {icon: hotel_icon}).bindPopup('Safine Najah').addTo(hotel);
+L.marker([31.99776641,44.31167115], {icon: hotel_icon}).bindPopup('Saghi').addTo(hotel);
+L.marker([32.02629967,44.39309489], {icon: hotel_icon}).bindPopup('Salsabil').addTo(hotel);
+L.marker([32.0021856,44.33460815], {icon: hotel_icon}).bindPopup('Sayer').addTo(hotel);
+L.marker([31.99256318,44.32143398], {icon: hotel_icon}).bindPopup('Seffein').addTo(hotel);
+L.marker([31.9942502,44.31901337], {icon: hotel_icon}).bindPopup('Seif Amir').addTo(hotel);
+L.marker([31.99361234,44.31579631], {icon: hotel_icon}).bindPopup('Shafae').addTo(hotel);
+L.marker([31.99345954,44.32094984], {icon: hotel_icon}).bindPopup('Shahid Mehrab').addTo(hotel);
+L.marker([32.00223447,44.33487318], {icon: hotel_icon}).bindPopup('Sharae').addTo(hotel);
+L.marker([32.00100912,44.35936284], {icon: hotel_icon}).bindPopup('Shomo Ghari').addTo(hotel);
+L.marker([31.99724673,44.33273052], {icon: hotel_icon}).bindPopup('Soltan').addTo(hotel);
+L.marker([31.99610663,44.32314078], {icon: hotel_icon}).bindPopup('Tabuk').addTo(hotel);
+L.marker([32.00445458,44.32933845], {icon: hotel_icon}).bindPopup('Tayebe Najaf').addTo(hotel);
+L.marker([31.99074439,44.32201216], {icon: hotel_icon}).bindPopup('Teisir').addTo(hotel);
+L.marker([31.99803153,44.31824533], {icon: hotel_icon}).bindPopup('Toor').addTo(hotel);
+L.marker([31.99607503,44.33365647], {icon: hotel_icon}).bindPopup('Vadi Aghigh').addTo(hotel);
+L.marker([31.99812516,44.31786999], {icon: hotel_icon}).bindPopup('Vadi Jamil').addTo(hotel);
+L.marker([31.99736743,44.32727633], {icon: hotel_icon}).bindPopup('Vadi Moghadas').addTo(hotel);
+L.marker([32.00417597,44.34005496], {icon: hotel_icon}).bindPopup('Vares').addTo(hotel);
+L.marker([32.01285434,44.3265632], {icon: hotel_icon}).bindPopup('Velay Ali').addTo(hotel);
+L.marker([31.99502553,44.31746791], {icon: hotel_icon}).bindPopup('Yasin').addTo(hotel);
+L.marker([31.99245933,44.31561803], {icon: hotel_icon}).bindPopup('Yosr').addTo(hotel);
+L.marker([31.98907153,44.31721092], {icon: hotel_icon}).bindPopup('Zahed').addTo(hotel);
+L.marker([32.00165855,44.33185645], {icon: hotel_icon}).bindPopup('Zamzam').addTo(hotel);
+L.marker([31.99463158,44.3205092], {icon: hotel_icon}).bindPopup('Zein').addTo(hotel);
+L.marker([31.99546617,44.31846351], {icon: hotel_icon}).bindPopup('Zohoor').addTo(hotel);
+L.marker([31.99873444,44.31612421], {icon: hotel_icon}).bindPopup('Zohrenojf').addTo(hotel);
+L.marker([31.9967196,44.32260937], {icon: hotel_icon}).bindPopup('Zolfaghar').addTo(hotel);
+L.marker([31.99516006,44.31638975], {icon: hotel_icon}).bindPopup('Zoyof Bagher').addTo(hotel);
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//KARBALA HOTEL/////////////////////////////////////////////////////////////////////////////////
+L.marker([32.61208783,44.03025102], {icon: hotel_icon}).bindPopup('18').addTo(hotel);
+L.marker([32.61304596,44.03624333], {icon: hotel_icon}).bindPopup('51').addTo(hotel);
+L.marker([32.61290599,44.03699367], {icon: hotel_icon}).bindPopup('52').addTo(hotel);
+L.marker([32.61274371,44.03713005], {icon: hotel_icon}).bindPopup('53').addTo(hotel);
+L.marker([32.61221582,44.0386755], {icon: hotel_icon}).bindPopup('54').addTo(hotel);
+L.marker([32.61768317,44.02743721], {icon: hotel_icon}).bindPopup('57').addTo(hotel);
+L.marker([32.61508729,44.03086298], {icon: hotel_icon}).bindPopup('58').addTo(hotel);
+L.marker([32.61483558,44.03070121], {icon: hotel_icon}).bindPopup('59').addTo(hotel);
+L.marker([32.61474322,44.03121418], {icon: hotel_icon}).bindPopup('60').addTo(hotel);
+L.marker([32.61450559,44.03131384], {icon: hotel_icon}).bindPopup('61').addTo(hotel);
+L.marker([32.61819824,44.0379565], {icon: hotel_icon}).bindPopup('Adan').addTo(hotel);
+L.marker([32.61794443,44.02920412], {icon: hotel_icon}).bindPopup('Afnan Karbala').addTo(hotel);
+L.marker([32.62078162,44.04473369], {icon: hotel_icon}).bindPopup('Aghmar Khamseh').addTo(hotel);
+L.marker([32.61396387,44.03565022], {icon: hotel_icon}).bindPopup('Aghsa').addTo(hotel);
+L.marker([32.62095018,44.03217584], {icon: hotel_icon}).bindPopup('Ahlebeit Nobov').addTo(hotel);
+L.marker([32.61177225,44.03131695], {icon: hotel_icon}).bindPopup('Akhavan').addTo(hotel);
+L.marker([32.61572038,44.02243347], {icon: hotel_icon}).bindPopup('Al Abud').addTo(hotel);
+L.marker([32.6085298,44.0245924], {icon: hotel_icon}).bindPopup('Alfenar').addTo(hotel);
+L.marker([32.62054986,44.03415321], {icon: hotel_icon}).bindPopup('Almahdi').addTo(hotel);
+L.marker([32.6120574,44.03027843], {icon: hotel_icon}).bindPopup('Almizan').addTo(hotel);
+L.marker([32.61320732,44.03410586], {icon: hotel_icon}).bindPopup('Altome').addTo(hotel);
+L.marker([32.60427573,44.03945904], {icon: hotel_icon}).bindPopup('Amirat').addTo(hotel);
+L.marker([32.61092652,44.03118325], {icon: hotel_icon}).bindPopup('Anbari').addTo(hotel);
+L.marker([32.61544562,44.0338596], {icon: hotel_icon}).bindPopup('Ansar Hosein').addTo(hotel);
+L.marker([32.6165242,44.04259362], {icon: hotel_icon}).bindPopup('Anvar Baqi').addTo(hotel);
+L.marker([32.61227475,44.03759424], {icon: hotel_icon}).bindPopup('Anvar Batul').addTo(hotel);
+L.marker([32.6196297,44.03738905], {icon: hotel_icon}).bindPopup('Anvar Fiha').addTo(hotel);
+L.marker([32.6210501,44.03206201], {icon: hotel_icon}).bindPopup('Anvar Madine').addTo(hotel);
+L.marker([32.6129738,44.03414651], {icon: hotel_icon}).bindPopup('Anvar Mighat').addTo(hotel);
+L.marker([32.61577134,44.03518084], {icon: hotel_icon}).bindPopup('Anvar Rasol').addTo(hotel);
+L.marker([32.62033897,44.03989591], {icon: hotel_icon}).bindPopup('Anvar Zafaf').addTo(hotel);
+L.marker([32.6178415,44.02919314], {icon: hotel_icon}).bindPopup('Anvarzahra').addTo(hotel);
+L.marker([32.61640526,44.03122843], {icon: hotel_icon}).bindPopup('Arz Hosein').addTo(hotel);
+L.marker([32.61692477,44.03797913], {icon: hotel_icon}).bindPopup('Arz Kheirat').addTo(hotel);
+L.marker([32.61523004,44.03470801], {icon: hotel_icon}).bindPopup('Asad Feze').addTo(hotel);
+L.marker([32.61524362,44.03476937], {icon: hotel_icon}).bindPopup('Asadfeze').addTo(hotel);
+L.marker([32.62111757,44.03441356], {icon: hotel_icon}).bindPopup('Ashab Kesa').addTo(hotel);
+L.marker([32.61664683,44.03998358], {icon: hotel_icon}).bindPopup('Atlas').addTo(hotel);
+L.marker([32.61346296,44.03411985], {icon: hotel_icon}).bindPopup('Atraghchi').addTo(hotel);
+L.marker([32.61881095,44.03661012], {icon: hotel_icon}).bindPopup('Aziz').addTo(hotel);
+L.marker([32.61784921,44.03406319], {icon: hotel_icon}).bindPopup('Bab Havaej').addTo(hotel);
+L.marker([32.61672596,44.03300623], {icon: hotel_icon}).bindPopup('Bab Salam').addTo(hotel);
+L.marker([32.61377418,44.03399228], {icon: hotel_icon}).bindPopup('Babmorad').addTo(hotel);
+L.marker([32.61863996,44.03256836], {icon: hotel_icon}).bindPopup('Babriyan').addTo(hotel);
+L.marker([32.61979449,44.03742425], {icon: hotel_icon}).bindPopup('Badr').addTo(hotel);
+L.marker([32.61504346,44.03205724], {icon: hotel_icon}).bindPopup('Baghdad').addTo(hotel);
+L.marker([32.61376815,44.03341552], {icon: hotel_icon}).bindPopup('Baghdadi').addTo(hotel);
+L.marker([32.61319307,44.03615406], {icon: hotel_icon}).bindPopup('Bagher').addTo(hotel);
+L.marker([32.62328714,44.04226036], {icon: hotel_icon}).bindPopup('Bakat Zeinab').addTo(hotel);
+L.marker([32.61957455,44.03739617], {icon: hotel_icon}).bindPopup('Balad Amin').addTo(hotel);
+L.marker([32.61789825,44.04100735], {icon: hotel_icon}).bindPopup('Barekat Bagher').addTo(hotel);
+L.marker([32.6195116,44.0380503], {icon: hotel_icon}).bindPopup('Barekat Zahra').addTo(hotel);
+L.marker([32.6176001,44.03224935], {icon: hotel_icon}).bindPopup('Bayaregh Eslam').addTo(hotel);
+L.marker([32.61497154,44.02649584], {icon: hotel_icon}).bindPopup('Behar Anvar').addTo(hotel);
+L.marker([32.62115797,44.0336643], {icon: hotel_icon}).bindPopup('Boghae').addTo(hotel);
+L.marker([32.6182207,44.03957915], {icon: hotel_icon}).bindPopup('Borj Saghalein').addTo(hotel);
+L.marker([32.62254241,44.03357939], {icon: hotel_icon}).bindPopup('Borjforat').addTo(hotel);
+L.marker([32.61858137,44.03796949], {icon: hotel_icon}).bindPopup('Borjkarbala').addTo(hotel);
+L.marker([32.61556179,44.02211756], {icon: hotel_icon}).bindPopup('Dahavi').addTo(hotel);
+L.marker([32.618632,44.03637869], {icon: hotel_icon}).bindPopup('Dale').addTo(hotel);
+L.marker([32.61743096,44.03744487], {icon: hotel_icon}).bindPopup('Dast Rast').addTo(hotel);
+L.marker([32.61766909,44.03577327], {icon: hotel_icon}).bindPopup('Dobei').addTo(hotel);
+L.marker([32.60777853,44.02510277], {icon: hotel_icon}).bindPopup('Dor Baroodi').addTo(hotel);
+L.marker([32.61186931,44.03297103], {icon: hotel_icon}).bindPopup('Ebraj Ber').addTo(hotel);
+L.marker([32.61120102,44.03555207], {icon: hotel_icon}).bindPopup('Ein Haiat').addTo(hotel);
+L.marker([32.6194867,44.03707062], {icon: hotel_icon}).bindPopup('Fadak 1').addTo(hotel);
+L.marker([32.61906727,44.03324964], {icon: hotel_icon}).bindPopup('Farghadein').addTo(hotel);
+L.marker([32.61020727,44.02374197], {icon: hotel_icon}).bindPopup('Fatemeh Bentas').addTo(hotel);
+L.marker([32.60865301,44.02459701], {icon: hotel_icon}).bindPopup('Fenar').addTo(hotel);
+L.marker([32.61394886,44.03129423], {icon: hotel_icon}).bindPopup('Fotros').addTo(hotel);
+L.marker([32.61725402,44.03372188], {icon: hotel_icon}).bindPopup('Ghaem').addTo(hotel);
+L.marker([32.61694095,44.03860291], {icon: hotel_icon}).bindPopup('Ghamr Alghami').addTo(hotel);
+L.marker([32.61379958,44.03560756], {icon: hotel_icon}).bindPopup('Ghamr Bani Has').addTo(hotel);
+L.marker([32.61212639,44.03755392], {icon: hotel_icon}).bindPopup('Ghasagh').addTo(hotel);
+L.marker([32.62053226,44.032621], {icon: hotel_icon}).bindPopup('Ghasr Akhzar').addTo(hotel);
+L.marker([32.61477842,44.03615858], {icon: hotel_icon}).bindPopup('Ghasr Alghadir').addTo(hotel);
+L.marker([32.61956801,44.03800973], {icon: hotel_icon}).bindPopup('Ghasr Javad').addTo(hotel);
+L.marker([32.61540614,44.02154993], {icon: hotel_icon}).bindPopup('Ghasr Oliya2').addTo(hotel);
+L.marker([32.61789255,44.03165608], {icon: hotel_icon}).bindPopup('Ghasr Shalal').addTo(hotel);
+L.marker([32.60807591,44.02494058], {icon: hotel_icon}).bindPopup('Ghasrsoltan').addTo(hotel);
+L.marker([32.61979667,44.03360789], {icon: hotel_icon}).bindPopup('Ghobatolhosein').addTo(hotel);
+L.marker([32.61784444,44.03911983], {icon: hotel_icon}).bindPopup('Ghobtan').addTo(hotel);
+L.marker([32.61589145,44.04307868], {icon: hotel_icon}).bindPopup('Ghods').addTo(hotel);
+L.marker([32.61672897,44.0368081], {icon: hotel_icon}).bindPopup('Ghorbatol Abas').addTo(hotel);
+L.marker([32.61327186,44.02079145], {icon: hotel_icon}).bindPopup('Ghoreishi').addTo(hotel);
+L.marker([32.62456153,44.03267364], {icon: hotel_icon}).bindPopup('Hadavali').addTo(hotel);
+L.marker([32.61443309,44.029975], {icon: hotel_icon}).bindPopup('Hamid').addTo(hotel);
+L.marker([32.61574645,44.03346665], {icon: hotel_icon}).bindPopup('Hasanein').addTo(hotel);
+L.marker([32.60420163,44.03884624], {icon: hotel_icon}).bindPopup('Hasanmojtaba').addTo(hotel);
+L.marker([32.60982857,44.02357768], {icon: hotel_icon}).bindPopup('Hendavi').addTo(hotel);
+L.marker([32.61652487,44.02768716], {icon: hotel_icon}).bindPopup('Hilton').addTo(hotel);
+L.marker([32.61411751,44.02983561], {icon: hotel_icon}).bindPopup('Janat Amir').addTo(hotel);
+L.marker([32.62004938,44.03678144], {icon: hotel_icon}).bindPopup('Janati').addTo(hotel);
+L.marker([32.61219688,44.03868539], {icon: hotel_icon}).bindPopup('Janatnaeim').addTo(hotel);
+L.marker([32.61768317,44.02743721], {icon: hotel_icon}).bindPopup('janato Ale Yasin').addTo(hotel);
+L.marker([32.61687214,44.04091297], {icon: hotel_icon}).bindPopup('Janatol Mahdi').addTo(hotel);
+L.marker([32.61947338,44.03742777], {icon: hotel_icon}).bindPopup('Janatozahra2').addTo(hotel);
+L.marker([32.62338957,44.03760304], {icon: hotel_icon}).bindPopup('Jar Sadeh').addTo(hotel);
+L.marker([32.60102481,44.03251187], {icon: hotel_icon}).bindPopup('Jarash 1').addTo(hotel);
+L.marker([32.61904213,44.03624509], {icon: hotel_icon}).bindPopup('K Mogh').addTo(hotel);
+L.marker([32.61417174,44.02978926], {icon: hotel_icon}).bindPopup('Kafil Zeinab').addTo(hotel);
+L.marker([32.61880869,44.03619496], {icon: hotel_icon}).bindPopup('Karbala Moghas').addTo(hotel);
+L.marker([32.61932502,44.03687155], {icon: hotel_icon}).bindPopup('Kerame').addTo(hotel);
+L.marker([32.62224225,44.03436251], {icon: hotel_icon}).bindPopup('Keristal').addTo(hotel);
+L.marker([32.60850197,44.03368056], {icon: hotel_icon}).bindPopup('Khalij').addTo(hotel);
+L.marker([32.61851449,44.03952409], {icon: hotel_icon}).bindPopup('Khodam Hosein').addTo(hotel);
+L.marker([32.61996338,44.03580168], {icon: hotel_icon}).bindPopup('Kosar Zahra').addTo(hotel);
+L.marker([32.61112064,44.0246328], {icon: hotel_icon}).bindPopup('Lolo Sabah').addTo(hotel);
+L.marker([32.62044559,44.03760036], {icon: hotel_icon}).bindPopup('Maiali').addTo(hotel);
+L.marker([32.61414668,44.03591995], {icon: hotel_icon}).bindPopup('Manar').addTo(hotel);
+L.marker([32.60014337,44.03191675], {icon: hotel_icon}).bindPopup('Manarhosein').addTo(hotel);
+L.marker([32.61500943,44.03590629], {icon: hotel_icon}).bindPopup('Mansoor').addTo(hotel);
+L.marker([32.61786665,44.03928738], {icon: hotel_icon}).bindPopup('Maraj Bahrein').addTo(hotel);
+L.marker([32.6156317,44.03413335], {icon: hotel_icon}).bindPopup('Mashala').addTo(hotel);
+L.marker([32.62409046,44.04230135], {icon: hotel_icon}).bindPopup('Meisam').addTo(hotel);
+L.marker([32.61662093,44.04211594], {icon: hotel_icon}).bindPopup('Menhal').addTo(hotel);
+L.marker([32.61577729,44.02104861], {icon: hotel_icon}).bindPopup('Mohje').addTo(hotel);
+L.marker([32.62481558,44.04453697], {icon: hotel_icon}).bindPopup('Mojama Janatal').addTo(hotel);
+L.marker([32.61396931,44.03600503], {icon: hotel_icon}).bindPopup('Moslem Ebn Agh').addTo(hotel);
+L.marker([32.61147444,44.0302169], {icon: hotel_icon}).bindPopup('Nabahayat').addTo(hotel);
+L.marker([32.62159551,44.04074835], {icon: hotel_icon}).bindPopup('Nahr Jane').addTo(hotel);
+L.marker([32.61214801,44.03641809], {icon: hotel_icon}).bindPopup('Noor Badie').addTo(hotel);
+L.marker([32.61548392,44.03503491], {icon: hotel_icon}).bindPopup('Noor Bareka').addTo(hotel);
+L.marker([32.61569842,44.03888262], {icon: hotel_icon}).bindPopup('Noor Haramein').addTo(hotel);
+L.marker([32.62016321,44.0336524], {icon: hotel_icon}).bindPopup('Noor Mohamad').addTo(hotel);
+L.marker([32.61529265,44.0349013], {icon: hotel_icon}).bindPopup('Noorbaake').addTo(hotel);
+L.marker([32.61349582,44.02020413], {icon: hotel_icon}).bindPopup('Oladrasool').addTo(hotel);
+L.marker([32.61767873,44.03681128], {icon: hotel_icon}).bindPopup('Rasool').addTo(hotel);
+L.marker([32.61776858,44.02921979], {icon: hotel_icon}).bindPopup('Rayat').addTo(hotel);
+L.marker([32.61274313,44.03160553], {icon: hotel_icon}).bindPopup('Raye').addTo(hotel);
+L.marker([32.61958435,44.03967597], {icon: hotel_icon}).bindPopup('Retaj').addTo(hotel);
+L.marker([32.6135612,44.02862887], {icon: hotel_icon}).bindPopup('Rjihane Rasul').addTo(hotel);
+L.marker([32.6215277,44.03912486], {icon: hotel_icon}).bindPopup('Rokn Htim').addTo(hotel);
+L.marker([32.62356467,44.04224636], {icon: hotel_icon}).bindPopup('Roknbostan').addTo(hotel);
+L.marker([32.61448204,44.03203025], {icon: hotel_icon}).bindPopup('roze Kheirat').addTo(hotel);
+L.marker([32.61734345,44.04155754], {icon: hotel_icon}).bindPopup('Safar').addTo(hotel);
+L.marker([32.61775517,44.03957186], {icon: hotel_icon}).bindPopup('Safine').addTo(hotel);
+L.marker([32.61520833,44.0359311], {icon: hotel_icon}).bindPopup('Safir Hosein$').addTo(hotel);
+L.marker([32.62065941,44.03223527], {icon: hotel_icon}).bindPopup('Safir Karbala').addTo(hotel);
+L.marker([32.61869445,44.03590092], {icon: hotel_icon}).bindPopup('Safirhoja').addTo(hotel);
+L.marker([32.61418892,44.03329181], {icon: hotel_icon}).bindPopup('Saghalein').addTo(hotel);
+L.marker([32.61809472,44.03716039], {icon: hotel_icon}).bindPopup('Saghi 2').addTo(hotel);
+L.marker([32.6219198,44.03226309], {icon: hotel_icon}).bindPopup('Sare').addTo(hotel);
+L.marker([32.62196749,44.03224834], {icon: hotel_icon}).bindPopup('Sareh').addTo(hotel);
+L.marker([32.62020696,44.03393352], {icon: hotel_icon}).bindPopup('Sedre Montaha').addTo(hotel);
+L.marker([32.62028541,44.04258038], {icon: hotel_icon}).bindPopup('Shafatol Hosen').addTo(hotel);
+L.marker([32.61908831,44.04037066], {icon: hotel_icon}).bindPopup('Shargh Osat').addTo(hotel);
+L.marker([32.61733674,44.03369933], {icon: hotel_icon}).bindPopup('Sharghe').addTo(hotel);
+L.marker([32.61874951,44.03756859], {icon: hotel_icon}).bindPopup('Shati Forat').addTo(hotel);
+L.marker([32.61642119,44.02956747], {icon: hotel_icon}).bindPopup('Tabarak Rahman').addTo(hotel);
+L.marker([32.61911731,44.03776657], {icon: hotel_icon}).bindPopup('Tofuf').addTo(hotel);
+L.marker([32.6190433,44.04202826], {icon: hotel_icon}).bindPopup('Toras').addTo(hotel);
+L.marker([32.61078042,44.03306114], {icon: hotel_icon}).bindPopup('Vafa Abas').addTo(hotel);
+L.marker([32.61686811,44.04001895], {icon: hotel_icon}).bindPopup('Vahe Khairat').addTo(hotel);
+L.marker([32.6246109,44.03269434], {icon: hotel_icon}).bindPopup('Vali').addTo(hotel);
+L.marker([32.61924908,44.04233378], {icon: hotel_icon}).bindPopup('Valiasr').addTo(hotel);
+L.marker([32.62020134,44.03732501], {icon: hotel_icon}).bindPopup('Valid').addTo(hotel);
+L.marker([32.61231582,44.04235072], {icon: hotel_icon}).bindPopup('Yanabie Karbal').addTo(hotel);
+L.marker([32.61079031,44.02951274], {icon: hotel_icon}).bindPopup('Yasamin').addTo(hotel);
+L.marker([32.62093518,44.03210166], {icon: hotel_icon}).bindPopup('Z Mousavi').addTo(hotel);
+L.marker([32.6156835,44.03610636], {icon: hotel_icon}).bindPopup('Zaer Abolfazl').addTo(hotel);
+L.marker([32.61306172,44.03553262], {icon: hotel_icon}).bindPopup('Zaer Hosein').addTo(hotel);
+L.marker([32.62132913,44.03979499], {icon: hotel_icon}).bindPopup('Zafaf').addTo(hotel);
+L.marker([32.61296994,44.03690281], {icon: hotel_icon}).bindPopup('Zamzam').addTo(hotel);
+L.marker([32.61255403,44.03420493], {icon: hotel_icon}).bindPopup('Zomorod').addTo(hotel);
+L.marker([32.61386245,44.03326515], {icon: hotel_icon}).bindPopup('Zouf Amir').addTo(hotel);
+L.marker([32.62091087,44.0343185], {icon: hotel_icon}).bindPopup('Zouof Om Banin').addTo(hotel);
+L.marker([32.63270555,44.04349753], {icon: hotel_icon}).bindPopup('Zoyof Bagher').addTo(hotel);
+L.marker([32.6038589,44.02179049], {icon: hotel_icon}).bindPopup('Zoyof Hosein').addTo(hotel);
+L.marker([32.61574293,44.03615909], {icon: hotel_icon}).bindPopup('Zoyof Zahra').addTo(hotel);
+L.marker([32.6104754,44.03110044], {icon: hotel_icon}).bindPopup('Zoyoof Rahman').addTo(hotel);
+////////////////////////////////////////////////////////////////////////////////////////////////		
+////////////////////////////////////////////////////////////////////////////////////////////////
+//-------------/////////////////////////////////////////////////////////////////////////////////
+		
+		
+		
+		
+		
+		
+		
+	
+//////////////////////////////////////////////////
+//////favorite////////////////////////////////////
+	if(window.localStorage.getItem('favorites_lat') == null)
+	{
+		window.localStorage.setItem('favorites_lat',JSON.stringify([""]));
+		window.localStorage.setItem('favorites_long',JSON.stringify([""]));
+		window.localStorage.setItem('favorites_title',JSON.stringify([""]));
+	}
+	else
+	{
+		temp_array_lat	 = JSON.parse(window.localStorage.getItem('favorites_lat'));
+		temp_array_long	 = JSON.parse(window.localStorage.getItem('favorites_long'));
+		temp_array_title = JSON.parse(window.localStorage.getItem('favorites_title'));
+		$.each(temp_array_lat, function(i, val) {
+			//alert(i + ":" + val);
+			//alert(temp_array_long[i]);
+			L.marker([temp_array_lat[i],temp_array_long[i]], {icon: favorites_icon}).bindPopup(temp_array_title[i]).addTo(favorites);
+		});
+	}
+//////favorite////////////////////////////////////
+//////////////////////////////////////////////////
+
+	var map = L.map('map', {
+		center: [32.0192,44.3298],
+		zoom: 13,
+		maxZoom: 16,//17
+		minZoom:1,
+	});
+	//map.locate({setView: true, maxZoom: 16});
+	//map.locate();
+
+/*
+	L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {
+		maxZoom: 17,
+	}).addTo(map);
+*/
+/*
+	L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {
+		maxZoom: 21,
+	}).addTo(map);
+*/
+/*
+	L.tileLayer('images/mapquest/{z}/{x}/{y}.jpg', {
+		maxZoom: 17,
+	}).addTo(map);
+*/
+/*
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+		maxZoom: 18,//17
+		attribution: '',
+		id: 'mapbox.streets'
+	}).addTo(map);
+*/	
+	var googleLayer = new L.Google('ROADMAP');
+	map.addLayer(googleLayer);
+	
+	map.addControl( new L.Control.Search({
+		container: 'findbox',
+		layer: ziyarati,
+		initial: false,
+		collapsed: false
+	}) );
+	
+	//inizialize search control
+
+	var baseLayers = {};
+
+	var overlays = {
+		"نقاط مورد علاقه": favorites,
+		"مکان های زیارتی": ziyarati,
+		//"بیمارستان ها": bimarestan,
+		"مراکز درمانی": darmani,
+		//"موکب ، حسینیه": mukeb,//0000000000000000000000000000000000000000
+		"موکب های در اختیار ایرانی ها": mukeb_irani,
+		"ایست و بازرسی": bazresi,
+		"هتل ها": hotel,
+		"عمود ها": amud,
+		"حمل و نقل": transport,
+		"محل های گمشدگان":lost,
+		"کنسولگری":consoles,
+		"خدمات اداری به زائرین":edari,
+		"wifi":wifi,
+	};
+
+	L.control.layers(baseLayers, overlays).addTo(map);
+
+	/*
+	function onLocationFound(e) {
+		var radius = e.accuracy / 2;
+		L.marker(e.latlng, {icon: user_location_icon}).addTo(map).bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");//.openPopup();
+		L.circle(e.latlng, radius*4).addTo(map);
+	}
+
+	function onLocationError(e) {
+		alert(e.message);
+	}
+
+	map.on('locationfound', onLocationFound);
+	map.on('locationerror', onLocationError);
+	*/
+// END Map ///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+</script>
+<style>
+
+
+.leaflet-control-container .leaflet-top.leaflet-left .leaflet-control-zoom.leaflet-bar.leaflet-control{
+	top:105px;
+	display:none;
+}
+#button{
+	position:fixed;
+	top:10px;
+	left:10px;
+	z-index:999999;
+    background-image: url(maps/js/images/botton.png);
+    width: 65.5px;
+    height: 189.5px;
+    background-size: contain;	
+	background-repeat:no-repeat
+}
+#back{
+    position: absolute;
+    top: 18px;
+    left: -2px;
+    background-image: url(maps/js/images/back.png);
+    width: 70px;
+    height: 30px;
+    background-size: 10px 17.5px;
+    background-repeat: no-repeat;
+    background-position: center center;
+	}
+#add_to_favorites{
+    position: absolute;
+    top: 63px;
+    left: -1px;
+    background-image: url(maps/js/images/favorite.png);
+    width: 70px;
+    height: 30px;
+    background-size: 22.5px 21px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#share_location{
+	position: absolute;
+    top: 112px;
+    left: -2px;
+    background-image: url(maps/js/images/location.png);
+    width: 70px;
+    height: 30px;
+    background-size: 29px 20.5px;
+    background-repeat: no-repeat;
+    background-position: center center;
+	}
+.leaflet-control-layers-toggle {
+    width: 50px;
+    background-size: 50px 50px;
+    height: 50px;
+}
+.leaflet-control-layers {
+    box-shadow: none;
+    border-radius: 0;
+	background-color:transparent;
+}
+.leaflet-control-layers.leaflet-control.leaflet-control-layers-expanded {
+    background-color: #eeeeee;
+    background-image: url(maps/js/images/list_top_bg.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    padding-top: 55px;
+}
+</style>
+</body>
+</html>
