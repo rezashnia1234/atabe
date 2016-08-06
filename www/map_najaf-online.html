@@ -11,10 +11,7 @@
 <script src="js/back_btn.js"></script>
 <script src="maps/js/leaflet.1.0.js"></script>
 <script src="maps/js/leaflet-search.min.js"></script> 
-<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
-<script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script>
-	
-	
+
 <link rel="stylesheet" href="maps/js/leaflet.css" />
 <link rel="stylesheet" href="maps/js/leaflet-search.css" />
 <link rel="stylesheet" href="maps/js/style.css" />
@@ -1075,15 +1072,13 @@ L.marker([32.6104754,44.03110044], {icon: hotel_icon}).bindPopup('Zoyoof Rahman'
 		maxZoom: 17,
 	}).addTo(map);
 */
-/*
+/**/
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
 		maxZoom: 18,//17
 		attribution: '',
 		id: 'mapbox.streets'
 	}).addTo(map);
-*/	
-	var googleLayer = new L.Google('ROADMAP');
-	map.addLayer(googleLayer);
+
 	
 	map.addControl( new L.Control.Search({
 		container: 'findbox',
