@@ -14,6 +14,7 @@
 <!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
 	<script type="text/javascript" src="js/iscroll.js"></script>
 	<script>
+		var does_we_have_intenet = true;
 		function init() {
 			var pano_url;
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
@@ -46,7 +47,9 @@
 
 		function onDeviceReady() {
 			var networkState = navigator.connection.type;
-
+			if (networkState == Connection.NONE) {
+				does_we_have_intenet = false;
+			}
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
@@ -108,9 +111,39 @@
 			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 		}
 		$(document).ready(function(){
-				//pano_url = "file://" + window.localStorage.getItem('pano_localPath') + "/panos/vtour-locale.html";
+			$(".goto").click(function(){
+				if($(this).hasClass("internet"))
+					return false;
+				window.location.href = $(this).attr("onclick3");
+				//(need_internet()) ? window.location.href = 'live.html' : need_internet_alert();
+			});
+			$(".goto.internet").click(function(e){
+				if(need_internet())
+				{
+					window.location.href = $(this).attr("onclick3")
+				}
+				else
+				{
+					need_internet_alert();
+				}
+			});
 		});
 		
+		function need_internet(){
+			if(does_we_have_intenet)
+				return true;
+			else
+				return false;
+		};
+		function need_internet_alert(){
+			navigator.notification.alert(
+				'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+				alertDismissed,         // callback
+				'اخطار',            // title
+				'تائید'                  // buttonName
+			);
+			function alertDismissed(){};
+		};
 	</script>	
 
 		
@@ -134,17 +167,17 @@
 			<div class="smm_menu">
 				<div id="smm_wrapper">
 					<ul class="retina">
-						<li onclick2="window.location.href = 'test.html'" title="news" class="internet"></li>
-						<li onclick2="window.location.href = 'test.html'" title="gallery" class="internet"></li>
-						<li onclick="window.location.href = 'live.html'" title="live broadcast" class="internet"></li>
-						<li onclick2="window.location.href = 'vtour-locale.html'" title="video" class="internet"></li>
-						<li onclick="window.location.href = 'radio.html'" title="radio" class="internet"></li>
-						<li onclick="window.location.href = 'map_najaf.html'" title="map" ></li>
-						<li onclick2="window.location.href = 'index.html'" title="adab al-ziyarat" ></li>
-						<li onclick="window.location.href = 'salat.html'" title="PrayTimes" ></li>
-						<li onclick="window.location.href = 'ziarat.html'" title="naeb al-ziyarat" class="internet"></li>
-						<li onclick="window.location.href = 'vtour-demo-day.html'" title="vtour" ></li>
-						<li onclick2="window.location.href = 'index.html'" title="majalat" class="internet"></li>
+						<li onclick3="index.html" title="news" class="goto internet"></li>
+						<li onclick3="index.html" title="gallery" class="goto internet"></li>
+						<li onclick3="live.html" title="live broadcast" class="goto internet"></li>
+						<li onclick3="index.html" title="video" class="goto internet"></li>
+						<li onclick3="radio.html" title="radio" class="goto internet"></li>
+						<li onclick3="map_najaf.html" title="map" class="goto" ></li>
+						<li onclick3="index.html" title="adab al-ziyarat" class="goto" ></li>
+						<li onclick3="salat.html" title="PrayTimes" class="goto" ></li>
+						<li onclick3="ziarat.html" title="naeb al-ziyarat" class="goto internet"></li>
+						<li onclick3="vtour-demo-day.html" title="vtour" class="goto" ></li>
+						<li onclick3="index.html" title="majalat" class="goto internet"></li>
 						<li style="background-color: transparent ! important;"></li>
 					</ul>
 				</div>
