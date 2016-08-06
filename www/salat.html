@@ -99,9 +99,9 @@
 					}
 					return sign;
 				}
-				
+/*				
 				var timezoon = new Date().getTimezone();
-				
+
 				function set_salat_time(x=31.995,y=44.314){
 						console.log('77777777');
 						var list = ['Fajr', 'Sunrise', 'Dhuhr', 'sunset', 'Maghrib', 'Midnight'];
@@ -133,25 +133,25 @@
 								$('.smm_salat_content ul li').eq(i).find('span:last-child').html(times[list[i].toLowerCase()]);
 							}
 				}
-				
+*/
 				//set salat time for najaf
 				console.log('5555555');
-				set_salat_time();
+/*				set_salat_time();*/
 				console.log('6666666666');
 				$('#najaf').click(function(){
 					$('.smm_select_city > div').removeClass('active');
 					$(this).addClass('active');
-					set_salat_time(31.995,44.314);
+					//set_salat_time(31.995,44.314);
 				});
 				$('#karbala').click(function(){
 					$('.smm_select_city > div').removeClass('active');
 					$(this).addClass('active');
-					set_salat_time(32.6068,44.0104);
+					//set_salat_time(32.6068,44.0104);
 				});
 				$('#kazemain').click(function(){
 					$('.smm_select_city > div').removeClass('active');
 					$(this).addClass('active');
-					set_salat_time(33.3611,44.3142);
+					//set_salat_time(33.3611,44.3142);
 				});
 				
 				
@@ -172,9 +172,6 @@
 		}
 		
 
-		$(document).ready(function(){
-
-		});
 	</script>	
 
 		
