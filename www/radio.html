@@ -41,6 +41,7 @@
 
 
 		function onDeviceReady() {
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onDeviceReady()');
 
 			
 			var networkState = navigator.connection.type;
@@ -51,6 +52,7 @@
 			//}
 			
 			setTimeout(function(){
+				console.log('setTimeout...');
 				file = "sound.mp3";
 				if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 					file = "/android_asset/www/" + file;
@@ -64,6 +66,7 @@
 				audio.seekTo(0);
 				
 			}, 300);
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    finish onDeviceReady()');
 		}
 
 			
