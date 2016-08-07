@@ -47,10 +47,13 @@
 			var networkState = navigator.connection.type;
 
 			FastClick.attach(document.body);
-			//if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-			//	document.addEventListener("backbutton", go_back, false);
-			//}
-			
+			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+				document.addEventListener("backbutton", radio_goback, false);
+			}
+			function radio_goback() {
+				stop_my_radio();
+				go_back();
+			}
 			setTimeout(function(){
 				file = "sound.mp3";
 				file = "http://37.236.145.99/radio.mp3";
@@ -166,7 +169,7 @@
 		</div>
 		<div class="smm_content">
 			<div class="smm_radio_title retina">
-				<a href="index.html">
+				<a href="index.html" onclick="stop_my_radio()">
 					<span class="smm_ziarat_back"></span>
 				</a>
 			</div>

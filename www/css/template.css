@@ -565,8 +565,8 @@ li .smm_midnight {
     margin-top: 2vw;
     font-weight: normal;
     font-size: 3vw;
-    margin-bottom: 15vw;
     padding-bottom: 15vw;
+    margin-bottom: 15vw;
 }
 }
 /*************** adab title **********/
@@ -631,6 +631,48 @@ li .smm_midnight {
     margin-top: 2vw;
     font-weight: normalß;
     font-size: 3vw;
+}
+/********** pictures ************/
+.mh_visualizations_title {
+    width: 90%;
+    height: 14vw;
+    background-image: url('../images/low/visualizations_title.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+    vertical-align: middle;
+}
+.mh_pictures_title {
+    width: 90%;
+    height: 14vw;
+    background-image: url('../images/low/pictures_title.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+    vertical-align: middle;
+}
+#smm_visualizations_wrapper{
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 1vw;
+    overflow: auto;
+    text-align: right;
+}
+.smm_visualizations_content{
+	top: 30vw;
+    bottom: 5%;
+    position: inherit;
+    left: 10%;
+    right: 10%;
+}
+.smm_visualizations_content ul li iframe{
+	width: 100%;
+    height: 50vw;
+    margin-bottom: 1vw;
 }
 /****** preloader **************/
 .windows8 {
