@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
+
+    <title>بسم الله الرحمن الرحيم</title>
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+
+	<script src="js/jquery-2.2.2.min.js"></script>
+    <script src="phonegap.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="js/PrayTimes.js"></script>
+<!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script>
+		function init() {		
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+			document.addEventListener("deviceready", onDeviceReady, false);
+			/**** added by mahdi *********/
+			if(isRetina())
+			{
+				$('.retina').each( function(i) {
+					var back = $(this).css('background-image');
+					back = back.replace("/low", "/high");
+					$(this).css('background-image',back);
+				});
+				$('.retina:before').each( function(i) {
+					var back = $(this).css('background-image');
+					back = back.replace("/low", "/high");
+					$(this).css('background-image',back);
+				});
+			}
+			var isAlreadyLoading = 0, jump = false;
+ 			var myScroll = new iScroll('smm_adab_wrapper', { hideScrollbar: true, bounce : "enable",useTransition: true });
+ 			linkable();
+			/*****************************/
+		}
+
+		function linkable(){
+			$('#smm_adab_wrapper ul li').unbind( "click" );
+			$('#smm_adab_wrapper ul li').click(function(){
+ 				var id = $(this)[0].id;
+ 				window.location.href = id+'.html';
+ 			});
+		}
+		function onDeviceReady() {
+		
+			var networkState = navigator.connection.type;
+
+			FastClick.attach(document.body);
+// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+// 				document.addEventListener("backbutton", go_back_index, false);
+// 			}
+			
+			
+			
+			
+			
+			
+			
+		}
+
+		$(window).load(function() {		
+			setTimeout(function(){
+				$(".mypreload").html("");
+			}, 300);
+		
+		});
+
+		function go_back_index() {
+			navigator.notification.confirm(
+				'آيا تمايل به خروج از برنامه را داريد؟',	// message
+				onExitConfirm,								// callback
+				'توجه',										// title
+				['بله','خير']								// buttonName
+			);
+		}
+		function onExitConfirm(buttonIndex) {
+			if(buttonIndex==1)
+			{
+				navigator.app.exitApp();
+				/*
+				if (navigator && navigator.app) {
+					navigator.app.exitApp();
+				} 
+				else {
+					if (navigator && navigator.device) {
+						navigator.device.exitApp();
+					}
+				}
+				*/
+			}
+			else
+			{
+				
+			}
+		}
+		function isHighDensity(){
+			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches)) || (window.devicePixelRatio && window.devicePixelRatio > 1.3));
+		}
+		function isRetina(){
+			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+		}
+		$(document).ready(function(){
+			
+		});
+		
+	</script>	
+
+		
+		
+		
+<style>
+
+
+</style>	
+</head>
+<body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body" class="smm_ziarat_body retina">
+	<div class="container " id="container" >
+			<div id="ajax" class="mypreload">
+				<div style="z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: #1e92c4; opacity: 1; cursor: default; position: fixed;overflow:visible;" class="blockUI blockOverlay"></div>
+				<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
+				<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
+			</div>
+		<div class="smm_content">
+			<div class="smm_adab_title retina">
+				<a href="adab.html">
+					<span class="smm_ziarat_back"></span>
+				</a>
+			</div>
+			<div class="smm_adab_content">
+				<div id="smm_adab_wrapper" style="position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 1vw;
+    overflow: auto;
+    text-align: right;">
+					<div>
+						<p class="smm_adab_subject">
+							  الباب الأول
+						</p>
+						<div class="smm_adab_text" style="margin-bottom: 10vw;padding-bottom: 10vw;">
+                        
+                        
+                      
+1- فضل زيارة أمير المؤمنين <br/>
+أ- آثار زيارة أمير المؤمنين في الدنيا  <br/>
+1- عن أبي عبد الله الصادق قال: (نحن نقول:بظهر الكوفة قبر لا يلوذ به ذو عاهة إلّا شفاه الله). <br/>
+2- قال الصادق : (إن الله عزّ إسمه عرض ولايتنا على السماوات والأرض والجبال والأمصار، فلم يقبلها قبول أهل الكوفة، وإنّ إلى جانبهم لقبراً، ما لقاه مكروب إلاّ نفّس الله كربته، وأجاب دعوته، وقلبه إلى أهله مسروراً). <br/>
+3- عن أبي عبد الله   : (إن إلى جانب كوفان قبرا ما أتاه مكروب قط فصلى عنده ركعتين أو أربع ركعات إلا نَفَّس الله كربته وقضى حاجته، قال: قلت: قبر الحسين بن علي؟ فقال لي برأسه: لا، فقلت: قبر أمير المؤمنين ؟ فقال برأسه: نعم). <br/>
+
+ب- آثار زيارة أمير المؤمنين  في الآخرة <br/>
+1- قال رسول الله : (من زار عليّاً بعد وفاته فله الجنة). <br/>
+2- قال رسول الله   لعليّ : (ومن زار قبوركم عدل ذلك له ثواب سبعين حجّة بعد حجّة الإسلام، وخرج من ذنوبه حتّى يرجع من زيارتكم كيوم ولدته أمّه. فأبشر وبشّر أولياءك ومحبيك من النعيم وقرّة العين بما لا عين رأت ولا أذن سمعت، ولا خطر على قلب بشر). <br/>
+3- قال رسول الله : (يا علي من زارني في حياتي أو بعد موتي أو زارك في حياتك أو بعد موتك أو زار ابنيك في حياتهما أو بعد موتهما ضمنت له يوم القيامة أن أُخلّصه من أهوالها وشدائدها حتى أصيّره معي في درجتي). <br/>
+4- قيل لأبي الحسن الرضا : (أيما أفضل، زيارة قبر أمير المؤمنين، أو زيارة الحسين ؟ قال: إن الحسين قتل مكروباً، فحقاً على الله - جل ذكره - أن لا يأتيه مكروب إلاّ فرّج الله كربه. وفضل زيارة أمير المؤمنين على زيارة قبر الحسين كفضل أمير المؤمنين على الحسين).
+<p class="smm_adab_subject">
+الباب الثاني
+</p>
+في آداب الزيارة <br/>
+1 ـ الغُسل قبل الخروج لسفر الزّيارة. <br/>
+2 ـ أن يتجنّب في الطّريق التكلُّم باللّغو والخصام والجدال. <br/>
+3 ـ أن يلبس ثياباً طاهرة نظيفة جديدة ويحسن أن تكون بيضاء.  <br/>
+4 ـ أن يقصِّر خُطاه إذا خرج إلى الرّوضة المقدّسة، وأن يسير وعليه السكينة والوقار، وأن يكون خاضعاً خاشعاً، وأن يطأطِئ رأسه فلا يلتفت إلى الأعلى ولا إلى جوانبه. <br/>
+5 ـ أن يتطيّب بشي‏ء من الطّيب فيما عدا زيارة الحسين. <br/>
+6 ـ أن يشغل لسانه وهو يمضي إلى الحرم المطهّر بالتكبير والتحميد والتّسبيح والتّهليل والتّمجيد، ويعطّر فاه بالصّلاة على محمّد وآله عليهم السلام. <br/>
+7 ـ أن يقف على باب الحرم الشّريف ويستأذن ويجتهد لتحصيل الرّقّة والخضُوع والانكسار والتفكّر في عظمة صاحب ذلك المرقد المنوّر وجلاله، وأنّه يرى مقامَهُ ويسمع كلامَهُ ويردّ سلامَهُ كما يشهد على ذلك كلّه عندما يقرأ الاستئذان. <br/>
+8 ـ أن يقدّم للدّخول رجلَه اليُمنى ويقدِّم للخروج رجله اليُسرى كما يصنع عند دُخول المساجد والخروج منها. <br/>
+9ـ أن يقف للزّيارة مستقبلاً القبر مُستدبِراً القبلة وهذا الأدب ممّا يخصّ زيارة المعصوم على الظّاهر، فإذا فرغ من الزّيارة فليضع خدّه الأيمن على الضّريح ويدعو الله بتضرُّع ثمّ ليضع الخدّ الأيسر ويدعو الله بحقّ صاحب القبر أن يجعله من أهل شفاعته ويبالغ في الدّعاء والإلحاح ثمّ يمضي إلى جانب الرّأس فيقف مستقبل القبلة فيدعو الله  تعالى. <br/>
+10 ـ أن يزور وهُو قائم على قدميه إلا إذا كان له عُذر من ضعف أو وجع أو غير ذلك من الأعذار. <br/>
+11 ـ أن يكبّر إذا شاهد القبر المطهّر قبل الشّروع في الزّيارة، وفي رواية أنّ من كبّر أمام الإمام وقال: لا اِلهَ اِلاَّ الله وَحْدَهُ لا شَريكَ لَهُ كتب له رضوان  الله الأكبر.
+12 ـ ترك اللّغو وما لا ينبغي من الكلام وترك الاشتغال بالتكلّم في أُمور الدّنيا فهو مذموم قبيح في كلّ زمان ومكان وهو مانع للرزق ومجلبة للقساوة لاسيّما في هذه البقاع الطاهرة والقباب السّامية التي أخبر الله تعالى بجلالهـا وعظمتهـا في ســورة النـور في بُيُوتٍ أَذِنَ اللهُ أَنْ تُرْفَعَ الآية. <br/>
+13 ـ أن لا يرفـع صوته بما يزور به، قال  الله تعالى: يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَرْفَعُوا أَصْوَاتَكُمْ فَوْقَ صَوْتِ النَّبِيِّ وَلَا تَجْهَرُوا لَهُ بِالْقَوْلِ كَجَهْرِ بَعْضِكُمْ لِبَعْضٍ أَن تَحْبَـطَ أَعْمَالُكُـمْ وَأَنتُـمْ لَا تَشْعُـرُونَ وأمير المؤمنين هو نفس رسول الله   بدليل قوله تعالى في آية المباهلة: فَمَنْ حَاجَّكَ فِيهِ مِن بَعْدِ مَا جَاءكَ مِنَ الْعِلْمِ فَقُلْ تَعَالَوْاْ نَدْعُ أَبْنَاءنَا وَأَبْنَاءكُمْ وَنِسَاءَنَا وَنِسَاءَكُمْ وَأَنفُسَنَا وأَنفُسَكُمْ ثُمَّ نَبْتَهِلْ فَنَجْعَل لَّعْنَةَ الله عَلَى الْكَاذِبِينَ. <br/>
+14 ـ أن يودّع الإمام بالمأثور أو بغيره إذا أراد الخروج من البلد. <br/>
+15 ـ أن يتوبَ إلى الله ويستغفر مِن ذنوبه، وأن يجعل أعماله وأقواله بعد الزّيارة خيراً منها قبلها. <br/>
+16 ـ ينبغي عند ازدحام الزّائرين للسّابقين إلى الضّريح أن يخفّفوا زيارتهم وينصرفوا ليفُوزَ غيرهُم بالدُّنوّ من الضّريح الطّاهر كما كانوا هم من الفائزين.
+
+                        
+                        
+                        
+                        
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+	</div>
+</body>
+</html>
