@@ -81,7 +81,7 @@
 		$(window).load(function() {		
 			setTimeout(function(){
 				$(".mypreload").html("");
-			}, 3000);
+			}, 6000);
 		});
 
 
@@ -99,7 +99,6 @@
 		}
 		$(document).ready(function(){
 			$(".hm_radio_bg").click(function(){
-				$(this).toggleClass("playing");
 				if($(this).hasClass("playing"))
 				{
 					stop_my_radio();
@@ -124,6 +123,11 @@
 						$(this).css('background-image','url("images/low/radio_bg.png")');
 					}
 				}
+				$(this).toggleClass("playing");
+			});
+			$(".go_back_stop").click(function(){
+				stop_my_radio();
+				window.location.href = 'index.html';
 			});
 		});
 	</script>	
@@ -169,7 +173,7 @@
 		</div>
 		<div class="smm_content">
 			<div class="smm_radio_title retina">
-				<a href="#" onclick="stop_my_radio();window.location.href = index.html">
+				<a href="#" class="go_back_stop">
 					<span class="smm_ziarat_back"></span>
 				</a>
 			</div>
