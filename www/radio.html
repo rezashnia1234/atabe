@@ -67,6 +67,7 @@
 					console.log("playing");
 				}, function(error){ // error callback
 					console.log("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
+					alert("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
 				});
 				audio.play({ playAudioWhenScreenIsLocked : true });
 				//audio.seekTo(0);
