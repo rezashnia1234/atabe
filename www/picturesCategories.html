@@ -20,8 +20,7 @@
 <script src="phonegap.js"></script>
 <script src="js/fastclick.js"></script>
 <script src="js/hammer.min.js"></script>
-<script src="js/PrayTimes.js"></script>
-<!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
+<script src="js/back_btn.js"></script>
 <script type="text/javascript" src="js/iscroll.js"></script>
 <script>
 	function init() {
@@ -113,30 +112,6 @@
 
 	});
 
-	function go_back_index() {
-		navigator.notification.confirm('آيا تمايل به خروج از برنامه را داريد؟', // message
-		onExitConfirm, // callback
-		'توجه', // title
-		[ 'بله', 'خير' ] // buttonName
-		);
-	}
-	function onExitConfirm(buttonIndex) {
-		if (buttonIndex == 1) {
-			navigator.app.exitApp();
-			/*
-			if (navigator && navigator.app) {
-				navigator.app.exitApp();
-			} 
-			else {
-				if (navigator && navigator.device) {
-					navigator.device.exitApp();
-				}
-			}
-			 */
-		} else {
-
-		}
-	}
 	function isHighDensity() {
 		return ((window.matchMedia && (window
 				.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window
