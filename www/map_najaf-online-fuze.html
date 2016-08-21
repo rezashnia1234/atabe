@@ -281,7 +281,15 @@
 	});
 </script>
 <style>
-
+* {
+  -webkit-touch-callout: text; /* iOS Safari */
+  -webkit-user-select: text;   /* Chrome/Safari/Opera */
+  -khtml-user-select: text;    /* Konqueror */
+  -moz-user-select: text;      /* Firefox */
+  -ms-user-select: text;       /* Internet Explorer/Edge */
+  user-select: text;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
 .leaflet-bar .leaflet-routing-alt,.leaflet-bar .leaflet-routing-alt *{direction:rtl;text-align:right;}
 h3.route_time {
   direction: ltr !important;
@@ -414,7 +422,6 @@ input[type=checkbox].leaflet-control-layers-selector {
     display: none !important;
 }
 .leaflet-control-search .search-cancel {
-  background: rgba(0, 0, 0, 0) url("../images/search-icon.png") no-repeat scroll 0 -46px;
   height: 44px;
   margin: 3px 0;
   opacity: 0;
@@ -422,6 +429,8 @@ input[type=checkbox].leaflet-control-layers-selector {
   left: 49px;
   right: auto;
   width: 44px;
+  top: 10px;
+  opacity:1;
 }
 .leaflet-control-search .search-tooltip{
 	max-width:auto;
@@ -485,6 +494,11 @@ input[type=checkbox].leaflet-control-layers-selector {
 }
 .leaflet-top.leaflet-right {
     z-index: 998;
+}
+.leaflet-bottom.leaflet-left {
+  bottom: 0;
+  left: 0;
+  position: fixed;
 }
 </style>
 
