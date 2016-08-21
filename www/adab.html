@@ -35,6 +35,11 @@
 					$(this).css('background-image',back);
 				});
 			}
+			var mc = new Hammer(document.body);
+			mc.on("swiperight", function(ev) {
+				goto_home();
+				//if(ev.velocity>0.8){console.log(ev.type +" gesture detected.");}
+			});
 			var isAlreadyLoading = 0, jump = false;
  			var myScroll = new iScroll('smm_adab_wrapper', { hideScrollbar: true, bounce : "enable",useTransition: true });
  			linkable();

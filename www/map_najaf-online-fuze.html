@@ -83,7 +83,7 @@
 		maxZoom: 16,//17
 		minZoom:1,
 		center: new L.latLng(32.0192,44.3298),
-		layers: offline_map,//L.tileLayer('maps/mapquest/{z}/{x}/{y}.png'),
+		layers: online_map,//L.tileLayer('maps/mapquest/{z}/{x}/{y}.png'),
 		zoomControl:false
 	});
 		
@@ -196,7 +196,7 @@
 
 			container.onclick = function(){
 				//console.log('buttonClicked');
-				window.location.href = 'index.html';
+				window.location.href = 'map.html';
 			}
 
 			return container;

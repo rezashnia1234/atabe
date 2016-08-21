@@ -36,6 +36,10 @@
 					$(this).css('background-image',back);
 				});
 			}
+			var mc = new Hammer(document.body);
+			mc.on("swiperight", function(ev) {
+				go_back();
+			});
 
 		}
 

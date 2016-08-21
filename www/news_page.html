@@ -35,6 +35,10 @@
 					$(this).css('background-image',back);
 				});
 			}
+			var mc = new Hammer(document.body);
+			mc.on("swiperight", function(ev) {
+				go_back();
+			});
 			var isAlreadyLoading = 0, jump = false;
  			var myScroll = new iScroll('smm_news_wrapper', { hideScrollbar: true, bounce : "enable",useTransition: true });
  			var nid = getUrlParameter('id');

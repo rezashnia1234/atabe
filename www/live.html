@@ -36,6 +36,11 @@
 					$(this).css('background-image',back);
 				});
 			}
+			var mc = new Hammer(document.body);
+			mc.on("swiperight", function(ev) {
+				goto_home();
+				//if(ev.velocity>0.8){console.log(ev.type +" gesture detected.");}
+			});
 
 		}
 
