@@ -818,12 +818,12 @@ li.windows8 .wBall {
 }
 .windows8 .wBall .wInnerBall{
 	position: absolute;
-	width: 2vw;
-	height: 2vw;
+	width: 17%;
+	height: 11%;
 	background: #1e92c4;
 	left:0px;
 	top:0px;
-	border-radius: 10px;
+	border-radius: 500px;
 }
 
 .windows8 #wBall_1 {
