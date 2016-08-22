@@ -520,13 +520,27 @@ input[type=checkbox].leaflet-control-layers-selector {
 	background-image:url('maps/images/wifi.png');
 }
 .leaflet-routing-collapse-btn {
-    z-index: 9999;
+    width: 100%;
+    height: 40px;
+    text-align: right;
+    right: 0;
+    max-width: 100px;
+    padding-right: 8px;
+    /* background: red; */
+    z-index: 9999 !important;
 }
+.leaflet-routing-container-hide .leaflet-routing-collapse-btn {
+
+}
+
 .leaflet-control-container .leaflet-routing-container-hide {
   height: 40px !important;
   width: 40px !important;
+  overflow: hidden;
 }
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn {
+  background-position: 1px -1px;
+  background-repeat: no-repeat;
   left: 7px;
 }
 .leaflet-top.leaflet-right {
