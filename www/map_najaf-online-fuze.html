@@ -243,7 +243,7 @@
 			showAlternatives: true,
 			geocoder: L.Control.Geocoder.nominatim(),
 			language: "fa",
-			
+			position:'bottomleft'
 		}).addTo(map);
 		
 	}
@@ -281,7 +281,7 @@
 	});
 </script>
 <style>
-* {
+input {
   -webkit-touch-callout: text; /* iOS Safari */
   -webkit-user-select: text;   /* Chrome/Safari/Opera */
   -khtml-user-select: text;    /* Konqueror */
@@ -312,6 +312,7 @@ div.leaflet-routing-alt  td:nth-child(3n) {
 	max-width: 100%;
 	width: auto !important;
 }
+/*
 .leaflet-routing-container{
   border-radius: 2px;
   max-width: 100%;
@@ -319,6 +320,24 @@ div.leaflet-routing-alt  td:nth-child(3n) {
   top: 57px;
   width: auto !important;
 }
+*/
+.leaflet-routing-container{
+  border-radius: 2px;
+  max-width: 100%;
+  bottom: -25px;
+  width: auto !important;
+  overflow: auto;
+  z-index: 99;
+}
+.leaflet-control-container .leaflet-routing-container-hide{
+	bottom: auto;
+}
+.leaflet-routing-alt, .leaflet-routing-geocoders, .leaflet-routing-error {
+  max-height:auto;
+}
+
+
+
 .leaflet-routing-container {
     margin: 10px 10px 0 17px !important;
     padding-top: 7px !important;
@@ -355,8 +374,8 @@ div.leaflet-control-layers.leaflet-control form.leaflet-control-layers-list {
   background-color: rgba(14, 123, 184, 0.9);
   color: white;
   line-height: 25px;
-  margin-right: -7px;
-  margin-top: 12px;
+  margin-right: -5px;
+  margin-top: 5px;
   padding: 16px 16px 16px 20px;
   border-radius:2px;
 }
@@ -386,12 +405,30 @@ input[type=checkbox].leaflet-control-layers-selector {
 	display: block;
 	height: 43px;
 }
+/*
 .leaflet-top.leaflet-left .leaflet-control.leaflet-control-layers{
 	position: fixed;
 	top:9px;
 	right:19px;
 	z-index:9999;
 	box-shadow: none;
+}
+*/
+.leaflet-top.leaflet-left .leaflet-control.leaflet-control-layers {
+  box-shadow: none;
+  padding-right: 19px;
+  position: fixed;
+  right: 0;
+  top: 9px;
+  z-index: 9999;
+  padding-bottom: 10px;
+}
+.leaflet-control-layers-toggle {
+  background-size: 26px auto;
+  height: 51px;
+  margin-right: -11px;
+  margin-top: -8px;
+  width: 62px;
 }
 .leaflet-top.leaflet-left .leaflet-control.leaflet-control-back_btn{
     border: 0px solid #e8e0d8;
@@ -453,7 +490,7 @@ input[type=checkbox].leaflet-control-layers-selector {
   background-position: right center;
   display: block !important;
   width: 100%;
-  margin-left: -5px;
+  margin-left: -7px;
 }
 .top_left_smcms_btn{
 	position:fixed;
