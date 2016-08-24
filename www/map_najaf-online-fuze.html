@@ -13,13 +13,22 @@
 <link rel="stylesheet" href="maps/js/style.css" />
 </head>
 
-<body style="overflow:hidden;width:100vw;">
-<div id="favorites_btn" class="top_left_smcms_btn" ></div>
-<div id="wifi_btn" class="top_left_smcms_btn" ></div>
-<div id="routing_btn" class="top_left_smcms_btn" ></div>
-<div id="map"></div>
+<body onload="init();">
+	<div id="favorites_btn" class="top_left_smcms_btn" ></div>
+	<div id="wifi_btn" class="top_left_smcms_btn" ></div>
+	<div id="routing_btn" class="top_left_smcms_btn" ></div>
+	<div id="map"></div>
 
-
+	<div class="cd-popup is-visible0" role="alert">
+		<div class="cd-popup-container">
+			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان نقطه جدید" /></p>
+			<ul class="cd-buttons">
+				<li><a href="#" onclick="add_to_favorites();">تاید</a></li>
+				<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
+			</ul>
+			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
 
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="maps/js/leaflet-src.js"></script>
@@ -30,7 +39,31 @@
 <script src="maps/js/fuse.min.js"></script>
 <script src="maps/js/points.json"></script>
 <script>
+	var my_location_gps;
+	new_favorite_marker = "";
+	add_to_favorites_popup = false;
+	
+	function init() {		
+		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+		document.addEventListener("deviceready", onDeviceReady, false);
+		
+		radius = 0;
 
+
+		my_location_marker = L.marker([36.2879,59.6157], {icon: user_location_icon,zIndexOffset: 999}).addTo(map);
+		my_location_circle = L.circle([36.2879,59.6157], radius).addTo(map);
+	}
+	
+	function onDeviceReady() {
+		//FastClick.attach(document.getElementById('button'));
+		/*
+		(function(){
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			setTimeout(arguments.callee, 5000);
+		})();
+		*/
+	}
+	
 	var categories = {
 		101 : {desc: "اماکن المقدسة", icon:"zearati"},/////////////
 		102 : {desc: "الأماكن المفضلة ", icon:"fav"},
@@ -46,7 +79,24 @@
 	};
 	
 	
-	
+		
+	var icon_style_favorites_new = L.Icon.extend({
+		options: {
+			iconSize:     [25, 41], // size of the icon
+			iconAnchor:   [12,41], // point of the icon which will correspond to marker's location
+			popupAnchor:  [0, -41], // point from which the popup should open relative to the iconAnchor
+			shadowSize:   [41, 41],
+			shadowAnchor: [11, 39]
+		}
+	});
+	var icon_style_user_location = L.Icon.extend({
+		options: {
+			iconSize:     [44, 59], // size of the icon
+			iconAnchor:   [22,59], // point of the icon which will correspond to marker's location
+			popupAnchor:  [0, -59] // point from which the popup should open relative to the iconAnchor
+		}
+	});
+	var	user_location_icon	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
 	
 	var setupIcons = function() {
 
@@ -86,8 +136,7 @@
 		layers: online_map,//L.tileLayer('maps/mapquest/{z}/{x}/{y}.png'),
 		zoomControl:false
 	});
-		
-		
+
 
 		
 		
@@ -221,13 +270,8 @@
 		
 	}, 1000);
 	
-	/*
-	centered_marker = L.marker(map.getCenter() ).addTo(map);
-	map.on('move', function () {
-		centered_marker.setLatLng(map.getCenter());
-		//console.log(map.getCenter());
-	});
-	*/
+
+	
 	
 	
 	function route_function(point1th_lat,point1th_long,point2th_lat,point2th_long) {
@@ -266,7 +310,42 @@
 		$("#routing_btn").click(function(){
 			route_function(31.99564047,44.31262563,32.6171,44.0362);
 		});
+		
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+		function add_to_favorites_open() {
+			if(add_to_favorites_popup==false)
+			{
+				new_favorite_marker = L.marker(map.getCenter() ).addTo(map);
+								
+				map.on('move', function () {
+					new_favorite_marker.setLatLng(map.getCenter());
+					//console.log(map.getCenter());
+				});
+			
+				$("#add_to_favorites").addClass("disabled");
+				$(".cd-popup").addClass("is-visible");
+				add_to_favorites_popup = true;
+				//new_favorite_marker_icon	= new icon_style_favorites_new({iconUrl: 'maps/map-icon/marker-icon.png',iconRetinaUrl: 'maps/map-icon/marker-icon@2x.png',shadowUrl: 'maps/map-icon/marker-shadow.png',});
+				//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup();
+			}
+			else
+			{
+				$("#add_to_favorites").removeClass("disabled");
+				$(".cd-popup").removeClass("is-visible");
+				add_to_favorites_popup = false;
+				map.removeLayer(new_favorite_marker);
+			}
+		}
+		
+		$("#favorites_btn").click(function(){
+			add_to_favorites_open()
 
+		});
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
 		function change_map_online_function() {
 			map.removeLayer(offline_map);
 			map.addLayer(online_map);
@@ -281,276 +360,8 @@
 	});
 </script>
 <style>
-input {
-  -webkit-touch-callout: text; /* iOS Safari */
-  -webkit-user-select: text;   /* Chrome/Safari/Opera */
-  -khtml-user-select: text;    /* Konqueror */
-  -moz-user-select: text;      /* Firefox */
-  -ms-user-select: text;       /* Internet Explorer/Edge */
-  user-select: text;           /* Non-prefixed version, currently
-                                  not supported by any browser */
-}
-.leaflet-bar .leaflet-routing-alt,.leaflet-bar .leaflet-routing-alt *{direction:rtl;text-align:right;}
-h3.route_time {
-  direction: ltr !important;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: left !important;
-}
-div.leaflet-routing-alt  td:nth-child(3n) {
-  direction: ltr !important;
-  text-align: left !important;
-}
-.layer-control-img {
-	width: 27px;
-}
-.leaflet-control-layers label {
-	direction: rtl;
-	display: block;
-}
-.leaflet-routing-container, .leaflet-routing-error {
-	max-width: 100%;
-	width: auto !important;
-}
-/*
-.leaflet-routing-container{
-  border-radius: 2px;
-  max-width: 100%;
-  right: 4px;
-  top: 57px;
-  width: auto !important;
-}
-*/
-.leaflet-routing-container{
-  border-radius: 2px;
-  max-width: 100%;
-  bottom: -25px;
-  width: auto !important;
-  overflow: auto;
-  z-index: 99;
-}
-.leaflet-control-container .leaflet-routing-container-hide{
-	bottom: auto;
-}
-.leaflet-routing-alt, .leaflet-routing-geocoders, .leaflet-routing-error {
-  max-height:auto;
-}
 
 
-
-.leaflet-routing-container {
-    margin: 10px 10px 0 17px !important;
-    padding-top: 7px !important;
-}
-div.leaflet-routing-alt td {
-  font-size: 13px;
-}
-.leaflet-routing-geocoders input {
-  box-sizing: border-box;
-  padding: 0 5px 0 0;
-  width: 100%;
-}
-.leaflet-routing-remove-waypoint::after {
-  padding: 2px 2px 16px 4px;
-  left: 1px;
-  right: auto;
-}
-.leaflet-routing-remove-waypoint {
-  left: 0;
-  position: absolute;
-  top: 20px;
-}
-.leaflet-routing-add-waypoint {display:none;}
-.leaflet-routing-geocoders	{display:none;}
-/*
-.leaflet-top.leaflet-bottom {
-  position: fixed;
-}
-*/
-.leaflet-bottom.leaflet-right .leaflet-control-attribution.leaflet-control{
-	display:none;
-}
-div.leaflet-control-layers.leaflet-control form.leaflet-control-layers-list {
-  background-color: rgba(14, 123, 184, 0.9);
-  color: white;
-  line-height: 25px;
-  margin-right: -5px;
-  margin-top: 5px; 
-  padding: 16px 16px 16px 20px;
-  border-radius:2px;
-}
-.leaflet-control-layers.leaflet-control {
-  background-color: transparent;
-}
-div.leaflet-control-layers.leaflet-control form.leaflet-control-layers-list span{
-	font-size: 13px;
-}
-input[type=checkbox].leaflet-control-layers-selector {
-
-}
-.leaflet-control-layers-expanded {
-	padding: 0;
-}
-.leaflet-top.leaflet-left .leaflet-control{
-	display:inline-block;
-	clear: none;
-}
-.leaflet-top.leaflet-left .leaflet-control.leaflet-control-search {
-	background-color: #ffffff;
-	border: 0 solid transparent;
-	border-radius: 0;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
-	float: none;
-	margin: 15px 15px 0;
-	display: block;
-	height: 43px;
-}
-/*
-.leaflet-top.leaflet-left .leaflet-control.leaflet-control-layers{
-	position: fixed;
-	top:9px;
-	right:19px;
-	z-index:9999;
-	box-shadow: none;
-}
-*/
-.leaflet-top.leaflet-left .leaflet-control.leaflet-control-layers {
-  box-shadow: none;
-  padding-right: 19px;
-  position: fixed;
-  right: 0;
-  top: 9px;
-  z-index: 9999;
-  padding-bottom: 10px;
-}
-.leaflet-control-layers-toggle {
-  background-size: 26px auto;
-  height: 51px;
-  margin-right: -11px;
-  margin-top: -8px;
-  width: 62px;
-}
-.leaflet-top.leaflet-left .leaflet-control.leaflet-control-back_btn{
-    border: 0px solid #e8e0d8;
-    border-radius: 4px;
-    box-shadow: none;
-    left: 12px;
-    position: fixed;
-    top: 11px;
-    z-index: 9999;
-	cursor: pointer;
-}
-.leaflet-top.leaflet-left{
-	width:100%;
-}
-.leaflet-top.leaflet-left .leaflet-control.leaflet-control-search #searchtext8,.leaflet-top.leaflet-left .leaflet-control.leaflet-control-search #searchtext21{
-    border-color: white;
-    border-style: none solid;
-    border-width: 0 51px;
-    box-sizing: border-box;
-    display: block !important;
-    height: 43px;
-    padding: 4px;
-    width: 100%;
-	border-bottom:1px solid #e8e0d8;
-	margin-top: 0;
-}
-.leaflet-top.leaflet-left .leaflet-control.leaflet-control-search .search-button {
-    display: none !important;
-}
-.leaflet-control-search .search-cancel {
-  height: 44px;
-  margin: 3px 0;
-  opacity: 0;
-  position: absolute;
-  left: 49px;
-  right: auto;
-  width: 44px;
-  top: 10px;
-  opacity:1;
-}
-.leaflet-control-search .search-tooltip{
-	max-width:auto;
-	min-width:auto;
-	width:100%;
-	max-height:500px;
-	background-color: white;
-    box-shadow: none;
-}
-.leaflet-control-search .search-tip {
-  background: transparent;
-  border-radius: 0;
-  border-bottom:1px solid #e8e0d8;
-  padding:4px;
-}
-.leaflet-control-layers-toggle {
-  display: block !important;
-}
-.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
-  background-position: right center;
-  display: block !important;
-  width: 100%;
-  margin-left: -7px;
-}
-.top_left_smcms_btn{
-	position:fixed;
-	border-radius:2px;
-	background-repeat:no-repeat;
-	background-position:center;
-	background-size:contain;
-	width:47px;
-	height:47px;
-	z-index: 998;
-	left:13px;
-	cursor: pointer;
-}
-#favorites_btn.top_left_smcms_btn{
-	top:67px;
-	background-color:rgba(14,123,184,1.0);
-	background-image:url('maps/images/favorites.png');
-}
-#routing_btn.top_left_smcms_btn{
-	top:118px;
-	background-color:rgba(19,165,56,1.0);
-	background-image:url('maps/images/routing.png');
-}
-#wifi_btn.top_left_smcms_btn{
-	top:169px;
-	background-color:rgba(14,123,184,1.0);
-	background-image:url('maps/images/wifi.png');
-}
-.leaflet-routing-collapse-btn {
-    width: 100%;
-    height: 40px;
-    text-align: right;
-    right: 0;
-    max-width: 100px;
-    padding-right: 8px;
-    /* background: red; */
-    z-index: 9999 !important;
-}
-.leaflet-routing-container-hide .leaflet-routing-collapse-btn {
-
-}
-
-.leaflet-control-container .leaflet-routing-container-hide {
-  height: 40px !important;
-  width: 40px !important;
-  overflow: hidden;
-}
-.leaflet-routing-container-hide .leaflet-routing-collapse-btn {
-  background-position: 1px -1px;
-  background-repeat: no-repeat;
-  left: 7px;
-}
-.leaflet-top.leaflet-right {
-    z-index: 998;
-}
-.leaflet-bottom.leaflet-left {
-  bottom: 0;
-  left: 0;
-  position: fixed;
-}
 </style>
 
 
