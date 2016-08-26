@@ -19,12 +19,34 @@
 	<div id="routing_btn" class="top_left_smcms_btn" ></div>
 	<div id="map"></div>
 
-	<div class="cd-popup is-visible0" role="alert">
+	<div class="cd-popup is-visible0 favorites" role="alert">
 		<div class="cd-popup-container">
 			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان نقطه جدید" /></p>
 			<ul class="cd-buttons">
 				<li><a href="#" onclick="add_to_favorites();">تاید</a></li>
 				<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
+			</ul>
+			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
+
+	<div class="cd-popup is-visible0 route_from" role="alert">
+		<div class="cd-popup-container">
+			<p>لطفا مبدا سفر را انتخاب نمایید</p>
+			<ul class="cd-buttons">
+				<li><a href="#" onclick="routing_to_open();">تاید</a></li>
+				<li><a href="#" onclick="routing_open();">لغو</a></li>
+			</ul>
+			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
+
+	<div class="cd-popup is-visible0 route_to" role="alert">
+		<div class="cd-popup-container">
+			<p>لطفا مقصد سفر را انتخاب نمایید</p>
+			<ul class="cd-buttons">
+				<li><a href="#" onclick="routinging_start();">تاید</a></li>
+				<li><a href="#" onclick="routing_open();">لغو</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
 		</div> <!-- cd-popup-container -->
@@ -40,9 +62,13 @@
 <script src="maps/js/points.json"></script>
 <script>
 	var my_location_gps;
-	new_favorite_marker = "";
-	add_to_favorites_popup = false;
-	
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
 	function init() {		
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 		document.addEventListener("deviceready", onDeviceReady, false);
@@ -55,13 +81,32 @@
 	}
 	
 	function onDeviceReady() {
-		//FastClick.attach(document.getElementById('button'));
-		/*
+		FastClick.attach(document.getElementById('button'));
+		/**/
 		(function(){
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			setTimeout(arguments.callee, 5000);
 		})();
-		*/
+		
+	}
+	function onSuccess(position) {
+		//alert("longitude : " + position.coords.longitude);
+		//alert("latitude  : " + position.coords.latitude );
+		
+		//user_location_icon	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
+		radius = (position.coords.accuracy / 2) * 1;
+		//my_location_marker = L.marker([position.coords.latitude,position.coords.longitude], {icon: user_location_icon}).addTo(map).bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");//.openPopup();
+		//my_location_circle = L.circle([position.coords.latitude,position.coords.longitude], radius).addTo(map);
+		my_location_marker.setLatLng([position.coords.latitude,position.coords.longitude]);
+		my_location_marker.bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");
+		my_location_circle.setLatLng([position.coords.latitude,position.coords.longitude]);
+		my_location_circle.setRadius(radius);
+				
+	}
+	
+	function onError(error) { 
+		// your callback here
+		//alert(JSON.stringify(error));
 	}
 	
 	var categories = {
@@ -127,12 +172,21 @@
 
 	var offline_map = L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {maxZoom: 16}),
 		online_map  = L.tileLayer('http://imamali.net/app-json/map/{z}/{x}/{y}.png', {maxZoom: 18});
-		
+	
+	//najaf//lat=32.0192&long=44.3298
+	//karbala//lat=32.6073&long=44.0115
+	var lat_center = getParameterByName('lat');
+	var long_center = getParameterByName('long');
+	if(lat_center=="")
+		lat_center=32.0192;
+	if(long_center=="")
+		long_center=44.3298;
+	var map_center = new L.latLng(lat_center,long_center);
 	var map = L.map('map', {
 		zoom: 14,
 		maxZoom: 16,//17
 		minZoom:1,
-		center: new L.latLng(32.0192,44.3298),
+		center: map_center,
 		layers: online_map,//L.tileLayer('maps/mapquest/{z}/{x}/{y}.png'),
 		zoomControl:false
 	});
@@ -188,7 +242,44 @@
 		}
 	});
 	//restLayers.addTo(map);
+//////////////////////////////////////////////////
+//////favorite////////////////////////////////////
+	new_favorite_marker = "";
+	route_to_marker = "";
+	routing_roud = "";
+	add_to_favorites_popup = false;
+	routing_from_popup = false;
+	routing_to_popup = false;
 
+	if(window.localStorage.getItem('favorites_lat') == null)
+	{
+		window.localStorage.setItem('favorites_lat',JSON.stringify([""]));
+		window.localStorage.setItem('favorites_long',JSON.stringify([""]));
+		window.localStorage.setItem('favorites_title',JSON.stringify([""]));
+	}
+	else
+	{
+		temp_array_lat	 = JSON.parse(window.localStorage.getItem('favorites_lat'));
+		temp_array_long	 = JSON.parse(window.localStorage.getItem('favorites_long'));
+		temp_array_title = JSON.parse(window.localStorage.getItem('favorites_title'));
+		$.each(temp_array_lat, function(i, val) {
+			//alert(i + ":" + val);
+			//alert(temp_array_long[i]);
+			if(temp_array_long[i]!="")
+			{
+				cat = 102;
+				var icon = icons[cat];
+				var my_marker = L.marker([temp_array_lat[i],temp_array_long[i]], {icon: icon,keyboard: false,riseOnHover: true}).bindPopup("<h3>" + temp_array_title[i] + "</h3>");
+				layerwww = layers[cat];
+				if (layerwww !== undefined) {
+					//console.log(layerwww);
+					layerwww.addLayer(my_marker);
+				}
+			}
+		});
+	}
+//////favorite////////////////////////////////////
+//////////////////////////////////////////////////
 
 
 		
@@ -277,7 +368,7 @@
 	function route_function(point1th_lat,point1th_long,point2th_lat,point2th_long) {
 		/*** start routing ***/
 		/**/
-		L.Routing.control({
+		routing_roud = L.Routing.control({
 		  waypoints: [
 			L.latLng(point1th_lat,point1th_long),
 			L.latLng(point2th_lat,point2th_long)
@@ -308,44 +399,14 @@
 	
 	$(document).ready(function(){
 		$("#routing_btn").click(function(){
-			route_function(31.99564047,44.31262563,32.6171,44.0362);
+			//route_function(31.99564047,44.31262563,32.6171,44.0362);
+			routing_open();
 		});
-		
-////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-		function add_to_favorites_open() {
-			if(add_to_favorites_popup==false)
-			{
-				new_favorite_marker = L.marker(map.getCenter() ).addTo(map);
-								
-				map.on('move', function () {
-					new_favorite_marker.setLatLng(map.getCenter());
-					//console.log(map.getCenter());
-				});
-			
-				$("#add_to_favorites").addClass("disabled");
-				$(".cd-popup").addClass("is-visible");
-				add_to_favorites_popup = true;
-				//new_favorite_marker_icon	= new icon_style_favorites_new({iconUrl: 'maps/map-icon/marker-icon.png',iconRetinaUrl: 'maps/map-icon/marker-icon@2x.png',shadowUrl: 'maps/map-icon/marker-shadow.png',});
-				//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup();
-			}
-			else
-			{
-				$("#add_to_favorites").removeClass("disabled");
-				$(".cd-popup").removeClass("is-visible");
-				add_to_favorites_popup = false;
-				map.removeLayer(new_favorite_marker);
-			}
-		}
 		
 		$("#favorites_btn").click(function(){
 			add_to_favorites_open()
-
 		});
-////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
+
 		function change_map_online_function() {
 			map.removeLayer(offline_map);
 			map.addLayer(online_map);
@@ -357,7 +418,128 @@
 			map.options.maxZoom = 16;
 		}
 		$("#wifi_btn").clickToggle(change_map_online_function,change_map_offline_function);
+		
+		
 	});
+	
+	
+	
+	function routing_open() {
+		if(routing_from_popup==false)
+		{
+			//map.removeLayer(routing_roud);
+			if(routing_roud)
+				routing_roud.spliceWaypoints(0, 2);
+			routing_roud = "";
+			
+			new_favorite_marker = L.marker(map.getCenter() ).addTo(map);
+							
+			map.on('move', function () {
+				if(routing_from_popup && !routing_to_popup)
+					new_favorite_marker.setLatLng(map.getCenter());
+			});
+		 
+			$("#routing_btn").addClass("disabled");
+			$(".cd-popup.route_from").addClass("is-visible");
+			routing_from_popup = true;
+			routing_to_popup = false;
+		}
+		else 
+		{
+			if(routing_roud)
+				routing_roud.spliceWaypoints(0, 2);
+			routing_roud = "";
+			
+			$("#routing_btn").removeClass("disabled");
+			$(".cd-popup.route_from").removeClass("is-visible");
+			$(".cd-popup.route_to").removeClass("is-visible");
+			routing_from_popup = false;
+			routing_to_popup = false;
+			map.removeLayer(new_favorite_marker);
+			map.removeLayer(route_to_marker);
+		}
+	}
+	function routing_to_open() {
+		route_to_marker = L.marker(map.getCenter() ).addTo(map);
+						
+		map.on('move', function () {
+			if(routing_to_popup)
+				route_to_marker.setLatLng(map.getCenter());
+		});
+		
+		$(".cd-popup.route_from").removeClass("is-visible");
+		$(".cd-popup.route_to").addClass("is-visible");
+		routing_from_popup = true;
+		routing_to_popup = true;
+	}
+	function routinging_start() {
+		route_function(new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng,route_to_marker.getLatLng().lat,route_to_marker.getLatLng().lng);
+		
+		$("#routing_btn").removeClass("disabled");
+		$(".cd-popup.route_from").removeClass("is-visible");
+		$(".cd-popup.route_to").removeClass("is-visible");
+		routing_from_popup = true;
+		routing_to_popup = true;
+		map.removeLayer(new_favorite_marker);
+		map.removeLayer(route_to_marker);
+	}
+	function add_to_favorites_open() {
+		if(add_to_favorites_popup==false)
+		{
+			new_favorite_marker = L.marker(map.getCenter() ).addTo(map);
+							
+			map.on('move', function () {
+				new_favorite_marker.setLatLng(map.getCenter());
+				//console.log(map.getCenter());
+			});
+		
+			$("#favorites_btn").addClass("disabled");
+			$(".cd-popup.favorites").addClass("is-visible");
+			add_to_favorites_popup = true;
+			//new_favorite_marker_icon	= new icon_style_favorites_new({iconUrl: 'maps/map-icon/marker-icon.png',iconRetinaUrl: 'maps/map-icon/marker-icon@2x.png',shadowUrl: 'maps/map-icon/marker-shadow.png',});
+			//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup();
+		}
+		else
+		{
+			$("#favorites_btn").removeClass("disabled");
+			$(".cd-popup.favorites").removeClass("is-visible");
+			add_to_favorites_popup = false;
+			$("#favorite_title").val("");
+			map.removeLayer(new_favorite_marker);
+		}
+	}
+	function add_to_favorites() {
+		temp_array_lat	 = JSON.parse(window.localStorage.getItem('favorites_lat'));
+		temp_array_long	 = JSON.parse(window.localStorage.getItem('favorites_long'));
+		temp_array_title = JSON.parse(window.localStorage.getItem('favorites_title'));
+		temp_new_title	 = $("#favorite_title");
+		
+		temp_array_lat.push(new_favorite_marker.getLatLng().lat);
+		temp_array_long.push(new_favorite_marker.getLatLng().lng);
+		temp_array_title.push(temp_new_title.val());
+		
+		window.localStorage.setItem('favorites_lat',JSON.stringify(temp_array_lat));
+		window.localStorage.setItem('favorites_long',JSON.stringify(temp_array_long));
+		window.localStorage.setItem('favorites_title',JSON.stringify(temp_array_title));
+		
+		cat = 102;
+		var icon = icons[cat];
+		var my_marker = L.marker([new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng], {icon: icon,keyboard: false,riseOnHover: true}).bindPopup("<h3>" + temp_new_title.val() + "</h3>");
+		var my_marker2 = L.marker([new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng], {icon: icon,keyboard: false,riseOnHover: true}).bindPopup("<h3>" + temp_new_title.val() + "</h3>");
+		my_marker2.addTo(map);
+		layerwww = layers[cat];
+		if (layerwww !== undefined) {
+			//console.log(layerwww);
+			layerwww.addLayer(my_marker);
+		}
+		map.removeLayer(new_favorite_marker);
+
+		
+		temp_new_title.val("");
+		add_to_favorites_popup = false;
+		$(".cd-popup.favorites").removeClass("is-visible");
+		$("#add_to_favorites").removeClass("disabled");
+	}
 </script>
 <style>
 
