@@ -55,6 +55,8 @@
 
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="phonegap.js"></script>
+<script src="js/fastclick.js"></script>
+
 <script src="maps/js/leaflet-src.js"></script>
 <script src="maps/js/leaflet-search.js"></script>
 <script src="maps/js/leaflet-routing-machine.min.js"></script> 
@@ -74,7 +76,6 @@
 	function init() {		
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 		document.addEventListener("deviceready", onDeviceReady, false);
-		
 		radius = 0;
 
 
@@ -87,6 +88,7 @@
 		/**/
 		(function(){
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			//console.log("11");
 			setTimeout(arguments.callee, 5000);
 		})();
 		
@@ -380,19 +382,60 @@
 	
 	function route_function(point1th_lat,point1th_long,point2th_lat,point2th_long) {
 		/*** start routing ***/
-		/**/
-		routing_roud = L.Routing.control({
-		  waypoints: [
+//new_favorite_marker = L.marker(map.getCenter(), {icon: from_icon} ).addTo(map);
+		waypoints = [
 			L.latLng(point1th_lat,point1th_long),
 			L.latLng(point2th_lat,point2th_long)
-		  ],
+		];
+		routing_roud = L.Routing.control({
+							plan: L.Routing.plan(waypoints, {
+								createMarker: function(i, wp) {
+									if(i==0)
+										return L.marker(wp.latLng, {draggable: true,icon: from_icon} );
+									else //if(i==1)
+										return L.marker(wp.latLng, {draggable: true,icon: to_icon} );
+								},
+								geocoder: L.Control.Geocoder.nominatim(),
+								routeWhileDragging: true
+							}),
+							routeWhileDragging: true,
+							routeDragTimeout: 250,
+							reverseWaypoints: false,
+							showAlternatives: true,
+							altLineOptions: {
+								styles: [
+									{color: 'black', opacity: 0.15, weight: 9},
+									{color: 'white', opacity: 0.8, weight: 6},
+									{color: 'blue', opacity: 0.5, weight: 2}
+								]
+							},
+							language: "fa",
+							position:'bottomleft'
+						}).addTo(map);
+		/*
+		routing_roud = L.Routing.control({
+			waypoints: [
+				L.latLng(point1th_lat,point1th_long),
+				L.latLng(point2th_lat,point2th_long)
+			],
 			routeWhileDragging: true,
 			reverseWaypoints: false,
-			showAlternatives: false,
+			showAlternatives: true,
+			altLineOptions: {
+				styles: [
+					{color: 'black', opacity: 0.15, weight: 9},
+					{color: 'white', opacity: 0.8, weight: 6},
+					{color: 'blue', opacity: 0.5, weight: 2}
+				]
+			},
 			geocoder: L.Control.Geocoder.nominatim(),
 			language: "fa",
 			position:'bottomleft'
 		}).addTo(map);
+		*/
+		
+		
+		
 		
 	}
 	
