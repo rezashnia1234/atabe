@@ -489,6 +489,14 @@ input[type=checkbox].leaflet-control-layers-selector {
 	background-color:rgba(14,123,184,1.0);
 	background-image:url('../../maps/images/wifi.png');
 }
+#location_btn.top_left_smcms_btn{
+	top:220px;
+	background-color:rgba(249,209,49,1.0);
+	background-image:url('../../maps/images/location.png');
+}
+#location_btn.top_left_smcms_btn.active{
+	background-color:rgba(19, 165, 56, 1);
+}
 
 .leaflet-routing-collapse-btn {
     width: 100%;

@@ -16,6 +16,7 @@
 <body onload="init();">
 	<div id="favorites_btn" class="top_left_smcms_btn" ></div>
 	<div id="wifi_btn" class="top_left_smcms_btn" ></div>
+	<div id="location_btn" class="top_left_smcms_btn" ></div>
 	<div id="routing_btn" class="top_left_smcms_btn" ></div>
 	<div id="map"></div>
 
@@ -101,6 +102,8 @@
 		my_location_marker.bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");
 		my_location_circle.setLatLng([position.coords.latitude,position.coords.longitude]);
 		my_location_circle.setRadius(radius);
+		
+		$("#location_btn").addClass("active");
 				
 	}
 	
@@ -141,7 +144,16 @@
 			popupAnchor:  [0, -59] // point from which the popup should open relative to the iconAnchor
 		}
 	});
-	var	user_location_icon	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
+	var all_normal_icons = L.Icon.extend({
+		options: {
+			iconSize:     [33, 44], // size of the icon
+			iconAnchor:   [16,44], // point of the icon which will correspond to marker's location
+			popupAnchor:  [0, -44] // point from which the popup should open relative to the iconAnchor
+		}
+	});
+	var	user_location_icon	= new all_normal_icons({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
+	var	from_icon			= new all_normal_icons({iconUrl: 'maps/map-icon/a.png',iconRetinaUrl: 'maps/map-icon/a@2x.png',});
+	var	to_icon				= new all_normal_icons({iconUrl: 'maps/map-icon/b.png',iconRetinaUrl: 'maps/map-icon/b@2x.png',});
 	
 	var setupIcons = function() {
 
@@ -404,18 +416,28 @@
 		});
 		
 		$("#favorites_btn").click(function(){
-			add_to_favorites_open()
+			add_to_favorites_open();
+		});
+		$("#location_btn").click(function(){
+			//$("#location_btn").addClass("active");
+			if ($("#location_btn").hasClass("active")) {
+				map.panTo(new L.LatLng(my_location_marker.getLatLng().lat, my_location_marker.getLatLng().lng));
+			}
 		});
 
 		function change_map_online_function() {
 			map.removeLayer(offline_map);
 			map.addLayer(online_map);
 			map.options.maxZoom = 18;
+			
+			$("#wifi_btn").css("background-color","#19d400");
 		}
 		function change_map_offline_function() {
 			map.removeLayer(online_map);
 			map.addLayer(offline_map);
 			map.options.maxZoom = 16;
+			
+			$("#wifi_btn").css("background-color","#f9d131");
 		}
 		$("#wifi_btn").clickToggle(change_map_online_function,change_map_offline_function);
 		
@@ -432,8 +454,8 @@
 				routing_roud.spliceWaypoints(0, 2);
 			routing_roud = "";
 			
-			new_favorite_marker = L.marker(map.getCenter() ).addTo(map);
-							
+			new_favorite_marker = L.marker(map.getCenter(), {icon: from_icon} ).addTo(map);
+
 			map.on('move', function () {
 				if(routing_from_popup && !routing_to_popup)
 					new_favorite_marker.setLatLng(map.getCenter());
@@ -460,7 +482,7 @@
 		}
 	}
 	function routing_to_open() {
-		route_to_marker = L.marker(map.getCenter() ).addTo(map);
+		route_to_marker = L.marker(map.getCenter(),{icon: to_icon} ).addTo(map);
 						
 		map.on('move', function () {
 			if(routing_to_popup)
