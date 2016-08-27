@@ -70,6 +70,8 @@
     background-size: contain;
     bottom: -5vw;
     position: absolute;
+	
+	z-index:-1;
 }
 .smm_menu ul{
 	background-image: url("../images/low/menu.png");
