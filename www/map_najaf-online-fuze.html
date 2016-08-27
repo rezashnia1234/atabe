@@ -24,7 +24,7 @@
 		<div class="cd-popup-container">
 			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان نقطه جدید" /></p>
 			<ul class="cd-buttons">
-				<li><a href="#" onclick="add_to_favorites();">تاید</a></li>
+				<li><a href="#" onclick="add_to_favorites();">تایید</a></li>
 				<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
@@ -35,7 +35,7 @@
 		<div class="cd-popup-container">
 			<p>لطفا مبدا سفر را انتخاب نمایید</p>
 			<ul class="cd-buttons">
-				<li><a href="#" onclick="routing_to_open();">تاید</a></li>
+				<li><a href="#" onclick="routing_to_open();" style="background-color:#247dc9;">تایید</a></li>
 				<li><a href="#" onclick="routing_open();">لغو</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
@@ -46,7 +46,7 @@
 		<div class="cd-popup-container">
 			<p>لطفا مقصد سفر را انتخاب نمایید</p>
 			<ul class="cd-buttons">
-				<li><a href="#" onclick="routinging_start();">تاید</a></li>
+				<li><a href="#" onclick="routinging_start();" style="background-color:#ce3b39;">تایید</a></li>
 				<li><a href="#" onclick="routing_open();">لغو</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
@@ -54,6 +54,7 @@
 	</div> <!-- cd-popup -->
 
 <script src="js/jquery-3.0.0.min.js"></script>
+<script src="phonegap.js"></script>
 <script src="maps/js/leaflet-src.js"></script>
 <script src="maps/js/leaflet-search.js"></script>
 <script src="maps/js/leaflet-routing-machine.min.js"></script> 
@@ -387,7 +388,7 @@
 		  ],
 			routeWhileDragging: true,
 			reverseWaypoints: false,
-			showAlternatives: true,
+			showAlternatives: false,
 			geocoder: L.Control.Geocoder.nominatim(),
 			language: "fa",
 			position:'bottomleft'
@@ -430,14 +431,14 @@
 			map.addLayer(online_map);
 			map.options.maxZoom = 18;
 			
-			$("#wifi_btn").css("background-color","#19d400");
+			$("#wifi_btn").css("background-color","rgba(19, 165, 56, 1)");
 		}
 		function change_map_offline_function() {
 			map.removeLayer(online_map);
 			map.addLayer(offline_map);
 			map.options.maxZoom = 16;
 			
-			$("#wifi_btn").css("background-color","#f9d131");
+			$("#wifi_btn").css("background-color","#c1c1c1");
 		}
 		$("#wifi_btn").clickToggle(change_map_online_function,change_map_offline_function);
 		

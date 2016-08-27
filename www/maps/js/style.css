@@ -486,13 +486,17 @@ input[type=checkbox].leaflet-control-layers-selector {
 }
 #wifi_btn.top_left_smcms_btn{
 	top:169px;
-	background-color:rgba(14,123,184,1.0);
+	background-color:#c1c1c1;
 	background-image:url('../../maps/images/wifi.png');
 }
 #location_btn.top_left_smcms_btn{
-	top:220px;
-	background-color:rgba(249,209,49,1.0);
+	background-color:#c1c1c1;
 	background-image:url('../../maps/images/location.png');
+	
+	top:auto;
+	bottom:10px;
+	right:10px;
+	left:auto;
 }
 #location_btn.top_left_smcms_btn.active{
 	background-color:rgba(19, 165, 56, 1);
