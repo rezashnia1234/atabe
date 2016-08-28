@@ -27,6 +27,13 @@
     $( document ).ready(function() {
         console.log( "document loaded" );
 		document.addEventListener("deviceready", onDeviceReady, false);
+		
+		(function(){
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start getCurrentPosition()');
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			//console.log("11");
+			setTimeout(arguments.callee, 5000);
+		})();
     });
 	function init() {		
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
@@ -42,12 +49,7 @@
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onDeviceReady()');
 		FastClick.attach(document.getElementById('button'));
 		/**/
-		(function(){
-			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start getCurrentPosition()');
-			navigator.geolocation.getCurrentPosition(onSuccess, onError);
-			//console.log("11");
-			setTimeout(arguments.callee, 5000);
-		})();
+
 		
 	}
 	function onSuccess(position) {
