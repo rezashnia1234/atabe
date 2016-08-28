@@ -24,10 +24,13 @@
 			results = regex.exec(location.search);
 		return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
-
+    $( document ).ready(function() {
+        console.log( "document loaded" );
+		document.addEventListener("deviceready", onDeviceReady, false);
+    });
 	function init() {		
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
-		document.addEventListener("deviceready", onDeviceReady, false);
+		
 		radius = 0;
 
 
