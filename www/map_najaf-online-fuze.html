@@ -217,8 +217,134 @@
 		zoomControl:false
 	});
 
+		
+	// Layer control, setting up 1 layer per category
+	var layers = {},
+		cultureLayer = L.layerGroup(),
+		layerCtrl = L.control.layers();
+	for (var icat in categories) {
+		var layer = L.featureGroup();
+		layers[icat] = layer;
+		cultureLayer.addLayer(layer);
+		
+		//var cat = categories[icat],desc = '<img class="layer-control-img ' + cat.icon + '" src="maps/map-icon/' + cat.icon + '@2x.png"> ' + cat.desc;
+		var cat = categories[icat],desc = cat.desc;
+		layerCtrl.addOverlay(layer, desc);
+	}
+	//cultureLayer.addTo(map);
+
+/**/
+	var restLayers = L.geoJson(restaurant500, {
+		pointToLayer: function(feature, latlng) {
+			var cat = feature.properties.categorie;
+			var icon = icons[cat];
+			
+			var props = L.Util.extend({
+						'name': '',
+						'cuisine': '',
+						'website': '',
+						'phone': ''
+					},feature.properties),
+				textPopup = L.Util.template("<h3>{name}</h3>", props),
+				style = {
+					radius: 5,
+					opacity: 0.8,
+					fillColor: '#ddd',
+					fillOpacity: 0.8
+				};
+
+			//return L.circleMarker(latlng, style).bindPopup(textPopup);
+			/**/
+			var my_marker = L.marker(latlng, {icon: icon,keyboard: false,riseOnHover: true}).bindPopup(textPopup);
+			layerwww = layers[cat];
+			if (layerwww !== undefined) {
+				//console.log(layerwww);
+				layerwww.addLayer(my_marker);
+			}
+			return my_marker;
+			
+		}
+	});
+	//restLayers.addTo(map);
+//////////////////////////////////////////////////
+//////favorite////////////////////////////////////
+	new_favorite_marker = "";
+	route_to_marker = "";
+	routing_roud = "";
+	add_to_favorites_popup = false;
+	routing_from_popup = false;
+	routing_to_popup = false;
+
+	if(window.localStorage.getItem('favorites_lat') == null)
+	{
+		window.localStorage.setItem('favorites_lat',JSON.stringify([""]));
+		window.localStorage.setItem('favorites_long',JSON.stringify([""]));
+		window.localStorage.setItem('favorites_title',JSON.stringify([""]));
+	}
+	else
+	{
+		temp_array_lat	 = JSON.parse(window.localStorage.getItem('favorites_lat'));
+		temp_array_long	 = JSON.parse(window.localStorage.getItem('favorites_long'));
+		temp_array_title = JSON.parse(window.localStorage.getItem('favorites_title'));
+		$.each(temp_array_lat, function(i, val) {
+			//alert(i + ":" + val);
+			//alert(temp_array_long[i]);
+			if(temp_array_long[i]!="")
+			{
+				cat = 102;
+				var icon = icons[cat];
+				var my_marker = L.marker([temp_array_lat[i],temp_array_long[i]], {icon: icon,keyboard: false,riseOnHover: true}).bindPopup("<h3>" + temp_array_title[i] + "</h3>");
+				layerwww = layers[cat];
+				if (layerwww !== undefined) {
+					//console.log(layerwww);
+					layerwww.addLayer(my_marker);
+				}
+			}
+		});
+	}
+//////favorite////////////////////////////////////
+//////////////////////////////////////////////////
+
 
 		
+		
+	var fuse = new Fuse(restaurant500.features, {
+		keys: ['properties.name']
+	});
+
+	L.control.search({
+		layer: restLayers,
+		propertyName: 'name',
+		textErr: 'موقعیت یافت نشد',	//error message
+		textCancel: 'لغو',		    //title in cancel button		
+		textPlaceholder: 'جستجو در میان نقاط...',   //placeholder value		 // 'جستجو در میان نقاط...'
+		markerLocation: true,
+		filterData: function(text, records) {
+			var jsons = fuse.search(text),
+				ret = {}, key;
+			
+			for(var i in jsons) {
+				//jsons[i].properties.name = jsons[i].properties.name + " - 000";
+				key = jsons[i].properties.name;
+				ret[ key ]= records[key];
+			}
+
+			//console.log(jsons,ret);
+			return ret;
+		}
+	})
+	.on('search_locationfound', function(e) {
+		e.layer.openPopup();
+	}).addTo(map);
+
+	layerCtrl.setPosition('topleft');
+	layerCtrl.addTo(map);
+	
+	
+	L.control.scale({'position':'bottomleft'}).addTo(map);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 	//console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    fihish()');
 </script>
