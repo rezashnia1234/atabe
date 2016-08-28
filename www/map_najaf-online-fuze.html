@@ -270,6 +270,7 @@
 //////favorite////////////////////////////////////
 	new_favorite_marker = "";
 	route_to_marker = "";
+	route_from_marker = "";
 	routing_roud = "";
 	add_to_favorites_popup = false;
 	routing_from_popup = false;
@@ -505,11 +506,11 @@
 				routing_roud.spliceWaypoints(0, 2);
 			routing_roud = "";
 			
-			new_favorite_marker = L.marker(map.getCenter(), {icon: from_icon} ).addTo(map);
+			route_from_marker = L.marker(map.getCenter(), {icon: from_icon} ).addTo(map);
 
 			map.on('move', function () {
 				if(routing_from_popup && !routing_to_popup)
-					new_favorite_marker.setLatLng(map.getCenter());
+					route_from_marker.setLatLng(map.getCenter());
 			});
 		 
 			$("#routing_btn").addClass("disabled");
@@ -528,7 +529,7 @@
 			$(".cd-popup.route_to").removeClass("is-visible");
 			routing_from_popup = false;
 			routing_to_popup = false;
-			map.removeLayer(new_favorite_marker);
+			map.removeLayer(route_from_marker);
 			map.removeLayer(route_to_marker);
 		}
 	}
@@ -546,14 +547,14 @@
 		routing_to_popup = true;
 	}
 	function routinging_start() {
-		route_function(new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng,route_to_marker.getLatLng().lat,route_to_marker.getLatLng().lng);
+		route_function(route_from_marker.getLatLng().lat,route_from_marker.getLatLng().lng,route_to_marker.getLatLng().lat,route_to_marker.getLatLng().lng);
 		
 		$("#routing_btn").removeClass("disabled");
 		$(".cd-popup.route_from").removeClass("is-visible");
 		$(".cd-popup.route_to").removeClass("is-visible");
 		routing_from_popup = true;
 		routing_to_popup = true;
-		map.removeLayer(new_favorite_marker);
+		map.removeLayer(route_from_marker);
 		map.removeLayer(route_to_marker);
 	}
 	function add_to_favorites_open() {
