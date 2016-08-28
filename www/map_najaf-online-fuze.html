@@ -126,7 +126,20 @@
 <script src="maps/js/points.json"></script>
 
 <script>
-
+	var categories = {
+		101 : {desc: "اماکن المقدسة", icon:"zearati"},/////////////
+		102 : {desc: "الأماكن المفضلة ", icon:"fav"},
+		103 : {desc: "مراكز صحية", icon:"hospetal"},///////////////////////////////
+		104 : {desc: "استراحات الزائرين", icon:"mukeb"},
+		105 : {desc: "نقاط التفتيش", icon:"stop"},
+		106 : {desc: "فنادق", icon:"hotel"},///////////////////////////////
+		107 : {desc: "اعمدة", icon:"mil"},//////////////////////////////////
+		108 : {desc: "محطات النقل", icon:"hamlonaghl"},/////////////////////////////
+		109 : {desc: "مراكز المفقودين", icon:"gomshodeghan"},
+		110 : {desc: "القنصليات", icon:"edari"},
+		111 : {desc: "خدمات الزائرين", icon:"service"},
+	};
+	
 	
 		
 	var icon_style_favorites_new = L.Icon.extend({
@@ -156,13 +169,43 @@
 	var	from_icon			= new all_normal_icons({iconUrl: 'maps/map-icon/a.png',iconRetinaUrl: 'maps/map-icon/a@2x.png',});
 	var	to_icon				= new all_normal_icons({iconUrl: 'maps/map-icon/b.png',iconRetinaUrl: 'maps/map-icon/b@2x.png',});
 	
+	var setupIcons = function() {
+
+		var icons = {};
+		for (var cat in categories) {
+			var icon = categories[cat].icon;
+			//console.log(icon);
+			/**/
+			var url = "maps/map-icon/" + icon;
+	 
+			var icon = L.icon({
+				iconUrl:		url + '.png',
+				iconRetinaUrl:	url + '@2x.png',
+				iconSize:		[33, 44],
+				iconAnchor:		[16,44],
+				popupAnchor:	[0, -44]
+			});
+			
+			icons[cat] = icon;
+		}
+		
+		return icons;
+	};
+	var icons = setupIcons();
+
+
 
 
 	var offline_map = L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {maxZoom: 16}),
 		online_map  = L.tileLayer('http://imamali.net/app-json/map/{z}/{x}/{y}.png', {maxZoom: 18});
 	
-
+	//najaf//lat=32.0192&long=44.3298
+	//karbala//lat=32.6073&long=44.0115
+	var lat_center = getParameterByName('lat');
+	var long_center = getParameterByName('long');
+	if(lat_center=="")
 		lat_center=32.0192;
+	if(long_center=="")
 		long_center=44.3298;
 	var map_center = new L.latLng(lat_center,long_center);
 	var map = L.map('map', {
