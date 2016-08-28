@@ -35,7 +35,7 @@
 		my_location_marker = L.marker([36.2879,59.6157], {icon: user_location_icon,zIndexOffset: 999}).addTo(map);
 		my_location_circle = L.circle([36.2879,59.6157], radius).addTo(map);
 		
-
+		onDeviceReady();
 	}
 	
 	function onDeviceReady() {
