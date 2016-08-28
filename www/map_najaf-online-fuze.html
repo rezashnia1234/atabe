@@ -35,7 +35,7 @@
 		my_location_marker = L.marker([36.2879,59.6157], {icon: user_location_icon,zIndexOffset: 999}).addTo(map);
 		my_location_circle = L.circle([36.2879,59.6157], radius).addTo(map);
 		
-		onDeviceReady();
+		//onDeviceReady();
 	}
 	
 	function onDeviceReady() {
@@ -46,7 +46,7 @@
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start getCurrentPosition()');
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			//console.log("11");
-			setTimeout(arguments.callee, 5000);
+			setTimeout(arguments.callee, 50000);
 		})();
 		
 	}
@@ -63,7 +63,7 @@
 		my_location_marker.bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");
 		my_location_circle.setLatLng([position.coords.latitude,position.coords.longitude]);
 		my_location_circle.setRadius(radius);
-		
+		//console.log("00000:" + position.coords);
 		$("#location_btn").addClass("active");
 				
 	}
