@@ -345,7 +345,157 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var customControl =  L.Control.extend({
+		options: {
+			position: 'topleft'
+		},
+		onAdd: function (map) {
+			var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-back_btn');
+
+			container.style.backgroundColor = 'white';     
+			container.style.backgroundImage = "url('maps/images/back.png')";
+			container.style.backgroundSize = "30px 30px";
+			container.style.width = '30px';
+			container.style.height = '30px';
+
+			container.onclick = function(){
+				//console.log('buttonClicked');
+				window.location.href = 'map.html';
+			}
+
+			return container;
+		}
+	});
+	map.addControl(new customControl());
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+
+	
+	setTimeout(function(){
+		$('.leaflet-control-layers-list .leaflet-control-layers-overlays .leaflet-control-layers-selector').slice(2).prop('checked', true);
+		//$('.leaflet-control-layers-list .leaflet-control-layers-overlays .leaflet-control-layers-selector:not(:first)').prop('checked', true);
+		//$('.leaflet-control-layers-list .leaflet-control-layers-overlays .layer-control-img.zearati').parent().parent().find('input[type=checkbox]').prop('checked', false);
+		//$('.leaflet-control-layers-list .leaflet-control-layers-overlays .layer-control-img.fav').parent().parent().find('input[type=checkbox]').prop('checked', false);
+		//$('.leaflet-control-layers-list .leaflet-control-layers-overlays .layer-control-img.hospetal').parent().parent().find('input[type=checkbox]').prop('checked', false);
+		$('.leaflet-control-layers-list .leaflet-control-layers-overlays .leaflet-control-layers-selector').trigger('click');
 		
+		
+	}, 1000);
+	
+
+	
+	
+	
+	function route_function(point1th_lat,point1th_long,point2th_lat,point2th_long) {
+		/*** start routing ***/
+//new_favorite_marker = L.marker(map.getCenter(), {icon: from_icon} ).addTo(map);
+		waypoints = [
+			L.latLng(point1th_lat,point1th_long),
+			L.latLng(point2th_lat,point2th_long)
+		];
+		routing_roud = L.Routing.control({
+							plan: L.Routing.plan(waypoints, {
+								createMarker: function(i, wp) {
+									if(i==0)
+										return L.marker(wp.latLng, {draggable: true,icon: from_icon} );
+									else //if(i==1)
+										return L.marker(wp.latLng, {draggable: true,icon: to_icon} );
+								},
+								geocoder: L.Control.Geocoder.nominatim(),
+								routeWhileDragging: true
+							}),
+							routeWhileDragging: true,
+							routeDragTimeout: 250,
+							reverseWaypoints: false,
+							showAlternatives: true,
+							altLineOptions: {
+								styles: [
+									{color: 'black', opacity: 0.15, weight: 9},
+									{color: 'white', opacity: 0.8, weight: 6},
+									{color: 'blue', opacity: 0.5, weight: 2}
+								]
+							},
+							language: "fa",
+							position:'bottomleft'
+						}).addTo(map);
+		/*
+		routing_roud = L.Routing.control({
+			waypoints: [
+				L.latLng(point1th_lat,point1th_long),
+				L.latLng(point2th_lat,point2th_long)
+			],
+			routeWhileDragging: true,
+			reverseWaypoints: false,
+			showAlternatives: true,
+			altLineOptions: {
+				styles: [
+					{color: 'black', opacity: 0.15, weight: 9},
+					{color: 'white', opacity: 0.8, weight: 6},
+					{color: 'blue', opacity: 0.5, weight: 2}
+				]
+			},
+			geocoder: L.Control.Geocoder.nominatim(),
+			language: "fa",
+			position:'bottomleft'
+		}).addTo(map);
+		*/
+		
+		
+		
+		
+	}
+	
+	(function($) {
+		$.fn.clickToggle = function(func1, func2) {
+			var funcs = [func1, func2];
+			this.data('toggleclicked', 0);
+			this.click(function() {
+				var data = $(this).data();
+				var tc = data.toggleclicked;
+				$.proxy(funcs[tc], this)();
+				data.toggleclicked = (tc + 1) % 2;
+			});
+			return this;
+		};
+	}(jQuery));
+	
+	$(document).ready(function(){
+		$("#routing_btn").click(function(){
+			//route_function(31.99564047,44.31262563,32.6171,44.0362);
+			routing_open();
+		});
+		
+		$("#favorites_btn").click(function(){
+			add_to_favorites_open();
+		});
+		$("#location_btn").click(function(){
+			//$("#location_btn").addClass("active");
+			if ($("#location_btn").hasClass("active")) {
+				map.panTo(new L.LatLng(my_location_marker.getLatLng().lat, my_location_marker.getLatLng().lng));
+			}
+		});
+
+		function change_map_online_function() {
+			map.removeLayer(offline_map);
+			map.addLayer(online_map);
+			map.options.maxZoom = 18;
+			
+			$("#wifi_btn").css("background-color","rgba(19, 165, 56, 1)");
+		}
+		function change_map_offline_function() {
+			map.removeLayer(online_map);
+			map.addLayer(offline_map);
+			map.options.maxZoom = 16;
+			
+			$("#wifi_btn").css("background-color","#c1c1c1");
+		}
+		$("#wifi_btn").clickToggle(change_map_online_function,change_map_offline_function);
+		
+		
+	});
 	//console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    fihish()');
 </script>
 <style>
