@@ -46,7 +46,7 @@
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start getCurrentPosition()');
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			//console.log("11");
-			setTimeout(arguments.callee, 50000);
+			setTimeout(arguments.callee, 10000);
 		})();
 		
 	}
@@ -580,6 +580,39 @@
 			$("#favorite_title").val("");
 			map.removeLayer(new_favorite_marker);
 		}
+	}
+	
+	function add_to_favorites() {
+		temp_array_lat	 = JSON.parse(window.localStorage.getItem('favorites_lat'));
+		temp_array_long	 = JSON.parse(window.localStorage.getItem('favorites_long'));
+		temp_array_title = JSON.parse(window.localStorage.getItem('favorites_title'));
+		temp_new_title	 = $("#favorite_title");
+		
+		temp_array_lat.push(new_favorite_marker.getLatLng().lat);
+		temp_array_long.push(new_favorite_marker.getLatLng().lng);
+		temp_array_title.push(temp_new_title.val());
+		
+		window.localStorage.setItem('favorites_lat',JSON.stringify(temp_array_lat));
+		window.localStorage.setItem('favorites_long',JSON.stringify(temp_array_long));
+		window.localStorage.setItem('favorites_title',JSON.stringify(temp_array_title));
+		
+		cat = 102;
+		var icon = icons[cat];
+		var my_marker = L.marker([new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng], {icon: icon,keyboard: false,riseOnHover: true}).bindPopup("<h3>" + temp_new_title.val() + "</h3>");
+		var my_marker2 = L.marker([new_favorite_marker.getLatLng().lat,new_favorite_marker.getLatLng().lng], {icon: icon,keyboard: false,riseOnHover: true}).bindPopup("<h3>" + temp_new_title.val() + "</h3>");
+		my_marker2.addTo(map);
+		layerwww = layers[cat];
+		if (layerwww !== undefined) {
+			//console.log(layerwww);
+			layerwww.addLayer(my_marker);
+		}
+		map.removeLayer(new_favorite_marker);
+
+		
+		temp_new_title.val("");
+		add_to_favorites_popup = false;
+		$(".cd-popup.favorites").removeClass("is-visible");
+		$("#add_to_favorites").removeClass("disabled");
 	}
 	//console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    fihish()');
 </script>
