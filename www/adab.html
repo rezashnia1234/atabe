@@ -83,7 +83,11 @@
 			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 		}
 		$(document).ready(function(){
-			
+			temp_all_width = $(".hmd-video-title").width();
+			temp_right_width = $(".hmd-video-title .right").width();
+			//temp_all_width = $(".hmd-video-title").width();
+			$(".hmd-video-title .center").width(temp_all_width - 2*temp_right_width);
+			$(".hmd-video-title .center").css("margin-right",temp_right_width + "px");
 		});
 		
 	</script>	
@@ -92,8 +96,57 @@
 		
 		
 <style>
-
-
+.smm_live_title {
+    width: 90%;
+    height: 14vw;
+    background-image: url('images/low/live_title.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+    vertical-align: middle;
+}
+.hmd-video-title .right {
+    width: auto;
+    height: 100%;
+    position: absolute;
+	top:0;
+	right:0;
+	background-position:top left;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+	z-index: 1;
+	margin-top:-1px;
+}
+.hmd-video-title .left {
+    width: auto;
+    height: 100%;
+    position: absolute;
+	top:0;
+	left:0;
+	background-position:center left;
+	margin-top:-1px;
+}
+.hmd-video-title .center {
+    background-color22: RGBA(247,133,0,0.70);
+    background-color: #f1a84d;
+    color: #ffffff;
+    display: inline-block;
+    width: 99%;
+    font-size: 4.5vw;
+    padding: 2vw;
+    box-sizing: border-box;
+}
+.hmd-video-title {
+    margin-top: 7vw;
+}
+.hmd-video-title img {
+    width: auto;
+    height: 100%;
+}
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body" class="smm_ziarat_body retina">
@@ -111,34 +164,32 @@
 				</a>
 			</div>
 			<div class="smm_adab_content">
-				<div id="smm_adab_wrapper">
+				<div id="smm_adab_wrapper" style="position: absolute;top: 0;left: 0;right: 0;bottom: 1vw; overflow: auto;    text-align: right;">
 					<div>
-						<ul>
-							<li id="adab_1">
-								اداب زيارة الامام علي (عليه السلام)
-							</li>
-							<li id="adab_1">
-								زیارة مسجد الكوفة المعظم 
-							</li>
-							<li id="adab_1">
-								زیارة العتبة الكاظمية المقدسة 
-							</li>
-							<li id="adab_1">
-								زیارة العتبة الكاظمية المقدسة
-							</li>
-							<li id="adab_1">
-								زیارة مسجد الكوفة المعظم		
-							</li>
-							<li id="adab_1">
-								احكام زیارة فی حرم شریف 
-							</li>
-							<li id="adab_1">
-								احكام زیارة فی حرم شریف 
-							</li>
-							<li id="adab_1">
-								احكام زیارة فی حرم شریف 
-							</li>
-						</ul>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">اداب زيارة الامام علي (عليه السلام)</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة العتبة الكاظمية المقدسة</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">اداب زيارة الامام علي (عليه السلام)</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة العتبة الكاظمية المقدسة</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">اداب زيارة الامام علي (عليه السلام)</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة العتبة الكاظمية المقدسة</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">اداب زيارة الامام علي (عليه السلام)</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة العتبة الكاظمية المقدسة</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">زیارة مسجد الكوفة المعظم</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
+							<div class="hmd-video-title adab_1"><div class="right"><img src="images/video-title-bg.png"></div><div class="center">احكام زیارة فی حرم شریف</div><div class="left"><img src="images/video-title-bg.png"></div></div>
 					</div>
 				</div>
 			</div>

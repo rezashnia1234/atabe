@@ -54,6 +54,7 @@
 	</div> <!-- cd-popup -->
 
 <script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/console.log.js"></script>
 <script src="phonegap.js"></script>
 <script src="js/fastclick.js"></script>
 
@@ -84,9 +85,11 @@
 	}
 	
 	function onDeviceReady() {
+		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onDeviceReady()');
 		FastClick.attach(document.getElementById('button'));
 		/**/
 		(function(){
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start getCurrentPosition()');
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			//console.log("11");
 			setTimeout(arguments.callee, 5000);
@@ -94,6 +97,7 @@
 		
 	}
 	function onSuccess(position) {
+		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onSuccess()');
 		//alert("longitude : " + position.coords.longitude);
 		//alert("latitude  : " + position.coords.latitude );
 		
@@ -606,6 +610,7 @@
 		$(".cd-popup.favorites").removeClass("is-visible");
 		$("#add_to_favorites").removeClass("disabled");
 	}
+	//console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    fihish()');
 </script>
 <style>
 
