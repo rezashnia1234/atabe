@@ -569,6 +569,7 @@ var restaurant500 = {
 { "type": "Feature", "id": 801 , "properties": { "gid": 801, "___idobj": 3.0, "name": "كراج المتعدد الطوابق",				"theme": 1.0, "libtheme": "CULTURE", "categorie":111.0 }, "geometry": { "type": "Point", "coordinates": [44.311625,31.998344]}},
 { "type": "Feature", "id": 801 , "properties": { "gid": 801, "___idobj": 3.0, "name": "المرافقات الصحية في شارع الرسول",				"theme": 1.0, "libtheme": "CULTURE", "categorie":111.0 }, "geometry": { "type": "Point", "coordinates": [44.315092,31.99459]}},
 { "type": "Feature", "id": 801 , "properties": { "gid": 801, "___idobj": 3.0, "name": "مركز ارشاد  التائهين ",				"theme": 1.0, "libtheme": "CULTURE", "categorie":111.0 }, "geometry": { "type": "Point", "coordinates": [44.315776,31.996957]}},
+{ "type": "Feature", "id": 801 , "properties": { "gid": 801, "___idobj": 3.0, "name": "مركز ارشاد التائهين",				"theme": 1.0, "libtheme": "CULTURE", "categorie":109.0 }, "geometry": { "type": "Point", "coordinates": [44.315776,31.996957]}},
 
 
 

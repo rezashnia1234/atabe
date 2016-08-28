@@ -11,60 +11,11 @@
 <link rel="stylesheet" href="maps/js/leaflet-search.css" />
 <link rel="stylesheet" href="maps/js/leaflet-routing-machine.css" />
 <link rel="stylesheet" href="maps/js/style.css" />
-</head>
-
-<body onload="init();">
-	<div id="favorites_btn" class="top_left_smcms_btn" ></div>
-	<div id="wifi_btn" class="top_left_smcms_btn" ></div>
-	<div id="location_btn" class="top_left_smcms_btn" ></div>
-	<div id="routing_btn" class="top_left_smcms_btn" ></div>
-	<div id="map"></div>
-
-	<div class="cd-popup is-visible0 favorites" role="alert">
-		<div class="cd-popup-container">
-			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان نقطه جدید" /></p>
-			<ul class="cd-buttons">
-				<li><a href="#" onclick="add_to_favorites();">تایید</a></li>
-				<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
-			</ul>
-			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
-		</div> <!-- cd-popup-container -->
-	</div> <!-- cd-popup -->
-
-	<div class="cd-popup is-visible0 route_from" role="alert">
-		<div class="cd-popup-container">
-			<p>لطفا مبدا سفر را انتخاب نمایید</p>
-			<ul class="cd-buttons">
-				<li><a href="#" onclick="routing_to_open();" style="background-color:#247dc9;">تایید</a></li>
-				<li><a href="#" onclick="routing_open();">لغو</a></li>
-			</ul>
-			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
-		</div> <!-- cd-popup-container -->
-	</div> <!-- cd-popup -->
-
-	<div class="cd-popup is-visible0 route_to" role="alert">
-		<div class="cd-popup-container">
-			<p>لطفا مقصد سفر را انتخاب نمایید</p>
-			<ul class="cd-buttons">
-				<li><a href="#" onclick="routinging_start();" style="background-color:#ce3b39;">تایید</a></li>
-				<li><a href="#" onclick="routing_open();">لغو</a></li>
-			</ul>
-			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
-		</div> <!-- cd-popup-container -->
-	</div> <!-- cd-popup -->
 
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="js/console.log.js"></script>
 <script src="phonegap.js"></script>
 <script src="js/fastclick.js"></script>
-
-<script src="maps/js/leaflet-src.js"></script>
-<script src="maps/js/leaflet-search.js"></script>
-<script src="maps/js/leaflet-routing-machine.min.js"></script> 
-<script src="maps/js/Control.Geocoder.js"></script>
-
-<script src="maps/js/fuse.min.js"></script>
-<script src="maps/js/points.json"></script>
 <script>
 	var my_location_gps;
 	function getParameterByName(name) {
@@ -118,6 +69,60 @@
 		// your callback here
 		//alert(JSON.stringify(error));
 	}
+</script>
+</head>
+
+<body onload="init();">
+	<div id="favorites_btn" class="top_left_smcms_btn" ></div>
+	<div id="wifi_btn" class="top_left_smcms_btn" ></div>
+	<div id="location_btn" class="top_left_smcms_btn" ></div>
+	<div id="routing_btn" class="top_left_smcms_btn" ></div>
+	<div id="map"></div>
+
+	<div class="cd-popup is-visible0 favorites" role="alert">
+		<div class="cd-popup-container">
+			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان نقطه جدید" /></p>
+			<ul class="cd-buttons">
+				<li><a href="#" onclick="add_to_favorites();">تایید</a></li>
+				<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
+			</ul>
+			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
+
+	<div class="cd-popup is-visible0 route_from" role="alert">
+		<div class="cd-popup-container">
+			<p>لطفا مبدا سفر را انتخاب نمایید</p>
+			<ul class="cd-buttons">
+				<li><a href="#" onclick="routing_to_open();" style="background-color:#247dc9;">تایید</a></li>
+				<li><a href="#" onclick="routing_open();">لغو</a></li>
+			</ul>
+			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
+
+	<div class="cd-popup is-visible0 route_to" role="alert">
+		<div class="cd-popup-container">
+			<p>لطفا مقصد سفر را انتخاب نمایید</p>
+			<ul class="cd-buttons">
+				<li><a href="#" onclick="routinging_start();" style="background-color:#ce3b39;">تایید</a></li>
+				<li><a href="#" onclick="routing_open();">لغو</a></li>
+			</ul>
+			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
+
+
+
+<script src="maps/js/leaflet-src.js"></script>
+<script src="maps/js/leaflet-search.js"></script>
+<script src="maps/js/leaflet-routing-machine.min.js"></script> 
+<script src="maps/js/Control.Geocoder.js"></script>
+
+<script src="maps/js/fuse.min.js"></script>
+<script src="maps/js/points.json"></script>
+<script>
+
 	
 	var categories = {
 		101 : {desc: "اماکن المقدسة", icon:"zearati"},/////////////
