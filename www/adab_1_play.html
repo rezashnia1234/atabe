@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
+
+    <title>بسم الله الرحمن الرحيم</title>
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/progress.bar.css">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+	<style>
+		.progress-bar-parent {
+			background-color: rgba(223, 244, 249, 0.95);
+			display: none;	
+		}
+	</style>
+	<script src="js/jquery-2.2.2.min.js"></script>
+    <script src="phonegap.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="js/back_btn.js"></script>
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script>
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////START DOWNLOAD//////////////////////////////////////////////////////////////////////
+		var temp_element;
+		var progress_bar_element;
+		function temp_function() {
+			// do something
+		}
+/////END DOWNLOAD////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+		function init() {		
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+			document.addEventListener("deviceready", onDeviceReady, false);
+			/**** added by mahdi *********/
+			if(isRetina())
+			{
+				$('.retina').each( function(i) {
+					var back = $(this).css('background-image');
+					back = back.replace("/low", "/high");
+					$(this).css('background-image',back);
+				});
+				$('.retina:before').each( function(i) {
+					var back = $(this).css('background-image');
+					back = back.replace("/low", "/high");
+					$(this).css('background-image',back);
+				});
+			}
+			var mc = new Hammer(document.body);
+			mc.on("swiperight", function(ev) {
+				go_back();
+			});
+			var isAlreadyLoading = 0, jump = false;
+ 			var myScroll = new iScroll('smm_adab_wrapper', { hideScrollbar: true, bounce : "enable",useTransition: true });
+ 			linkable();
+			/*****************************/
+		}
+
+		function linkable(){
+			$('#smm_adab_wrapper ul li').unbind( "click" );
+			$('#smm_adab_wrapper ul li').click(function(){
+ 				var id = $(this)[0].id;
+ 				window.location.href = id+'.html';
+ 			});
+		}
+		function onDeviceReady() {
+		
+			var networkState = navigator.connection.type;
+
+			FastClick.attach(document.body);
+// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+// 				document.addEventListener("backbutton", go_back_index, false);
+// 			}
+			
+			
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////START DOWNLOAD//////////////////////////////////////////////////////////////////////
+			init_audio();
+			
+			$('.play_it').each( function(i) {
+				//$(this).css("display","none");
+				var temp_array = JSON.parse(window.localStorage.getItem('downloaded_files'));
+				if($.inArray($.md5($(this).attr('online')),temp_array) != -1)
+				{
+					$(this).removeClass("need_download").addClass("downloaded");
+				}
+			});
+			$('.play_it').click( function(i) {
+				temp_element = $(this);
+				//alert($(this).attr('online'));
+				
+				//play_or_download('http://khamenei.mobi/app/jh/ios/audio/roze/02.mp3','mp3');
+				play_or_download($(this).attr('online'),"mp3");
+			});
+			
+			
+			
+			if(window.localStorage.getItem('downloaded_files') == null){
+				window.localStorage.setItem('downloaded_files',JSON.stringify(["786","110"]));	
+			}
+			
+			
+			if(window.localStorage.getItem('download_address') == null){
+				
+				window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, 
+					function(fs) {
+						window.localStorage.setItem('download_address',fs.root.toURL());
+					}, function(e) {
+						alert('failed to get fs');
+						alert(JSON.stringify(e));
+					}
+				);
+			}
+
+			console.log("window.localStorage.getItem('download_address'):" + window.localStorage.getItem('download_address'));
+			console.log("window.localStorage.getItem('downloaded_files'):" + window.localStorage.getItem('downloaded_files'));
+/////END DOWNLOAD////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+			
+			
+		}
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////START DOWNLOAD//////////////////////////////////////////////////////////////////////
+		function play_or_download(URL,Extension) {
+			console.log("play_or_download URL: " + URL);
+			console.log("play_or_download Extension: " + Extension);
+
+			if (device.platform == 'iOS')
+			{
+				downloadPath = "cdvfile://localhost/persistent/";
+				window.localStorage.setItem('download_address',downloadPath);
+			}
+			
+			downloadPath = window.localStorage.getItem('download_address') + $.md5(URL) + "." + Extension;
+			console.log("play_or_download : " + downloadPath);
+			if(temp_element.attr("play_type")=="offline")
+			{
+					console.log("play_or_download : play offline");
+					
+					playAudio_new(URL,false);
+			}
+			else
+			{
+				if(check_download(URL))
+				{
+					console.log("play_or_download : check_download");
+					
+					playAudio_new(downloadPath,true);
+					//var media = new Media(downloadPath, null, function(e) { alert(JSON.stringify(e));});
+					//media.play();
+				}
+				else
+				{
+					console.log("play_or_download : start_download");
+					start_download(URL,Extension);
+				}
+			}
+		}
+
+		function start_download(URL,Extension) {
+			console.log("start_download check internet");
+			networkState = navigator.connection.type;
+			if (networkState == Connection.NONE) {
+				console.log("start_download : NO internet");
+				navigator.notification.alert(
+					'شما برای اینکار به اینترنت نیاز دارید',  // message
+					temp_function,         // callback
+					'اخطار',            // title
+					'تائید'                  // buttonName
+				);
+			}
+			else{
+				console.log("start_download : we have internet");
+
+				console.log("start_download URL: " + URL);
+				console.log("start_download Extension: " + Extension);
+				
+				var FileTransfer_OBJ = new FileTransfer();
+				var uri = encodeURI(URL + "?" + Math.random());
+				
+				if (device.platform == 'iOS')
+				{
+					downloadPath = "cdvfile://localhost/persistent/";
+					window.localStorage.setItem('download_address',downloadPath);
+				}
+				
+				$('.progress-bar-parent').css("display","block");
+				
+				downloadPath = window.localStorage.getItem('download_address') + $.md5(URL) + "." + Extension;
+				console.log("start_download : " + downloadPath);
+				
+				FileTransfer_OBJ.onprogress = function(progressEvent) {
+					if (progressEvent.lengthComputable) {
+						var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+						$('#status').html(perc + "% بارگذاری شد...");
+						$('.progress-bar-percent').css('width',perc + "%");
+						//progress_bar_element.css('width',perc);
+					} else {
+						$('#status').html($('#status').html() + ".");
+						//progress_bar_element.css('width',progress_bar_element.width()+1);
+						$('.progress-bar-percent').css('width',$('.progress-bar-parent').find('span').width()+1);
+					}
+				};
+				
+				FileTransfer_OBJ.download(uri, downloadPath, 
+					function(entry) {	
+						$('#status').html("");
+						$('.progress-bar-parent').find('span').css('width','2%');
+						console.log("start_download : done");
+						temp_array = JSON.parse(window.localStorage.getItem('downloaded_files'));
+						temp_array.push($.md5(URL));
+						window.localStorage.setItem('downloaded_files',JSON.stringify(temp_array));	
+						
+						temp_element.removeClass("need_download");
+						$('.progress-bar-parent').css("display","none");				
+					}, 
+					function(error) {
+						//alert('Crap something went wrong...');	
+						//alert(JSON.stringify(error));
+						navigator.notification.alert(
+							'خطا در دانلود فایل',  // message
+							temp_function,         // callback
+							'اخطار',            // title
+							'تائید'                  // buttonName
+						);
+						$('.progress-bar-parent').find('span').css('width','2%');
+						$('.progress-bar-percent').css('width',"");
+						$('.progress-bar-parent').css("display","none");
+					},
+					true
+				);
+				
+				$("#abort").click( function(i) {
+					FileTransfer_OBJ.abort();
+					$('.progress-bar-parent').find('span').css('width','2%');
+					$('.progress-bar-percent').css('width',"");
+					$('.progress-bar-parent').css("display","none");
+				});
+				
+			}
+		}
+		
+		function check_download(URL) {
+			console.log("check_download URL: " + URL);
+			var temp_array = JSON.parse(window.localStorage.getItem('downloaded_files'));
+			console.log("check_download Extension: " + window.localStorage.getItem('downloaded_files'));
+			if($.inArray($.md5(URL),temp_array) != -1)
+			{
+				console.log("check_download true");
+				return true;
+			}
+			else
+			{
+				console.log("check_download false");
+				return false;
+			}
+		}
+/////END DOWNLOAD////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+		$(window).load(function() {		
+			setTimeout(function(){
+				$(".mypreload").html("");
+			}, 300);
+		
+		});
+
+		function isHighDensity(){
+			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (min-device-pixel-ratio: 1.3)').matches)) || (window.devicePixelRatio && window.devicePixelRatio > 1.3));
+		}
+		function isRetina(){
+			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+		}
+		$(document).ready(function(){
+			
+		});
+		
+	</script>	
+
+		
+		
+		
+<style>
+
+
+</style>	
+</head>
+<body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body" class="smm_ziarat_body retina">
+	<div class="bg" ></div>
+	<div class="container " id="container" >
+			<div id="ajax" class="mypreload">
+				<div style="z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: #1e92c4; opacity: 1; cursor: default; position: fixed;overflow:visible;" class="blockUI blockOverlay"></div>
+				<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
+				<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
+			</div>
+		<div class="smm_content">
+			<div class="smm_adab_title retina">
+				<a href="adab.html">
+					<span class="smm_ziarat_back"></span>
+				</a>
+			</div>
+			<div class="smm_adab_content">
+				<div id="smm_adab_wrapper" style="position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 1vw;
+    overflow: auto;
+    text-align: right;">
+					<div>
+						<p class="smm_adab_subject">
+							  الباب الأول
+						</p>
+						<div class="smm_adab_text" style="margin-bottom: 10vw;padding-bottom: 10vw;">
+                        
+                        
+                      
+1- فضل زيارة أمير المؤمنين <br/>
+أ- آثار زيارة أمير المؤمنين في الدنيا  <br/>
+1- عن أبي عبد الله الصادق قال: (نحن نقول:بظهر الكوفة قبر لا يلوذ به ذو عاهة إلّا شفاه الله). <br/>
+2- قال الصادق : (إن الله عزّ إسمه عرض ولايتنا على السماوات والأرض والجبال والأمصار، فلم يقبلها قبول أهل الكوفة، وإنّ إلى جانبهم لقبراً، ما لقاه مكروب إلاّ نفّس الله كربته، وأجاب دعوته، وقلبه إلى أهله مسروراً). <br/>
+3- عن أبي عبد الله   : (إن إلى جانب كوفان قبرا ما أتاه مكروب قط فصلى عنده ركعتين أو أربع ركعات إلا نَفَّس الله كربته وقضى حاجته، قال: قلت: قبر الحسين بن علي؟ فقال لي برأسه: لا، فقلت: قبر أمير المؤمنين ؟ فقال برأسه: نعم). <br/>
+
+ب- آثار زيارة أمير المؤمنين  في الآخرة <br/>
+1- قال رسول الله : (من زار عليّاً بعد وفاته فله الجنة). <br/>
+2- قال رسول الله   لعليّ : (ومن زار قبوركم عدل ذلك له ثواب سبعين حجّة بعد حجّة الإسلام، وخرج من ذنوبه حتّى يرجع من زيارتكم كيوم ولدته أمّه. فأبشر وبشّر أولياءك ومحبيك من النعيم وقرّة العين بما لا عين رأت ولا أذن سمعت، ولا خطر على قلب بشر). <br/>
+3- قال رسول الله : (يا علي من زارني في حياتي أو بعد موتي أو زارك في حياتك أو بعد موتك أو زار ابنيك في حياتهما أو بعد موتهما ضمنت له يوم القيامة أن أُخلّصه من أهوالها وشدائدها حتى أصيّره معي في درجتي). <br/>
+4- قيل لأبي الحسن الرضا : (أيما أفضل، زيارة قبر أمير المؤمنين، أو زيارة الحسين ؟ قال: إن الحسين قتل مكروباً، فحقاً على الله - جل ذكره - أن لا يأتيه مكروب إلاّ فرّج الله كربه. وفضل زيارة أمير المؤمنين على زيارة قبر الحسين كفضل أمير المؤمنين على الحسين).
+<p class="smm_adab_subject">
+الباب الثاني
+</p>
+في آداب الزيارة <br/>
+1 ـ الغُسل قبل الخروج لسفر الزّيارة. <br/>
+2 ـ أن يتجنّب في الطّريق التكلُّم باللّغو والخصام والجدال. <br/>
+3 ـ أن يلبس ثياباً طاهرة نظيفة جديدة ويحسن أن تكون بيضاء.  <br/>
+4 ـ أن يقصِّر خُطاه إذا خرج إلى الرّوضة المقدّسة، وأن يسير وعليه السكينة والوقار، وأن يكون خاضعاً خاشعاً، وأن يطأطِئ رأسه فلا يلتفت إلى الأعلى ولا إلى جوانبه. <br/>
+5 ـ أن يتطيّب بشي‏ء من الطّيب فيما عدا زيارة الحسين. <br/>
+6 ـ أن يشغل لسانه وهو يمضي إلى الحرم المطهّر بالتكبير والتحميد والتّسبيح والتّهليل والتّمجيد، ويعطّر فاه بالصّلاة على محمّد وآله عليهم السلام. <br/>
+7 ـ أن يقف على باب الحرم الشّريف ويستأذن ويجتهد لتحصيل الرّقّة والخضُوع والانكسار والتفكّر في عظمة صاحب ذلك المرقد المنوّر وجلاله، وأنّه يرى مقامَهُ ويسمع كلامَهُ ويردّ سلامَهُ كما يشهد على ذلك كلّه عندما يقرأ الاستئذان. <br/>
+8 ـ أن يقدّم للدّخول رجلَه اليُمنى ويقدِّم للخروج رجله اليُسرى كما يصنع عند دُخول المساجد والخروج منها. <br/>
+9ـ أن يقف للزّيارة مستقبلاً القبر مُستدبِراً القبلة وهذا الأدب ممّا يخصّ زيارة المعصوم على الظّاهر، فإذا فرغ من الزّيارة فليضع خدّه الأيمن على الضّريح ويدعو الله بتضرُّع ثمّ ليضع الخدّ الأيسر ويدعو الله بحقّ صاحب القبر أن يجعله من أهل شفاعته ويبالغ في الدّعاء والإلحاح ثمّ يمضي إلى جانب الرّأس فيقف مستقبل القبلة فيدعو الله  تعالى. <br/>
+10 ـ أن يزور وهُو قائم على قدميه إلا إذا كان له عُذر من ضعف أو وجع أو غير ذلك من الأعذار. <br/>
+11 ـ أن يكبّر إذا شاهد القبر المطهّر قبل الشّروع في الزّيارة، وفي رواية أنّ من كبّر أمام الإمام وقال: لا اِلهَ اِلاَّ الله وَحْدَهُ لا شَريكَ لَهُ كتب له رضوان  الله الأكبر.
+12 ـ ترك اللّغو وما لا ينبغي من الكلام وترك الاشتغال بالتكلّم في أُمور الدّنيا فهو مذموم قبيح في كلّ زمان ومكان وهو مانع للرزق ومجلبة للقساوة لاسيّما في هذه البقاع الطاهرة والقباب السّامية التي أخبر الله تعالى بجلالهـا وعظمتهـا في ســورة النـور في بُيُوتٍ أَذِنَ اللهُ أَنْ تُرْفَعَ الآية. <br/>
+13 ـ أن لا يرفـع صوته بما يزور به، قال  الله تعالى: يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَرْفَعُوا أَصْوَاتَكُمْ فَوْقَ صَوْتِ النَّبِيِّ وَلَا تَجْهَرُوا لَهُ بِالْقَوْلِ كَجَهْرِ بَعْضِكُمْ لِبَعْضٍ أَن تَحْبَـطَ أَعْمَالُكُـمْ وَأَنتُـمْ لَا تَشْعُـرُونَ وأمير المؤمنين هو نفس رسول الله   بدليل قوله تعالى في آية المباهلة: فَمَنْ حَاجَّكَ فِيهِ مِن بَعْدِ مَا جَاءكَ مِنَ الْعِلْمِ فَقُلْ تَعَالَوْاْ نَدْعُ أَبْنَاءنَا وَأَبْنَاءكُمْ وَنِسَاءَنَا وَنِسَاءَكُمْ وَأَنفُسَنَا وأَنفُسَكُمْ ثُمَّ نَبْتَهِلْ فَنَجْعَل لَّعْنَةَ الله عَلَى الْكَاذِبِينَ. <br/>
+14 ـ أن يودّع الإمام بالمأثور أو بغيره إذا أراد الخروج من البلد. <br/>
+15 ـ أن يتوبَ إلى الله ويستغفر مِن ذنوبه، وأن يجعل أعماله وأقواله بعد الزّيارة خيراً منها قبلها. <br/>
+16 ـ ينبغي عند ازدحام الزّائرين للسّابقين إلى الضّريح أن يخفّفوا زيارتهم وينصرفوا ليفُوزَ غيرهُم بالدُّنوّ من الضّريح الطّاهر كما كانوا هم من الفائزين.
+
+                        
+                        
+<br/><br/><br/><br/><br/>
+                        
+						</div>
+
+						
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+			
+			
+		<script>
+			function playAudio_new(filename,is_from_web) {
+				$("#durationTimer").html("--:--");
+				$("#audioTimer").html("00:00");
+				
+				audio.stop();
+				setTimeout(function(){
+					playAudio(filename,is_from_web);
+				}, 600);
+			}
+		</script>
+		<div id="smgroup_audio_player" >
+				<span id="audioTimer" >00:00</span>&nbsp 
+				<span id="durationTimer" >--:--</span>
+				<div id="audioPosition" >
+					<input type="range" name="slider" id="slider" disabled="disabled" value="0" min="0" max="60" style="padding:0;margin:0;" />
+				</div>
+				<div class="audio_btn">
+					<input type="button" id="play" value="" class="play_it need_download" online="http://khamenei.mobi/app/jh/ios/audio/besatkhune/03.mp3" /><!--play_type="offline"-->
+					<input type="button" id="play2" value="" />
+					<input type="button" id="pause" value="" />
+					<input type="button" id="stop" value="Stop" />
+				</div>
+		</div>
+		<div class="progress-bar-parent">
+			<div class="progress-bar green glow">
+				<div id="status"></div>
+				<span class="progress-bar-percent" style="width: 1%"></span>
+				<div id="descripion">
+					<div class="first">التحمیل</div>
+				</div>
+				<div id="abort_box"><input type="button" id="abort" value="إلغاء" /></div>
+			</div>
+		</div>
+			
+	</div>
+	
+	
+<script>
+	//init_audio("audio/roze/0.mp3");
+
+	audio_Timer = $("#audioTimer");
+	duration_Timer = $("#durationTimer");
+	slider_Timer = $("#slider");
+	
+	audio = null;
+	audioTimer = null;
+	pausePos = 0;
+	
+	function init_audio(my_file){
+		/*
+		if (audio) {
+			play_btn.css("display","block");
+			play2_btn.css("display","none");
+			pause_btn.css("display","none");
+			
+			slider_Timer.val(0);
+			stopAudio();
+		}
+		*/
+		// Phonegap is loaded and can be used
+		play_btn = $("#play");
+		play2_btn = $("#play2");
+		pause_btn = $("#pause");
+		stop_btn = $("#stop");
+		slider_Timer = $("#slider");
+		slider_range = slider_Timer;
+/*
+		play_btn.click(function(e){
+			e.preventDefault();
+			play_btn.css("display","none");
+			pause_btn.css("display","block");
+			slider_Timer.prop("disabled",false);
+			playAudio(my_file);
+		});
+*/
+		slider_Timer.on("change", function(){
+			//play_btn.prop("disabled",false);
+			//play2_btn.prop("disabled",false);
+			//pause_btn.prop("disabled",true);
+			play2_btn.css("display","block");
+			pause_btn.css("display","none");
+			
+			pausePos = slider_Timer.val();
+			formatTime(pausePos,audio_Timer);
+			pauseAudio();
+			formatTime(pausePos,audio_Timer);
+			audio.seekTo(pausePos*1000);
+			
+			setTimeout(function(){
+				pausePos = temp_pausePos;
+				audio.seekTo(pausePos*1000);
+				formatTime(pausePos,audio_Timer);
+				slider_Timer.val(pausePos);
+			}, 800);
+		});
+		
+		pause_btn.click(function(){	
+			play2_btn.css("display","block");
+			pause_btn.css("display","none");
+
+			pauseAudio();
+		});
+		
+		play2_btn.click(function(){	
+			pause_btn.css("display","block");
+			play2_btn.css("display","none");		
+			
+			PausePlayAudio();
+		});
+		
+		stop_btn.click(function(){
+			play_btn.css("display","block");
+			play2_btn.css("display","none");
+			pause_btn.css("display","none");
+			
+			slider_Timer.val(0);
+			stopAudio();
+		});
+		
+		
+		file = "audio/besmella.mp3";
+		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+			file = "/android_asset/www/" + file;
+		}
+		audio = new Media(file, function(){ // success callback
+
+		}, function(error){ // error callback
+			//alert("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
+			console.log("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
+		});
+	}
+
+
+	function playAudio(file,is_from_web){
+		//alert(file);
+		
+		if (is_from_web==false){//Android,iOS,win7=WinCE,win8=Win32NT
+			file = file.replace("http://khamenei.mobi/app/jh/ios/", "");
+		}
+		if ( device.platform == 'Android' && is_from_web==false ){//Android,iOS,win7=WinCE,win8=Win32NT
+			file = "/android_asset/www/" + file;
+		}
+		console.log("2");
+		if (audio) {
+			console.log("3");
+			audio.stop();
+			//audio.release();
+		}
+		console.log("4");
+		
+		$("#smgroup_audio_player").show();
+		play_btn.css("display","none");
+		play2_btn.css("display","none");
+		pause_btn.css("display","block");
+		slider_Timer.prop("disabled",false);
+		
+		audio = new Media(file, function(){ // success callback
+			console.log("playAudio():Audio Success");
+			play_btn.css("display","block");
+			play2_btn.css("display","none");
+			pause_btn.css("display","none");
+		
+			slider_Timer.val(0);
+			stopAudio();
+		}, function(error){ // error callback
+			//alert("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
+			console.log("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
+		});
+		//alert("3");
+		// get audio duration
+		var duration = audio.getDuration();
+		var duration_show = false;
+		
+		// set slider data
+		if( duration > 0 ){
+			formatTime(duration,duration_Timer);
+			slider_Timer.attr( "max", Math.round(duration) );
+			//slider_Timer.slider("refresh");
+			slider_Timer.val(0);
+			duration_show = true;
+		}
+
+		
+		// play audio
+		audio.play({ playAudioWhenScreenIsLocked : true });
+		
+		audio.seekTo(0);
+			
+		// update audio position every second
+		if (audioTimer == null) {
+			audioTimer = setInterval(function() {
+				// get audio position
+				audio.getCurrentPosition(
+					function(position) { // get position success
+						if (position > -1) {
+							setAudioPosition(position);
+						}
+					}, function(e) { // get position error
+						alert("Error getting pos=" + e);
+						//setAudioPosition(duration);
+					}
+				);
+				if(!duration_show){
+					duration = audio.getDuration();
+					if( duration > 0 ){
+						formatTime(duration,duration_Timer);
+						slider_Timer.attr( "max", Math.round(duration) );
+						//slider_Timer.slider("refresh");
+						duration_show = true;
+					}
+				}
+			}, 1000);
+		}
+	}
+
+
+	function pauseAudio() {
+		if (audio) {
+			audio.pause();
+		}
+	}
+	
+	function PausePlayAudio() {
+		if (audio) {
+			audio.pause();
+			audio.seekTo(pausePos*1000);
+			audio.play();
+		}
+	}
+
+
+	function stopAudio() {
+		if (audio) {
+			audio.stop();
+			audio.release();
+		}
+		clearInterval(audioTimer);
+		audioTimer = null;
+		pausePos = 0;
+		formatTime(0,audio_Timer);
+	}
+
+
+	function setAudioPosition(position) {
+		pausePos = position;
+		position = Math.round(position);
+		slider_Timer.val(position);
+		formatTime(position,audio_Timer);
+		//slider_Timer.slider("refresh");
+		//slider_Timer.val(0);
+	}
+
+	function formatTime(seconds,Timer) {
+		if (seconds <= 0)
+		{
+			Timer.html("00:00");
+			return;
+		}	
+		var minutes = Math.floor(seconds / 60);
+		
+		if (minutes < 10)
+			minutes = "0" + minutes;
+
+		seconds = seconds % 60;
+		if (seconds < 10)
+			seconds = "0" + seconds;
+		seconds = Math.round(seconds);
+		
+		Timer.html(minutes + ":" + seconds);
+	};
+</script>
+</body>
+</html>
