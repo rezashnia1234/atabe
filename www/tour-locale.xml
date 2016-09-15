@@ -267,6 +267,7 @@ set(plugin[rotate-icon].enabled,true);
 <hotspot name="spot3" style="skin_hotspotstyle" ath="-75.503" atv="-10.118" linkedscene="scene_ivane_rast_roze"/>
 <hotspot name="spot4" style="skin_hotspotstyle" ath="-109.808" atv="3.001" linkedscene="scene_21_roze"/>
 <hotspot name="spot6" style="skin_hotspotstyle" ath="-50.612" atv="-46.123" linkedscene="scene_menare_rast" />
+</scene>
 
  
 
