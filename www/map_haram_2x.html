@@ -116,7 +116,7 @@
 	}
 	var map = L.map('map', {
 	  minZoom: 1,
-	  maxZoom: 4,
+	  maxZoom: 5,
 	  center: [0, 0],
 	  zoom: 2,
 	  crs: L.CRS.Simple,
@@ -124,9 +124,9 @@
 	});
 
 	// dimensions of the image
-	var w = 1100,
-		h = 1858,
-		url = 'maps/haram-map.png';
+	var w = 1900,
+		h = 3208,
+		url = 'maps/haram-map-2x.png';
 
 	// calculate the edges of the image, in coordinate space
 	var southWest = map.unproject([0, h], map.getMaxZoom()-1);
@@ -161,7 +161,7 @@
 		//fx.run(el, [300, 500], 0.5);
 		//map.panTo(e.layer.getLatLng());
 		//map.panTo([800, 640]);
-		map.panTo([70, 70]);
+		map.panTo([-10, 70]);
 		
 		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup().on('click', function(e){alert(this.getLatLng());});
 		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup().on('click', onClick);
