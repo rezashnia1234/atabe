@@ -625,7 +625,7 @@ li .smm_midnight {
     direction: rtl;
     margin-top: 2vw;
     font-weight: bold;
-    font-size: 3vw;
+    font-size: 15px;
 }
 #smm_adab_wrapper .smm_adab_text{
 	text-align: justify;
@@ -634,6 +634,11 @@ li .smm_midnight {
     font-weight: normalß;
     font-size: 3vw;
 }
+#smm_adab_wrapper .smm_adab_text {
+	font-size: 14px;
+	line-height: 220%;
+}
+
 /********** pictures ************/
 .mh_visualizations_title {
     width: 90%;
