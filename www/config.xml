@@ -93,7 +93,7 @@
 	<!--<plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="pgb" />>-->
 	<!--<plugin name="com.synconset.imagepicker" source="pgb" />>-->
 	<!--<plugin name="net.roughshod.plugins.barcodescanner" source="pgb" />-->
-	<plugin spec="https://github.com/willyboy/cordova-plugin-local-notifications" source="git" />
+	<plugin spec="https://github.com/willyboy/cordova-plugin-local-notifications" platform="android" source="git" />
 	<plugin spec="https://github.com/kd-code/cordova-plugin-hello" platform="android" source="git" />
 	
     <!-- Define app icon      -->
