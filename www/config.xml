@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "ir.smgroup.imamali"
+        id        = "iq.imamali.net"
         version   = "1.10" >
 		
 		
@@ -61,6 +61,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
     <!--<gap:plugin name="org.apache.cordova.vibration" source="npm" />-->
 
+	
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
 	<plugin spec="https://github.com/fiscal-cliff/phonegap-plugin-brightness.git" source="git" />
@@ -95,6 +96,7 @@
 	<!--<plugin name="net.roughshod.plugins.barcodescanner" source="pgb" />-->
 	<plugin spec="https://github.com/willyboy/cordova-plugin-local-notifications" platform="android" source="git" />
 	<plugin spec="https://github.com/kd-code/cordova-plugin-hello" platform="android" source="git" />
+	<plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />
 	
     <!-- Define app icon      -->
     <icon src="images/splash/icon.png" />
