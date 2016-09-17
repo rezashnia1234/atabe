@@ -16,12 +16,14 @@
 <link rel="stylesheet" type="text/css" href="css/mh_visualizations.css">
 <!-- end mh css -->
 
-<script src="js/jquery-2.2.2.min.js"></script>
-<script src="phonegap.js"></script>
-<script src="js/fastclick.js"></script>
-<script src="js/hammer.min.js"></script>
-<script src="js/back_btn.js"></script>
-<script type="text/javascript" src="js/iscroll.js"></script>
+	<script src="js/jquery-2.2.2.min.js"></script>
+	<!--<script src="js/console.log.js"></script>-->
+    <script src="cordova.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="js/back_btn.js"></script>
+	<script src="js/iscroll.js"  type="text/javascript"></script>
 <script>
 	function init() {
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
@@ -103,7 +105,37 @@
 		// 				document.addEventListener("backbutton", go_back_index, false);
 		// 			}
 
-	}
+			$("a").each( function(i) {
+					var options_all_next = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					};
+					var options_all_back = {
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					};
+					if($(this).attr("transitions")=="next")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.slide({
+								options_all_next,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+					else if($(this).attr("transitions")=="perv")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.flip({
+								options_all_back,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+			});
+		}
 
 	$(window).load(function() {
 		setTimeout(function() {
@@ -154,7 +186,7 @@
 		</div>
 		<div class="smm_content">
 			<div class="mh_pictures_title retina">
-				<a href="picturesCategories.html"> <span class="smm_ziarat_back"></span>
+				<a href="picturesCategories.html" transitions="perv"> <span class="smm_ziarat_back"></span>
 				</a>
 			</div>
 			<div class="smm_picture_content">

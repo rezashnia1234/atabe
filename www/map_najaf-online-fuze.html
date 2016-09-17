@@ -49,7 +49,37 @@
 			setTimeout(arguments.callee, 10000);
 		})();
 		
-	}
+			$("a").each( function(i) {
+					var options_all_next = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					};
+					var options_all_back = {
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					};
+					if($(this).attr("transitions")=="next")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.slide({
+								options_all_next,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+					else if($(this).attr("transitions")=="perv")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.flip({
+								options_all_back,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+			});
+		}
 	function onSuccess(position) {
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onSuccess()');
 		//alert("longitude : " + position.coords.longitude);

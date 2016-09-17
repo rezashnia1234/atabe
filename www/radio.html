@@ -38,6 +38,7 @@
 			}
 			var mc = new Hammer(document.body);
 			mc.on("swiperight", function(ev) {
+				stop_my_radio();
 				goto_home();
 				//if(ev.velocity>0.8){console.log(ev.type +" gesture detected.");}
 			});
@@ -77,6 +78,36 @@
 				audio.play({ playAudioWhenScreenIsLocked : true });
 				//audio.seekTo(0);
 			}, 50);
+			$("a").each( function(i) {
+					var options_all_next = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					};
+					var options_all_back = {
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					};
+					if($(this).attr("transitions")=="next")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.slide({
+								options_all_next,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+					else if($(this).attr("transitions")=="perv")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.flip({
+								options_all_back,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+			});
 		}
 
 			
@@ -133,7 +164,8 @@
 			});
 			$(".go_back_stop").click(function(){
 				stop_my_radio();
-				window.location.href = 'index.html';
+				//window.location.href = 'index.html';
+				goto_home();
 			});
 		});
 	</script>	

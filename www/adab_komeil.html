@@ -128,6 +128,36 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 			
 			
+			$("a").each( function(i) {
+					var options_all_next = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					};
+					var options_all_back = {
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					};
+					if($(this).attr("transitions")=="next")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.slide({
+								options_all_next,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+					else if($(this).attr("transitions")=="perv")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.flip({
+								options_all_back,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+			});
 		}
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -274,7 +304,7 @@
 		$(window).load(function() {		
 			setTimeout(function(){
 				$(".mypreload").html("");
-			}, 600);
+			}, 800);
 		
 		});
 
@@ -308,7 +338,7 @@
 			</div>
 		<div class="smm_content">
 			<div class="smm_adab_title retina">
-				<a href="adab.html">
+<a href="adab.html" transitions="perv">
 					<span class="smm_ziarat_back"></span>
 				</a>
 			</div>

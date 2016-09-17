@@ -15,9 +15,9 @@
 			//window.location.href = "index.html";
 			var options_back = {
 			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  500, // in milliseconds (ms), default 400
+			  "duration"       :  1100, // in milliseconds (ms), default 400
 			};
-			window.plugins.nativepagetransitions.slide({
+			window.plugins.nativepagetransitions.flip({
 				options_back,
 				"href" : "index.html"
 			});
@@ -27,10 +27,10 @@
 			//parent.history.back();
 			var referrer =  document.referrer;
 			var options_back = {
-			  "direction"      : "up", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  700, // in milliseconds (ms), default 400
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
 			};
-			window.plugins.nativepagetransitions.slide({
+			window.plugins.nativepagetransitions.flip({
 				options_back,
 				"href" : referrer
 			});
@@ -56,9 +56,9 @@
 		//window.location.href = "index.html";
 		var options_back = {
 		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-		  "duration"       :  700, // in milliseconds (ms), default 400
+		  "duration"       :  1100, // in milliseconds (ms), default 400
 		};
-		window.plugins.nativepagetransitions.slide({
+		window.plugins.nativepagetransitions.flip({
 			options_back,
 			"href" : "index.html"
 		});

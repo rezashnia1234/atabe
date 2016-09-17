@@ -111,8 +111,41 @@
 	<div id="map"></div>
 	<script>
 	function init() {
+		document.addEventListener("deviceready", onDeviceReady, false);
 		winH = $(window).height();
 		$("#map").css("height",winH-40-12);
+	}
+	function onDeviceReady() {
+			$("a").each( function(i) {
+					var options_all_next = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					};
+					var options_all_back = {
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					};
+					if($(this).attr("transitions")=="next")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.slide({
+								options_all_next,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+					else if($(this).attr("transitions")=="perv")
+					{
+						$(this).click(function() {
+							event.preventDefault();
+							window.plugins.nativepagetransitions.flip({
+								options_all_back,
+								"href" : $(this).attr("href")
+							});
+						});
+					}
+			});
 	}
 	var map = L.map('map', {
 	  minZoom: 1,
