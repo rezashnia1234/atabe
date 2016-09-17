@@ -28,7 +28,7 @@
 			var referrer =  document.referrer;
 			var options_back = {
 			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  500, // in milliseconds (ms), default 400
+			  "duration"       :  700, // in milliseconds (ms), default 400
 			};
 			window.plugins.nativepagetransitions.slide({
 				options_back,
@@ -56,7 +56,7 @@
 		//window.location.href = "index.html";
 		var options_back = {
 		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-		  "duration"       :  500, // in milliseconds (ms), default 400
+		  "duration"       :  700, // in milliseconds (ms), default 400
 		};
 		window.plugins.nativepagetransitions.slide({
 			options_back,
