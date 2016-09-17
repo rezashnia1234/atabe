@@ -53,11 +53,7 @@
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
-			}
-			
-			
-			
-			
+			}			
 			
 			
 		}
@@ -77,12 +73,15 @@
 		});
 
 		function go_back_index() {
+			navigator.app.exitApp();
+			/*
 			navigator.notification.confirm(
 				'آيا تمايل به خروج از برنامه را داريد؟',	// message
 				onExitConfirm,								// callback
 				'توجه',										// title
 				['بله','خير']								// buttonName
 			);
+			*/
 		}
 		function onExitConfirm(buttonIndex) {
 			if(buttonIndex==1)
@@ -117,8 +116,12 @@
 				if($(this).attr("onclick3"))
 				{
 					//window.location.href = $(this).attr("onclick3");
+					var options_index = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  500, // in milliseconds (ms), default 400
+					};
 					window.plugins.nativepagetransitions.slide({
-						// the defaults for direction, duration, etc are all fine
+						options_index,
 						"href" : $(this).attr("onclick3")
 					});
 				}
@@ -129,8 +132,12 @@
 					if($(this).attr("onclick3"))
 					{
 						//window.location.href = $(this).attr("onclick3");
+						var options_index = {
+						  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+						  "duration"       :  500, // in milliseconds (ms), default 400
+						};
 						window.plugins.nativepagetransitions.slide({
-							// the defaults for direction, duration, etc are all fine
+							options_index,
 							"href" : $(this).attr("onclick3")
 						});
 					}

@@ -12,11 +12,28 @@
 		if(window.sessionStorage.getItem('go_to_first')=="true")
 		{
 			window.sessionStorage.setItem('go_to_first',"false");
-			window.location.href = "index.html";
+			//window.location.href = "index.html";
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  500, // in milliseconds (ms), default 400
+			};
+			window.plugins.nativepagetransitions.slide({
+				options_back,
+				"href" : "index.html"
+			});
 		}
 		else
 		{
-			parent.history.back();
+			//parent.history.back();
+			var referrer =  document.referrer;
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  500, // in milliseconds (ms), default 400
+			};
+			window.plugins.nativepagetransitions.slide({
+				options_back,
+				"href" : referrer
+			});
 		}
 	}
 	
@@ -36,7 +53,15 @@
 	}
 	
 	function goto_home() {
-		window.location.href = "index.html";
+		//window.location.href = "index.html";
+		var options_back = {
+		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+		  "duration"       :  500, // in milliseconds (ms), default 400
+		};
+		window.plugins.nativepagetransitions.slide({
+			options_back,
+			"href" : "index.html"
+		});
 	}
 	
 	// $(document).ready(function() {
