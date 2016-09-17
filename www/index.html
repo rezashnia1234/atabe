@@ -115,14 +115,25 @@
 				if($(this).hasClass("internet"))
 					return false;
 				if($(this).attr("onclick3"))
-					window.location.href = $(this).attr("onclick3");
-				//(need_internet()) ? window.location.href = 'live.html' : need_internet_alert();
+				{
+					//window.location.href = $(this).attr("onclick3");
+					window.plugins.nativepagetransitions.slide({
+						// the defaults for direction, duration, etc are all fine
+						"href" : $(this).attr("onclick3")
+					});
+				}
 			});
 			$(".goto.internet").click(function(e){
 				if(need_internet())
 				{
 					if($(this).attr("onclick3"))
-						window.location.href = $(this).attr("onclick3");
+					{
+						//window.location.href = $(this).attr("onclick3");
+						window.plugins.nativepagetransitions.slide({
+							// the defaults for direction, duration, etc are all fine
+							"href" : $(this).attr("onclick3")
+						});
+					}
 				}
 				else
 				{
