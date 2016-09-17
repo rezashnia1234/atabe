@@ -24,7 +24,8 @@
 		}
 		else
 		{
-			//parent.history.back();
+			parent.history.back();
+			/*
 			var referrer =  document.referrer;
 			var options_back = {
 			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
@@ -34,6 +35,7 @@
 				options_back,
 				"href" : referrer
 			});
+			*/
 		}
 	}
 	
@@ -61,6 +63,17 @@
 		window.plugins.nativepagetransitions.flip({
 			options_back,
 			"href" : "index.html"
+		});
+	}
+	function go_back_adab() {
+		//window.location.href = "index.html";
+		var options_back = {
+		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+		  "duration"       :  1100, // in milliseconds (ms), default 400
+		};
+		window.plugins.nativepagetransitions.flip({
+			options_back,
+			"href" : "adab.html"
 		});
 	}
 	
