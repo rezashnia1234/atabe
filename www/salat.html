@@ -82,7 +82,7 @@
 					{
 						$(this).click(function() {
 							event.preventDefault();
-							window.plugins.nativepagetransitions.slide({
+							window.plugins.nativepagetransitions.flip({
 								options_all_back,
 								"href" : $(this).attr("href")
 							});
@@ -192,9 +192,9 @@
 				
 				
 				
-				setTimeout(function(){
-					$(".mypreload").html("");
-				}, 300);
+			setTimeout(function(){
+				$(".mypreload").html("");
+			}, 600);
 		});
 
 

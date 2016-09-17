@@ -70,6 +70,14 @@
 			// $('a').on('dragstart', function(event) { event.preventDefault();				});
 		// }, 600);
 	// });
-	
+    function checkSimulator() {
+		if (window.navigator.simulator === true) {
+			return true;
+		} else if (window.plugins.nativepagetransitions === undefined) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	
