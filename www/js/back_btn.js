@@ -27,7 +27,7 @@
 			//parent.history.back();
 			var referrer =  document.referrer;
 			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "direction"      : "up", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 			  "duration"       :  700, // in milliseconds (ms), default 400
 			};
 			window.plugins.nativepagetransitions.slide({
