@@ -11,18 +11,24 @@
 	function go_back() {
 		if(window.sessionStorage.getItem('go_to_first')=="true")
 		{
-			window.sessionStorage.setItem('go_to_first',"false");
-			//window.location.href = "index.html";
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "href" : "index.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
+			if (window.cordova)
+			{
+				window.sessionStorage.setItem('go_to_first',"false");
+				//window.location.href = "index.html";
+				var options_back = {
+				  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+				  "duration"       :  1100, // in milliseconds (ms), default 400
+				  "androiddelay"   :  110,
+				  "href" : "index.html"
+				};
+				window.plugins.nativepagetransitions.flip({
+					options_back,
+					function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+				});
+			}
+			else
+				window.location.href = "adab.html";
 		}
 		else
 		{
@@ -32,6 +38,7 @@
 			var options_back = {
 			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
 			  "href" : referrer
 			};
 			window.plugins.nativepagetransitions.flip({
@@ -60,29 +67,42 @@
 	
 	function goto_home() {
 		//window.location.href = "index.html";
-		var options_back = {
-		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-		  "duration"       :  1100, // in milliseconds (ms), default 400
-		  "href" : "index.html"
-		};
-		window.plugins.nativepagetransitions.flip({
-			options_back,
-			function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-			function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-		});
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href" : "index.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "adab.html";
+
 	}
 	function go_back_adab() {
 		//window.location.href = "index.html";
-		var options_back = {
-		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-		  "duration"       :  1100, // in milliseconds (ms), default 400
-		  "href"		   : "adab.html"
-		};
-		window.plugins.nativepagetransitions.flip({
-			options_back,
-			function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-			function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-		});
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href"		   : "adab.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "adab.html";
 	}
 	
 	// $(document).ready(function() {
@@ -91,6 +111,106 @@
 			// $('a').on('dragstart', function(event) { event.preventDefault();				});
 		// }, 600);
 	// });
+	
+	function goto_next_page(href,need_internet) {
+		need_internet = need_internet || false;
+		if (window.cordova)
+		{
+			var networkState = navigator.connection.type;
+			if ((networkState == Connection.NONE) && need_internet) {
+				navigator.notification.alert(
+					'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+					alertDismissed,         // callback
+					'اخطار',            // title
+					'تائید'                  // buttonName
+				);
+				function alertDismissed(){};
+			}
+			else
+			{
+				if ( device.platform == 'iOS' )
+				{
+					var options_back = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					  "androiddelay"   :  110,
+					  "href"		   : href //"adab.html"
+					};
+					window.plugins.nativepagetransitions.slide(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
+				else
+				{
+					var options_back = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					  "androiddelay"   :  110,
+					  "href"		   : href //"adab.html"
+					};
+					window.plugins.nativepagetransitions.flip(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
+			}
+		} else {
+			window.location.href = href;
+		}
 
+	}
+	function goto_perv_page(href,need_internet) {
+		need_internet = need_internet || false;
+		if (window.cordova)
+		{
+			var networkState = navigator.connection.type;
+			if ((networkState == Connection.NONE) && need_internet) {
+				navigator.notification.alert(
+					'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+					alertDismissed,         // callback
+					'اخطار',            // title
+					'تائید'                  // buttonName
+				);
+				function alertDismissed(){};
+			}
+			else
+			{
+				if ( device.platform == 'iOS' )
+				{
+					var options_back = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					  "androiddelay"   :  110,
+					  "href"		   : href //"adab.html"
+					};
+					window.plugins.nativepagetransitions.slide(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
+				else
+				{
+					var options_back = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					  "androiddelay"   :  110,
+					  "href"		   : href //"adab.html"
+					};
+					window.plugins.nativepagetransitions.flip(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
+			}
+		} else {
+			window.location.href = href;
+		}
+
+	}
 	
 	

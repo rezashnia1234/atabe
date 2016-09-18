@@ -110,40 +110,7 @@
 			
 			
 			
-			$("a").each( function(i) {
-					var options_all_next = {
-					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  700, // in milliseconds (ms), default 400
-					  "href" : $(this).attr("href")
-					};
-					var options_all_back = {
-					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  1100, // in milliseconds (ms), default 400
-					  "href" : $(this).attr("href")
-					};
-					if($(this).attr("transitions")=="next")
-					{
-						$(this).click(function() {
-							event.preventDefault();
-							window.plugins.nativepagetransitions.slide({
-								options_all_next,
-								function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-								function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-							});
-						});
-					}
-					else if($(this).attr("transitions")=="perv")
-					{
-						$(this).click(function() {
-							event.preventDefault();
-							window.plugins.nativepagetransitions.flip({
-								options_all_back,
-								function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-								function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-							});
-						});
-					}
-			});
+
 		}
 
 		$(window).load(function() {		
@@ -211,7 +178,7 @@
 			</div>
 		<div class="smm_content">
 			<div class="smm_news_title retina">
-				<a href="index.html" transitions="perv">
+				<a href="#" onclick="goto_perv_page('index.html',true);">
 					<span class="smm_ziarat_back"></span>
 				</a>
 			</div>

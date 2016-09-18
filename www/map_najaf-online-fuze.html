@@ -14,7 +14,9 @@
 
 <script src="js/jquery-3.0.0.min.js"></script>
 <!--<script src="js/console.log.js"></script>-->
-<script src="phonegap.js"></script>
+<script src="cordova.js"></script>
+<script src="js/jquery.md5.js"></script>
+<script src="js/back_btn.js"></script>
 <script src="js/fastclick.js"></script>
 <script>
 	var my_location_gps;
@@ -49,40 +51,7 @@
 			setTimeout(arguments.callee, 10000);
 		})();
 		
-			$("a").each( function(i) {
-					var options_all_next = {
-					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  700, // in milliseconds (ms), default 400
-					  "href" : $(this).attr("href")
-					};
-					var options_all_back = {
-					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  1100, // in milliseconds (ms), default 400
-					  "href" : $(this).attr("href")
-					};
-					if($(this).attr("transitions")=="next")
-					{
-						$(this).click(function() {
-							event.preventDefault();
-							window.plugins.nativepagetransitions.slide({
-								options_all_next,
-								function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-								function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-							});
-						});
-					}
-					else if($(this).attr("transitions")=="perv")
-					{
-						$(this).click(function() {
-							event.preventDefault();
-							window.plugins.nativepagetransitions.flip({
-								options_all_back,
-								function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-								function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-							});
-						});
-					}
-			});
+
 		}
 	function onSuccess(position) {
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onSuccess()');
@@ -396,16 +365,7 @@
 			container.onclick = function(){
 				//console.log('buttonClicked');
 				//window.location.href = 'map.html';
-				var options_all_back = {
-				  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-				  "duration"       :  1100, // in milliseconds (ms), default 400
-				  "href" : $(this).attr("href")
-				};
-				window.plugins.nativepagetransitions.flip({
-					options_all_back,
-					function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-					function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-				});
+				goto_perv_page("map.html",false);
 			}
 
 			return container;
