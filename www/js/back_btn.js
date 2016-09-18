@@ -28,7 +28,7 @@
 				});
 			}
 			else
-				window.location.href = "adab.html";
+				window.location.href = "index.html";
 		}
 		else
 		{
@@ -82,7 +82,7 @@
 			});
 		}
 		else
-			window.location.href = "adab.html";
+			window.location.href = "index.html";
 
 	}
 	function go_back_adab() {
