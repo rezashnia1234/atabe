@@ -67,7 +67,7 @@
 				  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
 				);
 			});
-			/*
+			/**/
 			$(".goto").click(function(){
 				if($(this).hasClass("internet"))
 					return false;
@@ -75,14 +75,14 @@
 				{
 					//window.location.href = $(this).attr("onclick3");
 					var options_index = {
-					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  700, // in milliseconds (ms), default 400
-					  "href" : $(this).attr("onclick3")
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
+					  "href"		   : $(this).attr("onclick3")
 					};
 					window.plugins.nativepagetransitions.flip({
-						options_index,
-						function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-						function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+					  options_index,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
 					});
 				}
 			});
@@ -93,14 +93,14 @@
 					{
 						//window.location.href = $(this).attr("onclick3");
 						var options_index = {
-						  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-						  "duration"       :  700, // in milliseconds (ms), default 400
-						  "href" : $(this).attr("onclick3")
+						  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+						  "duration"       :  1100, // in milliseconds (ms), default 400
+						  "href"		   : $(this).attr("onclick3")
 						};
 						window.plugins.nativepagetransitions.flip({
-							options_index,
-							function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-							function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+						  options_index,
+						  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+						  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
 						});
 					}
 				}
@@ -109,7 +109,7 @@
 					need_internet_alert();
 				}
 			});
-			*/
+			
 		}
 
 		$(window).load(function() {		
