@@ -61,9 +61,9 @@
 				);
 			}
 			FastClick.attach(document.body);
-// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-// 				document.addEventListener("backbutton", temp_function, false);
-// 			}
+			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+				document.addEventListener("backbutton", goto_home, false);
+			}
 			
 			
 			

@@ -61,25 +61,19 @@
 			});
 			var isAlreadyLoading = 0, jump = false;
  			var myScroll = new iScroll('smm_adab_wrapper', { hideScrollbar: true, bounce : "enable",useTransition: true });
- 			linkable();
+ 			
 			/*****************************/
 		}
 
-		function linkable(){
-			$('#smm_adab_wrapper ul li').unbind( "click" );
-			$('#smm_adab_wrapper ul li').click(function(){
- 				var id = $(this)[0].id;
- 				window.location.href = id+'.html';
- 			});
-		}
+
 		function onDeviceReady() {
 		
 			var networkState = navigator.connection.type;
 
 			FastClick.attach(document.body);
-// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-// 				document.addEventListener("backbutton", go_back_index, false);
-// 			}
+ 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+ 				document.addEventListener("backbutton", go_back_adab, false);
+ 			}
 			
 			
 /////////////////////////////////////////////////////////////////////////////////////////

@@ -24,12 +24,11 @@
     <script src="js/hammer.min.js"></script>
     <script src="js/back_btn.js"></script>
 	<script src="js/iscroll.js"  type="text/javascript"></script>
-<script>
+	<script>
 	var sec_id = 323;
 	var myScroll, type = 9;
 	function init() {
-		console
-				.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 		document.addEventListener("deviceready", onDeviceReady, false);
 		/**** added by mahdi *********/
 		if (isRetina()) {
@@ -44,6 +43,12 @@
 				$(this).css('background-image', back);
 			});
 		}
+		
+		var mc = new Hammer(document.body);
+		mc.on("swiperight", function(ev) {
+			go_back_video_cat();
+		});
+		
 		var isAlreadyLoading = 0, jump = false;
 		myScroll = new iScroll(
 				'smm_visualizations_wrapper',
@@ -161,12 +166,12 @@
 		var networkState = navigator.connection.type;
 
 		FastClick.attach(document.body);
-		// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-		// 				document.addEventListener("backbutton", go_back_index, false);
-		// 			}
-
-
+		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+			document.addEventListener("backbutton", go_back_video_cat, false);
 		}
+
+
+	}
 
 	$(window).load(function() {
 		setTimeout(function() {
@@ -175,30 +180,6 @@
 
 	});
 
-	function go_back_index() {
-		navigator.notification.confirm('آيا تمايل به خروج از برنامه را داريد؟', // message
-		onExitConfirm, // callback
-		'توجه', // title
-		[ 'بله', 'خير' ] // buttonName
-		);
-	}
-	function onExitConfirm(buttonIndex) {
-		if (buttonIndex == 1) {
-			navigator.app.exitApp();
-			/*
-			if (navigator && navigator.app) {
-				navigator.app.exitApp();
-			} 
-			else {
-				if (navigator && navigator.device) {
-					navigator.device.exitApp();
-				}
-			}
-			 */
-		} else {
-
-		}
-	}
 	function isHighDensity() {
 		return ((window.matchMedia && (window
 				.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window

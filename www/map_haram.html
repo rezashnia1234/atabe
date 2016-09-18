@@ -120,7 +120,9 @@
 		$("#map").css("height",winH-40-12);
 	}
 	function onDeviceReady() {
-
+		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+			document.addEventListener("backbutton", go_back_map, false);
+		}
 	}
 	var map = L.map('map', {
 	  minZoom: 1,

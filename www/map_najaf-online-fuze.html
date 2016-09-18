@@ -51,8 +51,10 @@
 			setTimeout(arguments.callee, 10000);
 		})();
 		
-
+		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+			document.addEventListener("backbutton", go_back_map, false);
 		}
+	}
 	function onSuccess(position) {
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onSuccess()');
 		//alert("longitude : " + position.coords.longitude);

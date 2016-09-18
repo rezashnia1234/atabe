@@ -86,7 +86,6 @@
 
 	}
 	function go_back_adab() {
-		//window.location.href = "index.html";
 		if (window.cordova)
 		{
 			var options_back = {
@@ -103,6 +102,120 @@
 		}
 		else
 			window.location.href = "adab.html";
+	}
+	
+	function go_back_map() {
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href"		   : "map.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "map.html";
+	}
+	
+	function go_back_news() {
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href"		   : "news.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "news.html";
+	}
+	
+	function go_back_vtour() {
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href"		   : "vtour-demo-day.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "vtour-demo-day.html";
+	}
+	
+	function go_back_picture() {
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href"		   : "picturesCategories.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "picturesCategories.html";
+	}
+	
+	function go_back_video_sigle() {
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href"		   : "video.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "video.html";
+	}
+	
+	function go_back_video_cat() {
+		if (window.cordova)
+		{
+			var options_back = {
+			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "androiddelay"   :  110,
+			  "href"		   : "videoCategories.html"
+			};
+			window.plugins.nativepagetransitions.flip({
+				options_back,
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+			});
+		}
+		else
+			window.location.href = "videoCategories.html";
 	}
 	
 	// $(document).ready(function() {

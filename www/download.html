@@ -39,7 +39,7 @@
 			var mc = new Hammer(document.body);
 			mc.on("swiperight", function(ev) {
 				brightness.setKeepScreenOn(false);
-				go_back();
+				go_back_vtour();
 			});
 
 		}
@@ -54,9 +54,9 @@
 			var networkState = navigator.connection.type;
 
 			FastClick.attach(document.body);
-			//if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-			//	document.addEventListener("backbutton", go_back, false);
-			//}
+			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+				document.addEventListener("backbutton", go_back_vtour, false);
+			}
 			
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +104,7 @@
 			//alert("complete cached : " + data.cached);
 			navigator.notification.alert(
 				'دانلود با موفقیت به پایان رسید',  // message
-				go_back,         // callback
+				go_back_vtour,         // callback
 				'اطلاعیه',            // title
 				'تائید'                  // buttonName
 			);
@@ -127,7 +127,7 @@
 			brightness.setKeepScreenOn(false);
 			navigator.notification.alert(
 				'دانلود کنسل شد',  // message
-				go_back,         // callback
+				go_back_vtour,         // callback
 				'اخطار',            // title
 				'تائید'                  // buttonName
 			);
