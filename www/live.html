@@ -63,10 +63,12 @@
 					var options_all_next = {
 					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 					  "duration"       :  700, // in milliseconds (ms), default 400
+					  "href" : $(this).attr("href")
 					};
 					var options_all_back = {
 					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 					  "duration"       :  1100, // in milliseconds (ms), default 400
+					  "href" : $(this).attr("href")
 					};
 					if($(this).attr("transitions")=="next")
 					{
@@ -74,7 +76,8 @@
 							event.preventDefault();
 							window.plugins.nativepagetransitions.slide({
 								options_all_next,
-								"href" : $(this).attr("href")
+								function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+								function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 							});
 						});
 					}
@@ -84,7 +87,8 @@
 							event.preventDefault();
 							window.plugins.nativepagetransitions.flip({
 								options_all_back,
-								"href" : $(this).attr("href")
+								function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+								function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 							});
 						});
 					}

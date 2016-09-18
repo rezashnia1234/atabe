@@ -53,22 +53,7 @@
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
-			}
-			
-			$(".goto222").click(function(){
-				var options_back = {
-				  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-				  "duration"       :  1100, // in milliseconds (ms), default 400
-				  "href"		   : "adab.html"
-				};
-				window.plugins.nativepagetransitions.flip(
-				  options_back,
-				  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
-				);
-			});
-			
-			
+			}			
 			
 			
 		}
@@ -76,7 +61,7 @@
 		$(window).load(function() {		
 			setTimeout(function(){
 				$(".mypreload").html("");
-			}, 300);
+			}, 1000);
 			
 			var ulwidth = $('.smm_menu ul').height()*10/11;
 			var divwidth = $('.smm_menu > div').height();
@@ -88,12 +73,15 @@
 		});
 
 		function go_back_index() {
+			navigator.app.exitApp();
+			/*
 			navigator.notification.confirm(
 				'آيا تمايل به خروج از برنامه را داريد؟',	// message
 				onExitConfirm,								// callback
 				'توجه',										// title
 				['بله','خير']								// buttonName
 			);
+			*/
 		}
 		function onExitConfirm(buttonIndex) {
 			if(buttonIndex==1)
@@ -126,22 +114,43 @@
 				if($(this).hasClass("internet"))
 					return false;
 				if($(this).attr("onclick3"))
-					window.location.href = $(this).attr("onclick3");
-				//(need_internet()) ? window.location.href = 'live.html' : need_internet_alert();
+				{
+					//window.location.href = $(this).attr("onclick3");
+					var options_index = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					  "href" : $(this).attr("onclick3")
+					};
+					window.plugins.nativepagetransitions.slide({
+						options_index,
+						function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+						function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+					});
+				}
 			});
 			$(".goto.internet").click(function(e){
 				if(need_internet())
 				{
 					if($(this).attr("onclick3"))
-						window.location.href = $(this).attr("onclick3");
+					{
+						//window.location.href = $(this).attr("onclick3");
+						var options_index = {
+						  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+						  "duration"       :  700, // in milliseconds (ms), default 400
+						  "href" : $(this).attr("onclick3")
+						};
+						window.plugins.nativepagetransitions.slide({
+							options_index,
+							function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+							function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+						});
+					}
 				}
 				else
 				{
 					need_internet_alert();
 				}
 			});
-			
-
 		});
 		
 		function need_internet(){
@@ -182,7 +191,6 @@
 			<div class="smm_menu">
 				<div id="smm_wrapper">
 					<ul class="retina">
-						<li onclick3="news.html" title="news" class="goto222 internet"></li>
 						<li onclick3="news.html" title="news" class="goto internet"></li>
 						<li onclick23="picturesCategories.html" title="gallery" class="goto internet"></li>
 						<li onclick3="live.html" title="live broadcast" class="goto internet"></li>

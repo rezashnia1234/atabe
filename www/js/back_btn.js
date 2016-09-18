@@ -16,10 +16,12 @@
 			var options_back = {
 			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "href" : "index.html"
 			};
 			window.plugins.nativepagetransitions.flip({
 				options_back,
-				"href" : "index.html"
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 			});
 		}
 		else
@@ -30,10 +32,12 @@
 			var options_back = {
 			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 			  "duration"       :  1100, // in milliseconds (ms), default 400
+			  "href" : referrer
 			};
 			window.plugins.nativepagetransitions.flip({
 				options_back,
-				"href" : referrer
+				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 			});
 			*/
 		}
@@ -59,10 +63,12 @@
 		var options_back = {
 		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 		  "duration"       :  1100, // in milliseconds (ms), default 400
+		  "href" : "index.html"
 		};
 		window.plugins.nativepagetransitions.flip({
 			options_back,
-			"href" : "index.html"
+			function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+			function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 		});
 	}
 	function go_back_adab() {
@@ -70,10 +76,12 @@
 		var options_back = {
 		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 		  "duration"       :  1100, // in milliseconds (ms), default 400
+		  "href"		   : "adab.html"
 		};
 		window.plugins.nativepagetransitions.flip({
 			options_back,
-			"href" : "adab.html"
+			function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+			function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 		});
 	}
 	
@@ -83,14 +91,6 @@
 			// $('a').on('dragstart', function(event) { event.preventDefault();				});
 		// }, 600);
 	// });
-    function checkSimulator() {
-		if (window.navigator.simulator === true) {
-			return true;
-		} else if (window.plugins.nativepagetransitions === undefined) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+
 	
 	
