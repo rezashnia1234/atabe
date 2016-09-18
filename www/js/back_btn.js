@@ -11,42 +11,11 @@
 	function go_back() {
 		if(window.sessionStorage.getItem('go_to_first')=="true")
 		{
-			if (window.cordova)
-			{
-				window.sessionStorage.setItem('go_to_first',"false");
-				//window.location.href = "index.html";
-				var options_back = {
-				  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-				  "duration"       :  1100, // in milliseconds (ms), default 400
-				  "androiddelay"   :  110,
-				  "href" : "index.html"
-				};
-				window.plugins.nativepagetransitions.flip({
-					options_back,
-					function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-					function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-				});
-			}
-			else
-				window.location.href = "index.html";
+			goto_perv_page('index.html',false);
 		}
 		else
 		{
 			parent.history.back();
-			/*
-			var referrer =  document.referrer;
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href" : referrer
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-			*/
 		}
 	}
 	
@@ -67,155 +36,35 @@
 	
 	function goto_home() {
 		//window.location.href = "index.html";
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href" : "index.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "index.html";
+		goto_perv_page('index.html',false);
 
 	}
 	function go_back_adab() {
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href"		   : "adab.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "adab.html";
+		goto_perv_page('adab.html',false);
 	}
 	
 	function go_back_map() {
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href"		   : "map.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "map.html";
+		goto_perv_page('map.html',false);
 	}
 	
 	function go_back_news() {
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href"		   : "news.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "news.html";
+		goto_perv_page('news.html',false);
 	}
 	
 	function go_back_vtour() {
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href"		   : "vtour-demo-day.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "vtour-demo-day.html";
+		goto_perv_page('vtour-demo-day.html',false);
 	}
 	
 	function go_back_picture() {
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href"		   : "picturesCategories.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "picturesCategories.html";
+		goto_perv_page('picturesCategories.html',false);
 	}
 	
 	function go_back_video_sigle() {
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href"		   : "video.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "video.html";
+		goto_perv_page('video.html',false);
 	}
 	
 	function go_back_video_cat() {
-		if (window.cordova)
-		{
-			var options_back = {
-			  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-			  "duration"       :  1100, // in milliseconds (ms), default 400
-			  "androiddelay"   :  110,
-			  "href"		   : "videoCategories.html"
-			};
-			window.plugins.nativepagetransitions.flip({
-				options_back,
-				function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
-			});
-		}
-		else
-			window.location.href = "videoCategories.html";
+		goto_perv_page('videoCategories.html',false);
 	}
 	
 	// $(document).ready(function() {
@@ -259,11 +108,11 @@
 				{
 					var options_back = {
 					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  1100, // in milliseconds (ms), default 400
+					  "duration"       :  700, // in milliseconds (ms), default 400
 					  "androiddelay"   :  110,
 					  "href"		   : href //"adab.html"
 					};
-					window.plugins.nativepagetransitions.flip(
+					window.plugins.nativepagetransitions.slide(
 					  options_back,
 					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
 					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
@@ -294,12 +143,12 @@
 				if ( device.platform == 'iOS' )
 				{
 					var options_back = {
-					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  700, // in milliseconds (ms), default 400
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  1100, // in milliseconds (ms), default 400
 					  "androiddelay"   :  110,
 					  "href"		   : href //"adab.html"
 					};
-					window.plugins.nativepagetransitions.slide(
+					window.plugins.nativepagetransitions.flip(
 					  options_back,
 					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
 					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
@@ -308,7 +157,7 @@
 				else
 				{
 					var options_back = {
-					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
 					  "duration"       :  1100, // in milliseconds (ms), default 400
 					  "androiddelay"   :  110,
 					  "href"		   : href //"adab.html"
