@@ -90,18 +90,37 @@
 			}
 			else
 			{
-				var options_back = {
-				  "direction"		: "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-				  //"duration"		:  500, // in milliseconds (ms), default 400
-				  "iosdelay"		:  80, // ms to wait for the iOS webview to update before animation kicks in, default 60
-				  "androiddelay"	:  150, // same as above but for Android, default 70
-				  "href"			: href //"adab.html"
-				};
-				window.plugins.nativepagetransitions.slide(
-				  options_back,
-				  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
-				);
+				if ( device.platform == 'iOS' )
+				{
+					var options_back = {
+					  "direction"		: "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"		:  700, // in milliseconds (ms), default 400
+					  "iosdelay"		:  80, // ms to wait for the iOS webview to update before animation kicks in, default 60
+					  "androiddelay"	:  110, // same as above but for Android, default 70
+					  "href"			: href //"adab.html"
+					};
+					window.plugins.nativepagetransitions.slide(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
+				else
+				{
+					var options_back = {
+					  "direction"		: "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"		:  800, // in milliseconds (ms), default 400
+					  "iosdelay"		:  80, // ms to wait for the iOS webview to update before animation kicks in, default 60
+					  "androiddelay"	:  110, // same as above but for Android, default 70
+					  "href"			: href //"adab.html"
+					};
+
+					window.plugins.nativepagetransitions.slide(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
 			}
 		} else {
 			window.location.href = href;
@@ -124,18 +143,36 @@
 			}
 			else
 			{
-				var options_back = {
-				  "direction"		: "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-				  //"duration"		:  1100, // in milliseconds (ms), default 400
-				  "iosdelay"		:  80, // ms to wait for the iOS webview to update before animation kicks in, default 60
-				  "androiddelay"	:  120, // same as above but for Android, default 70
-				  "href"			: href //"adab.html"
-				};
-				window.plugins.nativepagetransitions.flip(
-				  options_back,
-				  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-				  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
-				);
+				if ( device.platform == 'iOS' )
+				{
+					var options_back = {
+					  "direction"		: "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"		:  900, // in milliseconds (ms), default 400
+					  "iosdelay"		:  80, // ms to wait for the iOS webview to update before animation kicks in, default 60
+					  "androiddelay"	:  140, // same as above but for Android, default 70
+					  "href"			: href //"adab.html"
+					};
+					window.plugins.nativepagetransitions.flip(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
+				else
+				{
+					var options_back = {
+					  "direction"		: "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"		:  1100, // in milliseconds (ms), default 400
+					  "iosdelay"		:  80, // ms to wait for the iOS webview to update before animation kicks in, default 60
+					  "androiddelay"	:  140, // same as above but for Android, default 70
+					  "href"			: href //"adab.html"
+					};
+					window.plugins.nativepagetransitions.flip(
+					  options_back,
+					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					);
+				}
 			}
 		} else {
 			window.location.href = href;
