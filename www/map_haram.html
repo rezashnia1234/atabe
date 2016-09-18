@@ -107,9 +107,22 @@
 		<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
 		<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
 	</div>
-	<div id="go_back_btn" class="top_left_smcms_btn" onclick="window.location.href = 'map.html';" ></div>
+	<div id="go_back_btn" class="top_left_smcms_btn" onclick="goto_map();" ></div>
 	<div id="map"></div>
 	<script>
+	function goto_map() {
+		//window.location.href = 'map.html';
+		var options_all_back = {
+		  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+		  "duration"       :  1100, // in milliseconds (ms), default 400
+		  "href" : 'map.html'
+		};
+		window.plugins.nativepagetransitions.flip({
+			options_all_back,
+			function (msg) {console.log("success: " + msg)}, // called when the animation has finished
+			function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
+		});
+	}
 	function init() {
 		document.addEventListener("deviceready", onDeviceReady, false);
 		winH = $(window).height();
