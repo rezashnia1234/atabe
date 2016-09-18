@@ -1,4 +1,4 @@
-<krpano version="1.16" title="Virtual Tour" onstart="startup();" showerrors="true" logkey="true">
+<krpano version="1.16" title="Virtual Tour" onstart="startup();" showerrors="false" logkey="false">
 <include url="%SWFPATH%/contro-normal.xml"/>
 <include url="%SWFPATH%/map.xml"/>
 <control movetocursor="vector"/>
