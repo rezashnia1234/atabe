@@ -49,7 +49,8 @@
 			//$('#smm_adab_wrapper ul li').unbind( "click" );
 			$('.hmd-video-title').click(function(){
  				var id = $(this)[0].id;
- 				window.location.href = id+'.html';
+ 				//window.location.href = id+'.html';
+				goto_next_page(id+'.html',false);
  			});
 		}
 		function onDeviceReady() {
