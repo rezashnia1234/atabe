@@ -96,7 +96,7 @@
 	<!--<plugin name="net.roughshod.plugins.barcodescanner" source="pgb" />-->
 	<plugin spec="https://github.com/willyboy/cordova-plugin-local-notifications" platform="android" source="git" />
 	<plugin spec="https://github.com/kd-code/cordova-plugin-hello" platform="android" source="git" />
-	<!--<plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />-->
+	<plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />
 	
     <!-- Define app icon      -->
     <icon src="images/splash/icon.png" />
