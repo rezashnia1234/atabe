@@ -55,7 +55,16 @@
 				document.addEventListener("backbutton", go_back_index, false);
 			}
 			
-			
+			$(".goto222").click(function(){
+				var options_back = {
+				  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+				  "duration"       :  1100, // in milliseconds (ms), default 400
+				};
+				window.plugins.nativepagetransitions.flip({
+					options_back,
+					"href" : "adab.html"
+				});
+			});
 			
 			
 			
@@ -130,16 +139,7 @@
 				}
 			});
 			
-			$(".goto222").click(function(){
-				var options_back = {
-				  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-				  "duration"       :  1100, // in milliseconds (ms), default 400
-				};
-				window.plugins.nativepagetransitions.flip({
-					options_back,
-					"href" : "adab.html"
-				});
-			});
+
 		});
 		
 		function need_internet(){
