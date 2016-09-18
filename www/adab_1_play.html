@@ -13,7 +13,8 @@
 	<style>
 		.progress-bar-parent {
 			background-color: rgba(223, 244, 249, 0.95);
-			display: none;	
+			display: none;
+			z-index: 50300;
 		}
 	</style>
 	<script src="js/jquery-2.2.2.min.js"></script>
@@ -54,7 +55,7 @@
 					$(this).css('background-image',back);
 				});
 			}
-			var mc = new Hammer(document.body);
+			var mc = new Hammer(document.getElementById("hamer_handel"));
 			mc.on("swiperight", function(ev) {
 				go_back_adab();
 			});
@@ -339,7 +340,7 @@
 				<div style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 28%; left: 0%; text-align: center;border: medium none;overflow:visible;" class="blockUI blockMsg blockPage"><img src="images/preloader.gif"></div>
 				<div style="z-index: 1012; position: fixed; padding: 0px; margin: 0px; width: 100%; top: 50%; left: 0%; text-align: center;border: medium none;overflow:visible;height:500px;" class="blockUI blockMsg blockPage"><img src="images/loading.png" width="70%"></div>
 			</div>
-		<div class="smm_content">
+		<div class="smm_content" id="hamer_handel">
 			<div class="smm_adab_title retina">
 				<a href="adab.html" transitions="perv">
 					<span class="smm_ziarat_back"></span>
