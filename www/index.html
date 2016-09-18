@@ -8,11 +8,11 @@
     <link rel="stylesheet" type="text/css" href="css/template.css">
 
 	<script src="js/jquery-2.2.2.min.js"></script>
+	<script src="js/console.log.js"></script><!--  -->
     <script src="cordova.js"></script>
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
-<!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
-	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script src="js/iscroll.js"  type="text/javascript"></script>
 	<script>
 		var does_we_have_intenet = true;
 		function init() {
@@ -40,12 +40,14 @@
 // 			  		animDuration: "0.3s",
 // 			  		animEasing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
 // 			    });
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    1');
 			var myScroll = new iScroll('smm_wrapper', { hideScrollbar: true, bounce : "enable", vScrollbar: false });
 			/*****************************/
 		}
 
 
 		function onDeviceReady() {
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    2');
 			var networkState = navigator.connection.type;
 			if (networkState == Connection.NONE) {
 				does_we_have_intenet = false;
@@ -54,15 +56,17 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
 			}			
-			
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    3');
 			
 		}
 
-		$(window).load(function() {		
+		$(window).load(function() {
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    4');
 			setTimeout(function(){
 				$(".mypreload").html("");
+				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    5');
 			}, 1000);
-			
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    6');
 			var ulwidth = $('.smm_menu ul').height()*10/11;
 			var divwidth = $('.smm_menu > div').height();
 
@@ -110,11 +114,13 @@
 			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 		}
 		$(document).ready(function(){
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    8');
 			$(".goto").click(function(){
 				if($(this).hasClass("internet"))
 					return false;
 				if($(this).attr("onclick3"))
 				{
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    9');
 					//window.location.href = $(this).attr("onclick3");
 					var options_index = {
 					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
@@ -124,9 +130,11 @@
 						options_index,
 						"href" : $(this).attr("onclick3")
 					});
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    10');
 				}
 			});
 			$(".goto.internet").click(function(e){
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    11');
 				if(need_internet())
 				{
 					if($(this).attr("onclick3"))
@@ -164,6 +172,7 @@
 			);
 			function alertDismissed(){};
 		};
+console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    12');
 	</script>	
 
 		
@@ -188,7 +197,7 @@
 				<div id="smm_wrapper">
 					<ul class="retina">
 						<li onclick3="news.html" title="news" class="goto internet"></li>
-						<li onclick23="picturesCategories.html" title="gallery" class="goto internet"></li>
+						<li onclick3="picturesCategories.html" title="gallery" class="goto internet"></li>
 						<li onclick3="live.html" title="live broadcast" class="goto internet"></li>
 						<li onclick3="videoCategories.html" title="video" class="goto internet"></li>
 						<li onclick3="radio.html" title="radio" class="goto internet"></li>
