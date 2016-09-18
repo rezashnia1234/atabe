@@ -57,29 +57,30 @@
 			
 			$(".goto222").click(function(){
 				var options_back = {
-				  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-				  "duration"       :  1100, // in milliseconds (ms), default 400
+				  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+				  "duration"       :  700, // in milliseconds (ms), default 400
 				  "href"		   : "adab.html"
 				};
-				window.plugins.nativepagetransitions.flip(
+				window.plugins.nativepagetransitions.slide(
 				  options_back,
 				  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
 				  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
 				);
 			});
-			/**/
+			/*
 			$(".goto").click(function(){
 				if($(this).hasClass("internet"))
 					return false;
 				if($(this).attr("onclick3"))
 				{
 					//window.location.href = $(this).attr("onclick3");
-					window.plugins.nativepagetransitions.flip({
-					  {
-						  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-						  "duration"       :  1100, // in milliseconds (ms), default 400
-						  "href"		   : $(this).attr("onclick3")
-					  },
+					options_index = {
+					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+					  "duration"       :  700, // in milliseconds (ms), default 400
+					  "href"		   : $(this).attr("onclick3")
+					};
+					window.plugins.nativepagetransitions.slide({
+					  options_index,
 					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
 					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
 					});
@@ -91,12 +92,13 @@
 					if($(this).attr("onclick3"))
 					{
 						//window.location.href = $(this).attr("onclick3");
-						window.plugins.nativepagetransitions.flip({
-						  {
-							  "direction"      : "right", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-							  "duration"       :  1100, // in milliseconds (ms), default 400
-							  "href"		   : $(this).attr("onclick3")
-						  },
+						options_index = {
+						  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
+						  "duration"       :  700, // in milliseconds (ms), default 400
+						  "href"		   : $(this).attr("onclick3")
+						};
+						window.plugins.nativepagetransitions.slide({
+						  options_index,
 						  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
 						  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
 						});
@@ -107,7 +109,7 @@
 					need_internet_alert();
 				}
 			});
-			
+			*/
 		}
 
 		$(window).load(function() {		
