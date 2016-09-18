@@ -121,7 +121,7 @@
 					  "duration"       :  700, // in milliseconds (ms), default 400
 					  "href" : $(this).attr("onclick3")
 					};
-					window.plugins.nativepagetransitions.slide({
+					window.plugins.nativepagetransitions.flip({
 						options_index,
 						function (msg) {console.log("success: " + msg)}, // called when the animation has finished
 						function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
@@ -139,7 +139,7 @@
 						  "duration"       :  700, // in milliseconds (ms), default 400
 						  "href" : $(this).attr("onclick3")
 						};
-						window.plugins.nativepagetransitions.slide({
+						window.plugins.nativepagetransitions.flip({
 							options_index,
 							function (msg) {console.log("success: " + msg)}, // called when the animation has finished
 							function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
