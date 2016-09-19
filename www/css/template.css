@@ -139,7 +139,7 @@
     background-repeat: no-repeat;
     background-position: center 40%;
     background-size: contain;
-    float: left;
+    float: right;
     vertical-align: -webkit-baseline-middle;
     margin-left: -5vw;
 }
@@ -424,8 +424,8 @@ li .smm_midnight {
 	top: 30vw;
     bottom: 5%;
     position: inherit;
-    left: 10%;
-    right: 10%;
+    left: 7%;
+    right: 7%;
 }
 .smm_news_content ul li:after {
     background-image: url('../images/low/seprator.png');
@@ -455,7 +455,7 @@ li .smm_midnight {
 }
 .smm_news_content ul li > div{
 	float: left;
-    width: 45vw;
+    width: 52vw;
 }
 .smm_news_content ul li > div > span{
 	text-align: justify;
@@ -463,7 +463,8 @@ li .smm_midnight {
     display: block;
     height: 18vw;
     line-height: 6vw;
-    overflow: hidden;
+    /* overflow: hidden; */
+    word-wrap: break-word;
 }
 .smm_news_content ul li > div > div > span{
 	font-size: 3vw;
@@ -1346,3 +1347,14 @@ outline:none
 /*//END AUDIO//////////////////////////////////////////////////////////////////////////////////////*/
 /*//////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*//////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.smm_esdarat_title {
+    width: 90%;
+    height: 14vw;
+    background-image: url('../images/low/esdarat_title.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+    vertical-align: middle;
+}

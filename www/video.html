@@ -16,19 +16,19 @@
 <!-- 	<link rel="stylesheet" type="text/css" href="css/mh_visualizations.css"> -->
 <!-- end mh css -->
 
-	<script src="js/jquery-2.2.2.min.js"></script>
-	<!--<script src="js/console.log.js"></script>-->
-    <script src="cordova.js"></script>
-    <script src="js/jquery.md5.js"></script>
-    <script src="js/fastclick.js"></script>
-    <script src="js/hammer.min.js"></script>
-    <script src="js/back_btn.js"></script>
-	<script src="js/iscroll.js"  type="text/javascript"></script>
-	<script>
+<script src="js/jquery-2.2.2.min.js"></script>
+<script src="phonegap.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="js/hammer.min.js"></script>
+<script src="js/PrayTimes.js"></script>
+<!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
+<script type="text/javascript" src="js/iscroll.js"></script>
+<script>
 	var sec_id = 323;
 	var myScroll, type = 9;
 	function init() {
-		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+		console
+				.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 		document.addEventListener("deviceready", onDeviceReady, false);
 		/**** added by mahdi *********/
 		if (isRetina()) {
@@ -43,12 +43,6 @@
 				$(this).css('background-image', back);
 			});
 		}
-		
-		var mc = new Hammer(document.body);
-		mc.on("swiperight", function(ev) {
-			go_back_video_cat();
-		});
-		
 		var isAlreadyLoading = 0, jump = false;
 		myScroll = new iScroll(
 				'smm_visualizations_wrapper',
@@ -166,10 +160,9 @@
 		var networkState = navigator.connection.type;
 
 		FastClick.attach(document.body);
-		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-			document.addEventListener("backbutton", go_back_video_cat, false);
-		}
-
+		// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+		// 				document.addEventListener("backbutton", go_back_index, false);
+		// 			}
 
 	}
 
@@ -180,6 +173,30 @@
 
 	});
 
+	function go_back_index() {
+		navigator.notification.confirm('آيا تمايل به خروج از برنامه را داريد؟', // message
+		onExitConfirm, // callback
+		'توجه', // title
+		[ 'بله', 'خير' ] // buttonName
+		);
+	}
+	function onExitConfirm(buttonIndex) {
+		if (buttonIndex == 1) {
+			navigator.app.exitApp();
+			/*
+			if (navigator && navigator.app) {
+				navigator.app.exitApp();
+			} 
+			else {
+				if (navigator && navigator.device) {
+					navigator.device.exitApp();
+				}
+			}
+			 */
+		} else {
+
+		}
+	}
 	function isHighDensity() {
 		return ((window.matchMedia && (window
 				.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window
@@ -211,6 +228,13 @@
 .smm_visualizations_content li:last-child:before {
 	content: none;
 }
+img {
+    border-radius: 3px;
+}
+.smm_underimage {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
 </style>
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0"
@@ -233,8 +257,7 @@
 		</div>
 		<div class="smm_content">
 			<div class="mh_visualizations_title retina">
-				<a href="#" onclick="goto_perv_page('index.html',false);">
-					<span class="smm_ziarat_back"></span>
+				<a href="index.html"> <span class="smm_ziarat_back"></span>
 				</a>
 			</div>
 			<div class="smm_visualizations_content">
