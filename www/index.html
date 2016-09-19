@@ -93,6 +93,108 @@
 			}
 
 		}
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// START push Notification :////////////////////////////////////////////////////////////////
+	 var register_for_notifs;// = window.sessionStorage.getItem('register_for_notifs');
+	 function onNotificationGCM(e) {
+		//alert("uuuuuu");
+		//$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+
+		switch( e.event )
+		{
+		case 'registered':
+			if ( e.regid.length > 0 )
+			{
+				//$("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
+				// Your GCM push server needs to know the regID before it can push to this device
+				// here is where you might want to send it the regID for later use.
+				//console.log("regID = " + e.regid);
+				//alert("regID = " + e.regid);
+				//if(register_for_notifs){
+					var temp_udid;
+					if(window.localStorage.getItem('uuid') == null)
+					{
+						window.plugins.uniqueDeviceID.get(uniqueDeviceIDsuccess_index, uniqueDeviceIDfail_index);
+						temp_udid	=	"";
+					}
+					else
+					{
+						var temp_udid = window.localStorage.getItem('uuid');
+					}
+					$.ajax({ type: "POST",
+							url: "http://imamali.net/app-json/set_new_user.php", 
+							data: {regID : e.regid,user:window.localStorage.getItem('uuid'),OS:device.platform},
+							async: false,
+							success : function(text)
+							{
+								//last_articles_version = text;
+								console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification registration text : ' + text);
+								window.sessionStorage.setItem('register_for_notifs','yes');
+							}
+					});
+				//}
+			}
+		break;
+
+		case 'message':
+			// if this flag is set, this notification happened while we were in the foreground.
+			// you might want to play a sound to get the user's attention, throw up a dialog, etc.
+			if ( e.foreground )
+			{
+				//$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+
+				// if the notification contains a soundname, play it.
+				//var my_media = new Media("/android_asset/www/"+e.soundname);
+				//my_media.play();
+			}
+			else
+			{  // otherwise we were launched because the user touched a notification in the notification tray.
+				/*
+				if ( e.coldstart )
+				{
+					$("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+				}
+				else
+				{
+					$("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+				}
+				*/
+			}
+			
+			//alert(e.payload.message);
+			navigator.notification.alert(
+				e.payload.message,  // message
+				alertDismissed,         // callback
+				'اطلاعیه',            // title
+				'تائید'                  // buttonName
+			);
+			//alert(e.payload.msgcnt);
+			/*
+			$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+			$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+			*/
+		break;
+
+		case 'error':
+			//$("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+		break;
+
+		default:
+			//$("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+		break;
+	  }
+	}
+	function successHandler (result) {
+		//alert('result = ' + result);
+	}
+	// result contains any error description text returned from the plugin call
+	function errorHandler (error) {
+		//alert('error = ' + error);
+	}
+// END push Notification ///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 		function onDeviceReady() {
 			var networkState = navigator.connection.type;
 			if (networkState == Connection.NONE) {
@@ -102,50 +204,65 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_index, false);
 			}			
-
-			/*
-			$(".goto").click(function(){
-				if($(this).hasClass("internet"))
-					return false;
-				if($(this).attr("onclick3"))
+			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+				$(".PrayTimes_page").attr("onclick","goto_next_page('salat-gps.html',false);");
+			}		
+			
+			if(window.localStorage.getItem('uuid') == null)
+				window.plugins.uniqueDeviceID.get(uniqueDeviceIDsuccess_index, uniqueDeviceIDfail_index);
+			else
+			{
+				
+			}
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+// START push Notification :////////////////////////////////////////////////////////////////
+			if (networkState == Connection.NONE) {
+			
+			}
+			else
+			{
+				if(window.sessionStorage.getItem('register_for_notifs') == null)
 				{
-					//window.location.href = $(this).attr("onclick3");
-					options_index = {
-					  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"       :  700, // in milliseconds (ms), default 400
-					  "href"		   : $(this).attr("onclick3")
-					};
-					window.plugins.nativepagetransitions.slide({
-					  options_index,
-					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
-					});
-				}
-			});
-			$(".goto.internet").click(function(e){
-				if(need_internet())
-				{
-					if($(this).attr("onclick3"))
-					{
-						//window.location.href = $(this).attr("onclick3");
-						options_index = {
-						  "direction"      : "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-						  "duration"       :  700, // in milliseconds (ms), default 400
-						  "href"		   : $(this).attr("onclick3")
-						};
-						window.plugins.nativepagetransitions.slide({
-						  options_index,
-						  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-						  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
-						});
+					pushNotification = window.plugins.pushNotification;
+					console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    register_for_notifs : no // ' + device.platform);
+					if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
+						pushNotification.register(successHandler,errorHandler,{"senderID":"804625540618","ecb":"onNotificationGCM"});
+					} else {
+						pushNotification.register(tokenHandler,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationGCM"});//"onNotificationAPN"});
 					}
+				}
+			}
+			function tokenHandler(result) {
+				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification Callback Success! Result (ios) = '+result);
+				
+				var temp_udid;
+				if(window.localStorage.getItem('uuid') == null)
+				{
+					window.plugins.uniqueDeviceID.get(uniqueDeviceIDsuccess_index, uniqueDeviceIDfail_index);
+					temp_udid	=	"";
 				}
 				else
 				{
-					need_internet_alert();
+					var temp_udid = window.localStorage.getItem('uuid');
 				}
-			});
-			*/
+				//if(register_for_notifs){
+					$.ajax({ type: "POST",
+							url: "http://imamali.net/app-json/set_new_user.php", 
+							data: {regID : result,user:window.localStorage.getItem('uuid'),OS:device.platform},
+							async: false,
+							success : function(text)
+							{
+								//last_articles_version = text;
+								console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification registration text : ' + text);
+								window.sessionStorage.setItem('register_for_notifs','yes');
+							}
+					});
+				//}
+			}
+// END push Notification ///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 		}
 
 		$(window).load(function() {		
@@ -218,6 +335,15 @@
 			);
 			function alertDismissed(){};
 		};
+		
+		function uniqueDeviceIDsuccess_index(uuid)
+		{
+			window.localStorage.setItem('uuid',uuid);
+		};
+		function uniqueDeviceIDfail_index(uuid)
+		{
+			//alert("uniqueDeviceIDfail" + uuid);
+		};
 	</script>	
 
 		
@@ -248,7 +374,7 @@
 						<li onclick="goto_next_page('radio.html',true);" title="radio" class="goto internet"></li>
 						<li onclick="goto_next_page('map.html',false);" title="map" class="goto" ></li>
 						<li onclick="goto_next_page('adab.html',false);" title="adab al-ziyarat" class="goto" ></li>
-						<li onclick="goto_next_page('salat.html',false);" title="PrayTimes" class="goto" ></li>
+						<li onclick="goto_next_page('salat.html',false);" title="PrayTimes" class="goto PrayTimes_page" ></li>
 						<li onclick="goto_next_page('ziarat.html',true);" title="naeb al-ziyarat" class="goto internet"></li>
 						<li onclick="goto_next_page('vtour-demo-day.html',false);" title="vtour" class="goto" ></li>
 						<li onclick="goto_next_page('index.html',true);" title="majalat" class="goto internet"></li>

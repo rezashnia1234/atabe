@@ -52,7 +52,20 @@
 		function onDeviceReady() {
 
 			
-			var networkState = navigator.connection.type;
+			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start getCurrentPosition()');
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			function onSuccess(position) {
+				console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start get position onSuccess()');
+				//alert("longitude : " + position.coords.longitude);
+				//alert("latitude  : " + position.coords.latitude );
+				//console.log("00000:" + position.coords);
+				//$("#location_btn").addClass("active");
+						
+			}
+			function onError(error) { 
+				// your callback here
+				//alert(JSON.stringify(error));
+			}
 
 			FastClick.attach(document.body);
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
