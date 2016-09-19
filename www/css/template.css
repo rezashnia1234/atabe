@@ -139,9 +139,10 @@
     background-repeat: no-repeat;
     background-position: center 40%;
     background-size: contain;
-    float: right;
+    /* float: left; */
     vertical-align: -webkit-baseline-middle;
     margin-left: -5vw;
+    position: absolute;
 }
 #smm_ziarat_wrapper{
 	position: absolute;
@@ -463,7 +464,7 @@ li .smm_midnight {
     display: block;
     height: 18vw;
     line-height: 6vw;
-    /* overflow: hidden; */
+    overflow: hidden;
     word-wrap: break-word;
 }
 .smm_news_content ul li > div > div > span{
