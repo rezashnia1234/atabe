@@ -466,11 +466,11 @@ li .smm_midnight {
 	text-align: justify;
     font-size: 3vw;
     display: block;
-<<<<<<< HEAD
+
     height: 18Vw;
-=======
+
     height: 18vw;
->>>>>>> parent of 4122c76... news change
+
     line-height: 6vw;
     overflow: hidden;
     word-wrap: break-word;
@@ -495,12 +495,11 @@ li .smm_midnight {
     margin-right: 1vw;
     background-repeat: no-repeat;
     background-position: center;
-<<<<<<< HEAD
+
     float: left;
     margin-top: 1.5vw;
     position: absolute;
-=======
->>>>>>> parent of 4122c76... news change
+
 }
 .smm_news_visit:after{
 	content: "";
@@ -512,12 +511,9 @@ li .smm_midnight {
     margin-right: 0vw;
     background-repeat: no-repeat;
     background-position: center;
-<<<<<<< HEAD
     float: left;
     margin-top: 1.5vw;
     position: absolute;
-=======
->>>>>>> parent of 4122c76... news change
 }
 #smm_news_wrapper > div > img {
 	width: 100%;
