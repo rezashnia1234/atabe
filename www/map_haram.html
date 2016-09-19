@@ -165,7 +165,7 @@
 	});
 	
 	new_favorite_marker_icon	= new icon_style_favorites_new({iconUrl: 'map/images/map-icon/marker-icon.png',iconRetinaUrl: 'map/images/map-icon/marker-icon@2x.png',shadowUrl: 'map/images/map-icon/marker-shadow.png',});
-	//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup();
+	//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("ضع هذا المؤشر على الموقع المراد تحديده .").openPopup();
 	setTimeout(function(){
 		//var fx = new L.PosAnimation();
 		//fx.run(el, [300, 500], 0.5);
@@ -173,9 +173,9 @@
 		//map.panTo([800, 640]);
 		map.panTo([70, 70]);
 		
-		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup().on('click', function(e){alert(this.getLatLng());});
-		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup().on('click', onClick);
-		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup().on('dragend', function(e){this.setPopupContent("" + this.getLatLng());});
+		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("ضع هذا المؤشر على الموقع المراد تحديده.").openPopup().on('click', function(e){alert(this.getLatLng());});
+		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("ضع هذا المؤشر على الموقع المراد تحديده.").openPopup().on('click', onClick);
+		//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("ضع هذا المؤشر على الموقع المراد تحديده.").openPopup().on('dragend', function(e){this.setPopupContent("" + this.getLatLng());});
 		function onClick(e) {
 			alert(this.getLatLng());
 		}

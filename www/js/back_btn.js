@@ -81,10 +81,10 @@
 			var networkState = navigator.connection.type;
 			if ((networkState == Connection.NONE) && need_internet) {
 				navigator.notification.alert(
-					'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+					'يجب عليك الاتصال بالانترنت',  // message
 					alertDismissed,         // callback
-					'اخطار',            // title
-					'تائید'                  // buttonName
+					'تنبيه',            // title
+					'نعم'                  // buttonName
 				);
 				function alertDismissed(){};
 			}
@@ -134,10 +134,10 @@
 			var networkState = navigator.connection.type;
 			if ((networkState == Connection.NONE) && need_internet) {
 				navigator.notification.alert(
-					'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+					'يجب عليك الاتصال بالانترنت',  // message
 					alertDismissed,         // callback
-					'اخطار',            // title
-					'تائید'                  // buttonName
+					'تنبيه',            // title
+					'نعم'                  // buttonName
 				);
 				function alertDismissed(){};
 			}

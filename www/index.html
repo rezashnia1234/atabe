@@ -49,10 +49,10 @@
 				var networkState = navigator.connection.type;
 				if ((networkState == Connection.NONE) && need_internet) {
 					navigator.notification.alert(
-						'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+						'يجب عليك الاتصال بالانترنت',  // message
 						alertDismissed,         // callback
-						'اخطار',            // title
-						'تائید'                  // buttonName
+						'تنبيه',            // title
+						'نعم'                  // buttonName
 					);
 					function alertDismissed(){};
 				}
@@ -166,8 +166,8 @@
 			navigator.notification.alert(
 				e.payload.message,  // message
 				alertDismissed,         // callback
-				'اطلاعیه',            // title
-				'تائید'                  // buttonName
+				'اعلان',            // title
+				'نعم'                  // buttonName
 			);
 			//alert(e.payload.msgcnt);
 			/*
@@ -283,10 +283,10 @@
 			navigator.app.exitApp();
 			/*
 			navigator.notification.confirm(
-				'آيا تمايل به خروج از برنامه را داريد؟',	// message
+				'هل حقا تريد الحروج من  التطبيق',	// message
 				onExitConfirm,								// callback
-				'توجه',										// title
-				['بله','خير']								// buttonName
+				'انتباه',										// title
+				['نعم','كلا']								// buttonName
 			);
 			*/
 		}
@@ -328,10 +328,10 @@
 		};
 		function need_internet_alert(){
 			navigator.notification.alert(
-				'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+				'يجب عليك الاتصال بالانترنت',  // message
 				alertDismissed,         // callback
-				'اخطار',            // title
-				'تائید'                  // buttonName
+				'تنبيه',            // title
+				'نعم'                  // buttonName
 			);
 			function alertDismissed(){};
 		};

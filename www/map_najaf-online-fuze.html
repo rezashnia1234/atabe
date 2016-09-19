@@ -65,7 +65,7 @@
 		//my_location_marker = L.marker([position.coords.latitude,position.coords.longitude], {icon: user_location_icon}).addTo(map).bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");//.openPopup();
 		//my_location_circle = L.circle([position.coords.latitude,position.coords.longitude], radius).addTo(map);
 		my_location_marker.setLatLng([position.coords.latitude,position.coords.longitude]);
-		my_location_marker.bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");
+		my_location_marker.bindPopup("بعدك عن هذه النقطة لا يتجاوز " + radius + " متراً");
 		my_location_circle.setLatLng([position.coords.latitude,position.coords.longitude]);
 		my_location_circle.setRadius(radius);
 		//console.log("00000:" + position.coords);
@@ -89,10 +89,10 @@
 
 	<div class="cd-popup is-visible0 favorites" role="alert">
 		<div class="cd-popup-container">
-			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان نقطه جدید" /></p>
+			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان النقطة الجديدة" /></p>
 			<ul class="cd-buttons">
-				<li><a href="#" onclick="add_to_favorites();">تایید</a></li>
-				<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
+				<li><a href="#" onclick="add_to_favorites();">تاييد</a></li>
+				<li><a href="#" onclick="add_to_favorites_open();">الغاء</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
 		</div> <!-- cd-popup-container -->
@@ -100,10 +100,10 @@
 
 	<div class="cd-popup is-visible0 route_from" role="alert">
 		<div class="cd-popup-container">
-			<p>لطفا مبدا سفر را انتخاب نمایید</p>
+			<p>اختر مبدأ الرحلة</p>
 			<ul class="cd-buttons">
-				<li><a href="#" onclick="routing_to_open();" style="background-color:#247dc9;">تایید</a></li>
-				<li><a href="#" onclick="routing_open();">لغو</a></li>
+				<li><a href="#" onclick="routing_to_open();" style="background-color:#247dc9;">تاييد</a></li>
+				<li><a href="#" onclick="routing_open();">الغاء</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
 		</div> <!-- cd-popup-container -->
@@ -111,10 +111,10 @@
 
 	<div class="cd-popup is-visible0 route_to" role="alert">
 		<div class="cd-popup-container">
-			<p>لطفا مقصد سفر را انتخاب نمایید</p>
+			<p>اختر مقصد الرحلة</p>
 			<ul class="cd-buttons">
-				<li><a href="#" onclick="routinging_start();" style="background-color:#ce3b39;">تایید</a></li>
-				<li><a href="#" onclick="routing_open();">لغو</a></li>
+				<li><a href="#" onclick="routinging_start();" style="background-color:#ce3b39;">تاييد</a></li>
+				<li><a href="#" onclick="routing_open();">الغاء</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
 		</div> <!-- cd-popup-container -->
@@ -132,13 +132,13 @@
 
 <script>
 	var categories = {
-		101 : {desc: "اماکن المقدسة", icon:"zearati"},/////////////
+		101 : {desc: "الاماكن المقدسة", icon:"zearati"},/////////////
 		102 : {desc: "الأماكن المفضلة ", icon:"fav"},
 		103 : {desc: "مراكز صحية", icon:"hospetal"},///////////////////////////////
 		104 : {desc: "استراحات الزائرين", icon:"mukeb"},
 		105 : {desc: "نقاط التفتيش", icon:"stop"},
-		106 : {desc: "فنادق", icon:"hotel"},///////////////////////////////
-		107 : {desc: "اعمدة", icon:"mil"},//////////////////////////////////
+		106 : {desc: "الفنادق", icon:"hotel"},///////////////////////////////
+		107 : {desc: "الاعمدة", icon:"mil"},//////////////////////////////////
 		108 : {desc: "محطات النقل", icon:"hamlonaghl"},/////////////////////////////
 		109 : {desc: "مراكز المفقودين", icon:"gomshodeghan"},
 		110 : {desc: "القنصليات", icon:"edari"},
@@ -321,9 +321,9 @@
 	L.control.search({
 		layer: restLayers,
 		propertyName: 'name',
-		textErr: 'موقعیت یافت نشد',	//error message
-		textCancel: 'لغو',		    //title in cancel button		
-		textPlaceholder: 'جستجو در میان نقاط...',   //placeholder value		 // 'جستجو در میان نقاط...'
+		textErr: 'لم يتم الحصول على الموقع',	//error message
+		textCancel: 'الغاء',		    //title in cancel button		
+		textPlaceholder: 'البحث في المواقع...',   //placeholder value		 // 'جستجو در میان نقاط...'
 		markerLocation: true,
 		filterData: function(text, records) {
 			var jsons = fuse.search(text),
@@ -425,7 +425,7 @@
 									{color: 'blue', opacity: 0.5, weight: 2}
 								]
 							},
-							language: "fa",
+							language: "ar",
 							position:'bottomleft'
 						}).addTo(map);
 		/*
@@ -577,7 +577,7 @@
 			$(".cd-popup.favorites").addClass("is-visible");
 			add_to_favorites_popup = true;
 			//new_favorite_marker_icon	= new icon_style_favorites_new({iconUrl: 'maps/map-icon/marker-icon.png',iconRetinaUrl: 'maps/map-icon/marker-icon@2x.png',shadowUrl: 'maps/map-icon/marker-shadow.png',});
-			//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("لطفا این مارکر را در موقعیت دلخواه قرار دهید.").openPopup();
+			//new_favorite_marker = L.marker(map.getCenter(), {icon: new_favorite_marker_icon,setZIndexOffset: 1000,draggable:true}).addTo(map).bindPopup("ضع هذا المؤشر على الموقع المراد تحديده.").openPopup();
 		}
 		else
 		{

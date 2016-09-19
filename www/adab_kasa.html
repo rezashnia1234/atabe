@@ -170,10 +170,10 @@
 			if (networkState == Connection.NONE) {
 				console.log("start_download : NO internet");
 				navigator.notification.alert(
-					'شما برای اینکار به اینترنت نیاز دارید',  // message
+					'يجب عليك الاتصال بالانترنت',  // message
 					temp_function,         // callback
-					'اخطار',            // title
-					'تائید'                  // buttonName
+					'تنبيه',            // title
+					'نعم'                  // buttonName
 				);
 			}
 			else{
@@ -226,10 +226,10 @@
 						//alert('Crap something went wrong...');	
 						//alert(JSON.stringify(error));
 						navigator.notification.alert(
-							'خطا در دانلود فایل',  // message
+							'قشل في تحميل الملف',  // message
 							temp_function,         // callback
-							'اخطار',            // title
-							'تائید'                  // buttonName
+							'تنبيه',            // title
+							'نعم'                  // buttonName
 						);
 						$('.progress-bar-parent').find('span').css('width','2%');
 						$('.progress-bar-percent').css('width',"");
