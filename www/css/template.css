@@ -473,6 +473,7 @@ li .smm_midnight {
 }
 .smm_news_content ul li > div > div > span{
 	font-size: 3vw;
+	margin-left: 5vw;
 }
 .smm_news_content ul li > div > div > span:FIRST-CHILD{
 	float: left;
@@ -492,6 +493,7 @@ li .smm_midnight {
     background-position: center;
     float: left;
     margin-top: 1.5vw;
+    position: absolute;
 }
 .smm_news_visit:after{
 	content: "";
@@ -505,6 +507,7 @@ li .smm_midnight {
     background-position: center;
     float: left;
     margin-top: 1.5vw;
+    position: absolute;
 }
 #smm_news_wrapper > div > img {
 	width: 100%;
