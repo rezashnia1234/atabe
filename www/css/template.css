@@ -231,7 +231,7 @@
     border-right: .5vw solid #167bb0;
 }
 .smm_select_city {
-    width: 90%;
+    width: 110%;
     height: 11vw;
     margin: auto;
     vertical-align: middle;
@@ -240,18 +240,23 @@
     background-size: 100% 104%;
     background-repeat: no-repeat;
     background-position: 0 -.2vw;
+	margin-left:-5%;
 }
 .smm_select_city div {
     display: inline-block;
     width: 31%;
     text-align: center;
     font-weight: bold;
-    font-size: 4vw;
-    height: 100%;
-    line-height: 10.5vw;
+    font-size: 3.5vw;
+    /*height: 100%;*/
+    line-height: 10.7vw;
     box-sizing: border-box;
     color: #167bb0;
 }
+.smm_select_city #karbala {width: 36%;}
+.smm_select_city #kazemain {width: 25%;}
+.smm_select_city #najaf {width: 28%;}
+
 .smm_select_city div.active{
 	color: #e39124;
 }
