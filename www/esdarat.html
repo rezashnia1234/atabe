@@ -16,13 +16,14 @@
 <!-- 	<link rel="stylesheet" type="text/css" href="css/mh_visualizations.css"> -->
 <!-- end mh css -->
 
-<script src="js/jquery-2.2.2.min.js"></script>
-<script src="phonegap.js"></script>
-<script src="js/fastclick.js"></script>
-<script src="js/hammer.min.js"></script>
-<script src="js/PrayTimes.js"></script>
-<!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
-<script type="text/javascript" src="js/iscroll.js"></script>
+	<script src="js/jquery-2.2.2.min.js"></script>
+	<!--<script src="js/console.log.js"></script>-->
+    <script src="cordova.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="js/back_btn.js"></script>
+	<script src="js/iscroll.js"  type="text/javascript"></script>
 <script>
 	var sec_id = 321;
 	var myScroll, type = 9;
@@ -43,6 +44,11 @@
 				$(this).css('background-image', back);
 			});
 		}
+		var mc = new Hammer(document.body);
+		mc.on("swiperight", function(ev) {
+			//go_back();
+			goto_home();
+		});
 		var isAlreadyLoading = 0, jump = false;
 		myScroll = new iScroll(
 				'smm_visualizations_wrapper',
@@ -159,9 +165,9 @@
 		var networkState = navigator.connection.type;
 
 		FastClick.attach(document.body);
-		// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-		// 				document.addEventListener("backbutton", go_back_index, false);
-		// 			}
+		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+			document.addEventListener("backbutton", goto_home, false);
+		}
 
 	}
 
@@ -172,30 +178,6 @@
 
 	});
 
-	function go_back_index() {
-		navigator.notification.confirm('هل ترغب بالخروج من التطبيق؟', // message
-		onExitConfirm, // callback
-		'انتباه', // title
-		[ 'نعم', 'كلا' ] // buttonName
-		);
-	}
-	function onExitConfirm(buttonIndex) {
-		if (buttonIndex == 1) {
-			navigator.app.exitApp();
-			/*
-			if (navigator && navigator.app) {
-				navigator.app.exitApp();
-			} 
-			else {
-				if (navigator && navigator.device) {
-					navigator.device.exitApp();
-				}
-			}
-			 */
-		} else {
-
-		}
-	}
 	function isHighDensity() {
 		return ((window.matchMedia && (window
 				.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window

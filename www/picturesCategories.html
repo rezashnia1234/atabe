@@ -58,21 +58,21 @@
 <!-- <link rel="stylesheet" type="text/css" href="css/mh_visualizations.css"> -->
 <!-- end mh css -->
 
-<script src="js/jquery-2.2.2.min.js"></script>
-<script src="phonegap.js"></script>
-<script src="js/fastclick.js"></script>
-<script src="js/hammer.min.js"></script>
-<script src="js/PrayTimes.js"></script>
-<!-- 	<script type="text/javascript" src="js/jquery.fancy-scroll.js"></script> -->
-<script type="text/javascript" src="js/iscroll.js"></script>
+	<script src="js/jquery-2.2.2.min.js"></script>
+	<!--<script src="js/console.log.js"></script>-->
+    <script src="cordova.js"></script>
+    <script src="js/jquery.md5.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="js/back_btn.js"></script>
+	<script src="js/iscroll.js"  type="text/javascript"></script>
 <script>
 	var sec_id = 322;
 	var myScroll;
 	var type=9;
 	var cash= [];
 	function init() {
-		console
-				.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 		document.addEventListener("deviceready", onDeviceReady, false);
 		/**** added by mahdi *********/
 		if (isRetina()) {
@@ -87,6 +87,11 @@
 				$(this).css('background-image', back);
 			});
 		}
+		var mc = new Hammer(document.body);
+		mc.on("swiperight", function(ev) {
+			goto_home();
+			//if(ev.velocity>0.8){console.log(ev.type +" gesture detected.");}
+		});
 		var isAlreadyLoading = 0, jump = false;
 
 		myScroll = new iScroll(
@@ -116,8 +121,7 @@
 										width : $('#smm_picture_wrapper ul').width()/2,
 										height : $('#smm_picture_wrapper ul').width()/3
 									}, function(data) {
-										$('#smm_picture_wrapper ul')
-												.append(data);
+										$('#smm_picture_wrapper ul').append(data);
 										addImagestoLi();
 										//$('ul .windows8').css('top',$('ul > div').last().position().top +$('ul > div').last().height()+20)
 										//myScroll.scrollTo(0,-$('ul > div').last().position().top -$('ul > div').last().height()-20);
@@ -160,9 +164,9 @@
 		var networkState = navigator.connection.type;
 
 		FastClick.attach(document.body);
-		// 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-		// 				document.addEventListener("backbutton", go_back_index, false);
-		// 			}
+		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+			document.addEventListener("backbutton", goto_home, false);
+		}
 
 	}
 
@@ -173,30 +177,6 @@
 
 	});
 
-	function go_back_index() {
-		navigator.notification.confirm('آيا تمايل به خروج از برنامه را داريد؟', // message
-		onExitConfirm, // callback
-		'توجه', // title
-		[ 'بله', 'خير' ] // buttonName
-		);
-	}
-	function onExitConfirm(buttonIndex) {
-		if (buttonIndex == 1) {
-			navigator.app.exitApp();
-			/*
-			if (navigator && navigator.app) {
-				navigator.app.exitApp();
-			} 
-			else {
-				if (navigator && navigator.device) {
-					navigator.device.exitApp();
-				}
-			}
-			 */
-		} else {
-
-		}
-	}
 	function isHighDensity() {
 		return ((window.matchMedia && (window
 				.matchMedia('only screen and (min-resolution: 124dpi), only screen and (min-resolution: 1.3dppx), only screen and (min-resolution: 48.8dpcm)').matches || window
@@ -275,6 +255,7 @@
 				sec_id : sec_id,
 				width : $('#smm_picture_wrapper ul').width()
 			}, function(data) {
+				//alert(data);
 				$('.windows8').hide();
 				$('#smm_picture_wrapper ul').html(data);
 				myScroll.refresh();

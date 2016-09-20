@@ -65,7 +65,11 @@
 				document.addEventListener("backbutton", goto_home, false);
 			}
 			
-			
+			if(window.localStorage.getItem('uuid') == null)
+			{
+				window.plugins.uniqueDeviceID.get(uniqueDeviceIDsuccess_index, uniqueDeviceIDfail_index);
+			}
+
 			
 			
 			
@@ -117,12 +121,12 @@
 							
 								$.post("http://www.imamali.net/app-json/set_zeara.php",
 								{
-								  name: n.item(0).value,
-								  country: c.item(0).value,
-								  city: ci.item(0).value,
-								  for_who: f.item(0).value,
-								  udid: "sdfsertwer",
-									app_lang: "en"
+									name: n.item(0).value,
+									country: c.item(0).value,
+									city: ci.item(0).value,
+									for_who: f.item(0).value,
+									udid: window.localStorage.getItem('uuid'),
+									app_lang: "ar"
 								},
 								function(data,status){
 									if(data == "" || data == null){
@@ -146,7 +150,14 @@
 						}
 			});
 		});
-		
+		function uniqueDeviceIDsuccess_index(uuid)
+		{
+			window.localStorage.setItem('uuid',uuid);
+		};
+		function uniqueDeviceIDfail_index(uuid)
+		{
+			//alert("uniqueDeviceIDfail" + uuid);
+		};
 	</script>	
 
 		
