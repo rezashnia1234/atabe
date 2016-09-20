@@ -413,7 +413,7 @@ input[type=checkbox].leaflet-control-layers-selector {
 .leaflet-top.leaflet-left{
 	width:100%;
 }
-.leaflet-top.leaflet-left .leaflet-control.leaflet-control-search #searchtext8,.leaflet-top.leaflet-left .leaflet-control.leaflet-control-search #searchtext21{
+.leaflet-top.leaflet-left .leaflet-control.leaflet-control-search input.search-input{
     border-color: white;
     border-style: none solid;
     border-width: 0 51px;
