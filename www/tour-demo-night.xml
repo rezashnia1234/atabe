@@ -1,1 +1,28 @@
-<encrypted><![CDATA[KENCRUZR-aWcwl_Xk9Zg3[ALbWpauX_XaKM9rEUB&ai$16lIeYeh]['@xfm;-xB(1=k.g,NNk2fi3+rk^*0&7,O'^B:,V%t/43KMH/<Eua,7upCd'ILMZf9*SJaJ7vra6o6RKtgjQYYW*,7&H#Br=1S(v?QD`Qt*_?IKvf+HfEdV)R5%ort^_kk8j3Ff'LKghV14RTSmEfuc82'sQ4KQHWGJVr2NEo0m^=4xava[#b`n6YjK&VK2D=Q)%bBn>+KGt[Fl[^)c&xNCUThS_i#%L-03`MedZwi'4CRI)LZ1VkV4FbE>n#87-,KXsQX6VTH*<SJRXa.xUUXa;?-Gf#gN4^_t/nY-5#57DE^kFTG0D^S,xOYi?.c*`Nhr;QT4X99RdSEaXNVW[4>KI/:8%bg;SvsFk[4%,sfbP3*$,2EJ+E_,qqATJC6q4T*^a2@P+@*G$]C$]]Z6.G.Vkdx5x9+'_b71$m#W]bA*QQW1t-ZObZ@O-</^A$se^&(cF1<D#+P&hmvPUAl@ncr&&#MLS@if'FQ`O(9T*-gG/AbfZ`Z]U(83pZk<+;<$$^_U$#Lr#al(D<;QnYvmx<:#>4YrCLcr_vYWll)E-Yb;ct^pMq+E+dGt`M$ZV^[=5?^r_S>ScdhY],$<IgmN+@7%cQ*0H>IN(xtoVGbUYK+RA.i]8=THcJ-*<<upJ%B8'o)9G8e;@@'.[hF3f#Fk%,ST[C=enKsS6';5AkZG@fl6Y_.)e]I?'oc<@8IP@]^.Q)O5K56dq)*`]]></encrypted>
+<krpano onstart="startup();" showerrors="false" logkey="false">
+
+	<action name="startup">
+		loadscene("eyvan", null, MERGE);
+	</action>
+	
+	<plugin name="gyro" devices="html5" keep="true"
+			url="%SWFPATH%/plugins/gyro2.js" 
+			enabled="true"
+			camroll="true"
+			friction="0.0"
+			touch_mode="full"
+			sensor_mode="1"
+			autocalibration="true"
+			onavailable=""
+			onunavailable=""
+			onenable=""
+			ondisable=""
+			/>
+	 
+	<scene name="eyvan" title="object" thumburl="panos/eyvan-night/thumb.jpg" >
+		<preview url="panos/eyvan-night/preview.jpg" />
+		<image >
+			<cube url="panos/eyvan-night/mobile_%s.jpg" />
+		</image>
+	</scene>
+
+</krpano>

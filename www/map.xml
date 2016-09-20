@@ -1,1 +1,76 @@
-<encrypted><![CDATA[KENCRUZR9&%k?mm*qfh=W;E,('rME/%&Wdui1,+.k:&b7F;PLEVGsXfjC-7bKbUH5BmJ:q>*rr-_$KVjH8):RxkEbaqB5Dg-rdKsbigB:cA5k8PF%#Nm%_6j#98tutPaV$Nc3s#I7n_Jw.'BiQ+c7@D40`Pdct6GO@?cA2i2LSrdI_>55jH`p;JI7o/T3(e_;-w_>FW`4d%ofqt[ZW0NY,ukuPB4#ck0$?=MQ3=DO-hNCo^@Sq;+1m5<KE<8NBM/Gd4#7Fvkn?xapF9C[v7a]N(-(DZSop0h:.'v7M9sK:PT6D[Y(JHsv3/^DM7XNM,MOXwA<x8;6pe7;-v4DePsgem2TmZat$tSf3r*X5OPd;STxJ:F36FA<3Rl&E^_wi#SZ%>rX='+$Sd;Kq@DphBg%*'4ndEcJAhbJZf&8bVdp)2QSPkk'NDd,([6*#i)7H>ZH_AMujD$S>JH^m8Dii*-'8%0v9b]rcQn_qcK%*>'aJj:)Qw9<+&k8)w1]IdD>fKQbnu<-%%mR^8/-p-=O[V>@2S$JOn_gpW`;47;WEq<WCUw-eP)&1B_K);7Y#dS>Kh[@$oe#,HPD?o(fgi03DiI9v+3XFV,`[`-:rR)qPr1]4%Z`hE3N%E0?<a-7<,D@KEIXx<(RCV9$GtO_>ls1'8,W*1g]3-lmb$f7EoCK67;*.HS03KlAblfQ1;2:IP=3urqY<3P&-'h4.k*MQkY2Kc1r6Mh++)E:K3Rfkf1%X=ULl_G6=@`M&J@kJte$7;dV>HUux@S)`bt_#SM>J@DqE7*;e&lON3gU'Zp@6O9cjV78xJ[]WLZq='PifkNKg*A)#CLn0HY&72,@.p(YL`w_^EYJ7ZrfwB[85Re)[H*/qI=X>_dB,u/>]U+_QK#'n*8@)WE&3nVv28WR?0^i=9sePX#YNcmSnMX,<+fYKB'm9b1XvSaHov]/[j0D.`3;AG]jfN'k;0]%^vV:$W#Z7j2EvDD4o%@cHeY0xJR?SCt79%,WLq#O%`n#R/7(4IS,.ZfT8@.#J/+a_u[GmU5F%$)&CDrwV@9G=@Ro_&?fFA0$[gn;ifmnKMb5AW-_ltA6&K^CuPO&30^B5cmbIW@6-Hu`M=]4vuZB$(^-Q6sK@K`dj)I<P4TsG.j`2^/_iUsgstrKgYd[aSqQ7suxUc`]E_aH^]e-oD9*f80rdib=+<^A_Z_6FK'nn&1A=[R,a3h6wx,bL^Uo>lbnjca/WdARV@ZB@07oSNq63qasLO+Drsm(f;&lYFtoDsN?h^'rfY/Icxg>n'jM+g*he02[D*r-sd^3Sl?w5LVh7qmh@m5Z2IQF52eJYJ-pmKW4F7fkqvuI)Z&7$ecnFt4^^qb@9tE>Z`^j^fT<DONMu`$*bp-sFKDSqhi.tE0r%;kMX^pJu%Wh-:klCt^&CU]b]]></encrypted>
+<krpano version="1.0.8">
+<action name="Move-Map">
+if(IsMapOpen != true,
+	set(IsMapOpen,true);
+	set(plugin[MapIcon].onhover,showtext(اغلاق المخطط, ToolTips);set(crop,0|40|40|40););
+	tween(plugin[map-body].alpha, 1);
+	tween(plugin[map-body].x,5);
+	
+	set(plugin[map-body-all-screen].enabled,true);
+	
+	set(plugin[BTN-open-map].enabled,false);
+	tween(plugin[BTN-open-map].alpha, 0.0);
+	tween(plugin[BTN-open-map].x, -132);
+,
+	set(IsMapOpen,false);
+	set(plugin[MapIcon].onhover,showtext(اضهار المخطط, ToolTips);set(crop,0|40|40|40););
+	tween(plugin[map-body].alpha, 0.0);
+	tween(plugin[map-body].x,-323);
+	
+	set(plugin[map-body-all-screen].enabled,false);
+	
+	set(plugin[BTN-open-map].enabled,true);
+	tween(plugin[BTN-open-map].alpha, 1.0);
+	tween(plugin[BTN-open-map].x, 0);
+);	
+
+</action>
+<include url="%SWFPATH%/map-plan.xml"/>
+<action name="hidemap-all">
+Move-Map();
+</action>
+<layer	name="back_btn_home"
+		url="images/vtour-demo/back.png"
+		align="lefttop"
+		x="0"
+		y="0"
+		keep="true" 
+		maskchildren="false"
+		scalechildren="false"
+		handcursor="true"
+		capture="true"
+		zorder="10002"
+		width="70" height="63"
+		onclick="openurl('vtour-demo-day.html',_self);"
+		/>
+<layer	name="map_btn_home"
+		url="images/vtour-demo/map.png"
+		align="lefttop"
+		x="0"
+		y="63"
+		keep="true" 
+		maskchildren="false"
+		scalechildren="false"
+		handcursor="true"
+		capture="true"
+		zorder="10002"
+		width="70" height="63"
+		onclick="showmap"
+		/>
+
+
+<plugin name="map-body-all-screen" onclick="showmap" url="skin/blank.png" align="lefttop" x="0" y="0" keep="true" maskchildren="true" scalechildren="false" handcursor="false" capture="false" zorder="10000" width="100%" height="100%"/>
+
+<plugin name="map-body" url="skin/blank.png" align="lefttop" x="5" y="95" keep="true" maskchildren="true" scalechildren="false" handcursor="false" capture="false" zorder="10001" width="323" height="345"/>
+<plugin name="map-background-front" url="skin/imamali/map-back.png" parent="map-body" align="lefttop" x="0" y="0" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10001" width="325" height="345" blendmode="normal"/>
+<plugin name="map-view" url="skin/imamali/all-map.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10004" width="323" height="323" blendmode="normal" alpha="1"/>
+<plugin name="map-view-shab" url="skin/imamali/all-map.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10004" width="323" height="323" blendmode="normal" alpha="0" enabled="false"/>
+<plugin name="map-view-radar" url="skin/blank.png" parent="map-background-front" align="lefttop" x="1" y="20" keep="true" maskchildren="false" scalechildren="false" handcursor="false" capture="false" zorder="10003" width="323" height="323" blendmode="normal" alpha="1" enabled="false"/>
+<action name="showmap">
+Move-Map();
+</action>
+<action name="hidemap">
+Move-Map();
+</action>
+
+</krpano>
