@@ -130,20 +130,24 @@
 								},
 								function(data,status){
 									if(data == "" || data == null){
-										alert("the data is null");
+										alert("لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.");
+										//alert("the data is null");
 									}
 									else if(data == 0){
-										alert("server problem");
+										alert("هناك مشكلة حاول مرة اخرى.");
+										//alert("server problem");
 									}
 									else if(data == 1){
-										alert("correct");
+										alert("تمت عملية التسجيل بنجاح.");
+										//alert("correct");
 									}
 									else if(data == 2){
-										alert("name or udid is empty");
+										//alert("name or udid is empty");
 									}
 									else
 									{
-										alert("Data: " + data + "\nStatus: " + status);
+										alert("لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.");
+										//alert("Data: " + data + "\nStatus: " + status);
 									}
 								});
 							}
