@@ -44,11 +44,18 @@
 			var isAlreadyLoading = 0, jump = false;
  			var myScroll = new iScroll('smm_news_wrapper', { hideScrollbar: true, bounce : "enable",useTransition: true });
  			var nid = getUrlParameter('id');
- 			$.post( "http://www.imamali.net/app-json/get_single_news.php",{news_id: nid}, function( data ) {
- 				$('.windows8').hide();
- 				$('#smm_news_wrapper > div').html( data );
+ 			if(localStorage.getItem("news_"+nid)){
+ 				$('#smm_news_wrapper > div').html( localStorage.getItem("news_"+nid) );
  				myScroll.refresh();
-			});
+ 			}
+ 			else{
+	 			$.post( "http://www.imamali.net/app-json/get_single_news.php",{news_id: nid}, function( data ) {
+	 				$('.windows8').hide();
+	 				$('#smm_news_wrapper > div').html( data );
+	 				myScroll.refresh();
+	 				localStorage.setItem("news_"+nid, data);
+				});
+ 			}
 			/*****************************/
 		}
 

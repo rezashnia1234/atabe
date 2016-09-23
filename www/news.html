@@ -61,6 +61,7 @@
  			 				jump = false;
  			 				linkable()
  						});
+ 				    	localStorage.setItem("lastnews", $("ul").html());
  				      }
  				},
  				onScrollEnd: function () {
@@ -81,7 +82,13 @@
 	 				$('#smm_news_wrapper ul').append('<li class="windows8" style="margin-top: 0;">'+$('.windows8').html()+'</li>');
 	 				$('li.windows8').hide();
 	 				 linkable();
-				});
+	 				localStorage.setItem("lastnews", data);
+				}).fail(function() {
+					$('#smm_news_wrapper ul').html( localStorage.getItem("lastnews") );
+	 				linkable();
+	 				$('.windows8').hide();
+	 				myScroll.refresh();
+				  });
 	 			
 			/*****************************/
 		}
