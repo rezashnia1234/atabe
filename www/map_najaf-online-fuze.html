@@ -200,7 +200,7 @@
 
 
 
-	var offline_map = L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {maxZoom: 16}),
+	var offline_map = L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {maxZoom: 15}),
 		online_map  = L.tileLayer('http://imamali.net/app-json/map/{z}/{x}/{y}.png', {maxZoom: 18});
 	
 	//najaf//lat=32.0192&long=44.3298
@@ -214,7 +214,7 @@
 	var map_center = new L.latLng(lat_center,long_center);
 	var map = L.map('map', {
 		zoom: 14,
-		maxZoom: 16,//17
+		maxZoom: 15,//17
 		minZoom:1,
 		center: map_center,
 		layers: offline_map,//offline_map,//online_map,//L.tileLayer('maps/mapquest/{z}/{x}/{y}.png'),
