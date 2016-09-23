@@ -23,6 +23,8 @@
 	}
 	ul>li>div>img {
 	    width: 100%;
+	    min-height: 20vw !important;
+}
 	}
 	ul>li>div .smm_underimage{
 		height: 7vw !important;
@@ -32,7 +34,6 @@
 		line-height: 7.5vw !important;
 	}
 	li.windows8 {
-	    width: 10vw !important;
 	    height: 10vw;
 	    display: inherit;
 	}
@@ -42,11 +43,14 @@
 	    height: 10vw;
 	}
 	img {
-    border-radius: 3px;
+    	border-radius: 3px;
 	}
 	.smm_underimage {
 	    border-bottom-left-radius: 2px;
 	    border-bottom-right-radius: 2px;
+	}
+	.windows8{
+	
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="css/reset.css">
@@ -123,10 +127,9 @@
 									}, function(data) {
 										$('#smm_picture_wrapper ul').append(data);
 										addImagestoLi();
-										//$('ul .windows8').css('top',$('ul > div').last().position().top +$('ul > div').last().height()+20)
-										//myScroll.scrollTo(0,-$('ul > div').last().position().top -$('ul > div').last().height()-20);
+										$('ul li[class!="windows8"]').delay(1000).fadeIn('slow');
+										$('.windows8').delay(1000).fadeOut('slow');
 										myScroll.refresh();
-										$('.windows8').hide();//.css('top',0);
 										jump = false;
 										linkable();
 								});
@@ -144,7 +147,8 @@
 										}, function(data) {
 											$('#smm_picture_wrapper ul li:nth-last-child(2)')
 													.after(data);
-											$('.windows8').hide();
+											$('ul li').delay(1000).fadeIn('slow');
+											$('.windows8').delay(1000).fadeOut('slow');
 											myScroll.refresh();
 											jump = false;
 											linkable();
@@ -198,6 +202,7 @@
 			}
 	});
 	function linkable() {
+		setTimeout( myScroll.refresh(),1000);
 		$('#smm_picture_wrapper ul li').unbind("click");
 		$('#smm_picture_wrapper ul div').unbind("click");
 		if (type == 9 )
@@ -236,15 +241,19 @@
 		});
 	}
 	function firstLoad(type) {
+		$('#smm_visualizations_wrapper ul').html("");
+		$('div.windows8').show();
 		if (type == 3) {
-			$.get("http://www.imamali.net/app-json/get_gallery_items.php", {
+			$.post("http://www.imamali.net/app-json/get_gallery_items.php", {
 				id : sec_id,
 				width : $('#smm_picture_wrapper ul').width()/2,
 				height : $('#smm_picture_wrapper ul').width()/3
 			}, function(data) {
-				$('.windows8').hide();
 				$('#smm_picture_wrapper ul').html(data);
 				addImagestoLi();
+				$('li.windows8').hide();
+				$('ul li[class!="windows8"]').delay(1000).fadeIn('slow');
+				$('.windows8').delay(1000).fadeOut('slow');
 				myScroll.refresh();
 				
 				linkable();
@@ -256,13 +265,14 @@
 				width : $('#smm_picture_wrapper ul').width()
 			}, function(data) {
 				//alert(data);
-				$('.windows8').hide();
 				$('#smm_picture_wrapper ul').html(data);
 				myScroll.refresh();
 				$('#smm_picture_wrapper ul').append(
 						'<li class="windows8" style="margin-top: 0;">'
 								+ $('.windows8').html() + '</li>');
 				$('li.windows8').hide();
+				$('ul li').delay(1000).fadeIn('slow');
+				$('.windows8').delay(1000).fadeOut('slow');
 				linkable();
 			});
 		}
@@ -272,9 +282,9 @@
 		$('#smm_picture_wrapper ul .windows8').remove();
 		for(var i=0;i<l;i++){
 			if($('#smm_picture_wrapper ul > div').length>1){
-				$('#smm_picture_wrapper ul').append('<li>'+$('#smm_picture_wrapper ul > div').eq(0)[0].outerHTML+$('#smm_picture_wrapper ul > div').eq(1)[0].outerHTML+'</li>')
+				$('#smm_picture_wrapper ul').append('<li style="float: right;">'+$('#smm_picture_wrapper ul > div').eq(0)[0].outerHTML+$('#smm_picture_wrapper ul > div').eq(1)[0].outerHTML+'</li>')
 				$('#smm_picture_wrapper ul > div').eq(0).remove();
-			}else $('#smm_picture_wrapper ul').append('<li>'+$('#smm_picture_wrapper ul > div').eq(0)[0].outerHTML+'</li>')	
+			}else $('#smm_picture_wrapper ul').append('<li style="float: right;">'+$('#smm_picture_wrapper ul > div').eq(0)[0].outerHTML+'</li>')	
 			$('#smm_picture_wrapper ul > div').eq(0).remove();
 			
 		}
@@ -381,6 +391,10 @@
     .modal-content {
         width: 100%;
     }
+}
+#smm_picture_wrapper > div{
+	float: right;
+	    width: 100%;
 }
 </style>
 

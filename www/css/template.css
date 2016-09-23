@@ -713,9 +713,12 @@ li .smm_midnight {
     width: 100%;
     max-height: 50vw;
     display: block;
+    min-height: 40vw;
 }
 .smm_visualizations_content ul li{
 	margin-bottom: 3vw;;
+	position: relative;
+	display: none;
 }
 .smm_visualizations_content .smm_underimage{
     width: 100%;
@@ -747,15 +750,18 @@ li .smm_midnight {
 }
 .smm_picture_content ul{
 	list-style-type: none;
+	float: right;
+	    width: 100%;
 }
 .smm_picture_content  li  img {
     width: 100%;
     max-height: 50vw;
     display: block;
+    min-height: 40vw;
 }
 .smm_picture_content ul li{
-	margin-bottom: 1vw;;
-	display: inline-block;
+	margin-bottom: 4vw;;
+	display: none;
 	width: 100%;
 }
 .smm_picture_content .smm_underimage{
@@ -825,8 +831,13 @@ li .smm_midnight {
 	margin-top: 45%;
 }
 li.windows8{
-	width: 10vw;
-	height:10vw;
+	width: 100%;
+	float: right;
+}
+li.windows8 > div{
+	 margin: auto;
+    left: 0;
+    right: 0;
 }
 .windows8 .wBall {
 	position: absolute;
@@ -850,8 +861,8 @@ li.windows8 .wBall {
 }
 .windows8 .wBall .wInnerBall{
 	position: absolute;
-	width: 17%;
-	height: 11%;
+	width: 13%;
+	height: 13%;
 	background: #1e92c4;
 	left:0px;
 	top:0px;
@@ -1400,4 +1411,16 @@ outline:none
 .ellip-line {
   position: relative;
   overflow: hidden;
+}
+img.downloadicon {
+    /* background-image: url("../images/downloadicon.png"); */
+    width: 10vw !important;
+    display: block;
+    height: 10vw;
+    position: absolute;
+    background-size: contain;
+    min-height: 5vw !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
 }

@@ -82,7 +82,8 @@
 													$(
 															'#smm_visualizations_wrapper ul li:nth-last-child(2)')
 															.after(data);
-													$('.windows8').hide();
+													$('ul li').delay(1000).fadeIn('slow');
+													$('.windows8').delay(1000).fadeOut('slow');
 													myScroll.refresh();
 													jump = false;
 													linkable()
@@ -102,7 +103,8 @@
 													$(
 															'#smm_visualizations_wrapper ul li:nth-last-child(2)')
 															.after(data);
-													$('.windows8').hide();
+													$('ul li').delay(1000).fadeIn('slow');
+													$('.windows8').delay(1000).fadeOut('slow');
 													myScroll.refresh();
 													jump = false;
 													linkable()
@@ -116,6 +118,7 @@
 	}
 	function linkable() {
 		$('#smm_visualizations_wrapper ul li').unbind("click");
+		setTimeout( myScroll.refresh(),1000);
 		$('#smm_visualizations_wrapper ul li').click(function() {
 			if ($(this).hasClass('windows8'))
 				return;
@@ -129,13 +132,16 @@
 		});
 	}
 	function firstLoad() {
+		$('#smm_visualizations_wrapper ul').html("");
+		$('div.windows8').show();
 		if (type == 5) {
 			$.post("http://www.imamali.net/app-json/get_video_items.php", {
 				id : sec_id,
 				width : $('#smm_visualizations_wrapper ul').width(),
 			}, function(data) {
-				$('.windows8').hide();
 				$('#smm_visualizations_wrapper ul').html(data);
+				$('ul li').delay(1000).fadeIn('slow');
+				$('.windows8').delay(1000).fadeOut('slow');
 				myScroll.refresh();
 				$('#smm_visualizations_wrapper ul').append(
 						'<li class="windows8" style="margin-top: 0;">'
@@ -149,8 +155,10 @@
 				sec_id : sec_id,
 				width : $('#smm_visualizations_wrapper ul').width()
 			}, function(data) {
-				$('.windows8').hide();
+				
 				$('#smm_visualizations_wrapper ul').html(data);
+				$('ul li').delay(1000).fadeIn('slow');
+				$('.windows8').delay(1000).fadeOut('slow');
 				myScroll.refresh();
 				$('#smm_visualizations_wrapper ul').append(
 						'<li class="windows8" style="margin-top: 0;">'
