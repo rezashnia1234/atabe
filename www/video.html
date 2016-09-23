@@ -47,7 +47,7 @@
 		var mc = new Hammer(document.body);
 		mc.on("swiperight", function(ev) {
 			//go_back();
-			go_back_video_cat();
+			goto_home();
 		});
 		var isAlreadyLoading = 0, jump = false;
 		myScroll = new iScroll(
@@ -175,7 +175,7 @@
 
 		FastClick.attach(document.body);
 		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
-			document.addEventListener("backbutton", go_back_video_cat, false);
+			document.addEventListener("backbutton", goto_home, false);
 		}
 
 	}
