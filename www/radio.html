@@ -100,16 +100,19 @@
 			return ((window.matchMedia && (window.matchMedia('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)').matches || window.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)').matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2)) && /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 		}
 		function play_my_radio(){
+			console.log("audio.play()");
 			audio.play({ playAudioWhenScreenIsLocked : true });
 		}
 		function stop_my_radio(){
 			audio.pause();
+			console.log("audio.pause()");
 		}
 		$(document).ready(function(){
 			$(".hm_radio_bg").click(function(){
+				$(this).toggleClass("playing");
 				if($(this).hasClass("playing"))
 				{
-					stop_my_radio();
+					play_my_radio();
 					if(isRetina())
 					{
 						$(this).css('background-image','url("images/high/radio_bg_stop.png")');
@@ -121,7 +124,7 @@
 				}
 				else
 				{
-					play_my_radio();
+					stop_my_radio();
 					if(isRetina())
 					{
 						$(this).css('background-image','url("images/high/radio_bg.png")');
@@ -131,7 +134,6 @@
 						$(this).css('background-image','url("images/low/radio_bg.png")');
 					}
 				}
-				$(this).toggleClass("playing");
 			});
 			$(".go_back_stop").click(function(){
 				stop_my_radio();
