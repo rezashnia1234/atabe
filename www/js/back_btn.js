@@ -109,7 +109,7 @@
 				{
 					var options_back = {
 					  "direction"		: "left", // "up", // 'left|right|up|down', default 'left' (which is like 'next')
-					  "duration"		:  1400, // in milliseconds (ms), default 400
+					  "duration"		:  900, // in milliseconds (ms), default 400
 					  "iosdelay"		:  80, // ms to wait for the iOS webview to update before animation kicks in, default 60
 					  "androiddelay"	:  280, // same as above but for Android, default 70
 					  "href"			: href //"adab.html"
