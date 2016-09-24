@@ -73,7 +73,9 @@
 					console.log("playing");
 				}, function(error){ // error callback
 					console.log("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
-					alert("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
+					if(error.code==0)
+						alert("Media server is not responding!");
+					//alert("code: "    + error.code    + "\n" + "message: " + error.message + "\n");
 				});
 				audio.play({ playAudioWhenScreenIsLocked : true });
 				//audio.seekTo(0);

@@ -102,7 +102,7 @@
 					window.plugins.nativepagetransitions.slide(
 					  options_back,
 					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					  function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 					);
 				}
 				else
@@ -118,7 +118,7 @@
 					window.plugins.nativepagetransitions.slide(
 					  options_back,
 					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					  function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 					);
 				}
 			}
@@ -155,7 +155,7 @@
 					window.plugins.nativepagetransitions.slide(
 					  options_back,
 					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					  function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 					);
 				}
 				else
@@ -170,7 +170,7 @@
 					window.plugins.nativepagetransitions.slide(
 					  options_back,
 					  function (msg) {console.log("success: " + msg)}, // called when the animation has finished
-					  function (msg) {alert("error: " + msg)} // called in case you pass in weird values
+					  function (msg) {console.log("error: " + msg)} // called in case you pass in weird values
 					);
 				}
 			}
