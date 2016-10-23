@@ -36,7 +36,7 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", goto_home, false);
 			}
-			register_notification ();
+			register_notification();
 		}
 		$(document).ready(function() {
 			if(window.localStorage.getItem('pano_localPath') == null)
