@@ -173,9 +173,9 @@ function register_notification_home() {
 			pushNotification = window.plugins.pushNotification;
 			console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    register_for_notifs : no // ' + device.platform);
 			if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
-				pushNotification.register(successHandler,errorHandler,{"senderID":"1069136326484","ecb":"onNotificationGCM"});
+				pushNotification.register(successHandler,errorHandler,{"senderID":"1069136326484","ecb":"onNotificationGCM_home"});
 			} else {
-				pushNotification.register(tokenHandler,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationGCM"});//"onNotificationAPN"});
+				pushNotification.register(tokenHandler_home,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationGCM_home"});//"onNotificationAPN"});
 			}
 		}
 	}
@@ -224,7 +224,7 @@ function register_notification() {
 			}
 		}
 	}
-	function tokenHandler_home(result) {
+	function tokenHandler(result) {
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    Notification Callback Success! Result (ios) = '+result);
 		
 		var temp_udid;
