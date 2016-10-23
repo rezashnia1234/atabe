@@ -17,8 +17,8 @@ function onNotificationAPN(event) {
 		navigator.notification.alert(
 			event.alert,  // message
 			successHandler,         // callback
-			'ÇÚáÇä',            // title
-			'äÚã'                  // buttonName
+			'Ø§Ø¹Ù„Ø§Ù†',            // title
+			'Ù†Ø¹Ù…'                  // buttonName
 		);
 	}
 	/*
@@ -101,8 +101,8 @@ function onNotificationGCM_home(e) {
 		navigator.notification.alert(
 			e.payload.message,  // message
 			successHandler,         // callback
-			'ÇÚáÇä',            // title
-			'äÚã'                  // buttonName
+			'Ø§Ø¹Ù„Ø§Ù†',            // title
+			'Ù†Ø¹Ù…'                  // buttonName
 		);
 		//alert(e.payload.msgcnt);
 		/*
@@ -164,8 +164,8 @@ function onNotificationGCM(e) {
 		navigator.notification.alert(
 			e.payload.message,  // message
 			successHandler,         // callback
-			'ÇÚáÇä',            // title
-			'äÚã'                  // buttonName
+			'Ø§Ø¹Ù„Ø§Ù†',            // title
+			'Ù†Ø¹Ù…'                  // buttonName
 		);
 		//alert(e.payload.msgcnt);
 		/*
