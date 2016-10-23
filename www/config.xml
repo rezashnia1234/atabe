@@ -133,7 +133,6 @@
     <gap:splash src="images/splash/screen-mdpi-landscape.png"		gap:platform="android" gap:density="mdpi" />
     <gap:splash src="images/splash/screen-hdpi-landscape.png"		gap:platform="android" gap:density="hdpi" />
     <gap:splash src="images/splash/screen-xhdpi-landscape.png"		gap:platform="android" gap:density="xhdpi" />
-    <gap:splash src="images/splash/screen-xxhdpi-landscape.png"		gap:platform="android" gap:density="xxhdpi" />
 
 	
     <gap:splash src="images/splash/screen-iphone-landscape.png"			gap:platform="ios"		width="320"		height="480" />
