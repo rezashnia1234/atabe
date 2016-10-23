@@ -23,13 +23,13 @@
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
     <script src="js/back_btn.js"></script>
+	<script src="js/notification.js"></script>
 	<script src="js/iscroll.js"  type="text/javascript"></script>
 <script>
 	var sec_id = 323;
 	var myScroll, type = 9;
 	function init() {
-		console
-				.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
+		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 		document.addEventListener("deviceready", onDeviceReady, false);
 		/**** added by mahdi *********/
 		if (isRetina()) {
@@ -177,7 +177,7 @@
 		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 			document.addEventListener("backbutton", goto_home, false);
 		}
-
+		register_notification ();
 	}
 
 	$(window).load(function() {

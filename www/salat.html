@@ -17,6 +17,7 @@
     <script src="js/fastclick.js"></script>
     <script src="js/hammer.min.js"></script>
     <script src="js/back_btn.js"></script>
+	<script src="js/notification.js"></script>
 	<script src="js/iscroll.js"  type="text/javascript"></script>
 	<script src="js/PrayTimes.js"></script>
 	
@@ -58,7 +59,7 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", goto_home, false);
 			}
-			
+			register_notification ();
 
 		}
 			
