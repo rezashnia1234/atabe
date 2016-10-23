@@ -1,6 +1,37 @@
 
-
-
+function successHandler (result) {
+	//alert('result = ' + result);
+}
+// result contains any error description text returned from the plugin call
+function errorHandler (error) {
+	//alert('error = ' + error);
+}
+function onNotificationAPN(event) {
+	var pushNotification = window.plugins.pushNotification;
+	console.log("Received a notification! " + event.alert);
+	console.log("event sound " + event.sound);
+	console.log("event badge " + event.badge);
+	console.log("event " + event);
+	if (event.alert) {
+		// navigator.notification.alert(event.alert);
+		navigator.notification.alert(
+			event.alert,  // message
+			successHandler,         // callback
+			'ÇÚáÇä',            // title
+			'äÚã'                  // buttonName
+		);
+	}
+	/*
+	if (event.badge) {
+		console.log("Set badge on  " + pushNotification);
+		pushNotification.setApplicationIconBadgeNumber(this.successHandler, event.badge);
+	}
+	if (event.sound) {
+		var snd = new Media(event.sound);
+		snd.play();
+	}
+	*/
+}
 function onNotificationGCM_home(e) {
 	//alert("uuuuuu");
 	//$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
@@ -152,13 +183,7 @@ function onNotificationGCM(e) {
 	break;
   }
 }
-function successHandler (result) {
-	//alert('result = ' + result);
-}
-// result contains any error description text returned from the plugin call
-function errorHandler (error) {
-	//alert('error = ' + error);
-}
+
 
 	
 function register_notification_home() {
@@ -175,7 +200,7 @@ function register_notification_home() {
 			if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
 				pushNotification.register(successHandler,errorHandler,{"senderID":"1069136326484","ecb":"onNotificationGCM_home"});
 			} else {
-				pushNotification.register(tokenHandler_home,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationGCM_home"});//"onNotificationAPN"});
+				pushNotification.register(tokenHandler_home,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});//"onNotificationAPN"});
 			}
 		}
 	}
@@ -220,7 +245,7 @@ function register_notification() {
 			if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
 				pushNotification.register(successHandler,errorHandler,{"senderID":"1069136326484","ecb":"onNotificationGCM"});
 			} else {
-				pushNotification.register(tokenHandler,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationGCM"});//"onNotificationAPN"});
+				pushNotification.register(tokenHandler,errorHandler,{"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});//"onNotificationAPN"});
 			}
 		}
 	}
