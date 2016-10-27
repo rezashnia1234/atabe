@@ -3,6 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "iq1.imamali.net"
         version   = "1.0"
+		ios-CFBundleVersion="2"
 		>
 		
 		
