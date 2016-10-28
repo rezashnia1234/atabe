@@ -2,6 +2,7 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "iq1.imamali.net"
+		ios-CFBundleVersion = "1.2"
         version   = "1.0" >
 		
 		
@@ -94,8 +95,8 @@
 	<!--<plugin name="com.hutchind.cordova.plugins.streamingmedia"  source="pgb" />>-->
 	<!--<plugin name="com.synconset.imagepicker" source="pgb" />>-->
 	<!--<plugin name="net.roughshod.plugins.barcodescanner" source="pgb" />-->
-	<plugin spec="https://github.com/willyboy/cordova-plugin-local-notifications" platform="android" source="git" />
-	<plugin spec="https://github.com/kd-code/cordova-plugin-hello" platform="android" source="git" />
+	<!--<plugin spec="https://github.com/willyboy/cordova-plugin-local-notifications" platform="android" source="git" />-->
+	<!--<plugin spec="https://github.com/kd-code/cordova-plugin-hello" platform="android" source="git" />-->
 	<plugin name="com.telerik.plugins.nativepagetransitions" source="npm" />
 	
     <!-- Define app icon      -->
