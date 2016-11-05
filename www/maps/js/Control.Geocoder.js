@@ -309,7 +309,7 @@
 
 	L.Control.Geocoder.Nominatim = L.Class.extend({
 		options: {
-			serviceUrl: 'http://nominatim.openstreetmap.org/',
+			serviceUrl: '//nominatim.openstreetmap.org/',
 			geocodingQueryParams: {},
 			reverseQueryParams: {},
 			htmlTemplate: function(r) {
@@ -403,7 +403,7 @@
 		},
 
 		geocode : function (query, cb, context) {
-			L.Control.Geocoder.jsonp('http://dev.virtualearth.net/REST/v1/Locations', {
+			L.Control.Geocoder.jsonp('//dev.virtualearth.net/REST/v1/Locations', {
 				query: query,
 				key : this.key
 			}, function(data) {
@@ -422,7 +422,7 @@
 		},
 
 		reverse: function(location, scale, cb, context) {
-			L.Control.Geocoder.jsonp('http://dev.virtualearth.net/REST/v1/Locations/' + location.lat + ',' + location.lng, {
+			L.Control.Geocoder.jsonp('//dev.virtualearth.net/REST/v1/Locations/' + location.lat + ',' + location.lng, {
 				key : this.key
 			}, function(data) {
 				var results = [];
@@ -522,7 +522,7 @@
 		},
 
 		geocode: function(query, cb, context) {
-			L.Control.Geocoder.jsonp('http://www.mapquestapi.com/geocoding/v1/address', {
+			L.Control.Geocoder.jsonp('//www.mapquestapi.com/geocoding/v1/address', {
 				key: this._key,
 				location: query,
 				limit: 5,
@@ -548,7 +548,7 @@
 		},
 
 		reverse: function(location, scale, cb, context) {
-			L.Control.Geocoder.jsonp('http://www.mapquestapi.com/geocoding/v1/reverse', {
+			L.Control.Geocoder.jsonp('//www.mapquestapi.com/geocoding/v1/reverse', {
 				key: this._key,
 				location: location.lat + ',' + location.lng,
 				outputFormat: 'json'

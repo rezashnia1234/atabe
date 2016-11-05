@@ -56,7 +56,7 @@
 				brightness.setKeepScreenOn(false);
 				navigator.notification.alert(
 					'يجب عليك الاتصال بالانترنت',  // message
-					temp_function,         // callback
+					goto_home,         // callback
 					'تنبيه',            // title
 					'نعم'                  // buttonName
 				);
@@ -102,7 +102,7 @@
 							console.log("start_download : NO internet");
 							navigator.notification.alert(
 								'يجب عليك الاتصال بالانترنت',  // message
-								temp_function,         // callback
+								goto_home,         // callback
 								'تنبيه',            // title
 								'نعم'                  // buttonName
 							);
@@ -111,7 +111,13 @@
 						{	
 							var x = document.getElementsByName("name");
 							if (x.item(0).value == null || x.item(0).value == "") {
-								alert("Name must be filled out");
+								//alert("Name must be filled out");
+								navigator.notification.alert(
+									"Name must be filled out",  // message
+									temp_function,         // callback
+									'تنبيه',            // title
+									'نعم'                  // buttonName
+								);
 								return false;
 							}
 							else{
@@ -119,7 +125,8 @@
 								var c = document.getElementsByName("country");
 								var ci = document.getElementsByName("city");
 								var f = document.getElementsByName("for_who");
-							
+								$('.preloader').css("opacity","1");
+								$('.preloader').removeClass("display_none");
 								$.post("http://www.imamali.net/app-json/set_zeara.php",
 								{
 									name: n.item(0).value,
@@ -131,15 +138,18 @@
 								},
 								function(data,status){
 									if(data == "" || data == null){
-										alert("لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.");
+										//alert("لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.");
+										Message = "لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.";
 										//alert("the data is null");
 									}
 									else if(data == 0){
-										alert("هناك مشكلة حاول مرة اخرى.");
+										//alert("هناك مشكلة حاول مرة اخرى.");
+										Message = "هناك مشكلة حاول مرة اخرى.";
 										//alert("server problem");
 									}
 									else if(data == 1){
-										alert("تمت عملية التسجيل بنجاح.");
+										//alert("تمت عملية التسجيل بنجاح.");
+										Message = "تمت عملية التسجيل بنجاح.";
 										//alert("correct");
 									}
 									else if(data == 2){
@@ -147,9 +157,16 @@
 									}
 									else
 									{
-										alert("لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.");
+										//alert("لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.");
+										Message = "لم تتم عملية التسجيل بنجاح، حاول مرة اخرى.";
 										//alert("Data: " + data + "\nStatus: " + status);
 									}
+									navigator.notification.alert(
+										Message,  // message
+										goto_home,         // callback
+										'تنبيه',            // title
+										'نعم'                  // buttonName
+									);
 								});
 							}
 						}
@@ -174,6 +191,9 @@
 </style>	
 </head>
 <body onload="init();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" id="body" class="smm_ziarat_body retina">
+<div class="preloader display_none"><div class="windows8"><div class="wBall" id="wBall_1"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_2"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_3"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_4"><div class="wInnerBall"></div></div><div class="wBall" id="wBall_5"><div class="wInnerBall"></div></div></div></div>
+<style>.preloader{opacity:1;position:fixed;width:100%;height:100%;left:0;top:0;background-color:rgba(255,255,255,.8);z-index:214748001!important;transition:all .7s cubic-bezier(.175,.885,.32,1.275) 0s}.preloader.display_none{display:none}.windows8,.windows8 *{direction:ltr;text-align:left}.windows8 .wBall{position:absolute;width:72px;height:72px;opacity:0;transform:rotate(225deg);-o-transform:rotate(225deg);-ms-transform:rotate(225deg);-webkit-transform:rotate(225deg);-moz-transform:rotate(225deg);animation:orbit 6.96s infinite;-o-animation:orbit 6.96s infinite;-ms-animation:orbit 6.96s infinite;-webkit-animation:orbit 6.96s infinite;-moz-animation:orbit 6.96s infinite}.windows8 .wBall .wInnerBall{position:absolute;width:9px;height:9px;background:#000;left:0;top:0;border-radius:9px}.windows8 #wBall_1{animation-delay:1.52s;-o-animation-delay:1.52s;-ms-animation-delay:1.52s;-webkit-animation-delay:1.52s;-moz-animation-delay:1.52s}.windows8 #wBall_2{animation-delay:.3s;-o-animation-delay:.3s;-ms-animation-delay:.3s;-webkit-animation-delay:.3s;-moz-animation-delay:.3s}.windows8 #wBall_3{animation-delay:.61s;-o-animation-delay:.61s;-ms-animation-delay:.61s;-webkit-animation-delay:.61s;-moz-animation-delay:.61s}.windows8 #wBall_4{animation-delay:.91s;-o-animation-delay:.91s;-ms-animation-delay:.91s;-webkit-animation-delay:.91s;-moz-animation-delay:.91s}.windows8 #wBall_5{animation-delay:1.22s;-o-animation-delay:1.22s;-ms-animation-delay:1.22s;-webkit-animation-delay:1.22s;-moz-animation-delay:1.22s}@keyframes orbit{0%{opacity:1;z-index:99;transform:rotate(180deg);animation-timing-function:ease-out}7%{opacity:1;transform:rotate(300deg);animation-timing-function:linear;origin:0}30%{opacity:1;transform:rotate(410deg);animation-timing-function:ease-in-out;origin:7%}39%{opacity:1;transform:rotate(645deg);animation-timing-function:linear;origin:30%}70%{opacity:1;transform:rotate(770deg);animation-timing-function:ease-out;origin:39%}75%{opacity:1;transform:rotate(900deg);animation-timing-function:ease-out;origin:70%}100%,76%{opacity:0;transform:rotate(900deg)}}@-o-keyframes orbit{0%{opacity:1;z-index:99;-o-transform:rotate(180deg);-o-animation-timing-function:ease-out}7%{opacity:1;-o-transform:rotate(300deg);-o-animation-timing-function:linear;-o-origin:0}30%{opacity:1;-o-transform:rotate(410deg);-o-animation-timing-function:ease-in-out;-o-origin:7%}39%{opacity:1;-o-transform:rotate(645deg);-o-animation-timing-function:linear;-o-origin:30%}70%{opacity:1;-o-transform:rotate(770deg);-o-animation-timing-function:ease-out;-o-origin:39%}75%{opacity:1;-o-transform:rotate(900deg);-o-animation-timing-function:ease-out;-o-origin:70%}100%,76%{opacity:0;-o-transform:rotate(900deg)}}@-ms-keyframes orbit{30%,39%,7%{opacity:1}39%,7%{-ms-animation-timing-function:linear}0%,70%,75%{opacity:1;-ms-animation-timing-function:ease-out}100%,75%,76%{-ms-transform:rotate(900deg)}0%{z-index:99;-ms-transform:rotate(180deg)}7%{-ms-transform:rotate(300deg);-ms-origin:0}30%{-ms-transform:rotate(410deg);-ms-animation-timing-function:ease-in-out;-ms-origin:7%}39%{-ms-transform:rotate(645deg);-ms-origin:30%}70%{-ms-transform:rotate(770deg);-ms-origin:39%}75%{-ms-origin:70%}100%,76%{opacity:0}}@-webkit-keyframes orbit{0%{opacity:1;z-index:99;-webkit-transform:rotate(180deg);-webkit-animation-timing-function:ease-out}7%{opacity:1;-webkit-transform:rotate(300deg);-webkit-animation-timing-function:linear;-webkit-origin:0}30%{opacity:1;-webkit-transform:rotate(410deg);-webkit-animation-timing-function:ease-in-out;-webkit-origin:7%}39%{opacity:1;-webkit-transform:rotate(645deg);-webkit-animation-timing-function:linear;-webkit-origin:30%}70%{opacity:1;-webkit-transform:rotate(770deg);-webkit-animation-timing-function:ease-out;-webkit-origin:39%}75%{opacity:1;-webkit-transform:rotate(900deg);-webkit-animation-timing-function:ease-out;-webkit-origin:70%}100%,76%{opacity:0;-webkit-transform:rotate(900deg)}}@-moz-keyframes orbit{0%{opacity:1;z-index:99;-moz-transform:rotate(180deg);-moz-animation-timing-function:ease-out}7%{opacity:1;-moz-transform:rotate(300deg);-moz-animation-timing-function:linear;-moz-origin:0}30%{opacity:1;-moz-transform:rotate(410deg);-moz-animation-timing-function:ease-in-out;-moz-origin:7%}39%{opacity:1;-moz-transform:rotate(645deg);-moz-animation-timing-function:linear;-moz-origin:30%}70%{opacity:1;-moz-transform:rotate(770deg);-moz-animation-timing-function:ease-out;-moz-origin:39%}75%{opacity:1;-moz-transform:rotate(900deg);-moz-animation-timing-function:ease-out;-moz-origin:70%}100%,76%{opacity:0;-moz-transform:rotate(900deg)}}.windows8{bottom:0;height:76px;left:0;margin:auto;position:absolute;right:0;top:0;width:76px}.btn{text-shadow:0 0 0 transparent}</style>
+
 	<div class="bg" ></div>
 	<div class="container " id="container" >
 			<div id="ajax" class="mypreload">
@@ -303,7 +323,6 @@
 							<option value="IRQ">Iraq</option>
 							<option value="IRL">Ireland</option>
 							<option value="IMN">Isle of Man</option>
-							<option value="ISR">Israel</option>
 							<option value="ITA">Italy</option>
 							<option value="JAM">Jamaica</option>
 							<option value="JPN">Japan</option>
@@ -371,6 +390,7 @@
 							<option value="PER">Peru</option>
 							<option value="PHL">Philippines</option>
 							<option value="PCN">Pitcairn</option>
+							<option value="Palestine">Palestine</option>
 							<option value="POL">Poland</option>
 							<option value="PRT">Portugal</option>
 							<option value="PRI">Puerto Rico</option>
